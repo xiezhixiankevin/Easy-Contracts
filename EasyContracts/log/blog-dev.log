@@ -1,0 +1,14 @@
+2022-05-05 17:09:07.965  INFO 8496 --- [restartedMain] b.p.e.EasyContractsApplication           : Starting EasyContractsApplication using Java 1.8.0_311 on xzx with PID 8496 (H:\gitrepository\Easy-Contracts\EasyContracts\target\classes started by 26802 in H:\gitrepository\Easy-Contracts\EasyContracts)
+2022-05-05 17:09:07.966  INFO 8496 --- [restartedMain] b.p.e.EasyContractsApplication           : The following 1 profile is active: "dev"
+2022-05-05 17:09:08.004  INFO 8496 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2022-05-05 17:09:08.004  INFO 8496 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2022-05-05 17:09:08.540  WARN 8496 --- [restartedMain] o.m.s.mapper.ClassPathMapperScanner      : No MyBatis mapper was found in '[bjtu.pt.easycontracts]' package. Please check your configuration.
+2022-05-05 17:09:08.898  INFO 8496 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2022-05-05 17:09:08.905  INFO 8496 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2022-05-05 17:09:08.905  INFO 8496 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.62]
+2022-05-05 17:09:08.981  INFO 8496 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2022-05-05 17:09:08.981  INFO 8496 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 976 ms
+2022-05-05 17:09:09.201  WARN 8496 --- [restartedMain] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates or check your Thymeleaf configuration)
+2022-05-05 17:09:09.374  INFO 8496 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2022-05-05 17:09:09.402  INFO 8496 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2022-05-05 17:09:09.412  INFO 8496 --- [restartedMain] b.p.e.EasyContractsApplication           : Started EasyContractsApplication in 1.836 seconds (JVM running for 3.122)
