@@ -58,7 +58,6 @@ public class UserController {
     @GetMapping("/retrievePassword/{username}/{code}")
     public String retrievePassword(@PathVariable("username")String username,
                                    @PathVariable("code")String code){
-
         return null;
     }
 
