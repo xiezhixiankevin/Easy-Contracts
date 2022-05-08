@@ -1,4 +1,4 @@
-package bjtu.pt.easycontracts.pojo;
+package bjtu.pt.easycontracts.pojo.table;
 
 /**
  * <Description> Contract
