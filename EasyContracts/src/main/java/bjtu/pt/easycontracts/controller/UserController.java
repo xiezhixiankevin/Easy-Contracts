@@ -21,7 +21,9 @@ public class UserController {
     * 注册请求，注册成功跳转到登录页面;失败重定向(redirect:xxx)到注册页面，并给出相应提示
     * */
     @PostMapping("/register")
+    @ResponseBody
     public String register(User user,@RequestParam("code")String codeValue){
+
         return null;
     }
 
@@ -34,6 +36,14 @@ public class UserController {
         return null;
     }
 
+    /*
+     * 发送验证码请求，向用户的邮箱发送验证码
+     * */
+    @GetMapping("/register/sendCode")
+    @ResponseBody
+    public String sendCode(@RequestParam("email")String email){
+        return null;
+    }
 
     /*
      *找回密码请求，用户输入的验证码正确跳转到显示密码页面将密码展示给用户;否则重定向到当前页面，并给出提示:验证码不正确
