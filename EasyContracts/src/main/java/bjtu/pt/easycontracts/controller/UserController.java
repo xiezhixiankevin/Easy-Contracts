@@ -1,7 +1,6 @@
 package bjtu.pt.easycontracts.controller;
 
-import bjtu.pt.easycontracts.pojo.Administrator;
-import bjtu.pt.easycontracts.pojo.Operator;
+import bjtu.pt.easycontracts.pojo.table.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,34 +20,28 @@ public class UserController {
     /*
     * 注册请求，注册成功跳转到登录页面;失败重定向(redirect:xxx)到注册页面，并给出相应提示
     * */
-    @PostMapping("/registerOperator")
-    public String registerOperator(Operator operator){
-        return null;
-    }
+    @PostMapping("/register")
+    @ResponseBody
+    public String register(User user,@RequestParam("code")String codeValue){
 
-    /*
-     * 注册请求，注册成功跳转到登录页面;失败重定向(redirect:xxx)到注册页面，并给出相应提示
-     * */
-    @PostMapping("/registerAdministrator")
-    public String registerAdministrator(Administrator administrator){
         return null;
     }
 
     /*
      * 登录请求，登录成功跳转到首页;失败重定向(redirect:xxx)到登录页面，并给出相应提示
      * */
-    @GetMapping("/loginOperator/{username}/{password}")
-    public String loginOperator(@PathVariable("username")String username,
+    @GetMapping("/login/{username}/{password}")
+    public String loginUser(@PathVariable("username")String username,
                                 @PathVariable("password")String password){
         return null;
     }
 
     /*
-     * 登录请求，登录成功跳转到首页;失败重定向(redirect:xxx)到登录页面，并给出相应提示
+     * 发送验证码请求，向用户的邮箱发送验证码
      * */
-    @GetMapping("/loginAdministrator/{username}/{password}")
-    public String loginAdministrator(@PathVariable("username")String username,
-                                     @PathVariable("password")String password){
+    @GetMapping("/register/sendCode")
+    @ResponseBody
+    public String sendCode(@RequestParam("email")String email){
         return null;
     }
 

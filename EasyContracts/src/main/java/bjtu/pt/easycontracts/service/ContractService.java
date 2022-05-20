@@ -1,6 +1,6 @@
 package bjtu.pt.easycontracts.service;
 
-import bjtu.pt.easycontracts.pojo.Contract;
+import bjtu.pt.easycontracts.pojo.table.Contract;
 
 import java.util.List;
 
@@ -22,5 +22,21 @@ public interface ContractService {
     */
     List<Contract> listContractSelective(Contract contract);
 
+    //添加合同
+    int addContract(Contract contract);
 
+    //删除合同
+    int deleteContract(int id);
+
+    //修改合同
+    int updateContract(int id,Contract newContract);
+
+    //给合同添加会签意见(每次添加会签以及后记得判断一下是不是所有会签人均已会签，是的话修改合同状态)
+    int countersignContract(int contractId ,int userId ,String opinion);
+
+    //给合同添加审批意见，并且记得修改被打回次数并更改状态为定稿，当然一次审批即通过则无需修改被打回次数并进入下一状态
+    int examineConTract(int contractId ,int userId , String opinion , boolean ifPass);
+
+    //签订合同
+    int signContract(int contractId ,int userId ,String opinion);
 }
