@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2022/5/7 20:39:19                            */
+/* Created on:     2022/5/20 20:20:10                           */
 /*==============================================================*/
 
 
@@ -16,9 +16,9 @@ drop table if exists customer;
 
 drop table if exists log;
 
-drop table if exists role;
+drop table if exists rights;
 
-drop table if exists user_role;
+drop table if exists role_right;
 
 /*==============================================================*/
 /* Table: User                                                  */
@@ -27,6 +27,7 @@ create table User
 (
    userId               int not null,
    userName             varchar(20),
+   userDescription      varchar(20),
    password             varchar(40),
    email                varchar(20),
    primary key (userId)
@@ -45,8 +46,7 @@ create table contract
    content              text,
    drafterId            int,
    type                 int,
-	 failureTimes         int,
-	 primary key (contractId)
+   failureTimes         int
 );
 
 /*==============================================================*/
@@ -66,12 +66,14 @@ create table contract_attachment
 /*==============================================================*/
 create table contract_process
 (
-   userId           int not null,
+   Use_userId           int not null,
+   contractId           int,
+   userId               int,
    type                 int,
    state                int,
    content              text,
    time                 datetime,
-   primary key (userId)
+   primary key (Use_userId)
 );
 
 /*==============================================================*/
@@ -99,24 +101,26 @@ create table log
 );
 
 /*==============================================================*/
-/* Table: role                                                  */
+/* Table: rights                                                */
 /*==============================================================*/
-create table role
+create table rights
 (
-   roleId               int not null,
-   roleName             varchar(40),
+   Use_userId           int not null,
+   rol_rightId          int not null,
+   userId               int,
+   rightId              int,
    description          varchar(100),
-   functions            varchar(500),
-   primary key (roleId)
+   primary key (Use_userId, rol_rightId)
 );
 
 /*==============================================================*/
-/* Table: user_role                                             */
+/* Table: role_right                                            */
 /*==============================================================*/
-create table user_role
+create table role_right
 (
-   userId           int not null,
-   roleId           int not null,
+   rightId              int not null,
+   rightName            varchar(40),
    description          varchar(100),
-   primary key (userId, roleId)
+   functions            varchar(500),
+   primary key (rightId)
 );
