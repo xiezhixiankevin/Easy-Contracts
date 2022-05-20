@@ -17,6 +17,11 @@ public interface CodeService {
     int sendCode(String username,String email,int type);
 
     //检查验证码是否和用户名匹配
-    int checkCode(Code code);
+    int checkCode(Code code,int type);
 
+    //获取用户已经发送验证码的次数
+    int getSendTimes(String username,int type);
+
+    //获取验证码
+    String getCode(String username,int type);
 }

@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="bjtu.pt.easycontracts.mapper.ContractMapper" >
+  <resultMap id="BaseResultMap" type="bjtu.pt.easycontracts.pojo.table.Contract" >
+    <id column="contractId" property="contractid" jdbcType="INTEGER" />
+    <result column="contractName" property="contractname" jdbcType="VARCHAR" />
+    <result column="customerId" property="customerid" jdbcType="INTEGER" />
+    <result column="beginTime" property="begintime" jdbcType="DATE" />
+    <result column="endTime" property="endtime" jdbcType="DATE" />
+    <result column="drafterId" property="drafterid" jdbcType="INTEGER" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="failureTimes" property="failuretimes" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="bjtu.pt.easycontracts.pojo.table.Contract" extends="BaseResultMap" >
+    <result column="content" property="content" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    contractId, contractName, customerId, beginTime, endTime, drafterId, type, failureTimes
+  </sql>
+  <sql id="Blob_Column_List" >
+    content
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="bjtu.pt.easycontracts.pojo.table.ContractExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from contract
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="bjtu.pt.easycontracts.pojo.table.ContractExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from contract
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from contract
+    where contractId = #{contractid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from contract
+    where contractId = #{contractid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="bjtu.pt.easycontracts.pojo.table.ContractExample" >
+    delete from contract
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="bjtu.pt.easycontracts.pojo.table.Contract" >
+    insert into contract (contractId, contractName, customerId, 
+      beginTime, endTime, drafterId, 
+      type, failureTimes, content
+      )
+    values (#{contractid,jdbcType=INTEGER}, #{contractname,jdbcType=VARCHAR}, #{customerid,jdbcType=INTEGER}, 
+      #{begintime,jdbcType=DATE}, #{endtime,jdbcType=DATE}, #{drafterid,jdbcType=INTEGER}, 
+      #{type,jdbcType=INTEGER}, #{failuretimes,jdbcType=INTEGER}, #{content,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="bjtu.pt.easycontracts.pojo.table.Contract" >
+    insert into contract
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="contractid != null" >
+        contractId,
+      </if>
+      <if test="contractname != null" >
+        contractName,
+      </if>
+      <if test="customerid != null" >
+        customerId,
+      </if>
+      <if test="begintime != null" >
+        beginTime,
+      </if>
+      <if test="endtime != null" >
+        endTime,
+      </if>
+      <if test="drafterid != null" >
+        drafterId,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="failuretimes != null" >
+        failureTimes,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="contractid != null" >
+        #{contractid,jdbcType=INTEGER},
+      </if>
+      <if test="contractname != null" >
+        #{contractname,jdbcType=VARCHAR},
+      </if>
+      <if test="customerid != null" >
+        #{customerid,jdbcType=INTEGER},
+      </if>
+      <if test="begintime != null" >
+        #{begintime,jdbcType=DATE},
+      </if>
+      <if test="endtime != null" >
+        #{endtime,jdbcType=DATE},
+      </if>
+      <if test="drafterid != null" >
+        #{drafterid,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="failuretimes != null" >
+        #{failuretimes,jdbcType=INTEGER},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="bjtu.pt.easycontracts.pojo.table.ContractExample" resultType="java.lang.Integer" >
+    select count(*) from contract
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update contract
+    <set >
+      <if test="record.contractid != null" >
+        contractId = #{record.contractid,jdbcType=INTEGER},
+      </if>
+      <if test="record.contractname != null" >
+        contractName = #{record.contractname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.customerid != null" >
+        customerId = #{record.customerid,jdbcType=INTEGER},
+      </if>
+      <if test="record.begintime != null" >
+        beginTime = #{record.begintime,jdbcType=DATE},
+      </if>
+      <if test="record.endtime != null" >
+        endTime = #{record.endtime,jdbcType=DATE},
+      </if>
+      <if test="record.drafterid != null" >
+        drafterId = #{record.drafterid,jdbcType=INTEGER},
+      </if>
+      <if test="record.type != null" >
+        type = #{record.type,jdbcType=INTEGER},
+      </if>
+      <if test="record.failuretimes != null" >
+        failureTimes = #{record.failuretimes,jdbcType=INTEGER},
+      </if>
+      <if test="record.content != null" >
+        content = #{record.content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update contract
+    set contractId = #{record.contractid,jdbcType=INTEGER},
+      contractName = #{record.contractname,jdbcType=VARCHAR},
+      customerId = #{record.customerid,jdbcType=INTEGER},
+      beginTime = #{record.begintime,jdbcType=DATE},
+      endTime = #{record.endtime,jdbcType=DATE},
+      drafterId = #{record.drafterid,jdbcType=INTEGER},
+      type = #{record.type,jdbcType=INTEGER},
+      failureTimes = #{record.failuretimes,jdbcType=INTEGER},
+      content = #{record.content,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update contract
+    set contractId = #{record.contractid,jdbcType=INTEGER},
+      contractName = #{record.contractname,jdbcType=VARCHAR},
+      customerId = #{record.customerid,jdbcType=INTEGER},
+      beginTime = #{record.begintime,jdbcType=DATE},
+      endTime = #{record.endtime,jdbcType=DATE},
+      drafterId = #{record.drafterid,jdbcType=INTEGER},
+      type = #{record.type,jdbcType=INTEGER},
+      failureTimes = #{record.failuretimes,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="bjtu.pt.easycontracts.pojo.table.Contract" >
+    update contract
+    <set >
+      <if test="contractname != null" >
+        contractName = #{contractname,jdbcType=VARCHAR},
+      </if>
+      <if test="customerid != null" >
+        customerId = #{customerid,jdbcType=INTEGER},
+      </if>
+      <if test="begintime != null" >
+        beginTime = #{begintime,jdbcType=DATE},
+      </if>
+      <if test="endtime != null" >
+        endTime = #{endtime,jdbcType=DATE},
+      </if>
+      <if test="drafterid != null" >
+        drafterId = #{drafterid,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="failuretimes != null" >
+        failureTimes = #{failuretimes,jdbcType=INTEGER},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where contractId = #{contractid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="bjtu.pt.easycontracts.pojo.table.Contract" >
+    update contract
+    set contractName = #{contractname,jdbcType=VARCHAR},
+      customerId = #{customerid,jdbcType=INTEGER},
+      beginTime = #{begintime,jdbcType=DATE},
+      endTime = #{endtime,jdbcType=DATE},
+      drafterId = #{drafterid,jdbcType=INTEGER},
+      type = #{type,jdbcType=INTEGER},
+      failureTimes = #{failuretimes,jdbcType=INTEGER},
+      content = #{content,jdbcType=LONGVARCHAR}
+    where contractId = #{contractid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="bjtu.pt.easycontracts.pojo.table.Contract" >
+    update contract
+    set contractName = #{contractname,jdbcType=VARCHAR},
+      customerId = #{customerid,jdbcType=INTEGER},
+      beginTime = #{begintime,jdbcType=DATE},
+      endTime = #{endtime,jdbcType=DATE},
+      drafterId = #{drafterid,jdbcType=INTEGER},
+      type = #{type,jdbcType=INTEGER},
+      failureTimes = #{failuretimes,jdbcType=INTEGER}
+    where contractId = #{contractid,jdbcType=INTEGER}
+  </update>
+</mapper>

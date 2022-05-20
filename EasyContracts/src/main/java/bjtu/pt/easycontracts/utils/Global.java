@@ -14,5 +14,10 @@ public class Global {
 
     public static final int SUCCESS = 200;
     public static final int FAIL = -1;
+    public static final int REGISTER = 1; //注册
+    public static final int FIND = 0; //找回
+    public static final int OK = 200;
+    public static final int CODE_ERROR = 201;
+    public static final int NAME_EXIST = 202;
 
 }

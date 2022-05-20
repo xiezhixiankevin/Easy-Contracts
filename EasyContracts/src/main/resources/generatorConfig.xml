@@ -14,12 +14,12 @@
         </commentGenerator>
         <!-- 数据库的连接信息 -->
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://localhost:3306/demo"
+                        connectionURL="jdbc:mysql://localhost:3306/easycontract"
                         userId="root"
                         password="shiwo2002625">
         </jdbcConnection>
         <!-- javaBean的生成策略-->
-        <javaModelGenerator targetPackage="bjtu.pt.easycontracts.pojo" targetProject=".\src\main\java">
+        <javaModelGenerator targetPackage="bjtu.pt.easycontracts.pojo.table" targetProject=".\src\main\java">
             <property name="enableSubPackages" value="true" />
             <property name="trimStrings" value="true" />
         </javaModelGenerator>
@@ -34,6 +34,7 @@
         <!-- 逆向分析的表 -->
         <!-- tableName设置为*号，可以对应所有表，此时不写domainObjectName -->
         <!-- domainObjectName属性指定生成出来的实体类的类名 -->
-<!--        <table tableName="user" domainObjectName="User"/>-->
+        <table tableName="%" />
+
     </context>
 </generatorConfiguration>

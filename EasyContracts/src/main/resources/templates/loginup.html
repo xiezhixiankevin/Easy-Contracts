@@ -69,7 +69,7 @@
 	<div class="container bloc-lg">
 		<div class="row">
 			<div id="div_form_38623" class="col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
-				<form id="form_38623" method="post" action="#" data-form-type="blocs-form" novalidate data-success-msg="Your message has been sent." data-fail-msg="Sorry it seems that our mail server is not responding, Sorry for the inconvenience!">
+				<form id="form_38623" method="get" action="#sss" data-form-type="blocs-form" novalidate data-success-msg="Your message has been sent." data-fail-msg="Sorry it seems that our mail server is not responding, Sorry for the inconvenience!">
 					<div class="form-group">
 						<label>
 							用户名<br>
@@ -215,17 +215,19 @@
 			},
 			//2.发送验证码方法
 			sendCode:function (){
+				var username = $("#name_38623").val();
 				var email = $("#email_38623").val();
+				var type = "1";
 				axios({
 					method: "get",
 					url: "user/register/sendCode",
-					params: {email}
+					params: {email,username,type}
 				})
 						.then(function (value) {
 							if(value.data === registerForm.OK) {
 								alert("发送成功请查收邮件！");
 							}else{
-								alert("系统繁忙请稍后重试！");
+								alert("发送次数已达上限，请间隔一小时重试！");
 							}
 						})
 						.catch();

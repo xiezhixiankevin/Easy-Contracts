@@ -1,6 +1,8 @@
 package bjtu.pt.easycontracts.controller;
 
 import bjtu.pt.easycontracts.pojo.table.User;
+import bjtu.pt.easycontracts.service.CodeService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,12 +19,15 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/user")
 public class UserController {
 
+    @Autowired
+    private CodeService codeService;
+
     /*
     * 注册请求，注册成功跳转到登录页面;失败重定向(redirect:xxx)到注册页面，并给出相应提示
     * */
     @PostMapping("/register")
     @ResponseBody
-    public String register(User user,@RequestParam("code")String codeValue){
+    public String register(User user, @RequestParam("code")String codeValue){
 
         return null;
     }
@@ -41,8 +46,12 @@ public class UserController {
      * */
     @GetMapping("/register/sendCode")
     @ResponseBody
-    public String sendCode(@RequestParam("email")String email){
-        return null;
+    public String sendCode(@RequestParam("email")String email,@RequestParam("username")String username,@RequestParam("type")int type){
+        //1.如果是注册需要先检查用户名是否存在
+
+        //2.不存在再发送验证码
+        int result = codeService.sendCode(username,email, type);
+        return String.valueOf(result);
     }
 
     /*
