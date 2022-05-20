@@ -32,7 +32,6 @@ public interface UserService {
     User loginUser(String username,String password);
 
     /*找回密码部分*/
-    boolean checkCode(String code); //检查用户输入的验证码与redis中存储的是否一致，一致则调用retrievePassword返回密码
     String retrievePassword(String username); //根据用户名查询密码并返回，调用此方法的前提是验证码输入正确
 
     /*通用部分*/

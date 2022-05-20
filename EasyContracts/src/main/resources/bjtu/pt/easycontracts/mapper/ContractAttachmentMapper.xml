@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="bjtu.pt.easycontracts.mapper.ContractAttachmentMapper" >
+  <resultMap id="BaseResultMap" type="bjtu.pt.easycontracts.pojo.table.ContractAttachment" >
+    <result column="contractId" property="contractid" jdbcType="INTEGER" />
+    <result column="fileName" property="filename" jdbcType="VARCHAR" />
+    <result column="path" property="path" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="uploadTime" property="uploadtime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    contractId, fileName, path, type, uploadTime
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="bjtu.pt.easycontracts.pojo.table.ContractAttachmentExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from contract_attachment
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="bjtu.pt.easycontracts.pojo.table.ContractAttachmentExample" >
+    delete from contract_attachment
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="bjtu.pt.easycontracts.pojo.table.ContractAttachment" >
+    insert into contract_attachment (contractId, fileName, path, 
+      type, uploadTime)
+    values (#{contractid,jdbcType=INTEGER}, #{filename,jdbcType=VARCHAR}, #{path,jdbcType=VARCHAR}, 
+      #{type,jdbcType=VARCHAR}, #{uploadtime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="bjtu.pt.easycontracts.pojo.table.ContractAttachment" >
+    insert into contract_attachment
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="contractid != null" >
+        contractId,
+      </if>
+      <if test="filename != null" >
+        fileName,
+      </if>
+      <if test="path != null" >
+        path,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="uploadtime != null" >
+        uploadTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="contractid != null" >
+        #{contractid,jdbcType=INTEGER},
+      </if>
+      <if test="filename != null" >
+        #{filename,jdbcType=VARCHAR},
+      </if>
+      <if test="path != null" >
+        #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="uploadtime != null" >
+        #{uploadtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="bjtu.pt.easycontracts.pojo.table.ContractAttachmentExample" resultType="java.lang.Integer" >
+    select count(*) from contract_attachment
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update contract_attachment
+    <set >
+      <if test="record.contractid != null" >
+        contractId = #{record.contractid,jdbcType=INTEGER},
+      </if>
+      <if test="record.filename != null" >
+        fileName = #{record.filename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.path != null" >
+        path = #{record.path,jdbcType=VARCHAR},
+      </if>
+      <if test="record.type != null" >
+        type = #{record.type,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uploadtime != null" >
+        uploadTime = #{record.uploadtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update contract_attachment
+    set contractId = #{record.contractid,jdbcType=INTEGER},
+      fileName = #{record.filename,jdbcType=VARCHAR},
+      path = #{record.path,jdbcType=VARCHAR},
+      type = #{record.type,jdbcType=VARCHAR},
+      uploadTime = #{record.uploadtime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>
