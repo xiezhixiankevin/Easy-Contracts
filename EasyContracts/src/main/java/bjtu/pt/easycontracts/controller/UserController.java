@@ -46,11 +46,8 @@ public class UserController {
      * */
     @GetMapping("/register/sendCode")
     @ResponseBody
-    public String sendCode(@RequestParam("email")String email,@RequestParam("username")String username,@RequestParam("type")int type){
-        //1.如果是注册需要先检查用户名是否存在
-
-        //2.不存在再发送验证码
-        int result = codeService.sendCode(username,email, type);
+    public String sendCode(@RequestParam("email")String email,@RequestParam("type")int type){
+        int result = codeService.sendCode(email, type);
         return String.valueOf(result);
     }
 
