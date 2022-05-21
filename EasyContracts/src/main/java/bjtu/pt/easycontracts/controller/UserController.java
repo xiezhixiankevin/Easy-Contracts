@@ -2,6 +2,7 @@ package bjtu.pt.easycontracts.controller;
 
 import bjtu.pt.easycontracts.pojo.table.User;
 import bjtu.pt.easycontracts.service.CodeService;
+import bjtu.pt.easycontracts.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +22,8 @@ public class UserController {
 
     @Autowired
     private CodeService codeService;
+    @Autowired
+    private UserService userService;
 
     /*
     * 注册请求，注册成功跳转到登录页面;失败重定向(redirect:xxx)到注册页面，并给出相应提示
@@ -36,9 +39,13 @@ public class UserController {
      * 登录请求，登录成功跳转到首页;失败重定向(redirect:xxx)到登录页面，并给出相应提示
      * */
     @GetMapping("/login/{username}/{password}")
-    public String loginUser(@PathVariable("username")String username,
+    public User loginUser(@PathVariable("username")String username,
                                 @PathVariable("password")String password){
-        return null;
+        User user = userService.loginUser(username,password);
+        if(user==null){
+            return null;
+        }else
+            return user;
     }
 
     /*
