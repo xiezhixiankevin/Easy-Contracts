@@ -7,10 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 	<meta name="robots" content="index, follow">
     <link rel="shortcut icon" type="image/png" href="favicon.png">
-    
-	<link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css?1145">
-	<link rel="stylesheet" type="text/css" href="../static/css/style.css?4078">
-	<link rel="stylesheet" type="text/css" href="./css/animate.min.css?6532">
+
+	<link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css?9188" th:href="@{/css/bootstrap.min.css?9188}">
+	<link rel="stylesheet" type="text/css" href="../static/css/style.css?8116" th:href="@{/css/style.css?8116}">
+	<link rel="stylesheet" type="text/css" href="./css/animate.min.css?7456" th:href="@{/css/animate.min.css?7456}">
 	<link href='https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
 	<link href='https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900&display=swap&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
     <title>LoginIn</title>
@@ -80,9 +80,9 @@
 						<label>
 							密码<br>
 						</label>
-						<input id="email_38623" class="form-control" type="password" required placeholder="请输入密码……" data-validation-required-message="请输入邮箱来注册。" />
+						<input id="password_38623" class="form-control" type="password" required placeholder="请输入密码……" data-validation-required-message="请输入邮箱来注册。" />
 					</div> 
-					<button class="btn btn-lg btn-button-style btn-azure bloc-button" type="submit">
+					<button v-on:click="login()" type="button" class="btn btn-lg btn-button-style btn-azure bloc-button">
 						登录<br>
 					</button>
 				</form>
@@ -116,16 +116,34 @@
 
 </div>
 <!-- Main container END -->
-    
-
 
 <!-- Additional JS -->
-<script src="./js/jquery.min.js?9650"></script>
-<script src="./js/bootstrap.bundle.min.js?1413"></script>
-<script src="./js/blocs.min.js?3842"></script>
-<script src="./js/jqBootstrapValidation.js"></script>
-<script src="./js/formHandler.js?2365"></script>
-<script src="./js/lazysizes.min.js" defer></script><!-- Additional JS END -->
+<script th:src="@{/js/jquery.min.js}"  type="text/javascript" charset="utf-8"></script>
+<script th:src="@{/js/vue.js}"  type="text/javascript" charset="utf-8"></script>
+<script th:src="@{/js/axios.min.js}"  type="text/javascript" charset="utf-8"></script>
+
+<!--js脚本，使用Vue框架-->
+<script>
+	var loginForm = new Vue({
+		el:"#form_38623",  //作用范围：id=form_38623的标签及其内部
+		//定义数据
+		data: {
+			//一些常量
+			OK :200,
+			CODE_ERROR:201,
+			NAME_EXIST:202
+		},
+		//定义方法
+		methods: {
+			//1.登录方法
+			login:function () {
+				var username = $("#name_38623").val();
+				var password = $("#password_38623").val();
+				window.location.href = "user/login/" + username +"/"+password;
+			}
+		}
+	});
+</script>
 
 
 </body>

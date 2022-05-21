@@ -17,11 +17,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class SkipController {
 
-    //跳转到注册页面，其实就是我们项目的默认页面
+    //跳转到注册页面，
     @GetMapping("/")
     public String toRegister(){
         return "loginup";
     }
 
+    //跳转到登录页面
+    @GetMapping("/toLogin")
+    public String toLogin(){
+        return "loginin";
+    }
 
 }
