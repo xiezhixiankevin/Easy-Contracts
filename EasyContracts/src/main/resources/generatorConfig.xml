@@ -14,9 +14,9 @@
         </commentGenerator>
         <!-- 数据库的连接信息 -->
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://localhost:3306/easycontract"
+                        connectionURL="jdbc:mysql://localhost:3306/easycontract?serverTimezone=UTC&amp;useSSL=true"
                         userId="root"
-                        password="shiwo2002625">
+                        password="123456">
         </jdbcConnection>
         <!-- javaBean的生成策略-->
         <javaModelGenerator targetPackage="bjtu.pt.easycontracts.pojo.table" targetProject=".\src\main\java">

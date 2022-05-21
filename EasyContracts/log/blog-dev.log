@@ -2984,3 +2984,19 @@ javax.mail.internet.AddressException: Illegal address
 2022-05-20 22:27:09.727  INFO 42296 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
 2022-05-20 22:27:09.728  INFO 42296 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
 2022-05-20 22:27:09.728  INFO 42296 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 0 ms
+2022-05-21 20:02:11.798  INFO 15724 --- [main] b.p.e.EasyContractsApplicationTests      : Starting EasyContractsApplicationTests using Java 11.0.11 on LAPTOP-U8055N0R with PID 15724 (started by FUBOFENG in C:\Users\FUBOFENG\Easy-Contracts\EasyContracts)
+2022-05-21 20:02:11.799  INFO 15724 --- [main] b.p.e.EasyContractsApplicationTests      : The following 1 profile is active: "dev"
+2022-05-21 20:02:12.709  INFO 15724 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2022-05-21 20:02:12.713  INFO 15724 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2022-05-21 20:02:12.761  INFO 15724 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 28 ms. Found 0 Redis repository interfaces.
+2022-05-21 20:02:12.947  WARN 15724 --- [main] o.m.s.mapper.ClassPathMapperScanner      : No MyBatis mapper was found in '[bjtu.pt.easycontracts]' package. Please check your configuration.
+2022-05-21 20:02:14.776  INFO 15724 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2022-05-21 20:02:16.036  INFO 15724 --- [main] b.p.e.EasyContractsApplicationTests      : Started EasyContractsApplicationTests in 4.812 seconds (JVM running for 6.863)
+2022-05-21 20:02:31.494  INFO 6768 --- [main] b.p.e.EasyContractsApplicationTests      : Starting EasyContractsApplicationTests using Java 11.0.11 on LAPTOP-U8055N0R with PID 6768 (started by FUBOFENG in C:\Users\FUBOFENG\Easy-Contracts\EasyContracts)
+2022-05-21 20:02:31.496  INFO 6768 --- [main] b.p.e.EasyContractsApplicationTests      : The following 1 profile is active: "dev"
+2022-05-21 20:02:32.379  INFO 6768 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2022-05-21 20:02:32.383  INFO 6768 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2022-05-21 20:02:32.426  INFO 6768 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 25 ms. Found 0 Redis repository interfaces.
+2022-05-21 20:02:32.604  WARN 6768 --- [main] o.m.s.mapper.ClassPathMapperScanner      : No MyBatis mapper was found in '[bjtu.pt.easycontracts]' package. Please check your configuration.
+2022-05-21 20:02:34.455  INFO 6768 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2022-05-21 20:02:35.908  INFO 6768 --- [main] b.p.e.EasyContractsApplicationTests      : Started EasyContractsApplicationTests in 4.971 seconds (JVM running for 6.245)
