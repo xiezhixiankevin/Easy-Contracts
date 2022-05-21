@@ -24,6 +24,7 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserMapper userMapper;
 
+
     @Override
     public User registerUser(User user) {
         return null;
@@ -31,7 +32,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User loginUser(String username, String password) {
-
         return null;
     }
 
@@ -49,4 +49,5 @@ public class UserServiceImpl implements UserService {
     public User getUserById(Integer id) {
         return null;
     }
+
 }
