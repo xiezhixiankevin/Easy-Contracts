@@ -35,12 +35,17 @@ public class UserController {
     @ResponseBody
     public ReturnObject<User> register(User user, @RequestParam("code")String codeValue){
 
-        User user1 = userService.registerUser(user);
-        String email = user1.getEmail();
+        String email = user.getEmail();
         int checkCode = codeService.checkCode(new Code(email, codeValue), Global.REGISTER);
         if (checkCode == Global.SUCCESS)
         {
-            // TODO: 判断各名称是否合法
+            User user1 = userService.registerUser(user);
+            if(user1==null){
+                return new ReturnObject<>(Global.FAIL, null);
+            }else {
+
+            }
+
             return new ReturnObject<>(Global.SUCCESS, user1);
         } else {
             return new ReturnObject<>(Global.FAIL, null);
