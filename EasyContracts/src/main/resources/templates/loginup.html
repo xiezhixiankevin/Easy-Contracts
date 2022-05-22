@@ -156,7 +156,11 @@
 </div>
 <!-- Main container END -->
 
-
+<script th:src="@{/js/bootstrap.bundle.min.js?1413}" src="./js/bootstrap.bundle.min.js?1413"></script>
+<script th:src="@{/js/blocs.min.js?3842}" src="./js/blocs.min.js?3842"></script>
+<script th:src="@{/js/jqBootstrapValidation.js}" src="./js/jqBootstrapValidation.js"></script>
+<script th:src="@{/js/formHandler.js?2118}" src="./js/formHandler.js?2118"></script>
+<script th:src="@{/js/lazysizes.min.js}" src="./js/lazysizes.min.js" defer></script>
 
 <script th:src="@{/js/jquery.min.js}"  type="text/javascript" charset="utf-8"></script>
 <script th:src="@{/js/vue.js}"  type="text/javascript" charset="utf-8"></script>
@@ -169,7 +173,7 @@
 		//定义数据
 		data: {
 			ifRegisterOK:false, //判断是否成功注册
-			jump_url:"http://localhost:8080/EasyContract/login", //注册成功需要跳转的页面地址
+			jump_url:"http://localhost:8080/toLogin", //注册成功需要跳转的页面地址
 
 			//一些常量
 			OK :200,
@@ -196,12 +200,13 @@
 				})
 						.then(function (value) {
 
-							if(value.data === registerForm.OK){
+							if(value.data.code === registerForm.OK){
+								alert("注册成功！即将跳转到登录页面");
 								//注册成功跳转到登录页面
 								window.location.href = registerForm.jump_url;
-							}else if(value.data === registerForm.CODE_ERROR){
+							}else if(value.data.code === registerForm.CODE_ERROR){
 								alert("验证码错误");
-							}else if(value.data === registerForm.NAME_EXIST){
+							}else if(value.data.code === registerForm.NAME_EXIST){
 								alert("用户名已存在");
 							}
 						})

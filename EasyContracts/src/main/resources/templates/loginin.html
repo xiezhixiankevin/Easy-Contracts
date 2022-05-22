@@ -1,5 +1,5 @@
 <!doctype html>
-<html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="">
@@ -118,6 +118,12 @@
 <!-- Main container END -->
 
 <!-- Additional JS -->
+<script th:src="@{/js/bootstrap.bundle.min.js?1413}" src="./js/bootstrap.bundle.min.js?1413"></script>
+<script th:src="@{/js/blocs.min.js?3842}" src="./js/blocs.min.js?3842"></script>
+<script th:src="@{/js/jqBootstrapValidation.js}" src="./js/jqBootstrapValidation.js"></script>
+<script th:src="@{/js/formHandler.js?2118}" src="./js/formHandler.js?2118"></script>
+<script th:src="@{/js/lazysizes.min.js}" src="./js/lazysizes.min.js" defer></script>
+
 <script th:src="@{/js/jquery.min.js}"  type="text/javascript" charset="utf-8"></script>
 <script th:src="@{/js/vue.js}"  type="text/javascript" charset="utf-8"></script>
 <script th:src="@{/js/axios.min.js}"  type="text/javascript" charset="utf-8"></script>
@@ -130,8 +136,7 @@
 		data: {
 			//一些常量
 			OK :200,
-			CODE_ERROR:201,
-			NAME_EXIST:202
+			ERROR:203
 		},
 		//定义方法
 		methods: {
@@ -139,7 +144,18 @@
 			login:function () {
 				var username = $("#name_38623").val();
 				var password = $("#password_38623").val();
-				window.location.href = "user/login/" + username +"/"+password;
+				axios({
+					method: "get",
+					url: "user/login/" + username +"/"+password,
+				})
+						.then(function (value) {
+							if(value.data.code === loginForm.OK) {
+								window.location.href = "toMe";
+							}else{
+								alert("用户名或密码错误");
+							}
+						})
+						.catch();
 			}
 		}
 	});

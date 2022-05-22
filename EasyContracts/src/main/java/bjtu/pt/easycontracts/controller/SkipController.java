@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class SkipController {
 
     //跳转到注册页面，
-    @GetMapping("/")
+    @GetMapping("/toRegister")
     public String toRegister(){
         return "loginup";
     }
@@ -27,6 +27,18 @@ public class SkipController {
     @GetMapping("/toLogin")
     public String toLogin(){
         return "loginin";
+    }
+
+    //跳转到首页
+    @GetMapping("/")
+    public String toIndex(){
+        return "index";
+    }
+
+    //跳转到me页面
+    @GetMapping("/toMe")
+    public String toMe(){
+        return "me";
     }
 
 }

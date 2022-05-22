@@ -19,5 +19,6 @@ public class Global {
     public static final int OK = 200;
     public static final int CODE_ERROR = 201;
     public static final int NAME_EXIST = 202;
+    public static final int ERROR = 203;
 
 }

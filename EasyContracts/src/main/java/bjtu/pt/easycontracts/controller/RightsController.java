@@ -4,15 +4,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
- * <Description> RoleController
+ * <Description> RightsController
  *
  * @author 26802
  * @version 1.0
- * @ClassName RoleController
+ * @ClassName RightsController
  * @taskId
  * @see bjtu.pt.easycontracts.controller
  */
 @Controller
-@RequestMapping("/role")
-public class RoleController {
+@RequestMapping("/rights")
+public class RightsController {
 }

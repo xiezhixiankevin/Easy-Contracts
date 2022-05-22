@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
+
 /**
  * <Description> UserController
  *
@@ -42,10 +44,7 @@ public class UserController {
             User user1 = userService.registerUser(user);
             if(user1==null){
                 return new ReturnObject<>(Global.NAME_EXIST, null);
-            }else {
-
             }
-
             return new ReturnObject<>(Global.SUCCESS, user1);
         } else {
             return new ReturnObject<>(Global.CODE_ERROR, null);
@@ -56,13 +55,16 @@ public class UserController {
      * 登录请求，登录成功跳转到首页;失败重定向(redirect:xxx)到登录页面，并给出相应提示
      * */
     @GetMapping("/login/{username}/{password}")
-    public User loginUser(@PathVariable("username")String username,
-                          @PathVariable("password")String password){
+    @ResponseBody
+    public ReturnObject<User> loginUser(@PathVariable("username")String username,
+                                        @PathVariable("password")String password,
+                                        HttpSession session){
         User user = userService.loginUser(username,password);
         if(user==null){
-            return null;
+            return new ReturnObject<>(Global.ERROR, null);
         }else
-            return user;
+            session.setAttribute("nowUser",user);
+            return new ReturnObject<>(Global.SUCCESS, user);
     }
 
     /*
