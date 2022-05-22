@@ -22,6 +22,13 @@ public class Code {
     public Code() {
     }
 
+    public String getUsername() {
+        return email;
+    }
+
+    public void setUsername(String username) {
+        this.email = username;
+    }
 
     public String getCodeValue() {
         return codeValue;

@@ -1,8 +1,11 @@
 package bjtu.pt.easycontracts.controller;
 
+import bjtu.pt.easycontracts.pojo.logic.Code;
 import bjtu.pt.easycontracts.pojo.table.User;
 import bjtu.pt.easycontracts.service.CodeService;
 import bjtu.pt.easycontracts.service.UserService;
+import bjtu.pt.easycontracts.utils.Global;
+import bjtu.pt.easycontracts.utils.ReturnObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -30,9 +33,18 @@ public class UserController {
     * */
     @PostMapping("/register")
     @ResponseBody
-    public String register(User user, @RequestParam("code")String codeValue){
+    public ReturnObject<User> register(User user, @RequestParam("code")String codeValue){
 
-        return null;
+        User user1 = userService.registerUser(user);
+        String email = user1.getEmail();
+        int checkCode = codeService.checkCode(new Code(email, codeValue), Global.REGISTER);
+        if (checkCode == Global.SUCCESS)
+        {
+            // TODO: 判断各名称是否合法
+            return new ReturnObject<>(Global.SUCCESS, user1);
+        } else {
+            return new ReturnObject<>(Global.FAIL, null);
+        }
     }
 
     /*
