@@ -41,14 +41,14 @@ public class UserController {
         {
             User user1 = userService.registerUser(user);
             if(user1==null){
-                return new ReturnObject<>(Global.FAIL, null);
+                return new ReturnObject<>(Global.NAME_EXIST, null);
             }else {
 
             }
 
             return new ReturnObject<>(Global.SUCCESS, user1);
         } else {
-            return new ReturnObject<>(Global.FAIL, null);
+            return new ReturnObject<>(Global.CODE_ERROR, null);
         }
     }
 
