@@ -32,7 +32,6 @@ public class UserController {
     @ResponseBody
     public String register(User user, @RequestParam("code")String codeValue){
 
-        User user1 = userService.registerUser(user);
         return null;
     }
 

@@ -40,7 +40,7 @@ public class CodeServiceImpl implements CodeService {
 
     @Override
     public int checkCode(Code code,int type) {
-        String realCode = getCode(code.getUsername(), type);
+        String realCode = getCode(code.getEmail(), type);
         if (realCode.equals(code.getCodeValue())){
             return Global.SUCCESS;
         }
