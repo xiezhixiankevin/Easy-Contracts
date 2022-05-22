@@ -2,6 +2,7 @@ package bjtu.pt.easycontracts.service.impl;
 
 import bjtu.pt.easycontracts.mapper.UserMapper;
 import bjtu.pt.easycontracts.pojo.table.User;
+import bjtu.pt.easycontracts.pojo.table.UserExample;
 import bjtu.pt.easycontracts.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,10 +25,21 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserMapper userMapper;
 
-
     @Override
     public User registerUser(User user) {
-        return null;
+        // 判断是否已存在该用户
+        UserExample userExample = new UserExample();
+        userExample.createCriteria().andUsernameEqualTo(user.getUsername());
+        List<User> userList = userMapper.selectByExample(userExample);
+        if (!userList.isEmpty())
+        {
+            return null;
+        }
+
+        // 否则注册为新的用户
+        userMapper.insert(user);
+
+        return user;
     }
 
     @Override
@@ -49,5 +61,4 @@ public class UserServiceImpl implements UserService {
     public User getUserById(Integer id) {
         return null;
     }
-
 }

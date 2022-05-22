@@ -10,7 +10,7 @@ public interface ContractProcessMapper {
 
     int deleteByExample(ContractProcessExample example);
 
-    int deleteByPrimaryKey(Integer userid);
+    int deleteByPrimaryKey(Integer useUserid);
 
     int insert(ContractProcess record);
 
@@ -20,7 +20,7 @@ public interface ContractProcessMapper {
 
     List<ContractProcess> selectByExample(ContractProcessExample example);
 
-    ContractProcess selectByPrimaryKey(Integer userid);
+    ContractProcess selectByPrimaryKey(Integer useUserid);
 
     int updateByExampleSelective(@Param("record") ContractProcess record, @Param("example") ContractProcessExample example);
 

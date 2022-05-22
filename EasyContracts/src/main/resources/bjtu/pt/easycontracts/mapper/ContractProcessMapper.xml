@@ -2,7 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="bjtu.pt.easycontracts.mapper.ContractProcessMapper" >
   <resultMap id="BaseResultMap" type="bjtu.pt.easycontracts.pojo.table.ContractProcess" >
-    <id column="userId" property="userid" jdbcType="INTEGER" />
+    <id column="Use_userId" property="useUserid" jdbcType="INTEGER" />
+    <result column="contractId" property="contractid" jdbcType="INTEGER" />
+    <result column="userId" property="userid" jdbcType="INTEGER" />
     <result column="type" property="type" jdbcType="INTEGER" />
     <result column="state" property="state" jdbcType="INTEGER" />
     <result column="time" property="time" jdbcType="TIMESTAMP" />
@@ -69,7 +71,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    userId, type, state, time
+    Use_userId, contractId, userId, type, state, time
   </sql>
   <sql id="Blob_Column_List" >
     content
@@ -110,11 +112,11 @@
     ,
     <include refid="Blob_Column_List" />
     from contract_process
-    where userId = #{userid,jdbcType=INTEGER}
+    where Use_userId = #{useUserid,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from contract_process
-    where userId = #{userid,jdbcType=INTEGER}
+    where Use_userId = #{useUserid,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="bjtu.pt.easycontracts.pojo.table.ContractProcessExample" >
     delete from contract_process
@@ -123,14 +125,22 @@
     </if>
   </delete>
   <insert id="insert" parameterType="bjtu.pt.easycontracts.pojo.table.ContractProcess" >
-    insert into contract_process (userId, type, state, 
-      time, content)
-    values (#{userid,jdbcType=INTEGER}, #{type,jdbcType=INTEGER}, #{state,jdbcType=INTEGER}, 
-      #{time,jdbcType=TIMESTAMP}, #{content,jdbcType=LONGVARCHAR})
+    insert into contract_process (Use_userId, contractId, userId, 
+      type, state, time, 
+      content)
+    values (#{useUserid,jdbcType=INTEGER}, #{contractid,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, 
+      #{type,jdbcType=INTEGER}, #{state,jdbcType=INTEGER}, #{time,jdbcType=TIMESTAMP}, 
+      #{content,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="bjtu.pt.easycontracts.pojo.table.ContractProcess" >
     insert into contract_process
     <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="useUserid != null" >
+        Use_userId,
+      </if>
+      <if test="contractid != null" >
+        contractId,
+      </if>
       <if test="userid != null" >
         userId,
       </if>
@@ -148,6 +158,12 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="useUserid != null" >
+        #{useUserid,jdbcType=INTEGER},
+      </if>
+      <if test="contractid != null" >
+        #{contractid,jdbcType=INTEGER},
+      </if>
       <if test="userid != null" >
         #{userid,jdbcType=INTEGER},
       </if>
@@ -174,6 +190,12 @@
   <update id="updateByExampleSelective" parameterType="map" >
     update contract_process
     <set >
+      <if test="record.useUserid != null" >
+        Use_userId = #{record.useUserid,jdbcType=INTEGER},
+      </if>
+      <if test="record.contractid != null" >
+        contractId = #{record.contractid,jdbcType=INTEGER},
+      </if>
       <if test="record.userid != null" >
         userId = #{record.userid,jdbcType=INTEGER},
       </if>
@@ -196,7 +218,9 @@
   </update>
   <update id="updateByExampleWithBLOBs" parameterType="map" >
     update contract_process
-    set userId = #{record.userid,jdbcType=INTEGER},
+    set Use_userId = #{record.useUserid,jdbcType=INTEGER},
+      contractId = #{record.contractid,jdbcType=INTEGER},
+      userId = #{record.userid,jdbcType=INTEGER},
       type = #{record.type,jdbcType=INTEGER},
       state = #{record.state,jdbcType=INTEGER},
       time = #{record.time,jdbcType=TIMESTAMP},
@@ -207,7 +231,9 @@
   </update>
   <update id="updateByExample" parameterType="map" >
     update contract_process
-    set userId = #{record.userid,jdbcType=INTEGER},
+    set Use_userId = #{record.useUserid,jdbcType=INTEGER},
+      contractId = #{record.contractid,jdbcType=INTEGER},
+      userId = #{record.userid,jdbcType=INTEGER},
       type = #{record.type,jdbcType=INTEGER},
       state = #{record.state,jdbcType=INTEGER},
       time = #{record.time,jdbcType=TIMESTAMP}
@@ -218,6 +244,12 @@
   <update id="updateByPrimaryKeySelective" parameterType="bjtu.pt.easycontracts.pojo.table.ContractProcess" >
     update contract_process
     <set >
+      <if test="contractid != null" >
+        contractId = #{contractid,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        userId = #{userid,jdbcType=INTEGER},
+      </if>
       <if test="type != null" >
         type = #{type,jdbcType=INTEGER},
       </if>
@@ -231,21 +263,25 @@
         content = #{content,jdbcType=LONGVARCHAR},
       </if>
     </set>
-    where userId = #{userid,jdbcType=INTEGER}
+    where Use_userId = #{useUserid,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKeyWithBLOBs" parameterType="bjtu.pt.easycontracts.pojo.table.ContractProcess" >
     update contract_process
-    set type = #{type,jdbcType=INTEGER},
+    set contractId = #{contractid,jdbcType=INTEGER},
+      userId = #{userid,jdbcType=INTEGER},
+      type = #{type,jdbcType=INTEGER},
       state = #{state,jdbcType=INTEGER},
       time = #{time,jdbcType=TIMESTAMP},
       content = #{content,jdbcType=LONGVARCHAR}
-    where userId = #{userid,jdbcType=INTEGER}
+    where Use_userId = #{useUserid,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="bjtu.pt.easycontracts.pojo.table.ContractProcess" >
     update contract_process
-    set type = #{type,jdbcType=INTEGER},
+    set contractId = #{contractid,jdbcType=INTEGER},
+      userId = #{userid,jdbcType=INTEGER},
+      type = #{type,jdbcType=INTEGER},
       state = #{state,jdbcType=INTEGER},
       time = #{time,jdbcType=TIMESTAMP}
-    where userId = #{userid,jdbcType=INTEGER}
+    where Use_userId = #{useUserid,jdbcType=INTEGER}
   </update>
 </mapper>

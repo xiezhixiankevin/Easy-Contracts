@@ -4,6 +4,7 @@
   <resultMap id="BaseResultMap" type="bjtu.pt.easycontracts.pojo.table.User" >
     <id column="userId" property="userid" jdbcType="INTEGER" />
     <result column="userName" property="username" jdbcType="VARCHAR" />
+    <result column="userDescription" property="userdescription" jdbcType="VARCHAR" />
     <result column="password" property="password" jdbcType="VARCHAR" />
     <result column="email" property="email" jdbcType="VARCHAR" />
   </resultMap>
@@ -66,7 +67,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    userId, userName, password, email
+    userId, userName, userDescription, password, email
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="bjtu.pt.easycontracts.pojo.table.UserExample" >
     select
@@ -98,13 +99,13 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="bjtu.pt.easycontracts.pojo.table.User" >
-    insert into user (userId, userName, password, 
-      email)
-    values (#{userid,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{email,jdbcType=VARCHAR})
+  <insert id="insert" parameterType="bjtu.pt.easycontracts.pojo.table.User" useGeneratedKeys="true" keyProperty="userid" >
+    insert into user (userId, userName, userDescription, 
+      password, email)
+    values (#{userid,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{userdescription,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="bjtu.pt.easycontracts.pojo.table.User" >
+  <insert id="insertSelective" parameterType="bjtu.pt.easycontracts.pojo.table.User" useGeneratedKeys="true" keyProperty="userid">
     insert into user
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="userid != null" >
@@ -112,6 +113,9 @@
       </if>
       <if test="username != null" >
         userName,
+      </if>
+      <if test="userdescription != null" >
+        userDescription,
       </if>
       <if test="password != null" >
         password,
@@ -126,6 +130,9 @@
       </if>
       <if test="username != null" >
         #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="userdescription != null" >
+        #{userdescription,jdbcType=VARCHAR},
       </if>
       <if test="password != null" >
         #{password,jdbcType=VARCHAR},
@@ -150,6 +157,9 @@
       <if test="record.username != null" >
         userName = #{record.username,jdbcType=VARCHAR},
       </if>
+      <if test="record.userdescription != null" >
+        userDescription = #{record.userdescription,jdbcType=VARCHAR},
+      </if>
       <if test="record.password != null" >
         password = #{record.password,jdbcType=VARCHAR},
       </if>
@@ -165,6 +175,7 @@
     update user
     set userId = #{record.userid,jdbcType=INTEGER},
       userName = #{record.username,jdbcType=VARCHAR},
+      userDescription = #{record.userdescription,jdbcType=VARCHAR},
       password = #{record.password,jdbcType=VARCHAR},
       email = #{record.email,jdbcType=VARCHAR}
     <if test="_parameter != null" >
@@ -176,6 +187,9 @@
     <set >
       <if test="username != null" >
         userName = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="userdescription != null" >
+        userDescription = #{userdescription,jdbcType=VARCHAR},
       </if>
       <if test="password != null" >
         password = #{password,jdbcType=VARCHAR},
@@ -189,6 +203,7 @@
   <update id="updateByPrimaryKey" parameterType="bjtu.pt.easycontracts.pojo.table.User" >
     update user
     set userName = #{username,jdbcType=VARCHAR},
+      userDescription = #{userdescription,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
       email = #{email,jdbcType=VARCHAR}
     where userId = #{userid,jdbcType=INTEGER}

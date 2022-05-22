@@ -3,6 +3,10 @@ package bjtu.pt.easycontracts.pojo.table;
 import java.util.Date;
 
 public class ContractProcess {
+    private Integer useUserid;
+
+    private Integer contractid;
+
     private Integer userid;
 
     private Integer type;
@@ -12,6 +16,22 @@ public class ContractProcess {
     private Date time;
 
     private String content;
+
+    public Integer getUseUserid() {
+        return useUserid;
+    }
+
+    public void setUseUserid(Integer useUserid) {
+        this.useUserid = useUserid;
+    }
+
+    public Integer getContractid() {
+        return contractid;
+    }
+
+    public void setContractid(Integer contractid) {
+        this.contractid = contractid;
+    }
 
     public Integer getUserid() {
         return userid;

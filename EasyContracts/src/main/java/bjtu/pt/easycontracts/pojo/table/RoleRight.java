@@ -1,28 +1,28 @@
 package bjtu.pt.easycontracts.pojo.table;
 
-public class Role {
-    private Integer roleid;
+public class RoleRight {
+    private Integer rightid;
 
-    private String rolename;
+    private String rightname;
 
     private String description;
 
     private String functions;
 
-    public Integer getRoleid() {
-        return roleid;
+    public Integer getRightid() {
+        return rightid;
     }
 
-    public void setRoleid(Integer roleid) {
-        this.roleid = roleid;
+    public void setRightid(Integer rightid) {
+        this.rightid = rightid;
     }
 
-    public String getRolename() {
-        return rolename;
+    public String getRightname() {
+        return rightname;
     }
 
-    public void setRolename(String rolename) {
-        this.rolename = rolename == null ? null : rolename.trim();
+    public void setRightname(String rightname) {
+        this.rightname = rightname == null ? null : rightname.trim();
     }
 
     public String getDescription() {

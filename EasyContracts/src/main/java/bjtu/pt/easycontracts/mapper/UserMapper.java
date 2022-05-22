@@ -4,9 +4,7 @@ import bjtu.pt.easycontracts.pojo.table.User;
 import bjtu.pt.easycontracts.pojo.table.UserExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Repository;
 
-@Repository
 public interface UserMapper {
     int countByExample(UserExample example);
 
@@ -29,5 +27,4 @@ public interface UserMapper {
     int updateByPrimaryKeySelective(User record);
 
     int updateByPrimaryKey(User record);
-
 }

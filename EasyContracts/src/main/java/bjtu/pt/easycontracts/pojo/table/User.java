@@ -5,6 +5,8 @@ public class User {
 
     private String username;
 
+    private String userdescription;
+
     private String password;
 
     private String email;
@@ -23,6 +25,14 @@ public class User {
 
     public void setUsername(String username) {
         this.username = username == null ? null : username.trim();
+    }
+
+    public String getUserdescription() {
+        return userdescription;
+    }
+
+    public void setUserdescription(String userdescription) {
+        this.userdescription = userdescription == null ? null : userdescription.trim();
     }
 
     public String getPassword() {

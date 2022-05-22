@@ -1,7 +1,6 @@
 package bjtu.pt.easycontracts.service;
 
-import bjtu.pt.easycontracts.pojo.table.Role;
-
+import javax.management.relation.Role;
 import java.util.List;
 
 /**

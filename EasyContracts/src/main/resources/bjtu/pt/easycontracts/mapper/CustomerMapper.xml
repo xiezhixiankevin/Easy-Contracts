@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="bjtu.pt.easycontracts.mapper.CustomerMapper" >
   <resultMap id="BaseResultMap" type="bjtu.pt.easycontracts.pojo.table.Customer" >
-    <result column="customerId" property="customerid" jdbcType="INTEGER" />
+    <id column="customerId" property="customerid" jdbcType="INTEGER" />
     <result column="customerName" property="customername" jdbcType="VARCHAR" />
     <result column="address" property="address" jdbcType="VARCHAR" />
     <result column="phone" property="phone" jdbcType="VARCHAR" />
@@ -85,6 +85,16 @@
       order by ${orderByClause}
     </if>
   </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from customer
+    where customerId = #{customerid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from customer
+    where customerId = #{customerid,jdbcType=INTEGER}
+  </delete>
   <delete id="deleteByExample" parameterType="bjtu.pt.easycontracts.pojo.table.CustomerExample" >
     delete from customer
     <if test="_parameter != null" >
@@ -195,5 +205,39 @@
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="bjtu.pt.easycontracts.pojo.table.Customer" >
+    update customer
+    <set >
+      <if test="customername != null" >
+        customerName = #{customername,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null" >
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="bank != null" >
+        bank = #{bank,jdbcType=VARCHAR},
+      </if>
+      <if test="account != null" >
+        account = #{account,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where customerId = #{customerid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="bjtu.pt.easycontracts.pojo.table.Customer" >
+    update customer
+    set customerName = #{customername,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      code = #{code,jdbcType=VARCHAR},
+      bank = #{bank,jdbcType=VARCHAR},
+      account = #{account,jdbcType=VARCHAR}
+    where customerId = #{customerid,jdbcType=INTEGER}
   </update>
 </mapper>

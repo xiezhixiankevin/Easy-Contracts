@@ -32,6 +32,7 @@ public class UserController {
     @ResponseBody
     public String register(User user, @RequestParam("code")String codeValue){
 
+        User user1 = userService.registerUser(user);
         return null;
     }
 
@@ -40,7 +41,7 @@ public class UserController {
      * */
     @GetMapping("/login/{username}/{password}")
     public User loginUser(@PathVariable("username")String username,
-                                @PathVariable("password")String password){
+                          @PathVariable("password")String password){
         User user = userService.loginUser(username,password);
         if(user==null){
             return null;

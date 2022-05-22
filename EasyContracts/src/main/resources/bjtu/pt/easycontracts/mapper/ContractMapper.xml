@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="bjtu.pt.easycontracts.mapper.ContractMapper" >
   <resultMap id="BaseResultMap" type="bjtu.pt.easycontracts.pojo.table.Contract" >
-    <id column="contractId" property="contractid" jdbcType="INTEGER" />
+    <result column="contractId" property="contractid" jdbcType="INTEGER" />
     <result column="contractName" property="contractname" jdbcType="VARCHAR" />
     <result column="customerId" property="customerid" jdbcType="INTEGER" />
     <result column="beginTime" property="begintime" jdbcType="DATE" />
@@ -108,18 +108,6 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from contract
-    where contractId = #{contractid,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from contract
-    where contractId = #{contractid,jdbcType=INTEGER}
-  </delete>
   <delete id="deleteByExample" parameterType="bjtu.pt.easycontracts.pojo.table.ContractExample" >
     delete from contract
     <if test="_parameter != null" >
@@ -266,58 +254,5 @@
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
-  </update>
-  <update id="updateByPrimaryKeySelective" parameterType="bjtu.pt.easycontracts.pojo.table.Contract" >
-    update contract
-    <set >
-      <if test="contractname != null" >
-        contractName = #{contractname,jdbcType=VARCHAR},
-      </if>
-      <if test="customerid != null" >
-        customerId = #{customerid,jdbcType=INTEGER},
-      </if>
-      <if test="begintime != null" >
-        beginTime = #{begintime,jdbcType=DATE},
-      </if>
-      <if test="endtime != null" >
-        endTime = #{endtime,jdbcType=DATE},
-      </if>
-      <if test="drafterid != null" >
-        drafterId = #{drafterid,jdbcType=INTEGER},
-      </if>
-      <if test="type != null" >
-        type = #{type,jdbcType=INTEGER},
-      </if>
-      <if test="failuretimes != null" >
-        failureTimes = #{failuretimes,jdbcType=INTEGER},
-      </if>
-      <if test="content != null" >
-        content = #{content,jdbcType=LONGVARCHAR},
-      </if>
-    </set>
-    where contractId = #{contractid,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="bjtu.pt.easycontracts.pojo.table.Contract" >
-    update contract
-    set contractName = #{contractname,jdbcType=VARCHAR},
-      customerId = #{customerid,jdbcType=INTEGER},
-      beginTime = #{begintime,jdbcType=DATE},
-      endTime = #{endtime,jdbcType=DATE},
-      drafterId = #{drafterid,jdbcType=INTEGER},
-      type = #{type,jdbcType=INTEGER},
-      failureTimes = #{failuretimes,jdbcType=INTEGER},
-      content = #{content,jdbcType=LONGVARCHAR}
-    where contractId = #{contractid,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="bjtu.pt.easycontracts.pojo.table.Contract" >
-    update contract
-    set contractName = #{contractname,jdbcType=VARCHAR},
-      customerId = #{customerid,jdbcType=INTEGER},
-      beginTime = #{begintime,jdbcType=DATE},
-      endTime = #{endtime,jdbcType=DATE},
-      drafterId = #{drafterid,jdbcType=INTEGER},
-      type = #{type,jdbcType=INTEGER},
-      failureTimes = #{failuretimes,jdbcType=INTEGER}
-    where contractId = #{contractid,jdbcType=INTEGER}
   </update>
 </mapper>
