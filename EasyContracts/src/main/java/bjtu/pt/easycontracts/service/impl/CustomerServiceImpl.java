@@ -51,7 +51,7 @@ public class CustomerServiceImpl implements CustomerService
         if (customer.getBank() != null)
             criteria.andBankEqualTo(customer.getBank());
         if (customer.getCustomername() != null)
-            criteria.andCustomernameLike('%' + customer.getCustomername() + '%');
+            criteria.andCustomernameLike(customer.getCustomername());
         if (customer.getPhone() != null)
             criteria.andPhoneEqualTo(customer.getPhone());
 
