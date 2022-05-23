@@ -2,8 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="bjtu.pt.easycontracts.mapper.RoleRightMapper" >
   <resultMap id="BaseResultMap" type="bjtu.pt.easycontracts.pojo.table.RoleRight" >
-    <id column="userId" property="userid" jdbcType="INTEGER" />
-    <id column="rightId" property="rightid" jdbcType="INTEGER" />
+    <result column="userId" property="userid" jdbcType="INTEGER" />
+    <result column="rightId" property="rightid" jdbcType="INTEGER" />
     <result column="description" property="description" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
@@ -81,18 +81,6 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="bjtu.pt.easycontracts.pojo.table.RoleRightKey" >
-    select 
-    <include refid="Base_Column_List" />
-    from role_right
-    where userId = #{userid,jdbcType=INTEGER}
-      and rightId = #{rightid,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="bjtu.pt.easycontracts.pojo.table.RoleRightKey" >
-    delete from role_right
-    where userId = #{userid,jdbcType=INTEGER}
-      and rightId = #{rightid,jdbcType=INTEGER}
-  </delete>
   <delete id="deleteByExample" parameterType="bjtu.pt.easycontracts.pojo.table.RoleRightExample" >
     delete from role_right
     <if test="_parameter != null" >
@@ -161,21 +149,5 @@
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
-  </update>
-  <update id="updateByPrimaryKeySelective" parameterType="bjtu.pt.easycontracts.pojo.table.RoleRight" >
-    update role_right
-    <set >
-      <if test="description != null" >
-        description = #{description,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where userId = #{userid,jdbcType=INTEGER}
-      and rightId = #{rightid,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="bjtu.pt.easycontracts.pojo.table.RoleRight" >
-    update role_right
-    set description = #{description,jdbcType=VARCHAR}
-    where userId = #{userid,jdbcType=INTEGER}
-      and rightId = #{rightid,jdbcType=INTEGER}
   </update>
 </mapper>

@@ -97,6 +97,7 @@
 		</div>
 	</div>
 
+
 </div>
 
 <!-- ScrollToTop Button -->
@@ -136,9 +137,9 @@
 <script th:src="@{/js/axios.min.js}"  type="text/javascript" charset="utf-8"></script>
 
 <script>
-	var customerTableVue = new Vue({
+		var customerTableVue = new Vue({
 		el:"#customer_table",
-		dara:{//定义数据
+		data:{//定义数据
 			search_url: "user/listUser/",
 			now_page:1,
 			users:[],

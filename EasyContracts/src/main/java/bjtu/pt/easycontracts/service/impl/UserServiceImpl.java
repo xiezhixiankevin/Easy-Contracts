@@ -67,9 +67,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> listUser() {
-        UserExample userExample = new UserExample();
-        userExample.createCriteria();
-        List<User> users =userMapper.selectByExample(userExample);
+        List<User> users =userMapper.selectByExample(null);
         return users;
     }
 
