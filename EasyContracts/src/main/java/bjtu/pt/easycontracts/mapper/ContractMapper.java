@@ -10,6 +10,8 @@ public interface ContractMapper {
 
     int deleteByExample(ContractExample example);
 
+    int deleteByPrimaryKey(Integer contractid);
+
     int insert(Contract record);
 
     int insertSelective(Contract record);
@@ -18,9 +20,17 @@ public interface ContractMapper {
 
     List<Contract> selectByExample(ContractExample example);
 
+    Contract selectByPrimaryKey(Integer contractid);
+
     int updateByExampleSelective(@Param("record") Contract record, @Param("example") ContractExample example);
 
     int updateByExampleWithBLOBs(@Param("record") Contract record, @Param("example") ContractExample example);
 
     int updateByExample(@Param("record") Contract record, @Param("example") ContractExample example);
+
+    int updateByPrimaryKeySelective(Contract record);
+
+    int updateByPrimaryKeyWithBLOBs(Contract record);
+
+    int updateByPrimaryKey(Contract record);
 }

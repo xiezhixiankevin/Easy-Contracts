@@ -99,7 +99,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="bjtu.pt.easycontracts.pojo.table.User" useGeneratedKeys="true" keyProperty="userid" >
+  <insert id="insert" parameterType="bjtu.pt.easycontracts.pojo.table.User" useGeneratedKeys="true" keyProperty="userid">
     insert into user (userId, userName, userDescription, 
       password, email)
     values (#{userid,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{userdescription,jdbcType=VARCHAR}, 

@@ -2,10 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="bjtu.pt.easycontracts.mapper.RoleRightMapper" >
   <resultMap id="BaseResultMap" type="bjtu.pt.easycontracts.pojo.table.RoleRight" >
+    <id column="userId" property="userid" jdbcType="INTEGER" />
     <id column="rightId" property="rightid" jdbcType="INTEGER" />
-    <result column="rightName" property="rightname" jdbcType="VARCHAR" />
     <result column="description" property="description" jdbcType="VARCHAR" />
-    <result column="functions" property="functions" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -66,7 +65,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    rightId, rightName, description, functions
+    userId, rightId, description
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="bjtu.pt.easycontracts.pojo.table.RoleRightExample" >
     select
@@ -82,15 +81,17 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="bjtu.pt.easycontracts.pojo.table.RoleRightKey" >
     select 
     <include refid="Base_Column_List" />
     from role_right
-    where rightId = #{rightid,jdbcType=INTEGER}
+    where userId = #{userid,jdbcType=INTEGER}
+      and rightId = #{rightid,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+  <delete id="deleteByPrimaryKey" parameterType="bjtu.pt.easycontracts.pojo.table.RoleRightKey" >
     delete from role_right
-    where rightId = #{rightid,jdbcType=INTEGER}
+    where userId = #{userid,jdbcType=INTEGER}
+      and rightId = #{rightid,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="bjtu.pt.easycontracts.pojo.table.RoleRightExample" >
     delete from role_right
@@ -99,39 +100,33 @@
     </if>
   </delete>
   <insert id="insert" parameterType="bjtu.pt.easycontracts.pojo.table.RoleRight" >
-    insert into role_right (rightId, rightName, description, 
-      functions)
-    values (#{rightid,jdbcType=INTEGER}, #{rightname,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
-      #{functions,jdbcType=VARCHAR})
+    insert into role_right (userId, rightId, description
+      )
+    values (#{userid,jdbcType=INTEGER}, #{rightid,jdbcType=INTEGER}, #{description,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="bjtu.pt.easycontracts.pojo.table.RoleRight" >
     insert into role_right
     <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userid != null" >
+        userId,
+      </if>
       <if test="rightid != null" >
         rightId,
-      </if>
-      <if test="rightname != null" >
-        rightName,
       </if>
       <if test="description != null" >
         description,
       </if>
-      <if test="functions != null" >
-        functions,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
       <if test="rightid != null" >
         #{rightid,jdbcType=INTEGER},
       </if>
-      <if test="rightname != null" >
-        #{rightname,jdbcType=VARCHAR},
-      </if>
       <if test="description != null" >
         #{description,jdbcType=VARCHAR},
-      </if>
-      <if test="functions != null" >
-        #{functions,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -144,17 +139,14 @@
   <update id="updateByExampleSelective" parameterType="map" >
     update role_right
     <set >
+      <if test="record.userid != null" >
+        userId = #{record.userid,jdbcType=INTEGER},
+      </if>
       <if test="record.rightid != null" >
         rightId = #{record.rightid,jdbcType=INTEGER},
       </if>
-      <if test="record.rightname != null" >
-        rightName = #{record.rightname,jdbcType=VARCHAR},
-      </if>
       <if test="record.description != null" >
         description = #{record.description,jdbcType=VARCHAR},
-      </if>
-      <if test="record.functions != null" >
-        functions = #{record.functions,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -163,10 +155,9 @@
   </update>
   <update id="updateByExample" parameterType="map" >
     update role_right
-    set rightId = #{record.rightid,jdbcType=INTEGER},
-      rightName = #{record.rightname,jdbcType=VARCHAR},
-      description = #{record.description,jdbcType=VARCHAR},
-      functions = #{record.functions,jdbcType=VARCHAR}
+    set userId = #{record.userid,jdbcType=INTEGER},
+      rightId = #{record.rightid,jdbcType=INTEGER},
+      description = #{record.description,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -174,23 +165,17 @@
   <update id="updateByPrimaryKeySelective" parameterType="bjtu.pt.easycontracts.pojo.table.RoleRight" >
     update role_right
     <set >
-      <if test="rightname != null" >
-        rightName = #{rightname,jdbcType=VARCHAR},
-      </if>
       <if test="description != null" >
         description = #{description,jdbcType=VARCHAR},
       </if>
-      <if test="functions != null" >
-        functions = #{functions,jdbcType=VARCHAR},
-      </if>
     </set>
-    where rightId = #{rightid,jdbcType=INTEGER}
+    where userId = #{userid,jdbcType=INTEGER}
+      and rightId = #{rightid,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="bjtu.pt.easycontracts.pojo.table.RoleRight" >
     update role_right
-    set rightName = #{rightname,jdbcType=VARCHAR},
-      description = #{description,jdbcType=VARCHAR},
-      functions = #{functions,jdbcType=VARCHAR}
-    where rightId = #{rightid,jdbcType=INTEGER}
+    set description = #{description,jdbcType=VARCHAR}
+    where userId = #{userid,jdbcType=INTEGER}
+      and rightId = #{rightid,jdbcType=INTEGER}
   </update>
 </mapper>

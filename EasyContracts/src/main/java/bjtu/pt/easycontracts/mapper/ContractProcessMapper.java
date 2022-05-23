@@ -2,6 +2,7 @@ package bjtu.pt.easycontracts.mapper;
 
 import bjtu.pt.easycontracts.pojo.table.ContractProcess;
 import bjtu.pt.easycontracts.pojo.table.ContractProcessExample;
+import bjtu.pt.easycontracts.pojo.table.ContractProcessKey;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
@@ -10,7 +11,7 @@ public interface ContractProcessMapper {
 
     int deleteByExample(ContractProcessExample example);
 
-    int deleteByPrimaryKey(Integer useUserid);
+    int deleteByPrimaryKey(ContractProcessKey key);
 
     int insert(ContractProcess record);
 
@@ -20,7 +21,7 @@ public interface ContractProcessMapper {
 
     List<ContractProcess> selectByExample(ContractProcessExample example);
 
-    ContractProcess selectByPrimaryKey(Integer useUserid);
+    ContractProcess selectByPrimaryKey(ContractProcessKey key);
 
     int updateByExampleSelective(@Param("record") ContractProcess record, @Param("example") ContractProcessExample example);
 

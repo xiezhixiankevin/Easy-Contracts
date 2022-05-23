@@ -2,7 +2,6 @@ package bjtu.pt.easycontracts.mapper;
 
 import bjtu.pt.easycontracts.pojo.table.Rights;
 import bjtu.pt.easycontracts.pojo.table.RightsExample;
-import bjtu.pt.easycontracts.pojo.table.RightsKey;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
@@ -11,7 +10,7 @@ public interface RightsMapper {
 
     int deleteByExample(RightsExample example);
 
-    int deleteByPrimaryKey(RightsKey key);
+    int deleteByPrimaryKey(Integer rightid);
 
     int insert(Rights record);
 
@@ -19,7 +18,7 @@ public interface RightsMapper {
 
     List<Rights> selectByExample(RightsExample example);
 
-    Rights selectByPrimaryKey(RightsKey key);
+    Rights selectByPrimaryKey(Integer rightid);
 
     int updateByExampleSelective(@Param("record") Rights record, @Param("example") RightsExample example);
 

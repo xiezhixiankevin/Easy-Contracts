@@ -105,66 +105,6 @@ public class ContractProcessExample {
             criteria.add(new Criterion(condition, value1, value2));
         }
 
-        public Criteria andUseUseridIsNull() {
-            addCriterion("Use_userId is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andUseUseridIsNotNull() {
-            addCriterion("Use_userId is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andUseUseridEqualTo(Integer value) {
-            addCriterion("Use_userId =", value, "useUserid");
-            return (Criteria) this;
-        }
-
-        public Criteria andUseUseridNotEqualTo(Integer value) {
-            addCriterion("Use_userId <>", value, "useUserid");
-            return (Criteria) this;
-        }
-
-        public Criteria andUseUseridGreaterThan(Integer value) {
-            addCriterion("Use_userId >", value, "useUserid");
-            return (Criteria) this;
-        }
-
-        public Criteria andUseUseridGreaterThanOrEqualTo(Integer value) {
-            addCriterion("Use_userId >=", value, "useUserid");
-            return (Criteria) this;
-        }
-
-        public Criteria andUseUseridLessThan(Integer value) {
-            addCriterion("Use_userId <", value, "useUserid");
-            return (Criteria) this;
-        }
-
-        public Criteria andUseUseridLessThanOrEqualTo(Integer value) {
-            addCriterion("Use_userId <=", value, "useUserid");
-            return (Criteria) this;
-        }
-
-        public Criteria andUseUseridIn(List<Integer> values) {
-            addCriterion("Use_userId in", values, "useUserid");
-            return (Criteria) this;
-        }
-
-        public Criteria andUseUseridNotIn(List<Integer> values) {
-            addCriterion("Use_userId not in", values, "useUserid");
-            return (Criteria) this;
-        }
-
-        public Criteria andUseUseridBetween(Integer value1, Integer value2) {
-            addCriterion("Use_userId between", value1, value2, "useUserid");
-            return (Criteria) this;
-        }
-
-        public Criteria andUseUseridNotBetween(Integer value1, Integer value2) {
-            addCriterion("Use_userId not between", value1, value2, "useUserid");
-            return (Criteria) this;
-        }
-
         public Criteria andContractidIsNull() {
             addCriterion("contractId is null");
             return (Criteria) this;
