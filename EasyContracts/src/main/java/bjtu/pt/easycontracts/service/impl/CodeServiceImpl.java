@@ -3,6 +3,7 @@ package bjtu.pt.easycontracts.service.impl;
 import bjtu.pt.easycontracts.pojo.logic.Code;
 import bjtu.pt.easycontracts.service.CodeService;
 import bjtu.pt.easycontracts.service.EmailService;
+import bjtu.pt.easycontracts.service.UserService;
 import bjtu.pt.easycontracts.utils.Global;
 import org.junit.internal.runners.statements.Fail;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,8 @@ public class CodeServiceImpl implements CodeService {
     private RedisTemplate redisTemplate;
     @Autowired
     private EmailService emailService;
+    @Autowired
+    private UserService userService;
 
     @Override
     public int sendCode( String email,int type) {
@@ -36,6 +39,23 @@ public class CodeServiceImpl implements CodeService {
             return sendCodeFIND(email);
         }
         return Global.FAIL;
+    }
+
+    @Override
+    public int sendCodeForFind(String username) {
+        //先获取用户名对应的邮箱
+        String email = userService.getUserByUserName(username).getEmail();
+        long codeL = System.nanoTime();
+        //生成6位验证码
+        String codeStr = Long.toString(codeL);
+        codeStr = codeStr.substring(codeStr.length() - 8, codeStr.length() - 2);
+        //存入redis
+        String key_code = username + "_find_code"; //kevin_find_code
+        redisTemplate.opsForValue().set(key_code,codeStr,60*5,TimeUnit.SECONDS);//验证码有效时间是5分钟
+        //发送到用户邮箱
+        String content = "你好，欢迎使用EasyContract,验证码是:"+ codeStr +",有效时间5分钟";
+        emailService.sendSimpleMail(email,"EasyContract找回密码验证码",content);
+        return Global.SUCCESS;
     }
 
     @Override

@@ -1,9 +1,12 @@
 package bjtu.pt.easycontracts.service.impl;
 
+import bjtu.pt.easycontracts.mapper.RightsMapper;
 import bjtu.pt.easycontracts.pojo.table.Rights;
 import bjtu.pt.easycontracts.service.RightsService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,6 +20,10 @@ import java.util.List;
  */
 @Service
 public class RightsServiceImpl implements RightsService {
+
+    @Autowired
+    private RightsMapper rightsMapper;
+
     @Override
     public int allocationRights(int userId, List<Rights> rights) {
         return 0;
@@ -54,6 +61,13 @@ public class RightsServiceImpl implements RightsService {
 
     @Override
     public List<Rights> createRightList(List<Integer> rights) {
-        return null;
+        List<Rights> result = new ArrayList<>();
+        for (Integer id : rights){
+            Rights right = rightsMapper.selectByPrimaryKey(id);
+            if (right!=null){
+                result.add(right);
+            }
+        }
+        return result;
     }
 }

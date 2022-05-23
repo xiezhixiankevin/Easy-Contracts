@@ -1,8 +1,10 @@
 package bjtu.pt.easycontracts.controller;
 
 import bjtu.pt.easycontracts.pojo.logic.Code;
+import bjtu.pt.easycontracts.pojo.table.Rights;
 import bjtu.pt.easycontracts.pojo.table.User;
 import bjtu.pt.easycontracts.service.CodeService;
+import bjtu.pt.easycontracts.service.RightsService;
 import bjtu.pt.easycontracts.service.UserService;
 import bjtu.pt.easycontracts.utils.Global;
 import bjtu.pt.easycontracts.utils.ReturnObject;
@@ -30,6 +32,8 @@ public class UserController {
     private CodeService codeService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private RightsService rightsService;
 
     /*
     * 注册请求，注册成功跳转到登录页面;失败重定向(redirect:xxx)到注册页面，并给出相应提示
@@ -63,8 +67,11 @@ public class UserController {
         User user = userService.loginUser(username,password);
         if(user==null){
             return new ReturnObject<>(Global.ERROR, null);
-        }else
-            session.setAttribute("nowUser",user);
+        }else {
+            List<Rights> rights = rightsService.listRights(user.getUserid());
+            user.setUserRights(rights);
+            session.setAttribute("nowUser", user);
+        }
             return new ReturnObject<>(Global.SUCCESS, user);
     }
 

@@ -80,13 +80,14 @@
 					<div class="card-body card-body-bloc-7-style">
 						<h6 class="mg-md text-lg-center">
 							其他操作：
-						</h6><a href="index.html" class="btn btn-d btn-lg btn-6-style btn-style-none">权限管理</a><a href="index.html" class="btn btn-d btn-lg btn-6-style btn-style-none">Button</a><a href="index.html" class="btn btn-d btn-lg btn-6-style btn-style-none">Button</a><a href="index.html" class="btn btn-d btn-lg btn-6-style btn-style-none">Button</a><a href="index.html" class="btn btn-d btn-lg btn-6-style btn-style-none">Button</a><a href="index.html" class="btn btn-d btn-lg btn-6-style btn-style-none">Button</a>
+						</h6>
+						<a href="index.html" th:href="@{/toSelectUser}" th:if="${session.nowUser.ifHasRight(20)}" class="btn btn-d btn-lg btn-6-style btn-style-none">权限管理</a>
 					</div>
 				</div>
 			</div>
 			<div class="col-sm-8 text-md-left text-center col-lg-10">
 				<h3 class="mg-md">
-					欢迎登录，xxx。
+					欢迎登录，<span th:text="${session.nowUser.username}">xxx</span>。
 				</h3>
 				<h6 class="mg-md">
 					以下是您可进行的工作：

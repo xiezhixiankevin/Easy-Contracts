@@ -43,6 +43,24 @@ public class SkipController {
         return "me";
     }
 
+    //跳转到select用户页面
+    @GetMapping("/toSelectUser")
+    public String toSelectUser(){
+        return "customer/select_customers";
+    }
+
+    //跳转到create用户页面
+    @GetMapping("/toCreateUser")
+    public String toCreateUser(){
+        return "customer/create_customers";
+    }
+
+    //跳转到modify用户页面
+    @GetMapping("/toModifyUser")
+    public String toModifyUser(){
+        return "customer/modify_customers";
+    }
+
     //跳转到权限分配页面
     @GetMapping("/toRights/{username}")
     public String toRights(@PathVariable("username")String username, Model model){

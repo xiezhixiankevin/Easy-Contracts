@@ -55,6 +55,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public String retrievePassword(String username) {
+        UserExample userExample = new UserExample();
+        userExample.createCriteria().andUsernameEqualTo(username);
+        List<User> users = userMapper.selectByExample(userExample);
+        if (users!=null){
+            if (users.size()!=0) return users.get(0).getPassword();
+            else return null;
+        }
         return null;
     }
 
@@ -65,6 +72,17 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getUserById(Integer id) {
+        return null;
+    }
+
+    @Override
+    public User getUserByUserName(String username) {
+        UserExample userExample = new UserExample();
+        userExample.createCriteria().andUsernameEqualTo(username);
+        List<User> users = userMapper.selectByExample(userExample);
+        if (users.size()!=0){
+            return users.get(0);
+        }
         return null;
     }
 

@@ -4,7 +4,9 @@ import bjtu.pt.easycontracts.pojo.table.Rights;
 import bjtu.pt.easycontracts.pojo.table.RightsExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface RightsMapper {
     int countByExample(RightsExample example);
 
