@@ -1,5 +1,7 @@
 package bjtu.pt.easycontracts.pojo.table;
 
+import java.util.*;
+
 public class User {
     private Integer userid;
 
@@ -10,6 +12,9 @@ public class User {
     private String password;
 
     private String email;
+
+    //以下是非数据库属性
+    private List<Rights> userRights = new ArrayList<>();
 
     public Integer getUserid() {
         return userid;
@@ -50,4 +55,26 @@ public class User {
     public void setEmail(String email) {
         this.email = email == null ? null : email.trim();
     }
+
+    /**/
+    public List<Rights> getUserRights() {
+        return userRights;
+    }
+
+    public void setUserRights(List<Rights> userRights) {
+        this.userRights = userRights;
+    }
+
+    public boolean ifHasRight(Integer rightId){
+        if (userRights == null){
+            return false;
+        }
+        for(Rights rights:userRights){
+            if (rights.getRightid() == rightId){
+                return true;
+            }
+        }
+        return false;
+    }
+
 }

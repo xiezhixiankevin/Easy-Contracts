@@ -40,6 +40,7 @@ public interface UserService {
     /*通用部分*/
     List<User> listUser(); //获取数据库中的所有用户 fbf
     User getUserById(Integer id); //根据id获取用户 fbf
+    User getUserByUserName(String username); //xzx
     boolean ifExistUser(String username); //wj
     boolean ifExistUser(Integer id); //wj
 
