@@ -17,26 +17,24 @@ public class CustomerServiceImpl implements CustomerService
 
     @Override
     public int addCustomer(Customer customer) {
-        return 0;
+        return customerMapper.insert(customer);
     }
 
     @Override
     public int deleteCustomer(int customerId) {
-        return 0;
+        return customerMapper.deleteByPrimaryKey(customerId);
     }
 
     @Override
-    public int updateCustomer(int customerId, Customer customer)
-    {
+    public int updateCustomer(int customerId, Customer customer) {
         CustomerExample customerExample = new CustomerExample();
         customerExample.createCriteria().andCustomeridEqualTo(customerId);
         customer.setCustomerid(customerId);
-        return customerMapper.updateByExample(customer , customerExample);
+        return customerMapper.updateByExample(customer, customerExample);
     }
 
     @Override
-    public List<Customer> listCustomerSelective(Customer customer)
-    {
+    public List<Customer> listCustomerSelective(Customer customer) {
         CustomerExample customerExample = new CustomerExample();
         CustomerExample.Criteria criteria = customerExample.createCriteria();
 

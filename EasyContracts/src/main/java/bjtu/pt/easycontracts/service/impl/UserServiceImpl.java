@@ -67,12 +67,15 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> listUser() {
-        return null;
+        UserExample userExample = new UserExample();
+        userExample.createCriteria();
+        List<User> users =userMapper.selectByExample(userExample);
+        return users;
     }
 
     @Override
     public User getUserById(Integer id) {
-        return null;
+        return userMapper.selectByPrimaryKey(id);
     }
 
     @Override

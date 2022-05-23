@@ -1,7 +1,11 @@
 package bjtu.pt.easycontracts.service.impl;
 
 import bjtu.pt.easycontracts.mapper.RightsMapper;
+import bjtu.pt.easycontracts.mapper.RoleRightMapper;
 import bjtu.pt.easycontracts.pojo.table.Rights;
+import bjtu.pt.easycontracts.pojo.table.RightsExample;
+import bjtu.pt.easycontracts.pojo.table.RoleRight;
+import bjtu.pt.easycontracts.pojo.table.RoleRightExample;
 import bjtu.pt.easycontracts.service.RightsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,6 +27,8 @@ public class RightsServiceImpl implements RightsService {
 
     @Autowired
     private RightsMapper rightsMapper;
+    @Autowired
+    private RoleRightMapper roleRightMapper;
 
     @Override
     public int allocationRights(int userId, List<Rights> rights) {
@@ -46,16 +52,43 @@ public class RightsServiceImpl implements RightsService {
 
     @Override
     public int deleteRights(int userId) {
-        return 0;
+        RoleRightExample example = new RoleRightExample();
+        example.createCriteria().andUseridEqualTo(userId);
+        return roleRightMapper.deleteByExample(example);
+        // TODO: 错误处理
     }
 
     @Override
     public List<Rights> listRights(int userId) {
-        return null;
+        RoleRightExample example = new RoleRightExample();
+        example.createCriteria().andUseridEqualTo(userId);
+        List<RoleRight> gotRoleRights = roleRightMapper.selectByExample(example);
+
+        List<Rights> gotRights = new ArrayList<>();
+
+        for (RoleRight eachRoleRights: gotRoleRights)
+        {
+            RightsExample rightsExample = new RightsExample();
+            rightsExample.createCriteria().andRightidEqualTo(eachRoleRights.getRightid());
+            List<Rights> tempRights;
+            tempRights = rightsMapper.selectByExample(rightsExample);
+            gotRights.add(tempRights.get(0));
+        }
+        return gotRights;
     }
 
     @Override
-    public Rights ifUserHasRights(int userId, int rightsType) {
+    public Rights ifUserHasRights(int userId, int rightsId) {
+        RoleRightExample example = new RoleRightExample();
+        example.createCriteria().andUseridEqualTo(userId);
+        List<RoleRight> gotRoleRights = roleRightMapper.selectByExample(example);
+        for (RoleRight i: gotRoleRights)
+        {
+            if (i.getRightid() == rightsId)
+            {
+                return rightsMapper.selectByPrimaryKey(rightsId);
+            }
+        }
         return null;
     }
 

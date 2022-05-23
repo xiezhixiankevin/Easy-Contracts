@@ -18,6 +18,7 @@
 2022-05-23 11:18:13.088  INFO 25296 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
 2022-05-23 11:18:13.090  INFO 25296 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
 <<<<<<< HEAD
+<<<<<<< HEAD
 2022-05-23 16:05:18.707  INFO 18836 --- [restartedMain] b.p.e.EasyContractsApplication           : Starting EasyContractsApplication using Java 1.8.0_311 on xzx with PID 18836 (H:\gitrepository\Easy-Contracts\EasyContracts\target\classes started by 26802 in H:\gitrepository\Easy-Contracts\EasyContracts)
 2022-05-23 16:05:18.709  INFO 18836 --- [restartedMain] b.p.e.EasyContractsApplication           : The following 1 profile is active: "dev"
 2022-05-23 16:05:18.753  INFO 18836 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
@@ -2877,3 +2878,330 @@ java.lang.NullPointerException: null
 2022-05-23 15:22:48.331  INFO 15012 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
 2022-05-23 15:22:48.340  INFO 15012 --- [restartedMain] b.p.e.EasyContractsApplication           : Started EasyContractsApplication in 2.742 seconds (JVM running for 3.451)
 >>>>>>> 7afacdcee9c21691050e8f219a95aaf3cac4e866
+=======
+2022-05-23 14:28:05.585  INFO 20304 --- [restartedMain] b.p.e.EasyContractsApplication           : Starting EasyContractsApplication using Java 11.0.11 on LAPTOP-U8055N0R with PID 20304 (C:\Users\FUBOFENG\Easy-Contracts\EasyContracts\target\classes started by FUBOFENG in C:\Users\FUBOFENG\Easy-Contracts\EasyContracts)
+2022-05-23 14:28:05.586  INFO 20304 --- [restartedMain] b.p.e.EasyContractsApplication           : The following 1 profile is active: "dev"
+2022-05-23 14:28:05.637  INFO 20304 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2022-05-23 14:28:05.637  INFO 20304 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2022-05-23 14:28:06.402  INFO 20304 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2022-05-23 14:28:06.405  INFO 20304 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2022-05-23 14:28:06.445  INFO 20304 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 23 ms. Found 0 Redis repository interfaces.
+2022-05-23 14:28:07.179  INFO 20304 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2022-05-23 14:28:07.189  INFO 20304 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2022-05-23 14:28:07.189  INFO 20304 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.62]
+2022-05-23 14:28:07.276  INFO 20304 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2022-05-23 14:28:07.276  INFO 20304 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1638 ms
+2022-05-23 14:28:08.171  INFO 20304 --- [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2022-05-23 14:28:08.429  INFO 20304 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2022-05-23 14:28:08.465  INFO 20304 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2022-05-23 14:28:08.478  INFO 20304 --- [restartedMain] b.p.e.EasyContractsApplication           : Started EasyContractsApplication in 3.332 seconds (JVM running for 5.426)
+2022-05-23 14:28:28.032  INFO 20304 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-05-23 14:28:28.033  INFO 20304 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2022-05-23 14:28:28.036  INFO 20304 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2022-05-23 14:28:55.042  INFO 19084 --- [main] b.p.e.EasyContractsApplicationTests      : Starting EasyContractsApplicationTests using Java 11.0.11 on LAPTOP-U8055N0R with PID 19084 (started by FUBOFENG in C:\Users\FUBOFENG\Easy-Contracts\EasyContracts)
+2022-05-23 14:28:55.045  INFO 19084 --- [main] b.p.e.EasyContractsApplicationTests      : The following 1 profile is active: "dev"
+2022-05-23 14:28:56.094  INFO 19084 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2022-05-23 14:28:56.101  INFO 19084 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2022-05-23 14:28:56.166  INFO 19084 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 41 ms. Found 0 Redis repository interfaces.
+2022-05-23 14:28:59.149  INFO 19084 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2022-05-23 14:28:59.999  INFO 19084 --- [main] b.p.e.EasyContractsApplicationTests      : Started EasyContractsApplicationTests in 5.689 seconds (JVM running for 6.969)
+2022-05-23 14:37:20.737  INFO 20812 --- [main] b.p.e.EasyContractsApplicationTests      : Starting EasyContractsApplicationTests using Java 11.0.11 on LAPTOP-U8055N0R with PID 20812 (started by FUBOFENG in C:\Users\FUBOFENG\Easy-Contracts\EasyContracts)
+2022-05-23 14:37:20.741  INFO 20812 --- [main] b.p.e.EasyContractsApplicationTests      : The following 1 profile is active: "dev"
+2022-05-23 14:37:21.887  INFO 20812 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2022-05-23 14:37:21.892  INFO 20812 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2022-05-23 14:37:21.948  INFO 20812 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 30 ms. Found 0 Redis repository interfaces.
+2022-05-23 14:37:24.997  INFO 20812 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2022-05-23 14:37:25.838  INFO 20812 --- [main] b.p.e.EasyContractsApplicationTests      : Started EasyContractsApplicationTests in 5.749 seconds (JVM running for 7.076)
+2022-05-23 14:39:10.679  INFO 19620 --- [main] b.p.e.EasyContractsApplicationTests      : Starting EasyContractsApplicationTests using Java 11.0.11 on LAPTOP-U8055N0R with PID 19620 (started by FUBOFENG in C:\Users\FUBOFENG\Easy-Contracts\EasyContracts)
+2022-05-23 14:39:10.682  INFO 19620 --- [main] b.p.e.EasyContractsApplicationTests      : The following 1 profile is active: "dev"
+2022-05-23 14:39:11.806  INFO 19620 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2022-05-23 14:39:11.809  INFO 19620 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2022-05-23 14:39:11.861  INFO 19620 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 33 ms. Found 0 Redis repository interfaces.
+2022-05-23 14:39:14.893  INFO 19620 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2022-05-23 14:39:15.846  INFO 19620 --- [main] b.p.e.EasyContractsApplicationTests      : Started EasyContractsApplicationTests in 5.824 seconds (JVM running for 7.119)
+2022-05-23 14:40:49.143  INFO 18204 --- [main] b.p.e.EasyContractsApplicationTests      : Starting EasyContractsApplicationTests using Java 11.0.11 on LAPTOP-U8055N0R with PID 18204 (started by FUBOFENG in C:\Users\FUBOFENG\Easy-Contracts\EasyContracts)
+2022-05-23 14:40:49.145  INFO 18204 --- [main] b.p.e.EasyContractsApplicationTests      : The following 1 profile is active: "dev"
+2022-05-23 14:40:50.217  INFO 18204 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2022-05-23 14:40:50.222  INFO 18204 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2022-05-23 14:40:50.274  INFO 18204 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 30 ms. Found 0 Redis repository interfaces.
+2022-05-23 14:40:54.120  INFO 18204 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2022-05-23 14:40:55.078  INFO 18204 --- [main] b.p.e.EasyContractsApplicationTests      : Started EasyContractsApplicationTests in 6.751 seconds (JVM running for 8.679)
+2022-05-23 14:41:16.543  INFO 17508 --- [main] b.p.e.EasyContractsApplicationTests      : Starting EasyContractsApplicationTests using Java 11.0.11 on LAPTOP-U8055N0R with PID 17508 (started by FUBOFENG in C:\Users\FUBOFENG\Easy-Contracts\EasyContracts)
+2022-05-23 14:41:16.548  INFO 17508 --- [main] b.p.e.EasyContractsApplicationTests      : The following 1 profile is active: "dev"
+2022-05-23 14:41:17.897  INFO 17508 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2022-05-23 14:41:17.903  INFO 17508 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2022-05-23 14:41:17.958  INFO 17508 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 30 ms. Found 0 Redis repository interfaces.
+2022-05-23 14:41:21.889  INFO 17508 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2022-05-23 14:41:22.800  INFO 17508 --- [main] b.p.e.EasyContractsApplicationTests      : Started EasyContractsApplicationTests in 7.138 seconds (JVM running for 8.674)
+2022-05-23 14:42:25.233  INFO 16356 --- [main] b.p.e.EasyContractsApplicationTests      : Starting EasyContractsApplicationTests using Java 11.0.11 on LAPTOP-U8055N0R with PID 16356 (started by FUBOFENG in C:\Users\FUBOFENG\Easy-Contracts\EasyContracts)
+2022-05-23 14:42:25.235  INFO 16356 --- [main] b.p.e.EasyContractsApplicationTests      : The following 1 profile is active: "dev"
+2022-05-23 14:42:26.391  INFO 16356 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2022-05-23 14:42:26.397  INFO 16356 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2022-05-23 14:42:26.452  INFO 16356 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 32 ms. Found 0 Redis repository interfaces.
+2022-05-23 14:42:29.302  INFO 16356 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2022-05-23 14:42:30.109  INFO 16356 --- [main] b.p.e.EasyContractsApplicationTests      : Started EasyContractsApplicationTests in 5.497 seconds (JVM running for 6.733)
+2022-05-23 14:42:30.671  INFO 16356 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2022-05-23 14:42:31.953 ERROR 16356 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Exception during pool initialization.
+
+java.sql.SQLSyntaxErrorException: Unknown database 'easycontract'
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120) ~[mysql-connector-java-8.0.28.jar:8.0.28]
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122) ~[mysql-connector-java-8.0.28.jar:8.0.28]
+	at com.mysql.cj.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:829) ~[mysql-connector-java-8.0.28.jar:8.0.28]
+	at com.mysql.cj.jdbc.ConnectionImpl.<init>(ConnectionImpl.java:449) ~[mysql-connector-java-8.0.28.jar:8.0.28]
+	at com.mysql.cj.jdbc.ConnectionImpl.getInstance(ConnectionImpl.java:242) ~[mysql-connector-java-8.0.28.jar:8.0.28]
+	at com.mysql.cj.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:198) ~[mysql-connector-java-8.0.28.jar:8.0.28]
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:138) ~[HikariCP-4.0.3.jar:na]
+	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:364) ~[HikariCP-4.0.3.jar:na]
+	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:206) ~[HikariCP-4.0.3.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:476) ~[HikariCP-4.0.3.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool.checkFailFast(HikariPool.java:561) ~[HikariCP-4.0.3.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool.<init>(HikariPool.java:115) ~[HikariCP-4.0.3.jar:na]
+	at com.zaxxer.hikari.HikariDataSource.getConnection(HikariDataSource.java:112) ~[HikariCP-4.0.3.jar:na]
+	at org.springframework.jdbc.datasource.DataSourceUtils.fetchConnection(DataSourceUtils.java:159) ~[spring-jdbc-5.3.19.jar:5.3.19]
+	at org.springframework.jdbc.datasource.DataSourceUtils.doGetConnection(DataSourceUtils.java:117) ~[spring-jdbc-5.3.19.jar:5.3.19]
+	at org.springframework.jdbc.datasource.DataSourceUtils.getConnection(DataSourceUtils.java:80) ~[spring-jdbc-5.3.19.jar:5.3.19]
+	at org.mybatis.spring.transaction.SpringManagedTransaction.openConnection(SpringManagedTransaction.java:80) ~[mybatis-spring-2.0.7.jar:2.0.7]
+	at org.mybatis.spring.transaction.SpringManagedTransaction.getConnection(SpringManagedTransaction.java:67) ~[mybatis-spring-2.0.7.jar:2.0.7]
+	at org.apache.ibatis.executor.BaseExecutor.getConnection(BaseExecutor.java:337) ~[mybatis-3.5.9.jar:3.5.9]
+	at org.apache.ibatis.executor.SimpleExecutor.prepareStatement(SimpleExecutor.java:86) ~[mybatis-3.5.9.jar:3.5.9]
+	at org.apache.ibatis.executor.SimpleExecutor.doQuery(SimpleExecutor.java:62) ~[mybatis-3.5.9.jar:3.5.9]
+	at org.apache.ibatis.executor.BaseExecutor.queryFromDatabase(BaseExecutor.java:325) ~[mybatis-3.5.9.jar:3.5.9]
+	at org.apache.ibatis.executor.BaseExecutor.query(BaseExecutor.java:156) ~[mybatis-3.5.9.jar:3.5.9]
+	at org.apache.ibatis.executor.CachingExecutor.query(CachingExecutor.java:109) ~[mybatis-3.5.9.jar:3.5.9]
+	at org.apache.ibatis.executor.CachingExecutor.query(CachingExecutor.java:89) ~[mybatis-3.5.9.jar:3.5.9]
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:151) ~[mybatis-3.5.9.jar:3.5.9]
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:145) ~[mybatis-3.5.9.jar:3.5.9]
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:140) ~[mybatis-3.5.9.jar:3.5.9]
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectOne(DefaultSqlSession.java:76) ~[mybatis-3.5.9.jar:3.5.9]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566) ~[na:na]
+	at org.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor.invoke(SqlSessionTemplate.java:427) ~[mybatis-spring-2.0.7.jar:2.0.7]
+	at com.sun.proxy.$Proxy70.selectOne(Unknown Source) ~[na:na]
+	at org.mybatis.spring.SqlSessionTemplate.selectOne(SqlSessionTemplate.java:160) ~[mybatis-spring-2.0.7.jar:2.0.7]
+	at org.apache.ibatis.binding.MapperMethod.execute(MapperMethod.java:87) ~[mybatis-3.5.9.jar:3.5.9]
+	at org.apache.ibatis.binding.MapperProxy$PlainMethodInvoker.invoke(MapperProxy.java:145) ~[mybatis-3.5.9.jar:3.5.9]
+	at org.apache.ibatis.binding.MapperProxy.invoke(MapperProxy.java:86) ~[mybatis-3.5.9.jar:3.5.9]
+	at com.sun.proxy.$Proxy71.selectByPrimaryKey(Unknown Source) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566) ~[na:na]
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:344) ~[spring-aop-5.3.19.jar:5.3.19]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:198) ~[spring-aop-5.3.19.jar:5.3.19]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163) ~[spring-aop-5.3.19.jar:5.3.19]
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:137) ~[spring-tx-5.3.19.jar:5.3.19]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186) ~[spring-aop-5.3.19.jar:5.3.19]
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:215) ~[spring-aop-5.3.19.jar:5.3.19]
+	at com.sun.proxy.$Proxy72.selectByPrimaryKey(Unknown Source) ~[na:na]
+	at bjtu.pt.easycontracts.EasyContractsApplicationTests.contextLoads(EasyContractsApplicationTests.java:18) ~[test-classes/:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566) ~[na:na]
+	at org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:725) ~[junit-platform-commons-1.8.2.jar:1.8.2]
+	at org.junit.jupiter.engine.execution.MethodInvocation.proceed(MethodInvocation.java:60) ~[junit-jupiter-engine-5.8.2.jar:5.8.2]
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$ValidatingInvocation.proceed(InvocationInterceptorChain.java:131) ~[junit-jupiter-engine-5.8.2.jar:5.8.2]
+	at org.junit.jupiter.engine.extension.TimeoutExtension.intercept(TimeoutExtension.java:149) ~[junit-jupiter-engine-5.8.2.jar:5.8.2]
+	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestableMethod(TimeoutExtension.java:140) ~[junit-jupiter-engine-5.8.2.jar:5.8.2]
+	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestMethod(TimeoutExtension.java:84) ~[junit-jupiter-engine-5.8.2.jar:5.8.2]
+	at org.junit.jupiter.engine.execution.ExecutableInvoker$ReflectiveInterceptorCall.lambda$ofVoidMethod$0(ExecutableInvoker.java:115) ~[junit-jupiter-engine-5.8.2.jar:5.8.2]
+	at org.junit.jupiter.engine.execution.ExecutableInvoker.lambda$invoke$0(ExecutableInvoker.java:105) ~[junit-jupiter-engine-5.8.2.jar:5.8.2]
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$InterceptedInvocation.proceed(InvocationInterceptorChain.java:106) ~[junit-jupiter-engine-5.8.2.jar:5.8.2]
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.proceed(InvocationInterceptorChain.java:64) ~[junit-jupiter-engine-5.8.2.jar:5.8.2]
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.chainAndInvoke(InvocationInterceptorChain.java:45) ~[junit-jupiter-engine-5.8.2.jar:5.8.2]
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.invoke(InvocationInterceptorChain.java:37) ~[junit-jupiter-engine-5.8.2.jar:5.8.2]
+	at org.junit.jupiter.engine.execution.ExecutableInvoker.invoke(ExecutableInvoker.java:104) ~[junit-jupiter-engine-5.8.2.jar:5.8.2]
+	at org.junit.jupiter.engine.execution.ExecutableInvoker.invoke(ExecutableInvoker.java:98) ~[junit-jupiter-engine-5.8.2.jar:5.8.2]
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$invokeTestMethod$7(TestMethodTestDescriptor.java:214) ~[junit-jupiter-engine-5.8.2.jar:5.8.2]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.invokeTestMethod(TestMethodTestDescriptor.java:210) ~[junit-jupiter-engine-5.8.2.jar:5.8.2]
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:135) ~[junit-jupiter-engine-5.8.2.jar:5.8.2]
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:66) ~[junit-jupiter-engine-5.8.2.jar:5.8.2]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:151) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1541) ~[na:na]
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:155) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1541) ~[na:na]
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:155) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:35) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:57) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:54) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:107) ~[junit-platform-launcher-1.8.2.jar:1.8.2]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:88) ~[junit-platform-launcher-1.8.2.jar:1.8.2]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.lambda$execute$0(EngineExecutionOrchestrator.java:54) ~[junit-platform-launcher-1.8.2.jar:1.8.2]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.withInterceptedStreams(EngineExecutionOrchestrator.java:67) ~[junit-platform-launcher-1.8.2.jar:1.8.2]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:52) ~[junit-platform-launcher-1.8.2.jar:1.8.2]
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:114) ~[junit-platform-launcher-1.8.2.jar:1.8.2]
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:86) ~[junit-platform-launcher-1.8.2.jar:1.8.2]
+	at org.junit.platform.launcher.core.DefaultLauncherSession$DelegatingLauncher.execute(DefaultLauncherSession.java:86) ~[junit-platform-launcher-1.8.2.jar:1.8.2]
+	at org.junit.platform.launcher.core.SessionPerRequestLauncher.execute(SessionPerRequestLauncher.java:53) ~[junit-platform-launcher-1.8.2.jar:1.8.2]
+	at com.intellij.junit5.JUnit5IdeaTestRunner.startRunnerWithArgs(JUnit5IdeaTestRunner.java:74) ~[junit5-rt.jar:na]
+	at com.intellij.rt.execution.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:47) ~[junit-rt.jar:na]
+	at com.intellij.rt.execution.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:242) ~[junit-rt.jar:na]
+	at com.intellij.rt.execution.junit.JUnitStarter.main(JUnitStarter.java:70) ~[junit-rt.jar:na]
+
+2022-05-23 14:43:33.244  INFO 17300 --- [main] b.p.e.EasyContractsApplicationTests      : Starting EasyContractsApplicationTests using Java 11.0.11 on LAPTOP-U8055N0R with PID 17300 (started by FUBOFENG in C:\Users\FUBOFENG\Easy-Contracts\EasyContracts)
+2022-05-23 14:43:33.246  INFO 17300 --- [main] b.p.e.EasyContractsApplicationTests      : The following 1 profile is active: "dev"
+2022-05-23 14:43:34.323  INFO 17300 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2022-05-23 14:43:34.328  INFO 17300 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2022-05-23 14:43:34.383  INFO 17300 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 33 ms. Found 0 Redis repository interfaces.
+2022-05-23 14:43:37.307  INFO 17300 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2022-05-23 14:43:38.039  INFO 17300 --- [main] b.p.e.EasyContractsApplicationTests      : Started EasyContractsApplicationTests in 5.369 seconds (JVM running for 6.581)
+2022-05-23 14:43:38.550  INFO 17300 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2022-05-23 14:43:38.777  INFO 17300 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2022-05-23 14:43:38.936  INFO 17300 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2022-05-23 14:43:38.953  INFO 17300 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2022-05-23 14:45:07.956  INFO 12620 --- [main] b.p.e.EasyContractsApplicationTests      : Starting EasyContractsApplicationTests using Java 11.0.11 on LAPTOP-U8055N0R with PID 12620 (started by FUBOFENG in C:\Users\FUBOFENG\Easy-Contracts\EasyContracts)
+2022-05-23 14:45:07.958  INFO 12620 --- [main] b.p.e.EasyContractsApplicationTests      : The following 1 profile is active: "dev"
+2022-05-23 14:45:09.115  INFO 12620 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2022-05-23 14:45:09.120  INFO 12620 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2022-05-23 14:45:09.172  INFO 12620 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 30 ms. Found 0 Redis repository interfaces.
+2022-05-23 14:45:12.064  INFO 12620 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2022-05-23 14:45:12.867  INFO 12620 --- [main] b.p.e.EasyContractsApplicationTests      : Started EasyContractsApplicationTests in 5.533 seconds (JVM running for 6.794)
+2022-05-23 14:45:13.485  INFO 12620 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2022-05-23 14:45:13.818  INFO 12620 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2022-05-23 14:45:14.007  INFO 12620 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2022-05-23 14:45:14.023  INFO 12620 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2022-05-23 14:48:30.586  INFO 21248 --- [main] b.p.e.EasyContractsApplicationTests      : Starting EasyContractsApplicationTests using Java 11.0.11 on LAPTOP-U8055N0R with PID 21248 (started by FUBOFENG in C:\Users\FUBOFENG\Easy-Contracts\EasyContracts)
+2022-05-23 14:48:30.588  INFO 21248 --- [main] b.p.e.EasyContractsApplicationTests      : The following 1 profile is active: "dev"
+2022-05-23 14:48:31.732  INFO 21248 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2022-05-23 14:48:31.737  INFO 21248 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2022-05-23 14:48:31.792  INFO 21248 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 33 ms. Found 0 Redis repository interfaces.
+2022-05-23 14:48:34.591  INFO 21248 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2022-05-23 14:48:35.397  INFO 21248 --- [main] b.p.e.EasyContractsApplicationTests      : Started EasyContractsApplicationTests in 5.43 seconds (JVM running for 6.696)
+2022-05-23 14:48:36.167  INFO 21248 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2022-05-23 14:48:36.430  INFO 21248 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2022-05-23 14:48:36.604  INFO 21248 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2022-05-23 14:48:36.623  INFO 21248 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2022-05-23 14:56:28.989  INFO 10520 --- [main] b.p.e.EasyContractsApplicationTests      : Starting EasyContractsApplicationTests using Java 11.0.11 on LAPTOP-U8055N0R with PID 10520 (started by FUBOFENG in C:\Users\FUBOFENG\Easy-Contracts\EasyContracts)
+2022-05-23 14:56:28.991  INFO 10520 --- [main] b.p.e.EasyContractsApplicationTests      : The following 1 profile is active: "dev"
+2022-05-23 14:56:30.178  INFO 10520 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2022-05-23 14:56:30.184  INFO 10520 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2022-05-23 14:56:30.232  INFO 10520 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 27 ms. Found 0 Redis repository interfaces.
+2022-05-23 14:56:33.283  INFO 10520 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2022-05-23 14:56:34.246  INFO 10520 --- [main] b.p.e.EasyContractsApplicationTests      : Started EasyContractsApplicationTests in 5.896 seconds (JVM running for 7.212)
+2022-05-23 14:56:34.913  INFO 10520 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2022-05-23 14:56:35.155  INFO 10520 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2022-05-23 14:56:35.307  INFO 10520 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2022-05-23 14:56:35.325  INFO 10520 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2022-05-23 15:18:18.401  INFO 11564 --- [main] b.p.e.EasyContractsApplicationTests      : Starting EasyContractsApplicationTests using Java 11.0.11 on LAPTOP-U8055N0R with PID 11564 (started by FUBOFENG in C:\Users\FUBOFENG\Easy-Contracts\EasyContracts)
+2022-05-23 15:18:18.403  INFO 11564 --- [main] b.p.e.EasyContractsApplicationTests      : The following 1 profile is active: "dev"
+2022-05-23 15:18:19.626  INFO 11564 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2022-05-23 15:18:19.631  INFO 11564 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2022-05-23 15:18:19.691  INFO 11564 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 37 ms. Found 0 Redis repository interfaces.
+2022-05-23 15:18:22.564  INFO 11564 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2022-05-23 15:18:23.356  INFO 11564 --- [main] b.p.e.EasyContractsApplicationTests      : Started EasyContractsApplicationTests in 5.584 seconds (JVM running for 6.908)
+2022-05-23 15:18:23.933  INFO 11564 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2022-05-23 15:18:24.186  INFO 11564 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2022-05-23 15:18:24.300  INFO 11564 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2022-05-23 15:18:24.313  INFO 11564 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2022-05-23 16:02:41.935  INFO 14152 --- [main] b.p.e.EasyContractsApplicationTests      : Starting EasyContractsApplicationTests using Java 11.0.11 on LAPTOP-U8055N0R with PID 14152 (started by FUBOFENG in C:\Users\FUBOFENG\Easy-Contracts\EasyContracts)
+2022-05-23 16:02:41.936  INFO 14152 --- [main] b.p.e.EasyContractsApplicationTests      : The following 1 profile is active: "dev"
+2022-05-23 16:02:42.980  INFO 14152 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2022-05-23 16:02:42.985  INFO 14152 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2022-05-23 16:02:43.040  INFO 14152 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 36 ms. Found 0 Redis repository interfaces.
+2022-05-23 16:02:45.522  INFO 14152 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2022-05-23 16:02:46.154  INFO 14152 --- [main] b.p.e.EasyContractsApplicationTests      : Started EasyContractsApplicationTests in 4.769 seconds (JVM running for 5.89)
+2022-05-23 16:02:46.639  INFO 14152 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2022-05-23 16:02:46.866  INFO 14152 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2022-05-23 16:02:46.964  INFO 14152 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2022-05-23 16:02:46.974  INFO 14152 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+>>>>>>> 5c8c284 (customerservice接口实现)
+2022-05-23 19:40:38.383  INFO 20272 --- [main] b.p.e.EasyContractsApplicationTests      : Starting EasyContractsApplicationTests using Java 11.0.11 on LAPTOP-U8055N0R with PID 20272 (started by FUBOFENG in C:\Users\FUBOFENG\Easy-Contracts\EasyContracts)
+2022-05-23 19:40:38.386  INFO 20272 --- [main] b.p.e.EasyContractsApplicationTests      : The following 1 profile is active: "dev"
+2022-05-23 19:40:39.324  INFO 20272 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2022-05-23 19:40:39.329  INFO 20272 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2022-05-23 19:40:39.387  INFO 20272 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 33 ms. Found 0 Redis repository interfaces.
+2022-05-23 19:40:42.060  INFO 20272 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2022-05-23 19:40:42.751  INFO 20272 --- [main] b.p.e.EasyContractsApplicationTests      : Started EasyContractsApplicationTests in 5.1 seconds (JVM running for 6.514)
+2022-05-23 19:40:43.289  INFO 20272 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2022-05-23 19:40:43.550  INFO 20272 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2022-05-23 19:40:43.654  INFO 20272 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2022-05-23 19:40:43.664  INFO 20272 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2022-05-23 19:41:23.570  INFO 17648 --- [main] b.p.e.EasyContractsApplicationTests      : Starting EasyContractsApplicationTests using Java 11.0.11 on LAPTOP-U8055N0R with PID 17648 (started by FUBOFENG in C:\Users\FUBOFENG\Easy-Contracts\EasyContracts)
+2022-05-23 19:41:23.571  INFO 17648 --- [main] b.p.e.EasyContractsApplicationTests      : The following 1 profile is active: "dev"
+2022-05-23 19:41:24.568  INFO 17648 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2022-05-23 19:41:24.572  INFO 17648 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2022-05-23 19:41:24.624  INFO 17648 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 30 ms. Found 0 Redis repository interfaces.
+2022-05-23 19:41:27.461  INFO 17648 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2022-05-23 19:41:28.714  INFO 17648 --- [main] b.p.e.EasyContractsApplicationTests      : Started EasyContractsApplicationTests in 5.69 seconds (JVM running for 7.065)
+2022-05-23 19:41:29.190  INFO 17648 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2022-05-23 19:41:29.442  INFO 17648 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2022-05-23 19:41:29.554  INFO 17648 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2022-05-23 19:41:29.568  INFO 17648 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2022-05-23 19:41:54.176  INFO 18096 --- [main] b.p.e.EasyContractsApplicationTests      : Starting EasyContractsApplicationTests using Java 11.0.11 on LAPTOP-U8055N0R with PID 18096 (started by FUBOFENG in C:\Users\FUBOFENG\Easy-Contracts\EasyContracts)
+2022-05-23 19:41:54.179  INFO 18096 --- [main] b.p.e.EasyContractsApplicationTests      : The following 1 profile is active: "dev"
+2022-05-23 19:41:55.328  INFO 18096 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2022-05-23 19:41:55.333  INFO 18096 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2022-05-23 19:41:55.387  INFO 18096 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 33 ms. Found 0 Redis repository interfaces.
+2022-05-23 19:41:58.187  INFO 18096 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2022-05-23 19:41:58.944  INFO 18096 --- [main] b.p.e.EasyContractsApplicationTests      : Started EasyContractsApplicationTests in 5.382 seconds (JVM running for 6.555)
+2022-05-23 19:41:59.487  INFO 18096 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2022-05-23 19:41:59.722  INFO 18096 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2022-05-23 19:41:59.823  INFO 18096 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2022-05-23 19:41:59.838  INFO 18096 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2022-05-23 19:42:22.654  INFO 13604 --- [main] b.p.e.EasyContractsApplicationTests      : Starting EasyContractsApplicationTests using Java 11.0.11 on LAPTOP-U8055N0R with PID 13604 (started by FUBOFENG in C:\Users\FUBOFENG\Easy-Contracts\EasyContracts)
+2022-05-23 19:42:22.656  INFO 13604 --- [main] b.p.e.EasyContractsApplicationTests      : The following 1 profile is active: "dev"
+2022-05-23 19:42:23.635  INFO 13604 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2022-05-23 19:42:23.641  INFO 13604 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2022-05-23 19:42:23.693  INFO 13604 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 30 ms. Found 0 Redis repository interfaces.
+2022-05-23 19:42:26.645  INFO 13604 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2022-05-23 19:42:27.389  INFO 13604 --- [main] b.p.e.EasyContractsApplicationTests      : Started EasyContractsApplicationTests in 5.374 seconds (JVM running for 6.875)
+2022-05-23 19:42:27.913  INFO 13604 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2022-05-23 19:42:28.162  INFO 13604 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2022-05-23 19:42:28.299  INFO 13604 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2022-05-23 19:42:28.321  INFO 13604 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2022-05-23 19:42:50.087  INFO 16544 --- [main] b.p.e.EasyContractsApplicationTests      : Starting EasyContractsApplicationTests using Java 11.0.11 on LAPTOP-U8055N0R with PID 16544 (started by FUBOFENG in C:\Users\FUBOFENG\Easy-Contracts\EasyContracts)
+2022-05-23 19:42:50.089  INFO 16544 --- [main] b.p.e.EasyContractsApplicationTests      : The following 1 profile is active: "dev"
+2022-05-23 19:42:51.043  INFO 16544 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2022-05-23 19:42:51.048  INFO 16544 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2022-05-23 19:42:51.096  INFO 16544 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 32 ms. Found 0 Redis repository interfaces.
+2022-05-23 19:42:53.972  INFO 16544 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2022-05-23 19:42:54.816  INFO 16544 --- [main] b.p.e.EasyContractsApplicationTests      : Started EasyContractsApplicationTests in 5.33 seconds (JVM running for 6.778)
+2022-05-23 19:42:55.328  INFO 16544 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2022-05-23 19:42:55.578  INFO 16544 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2022-05-23 19:42:55.685  INFO 16544 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2022-05-23 19:42:55.696  INFO 16544 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2022-05-23 19:43:07.001  INFO 18940 --- [restartedMain] b.p.e.EasyContractsApplication           : Starting EasyContractsApplication using Java 11.0.11 on LAPTOP-U8055N0R with PID 18940 (C:\Users\FUBOFENG\Easy-Contracts\EasyContracts\target\classes started by FUBOFENG in C:\Users\FUBOFENG\Easy-Contracts\EasyContracts)
+2022-05-23 19:43:07.003  INFO 18940 --- [restartedMain] b.p.e.EasyContractsApplication           : The following 1 profile is active: "dev"
+2022-05-23 19:43:07.053  INFO 18940 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2022-05-23 19:43:07.054  INFO 18940 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2022-05-23 19:43:07.749  INFO 18940 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2022-05-23 19:43:07.752  INFO 18940 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2022-05-23 19:43:07.786  INFO 18940 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 22 ms. Found 0 Redis repository interfaces.
+2022-05-23 19:43:08.408  INFO 18940 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2022-05-23 19:43:08.418  INFO 18940 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2022-05-23 19:43:08.418  INFO 18940 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.62]
+2022-05-23 19:43:08.513  INFO 18940 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2022-05-23 19:43:08.513  INFO 18940 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1459 ms
+2022-05-23 19:43:09.379  INFO 18940 --- [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2022-05-23 19:43:09.626  INFO 18940 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2022-05-23 19:43:09.659  INFO 18940 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2022-05-23 19:43:09.671  INFO 18940 --- [restartedMain] b.p.e.EasyContractsApplication           : Started EasyContractsApplication in 3.223 seconds (JVM running for 5.164)
+2022-05-23 19:43:37.867  INFO 18940 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-05-23 19:43:37.869  INFO 18940 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2022-05-23 19:43:37.871  INFO 18940 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
