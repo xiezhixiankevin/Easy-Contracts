@@ -32,12 +32,15 @@ public interface UserService {
     * */
     User loginUser(String username,String password);
 
-    /*找回密码部分*/
+    /*找回密码部分
+    * xzx
+    * */
     String retrievePassword(String username); //根据用户名查询密码并返回，调用此方法的前提是验证码输入正确
 
     /*通用部分*/
-    List<User> listUser(); //获取数据库中的所有用户
-    User getUserById(Integer id); //根据id获取用户
-
+    List<User> listUser(); //获取数据库中的所有用户 fbf
+    User getUserById(Integer id); //根据id获取用户 fbf
+    boolean ifExistUser(String username); //wj
+    boolean ifExistUser(Integer id); //wj
 
 }

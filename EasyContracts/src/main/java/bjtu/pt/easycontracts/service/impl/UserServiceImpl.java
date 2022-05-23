@@ -67,4 +67,14 @@ public class UserServiceImpl implements UserService {
     public User getUserById(Integer id) {
         return null;
     }
+
+    @Override
+    public boolean ifExistUser(String username) {
+        return false;
+    }
+
+    @Override
+    public boolean ifExistUser(Integer id) {
+        return false;
+    }
 }

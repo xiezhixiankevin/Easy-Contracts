@@ -1,5 +1,5 @@
 <!doctype html>
-<html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="">
@@ -7,10 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 	<meta name="robots" content="index, follow">
     <link rel="shortcut icon" type="image/png" href="../../../../../../contracts/favicon.png">
-    
-	<link rel="stylesheet" type="text/css" href="../../../../../../contracts/css/bootstrap.min.css?1709">
-	<link rel="stylesheet" type="text/css" href="../../../../../../contracts/style.css?5815">
-	<link rel="stylesheet" type="text/css" href="../../../../../../contracts/css/animate.min.css?3994">
+
+	<link rel="stylesheet" type="text/css" href="../../static/css/bootstrap.min.css?9188" th:href="@{/css/bootstrap.min.css?9188}">
+	<link rel="stylesheet" type="text/css" href="../../static/css/style.css?8116" th:href="@{/css/style.css?8116}">
+	<link rel="stylesheet" type="text/css" href="../../static/css/animate.min.css?7456" th:href="@{/css/animate.min.css?7456}">
 	<link href='https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
 	<link href='https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900&display=swap&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
     <title>create_customers-1</title>
@@ -156,10 +156,13 @@
 
 
 <!-- Additional JS -->
-<script src="../../../../../../contracts/js/jquery.min.js?7482"></script>
-<script src="../../../../../../contracts/js/bootstrap.bundle.min.js?6777"></script>
-<script src="../../../../../../contracts/js/blocs.min.js?2512"></script>
-<script src="../../../../../../contracts/js/lazysizes.min.js" defer></script><!-- Additional JS END -->
+<script th:src="@{/js/jquery.min.js}" src="../../static/js/jquery.min.js?7482"></script>
+<script th:src="@{/js/bootstrap.bundle.min.js?6777}" src="../../static/js/bootstrap.bundle.min.js?6777"></script>
+<script th:src="@{/js/blocs.min.js?2512}" src="../../static/js/blocs.min.js?2512"></script>
+<script th:src="@{/js/lazysizes.min.js}" src="../../static/js/lazysizes.min.js" defer></script>
+<script th:src="@{/js/jquery.min.js}"  type="text/javascript" charset="utf-8"></script>
+<script th:src="@{/js/vue.js}"  type="text/javascript" charset="utf-8"></script>
+<script th:src="@{/js/axios.min.js}"  type="text/javascript" charset="utf-8"></script>
 
 
 </body>

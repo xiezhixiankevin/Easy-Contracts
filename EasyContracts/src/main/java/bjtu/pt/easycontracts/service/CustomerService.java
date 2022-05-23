@@ -15,15 +15,15 @@ import java.util.List;
  */
 public interface CustomerService {
 
-    //新增客户
+    //新增客户(fbf)
     int addCustomer(Customer customer);
 
-    //删除客户
+    //删除客户(fbf)
     int deleteCustomer(int customerId);
 
-    //修改客户
+    //修改客户(wj)
     int updateCustomer(int customerId,Customer customer);
 
-    //查询客户
+    //查询客户(wj)
     List<Customer> listCustomerSelective(Customer customer);
 }

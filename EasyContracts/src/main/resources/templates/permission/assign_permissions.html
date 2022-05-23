@@ -1,5 +1,5 @@
 <!doctype html>
-<html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="">
@@ -78,10 +78,10 @@
 				<h1 class="mg-md">
 					权限管理
 				</h1>
-				<h3 class="mg-md">
-					用户名：xxxxx
+				<h3 class="mg-md" >
+					<span id="username_span">用户名：xxxxx </span> <span>昵称:xxxx</span>
 				</h3>
-				<button class="bloc-button btn btn-lg btn-block btn-azure btn-保存-style" type="submit">
+				<button v-on:click="savePermisson()" class="bloc-button btn btn-lg btn-block btn-azure btn-保存-style" type="button">
 					保存<br>
 				</button>
 				<div class="divider-h">
@@ -96,26 +96,26 @@
 							</div>
 							<div class="card-body">
 								<div class="custom-switch custom-control form-check-inline ">
-									<input class="custom-control-input" type="checkbox" id="permission11" />
-									<label class="custom-control-label" for="permission11">
+									<input class="custom-control-input" type="checkbox" id="permission1" />
+									<label class="custom-control-label" for="permission1">
 										起草合同
 									</label>
 								</div>
 								<div class="custom-switch custom-control">
-									<input class="custom-control-input" type="checkbox" id="permission12" />
-									<label class="custom-control-label" for="permission12">
+									<input class="custom-control-input" type="checkbox" id="permission2" />
+									<label class="custom-control-label" for="permission2">
 										定稿合同
 									</label>
 								</div>
 								<div class="custom-switch custom-control">
-									<input class="custom-control-input" type="checkbox" id="permission13" />
-									<label class="custom-control-label" for="permission13">
+									<input class="custom-control-input" type="checkbox" id="permission3" />
+									<label class="custom-control-label" for="permission3">
 										查询合同
 									</label>
 								</div>
 								<div class="custom-switch custom-control">
-									<input class="custom-control-input" type="checkbox" id="permission14" />
-									<label class="custom-control-label" for="permission14">
+									<input class="custom-control-input" type="checkbox" id="permission4" />
+									<label class="custom-control-label" for="permission4">
 										删除合同
 									</label>
 								</div>
@@ -131,20 +131,20 @@
 							</div>
 							<div class="card-body">
 								<div class="custom-switch custom-control form-check-inline">
-									<input class="custom-control-input" type="checkbox" id="permission21" />
-									<label class="custom-control-label" for="permission21">
+									<input class="custom-control-input" type="checkbox" id="permission5" />
+									<label class="custom-control-label" for="permission5">
 										会签合同
 									</label>
 								</div>
 								<div class="custom-switch custom-control">
-									<input class="custom-control-input" type="checkbox" id="permission22" />
-									<label class="custom-control-label" for="permission22">
+									<input class="custom-control-input" type="checkbox" id="permission6" />
+									<label class="custom-control-label" for="permission6">
 										审批合同
 									</label>
 								</div>
 								<div class="custom-switch custom-control">
-									<input class="custom-control-input" type="checkbox" id="permission23" />
-									<label class="custom-control-label" for="permission23">
+									<input class="custom-control-input" type="checkbox" id="permission7" />
+									<label class="custom-control-label" for="permission7">
 										签订合同
 									</label>
 								</div>
@@ -160,26 +160,26 @@
 							</div>
 							<div class="card-body">
 								<div class="custom-switch custom-control form-check-inline">
-									<input class="custom-control-input" type="checkbox" id="permission31" />
-									<label class="custom-control-label" for="permission31">
+									<input class="custom-control-input" type="checkbox" id="permission8" />
+									<label class="custom-control-label" for="permission8">
 										分配会签
 									</label>
 								</div>
 								<div class="custom-switch custom-control">
-									<input class="custom-control-input" type="checkbox" id="permission32" />
-									<label class="custom-control-label" for="permission32">
+									<input class="custom-control-input" type="checkbox" id="permission9" />
+									<label class="custom-control-label" for="permission9">
 										分配审批
 									</label>
 								</div>
 								<div class="custom-switch custom-control">
-									<input class="custom-control-input" type="checkbox" id="permission33" />
-									<label class="custom-control-label" for="permission33">
+									<input class="custom-control-input" type="checkbox" id="permission10" />
+									<label class="custom-control-label" for="permission10">
 										分配签订
 									</label>
 								</div>
 								<div class="custom-switch custom-control">
-									<input class="custom-control-input" type="checkbox" id="permission34" />
-									<label class="custom-control-label" for="permission34">
+									<input class="custom-control-input" type="checkbox" id="permission11" />
+									<label class="custom-control-label" for="permission11">
 										流程查询
 									</label>
 								</div>
@@ -195,26 +195,26 @@
 							</div>
 							<div class="card-body">
 								<div class="custom-switch custom-control form-check-inline">
-									<input class="custom-control-input" type="checkbox" id="permission41" />
-									<label class="custom-control-label" for="permission41">
+									<input class="custom-control-input" type="checkbox" id="permission12" />
+									<label class="custom-control-label" for="permission12">
 										新增用户
 									</label>
 								</div>
 								<div class="custom-switch custom-control">
-									<input class="custom-control-input" type="checkbox" id="permission42" />
-									<label class="custom-control-label" for="permission42">
+									<input class="custom-control-input" type="checkbox" id="permission13" />
+									<label class="custom-control-label" for="permission13">
 										编辑用户
 									</label>
 								</div>
 								<div class="custom-switch custom-control">
-									<input class="custom-control-input" type="checkbox" id="permission43" />
-									<label class="custom-control-label" for="permission43">
+									<input class="custom-control-input" type="checkbox" id="permission14" />
+									<label class="custom-control-label" for="permission14">
 										查询用户
 									</label>
 								</div>
 								<div class="custom-switch custom-control">
-									<input class="custom-control-input" type="checkbox" id="permission44" />
-									<label class="custom-control-label" for="permission44">
+									<input class="custom-control-input" type="checkbox" id="permission15" />
+									<label class="custom-control-label" for="permission15">
 										删除用户
 									</label>
 								</div>
@@ -234,26 +234,26 @@
 							</div>
 							<div class="card-body">
 								<div class="custom-switch custom-control form-check-inline">
-									<input class="custom-control-input" type="checkbox" id="permission51" />
-									<label class="custom-control-label" for="permission51">
+									<input class="custom-control-input" type="checkbox" id="permission16" />
+									<label class="custom-control-label" for="permission16">
 										新增客户
 									</label>
 								</div>
 								<div class="custom-switch custom-control">
-									<input class="custom-control-input" type="checkbox" id="permission52" />
-									<label class="custom-control-label" for="permission52">
+									<input class="custom-control-input" type="checkbox" id="permission17" />
+									<label class="custom-control-label" for="permission17">
 										编辑客户
 									</label>
 								</div>
 								<div class="custom-switch custom-control">
-									<input class="custom-control-input" type="checkbox" id="permission53" />
-									<label class="custom-control-label" for="permission53">
+									<input class="custom-control-input" type="checkbox" id="permission18" />
+									<label class="custom-control-label" for="permission18">
 										查询客户
 									</label>
 								</div>
 								<div class="custom-switch custom-control">
-									<input class="custom-control-input" type="checkbox" id="permission54" />
-									<label class="custom-control-label" for="permission54">
+									<input class="custom-control-input" type="checkbox" id="permission19" />
+									<label class="custom-control-label" for="permission19">
 										删除客户
 									</label>
 								</div>
@@ -269,8 +269,8 @@
 							</div>
 							<div class="card-body">
 								<div class="custom-switch custom-control form-check-inline">
-									<input class="custom-control-input" type="checkbox" id="permission61" />
-									<label class="custom-control-label" for="permission61">
+									<input class="custom-control-input" type="checkbox" id="permission20" />
+									<label class="custom-control-label" for="permission20">
 										配置权限
 									</label>
 								</div>
@@ -317,11 +317,55 @@
 
 
 <!-- Additional JS -->
-<script src="../../../../../../contracts/js/jquery.min.js?7482"></script>
-<script src="../../../../../../contracts/js/bootstrap.bundle.min.js?6777"></script>
-<script src="../../../../../../contracts/js/blocs.min.js?2512"></script>
-<script src="../../../../../../contracts/js/lazysizes.min.js" defer></script><!-- Additional JS END -->
+<script th:src="@{/js/jquery.min.js}" src="../../static/js/jquery.min.js?7482"></script>
+<script th:src="@{/js/bootstrap.bundle.min.js?6777}" src="../../static/js/bootstrap.bundle.min.js?6777"></script>
+<script th:src="@{/js/blocs.min.js?2512}" src="../../static/js/blocs.min.js?2512"></script>
+<script th:src="@{/js/lazysizes.min.js}" src="../../static/js/lazysizes.min.js" defer></script>
+<script th:src="@{/js/jquery.min.js}"  type="text/javascript" charset="utf-8"></script>
+<script th:src="@{/js/vue.js}"  type="text/javascript" charset="utf-8"></script>
+<script th:src="@{/js/axios.min.js}"  type="text/javascript" charset="utf-8"></script>
+<script>
+	var rightsVue = new Vue({
+		el:"#bloc-17",
+		dara:{//定义数据
+			jump_url: "rights/allocationRights",
+			right_num: 20,
+			//一些常量
+			OK :200
+		},
+		methods:{
+			savePermisson:function (){
+				var rights = []; //数组，1表示勾选上权限
+				var username =$("#username_span");
+				//遍历获取用户勾选情况 permission
+				var rightsid = "permission";
+				for (var i = 1; i <= this.right_num; i++) {
+					rightsid += i.toString();
+					if ($("#"+rightsid).get(0).checked) {
+						rights.push(1);
+					}else {
+						rights.push(0);
+					}
+					rightsid = "permission";
+				}
+				//发送请求
+				axios({
+					method: "post",
+					url : rightsVue.jump_url,
+					params : {username:username,rights:rights}
 
+				}).then(function (value) {
+					if(value.data.code === registerForm.OK){
+						alert("权限更改成功！");
+					}else{
+						alert("权限更改失败！");
+					}
+				}).catch();
+			}
+		}
+	});
+
+</script>
 
 </body>
 </html>
