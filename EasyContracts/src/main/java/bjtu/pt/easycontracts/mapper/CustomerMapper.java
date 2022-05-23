@@ -4,7 +4,9 @@ import bjtu.pt.easycontracts.pojo.table.Customer;
 import bjtu.pt.easycontracts.pojo.table.CustomerExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface CustomerMapper {
     int countByExample(CustomerExample example);
 
