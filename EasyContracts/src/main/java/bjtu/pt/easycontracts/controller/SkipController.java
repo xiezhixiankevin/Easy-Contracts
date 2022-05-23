@@ -1,7 +1,9 @@
 package bjtu.pt.easycontracts.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -39,6 +41,13 @@ public class SkipController {
     @GetMapping("/toMe")
     public String toMe(){
         return "me";
+    }
+
+    //跳转到权限分配页面
+    @GetMapping("/toRights/{username}")
+    public String toRights(@PathVariable("username")String username, Model model){
+        model.addAttribute("username",username);
+        return "permission/assign_permissions";
     }
 
 }

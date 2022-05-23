@@ -9,6 +9,7 @@ import bjtu.pt.easycontracts.utils.ReturnObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import java.util.*;
 
 import javax.servlet.http.HttpSession;
 
@@ -83,6 +84,17 @@ public class UserController {
     @GetMapping("/retrievePassword/{username}/{code}")
     public String retrievePassword(@PathVariable("username")String username,
                                    @PathVariable("code")String code){
+        return null;
+    }
+
+    /*
+    *向前端返回用户列表
+     */
+    @GetMapping("/listUser/{pageNum}")
+    @ResponseBody
+    public ReturnObject<List<User>> listUser(User user,
+                                             @PathVariable("pageNum")Integer pageNum){
+
         return null;
     }
 

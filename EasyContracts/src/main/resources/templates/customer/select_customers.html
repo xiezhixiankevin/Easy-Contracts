@@ -1,0 +1,171 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+	<meta name="robots" content="index, follow">
+    <link rel="shortcut icon" type="image/png" href="../../../../../../contracts/favicon.png">
+
+	<link href="../../lib/bootstrap-3.4.1-dist/bootstrap-3.4.1-dist/css/bootstrap.min.css" th:href="@{/lib/bootstrap-3.4.1-dist/bootstrap-3.4.1-dist/css/bootstrap.min.css}" rel="stylesheet">
+	<script src="../../lib/bootstrap-3.4.1-dist/bootstrap-3.4.1-dist/js/bootstrap.min.js" th:src="@{/lib/bootstrap-3.4.1-dist/bootstrap-3.4.1-dist/js/bootstrap.min.js}"  ></script>
+	<link rel="stylesheet" type="text/css" href="../../static/css/bootstrap.min.css?9188" th:href="@{/css/bootstrap.min.css?9188}">
+	<link rel="stylesheet" type="text/css" href="../../static/css/style.css?8116" th:href="@{/css/style.css?8116}">
+	<link rel="stylesheet" type="text/css" href="../../static/css/animate.min.css?7456" th:href="@{/css/animate.min.css?7456}">
+	<link href='https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900&display=swap&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+    <title>select_customers</title>
+
+
+    
+<!-- Analytics -->
+ 
+<!-- Analytics END -->
+    
+</head>
+<body>
+
+<!-- Preloader -->
+<div id="page-loading-blocs-notifaction" class="page-preloader"></div>
+<!-- Preloader END -->
+
+
+<!-- Main container -->
+<div class="page-container">
+    
+<!-- bloc-0 -->
+<div class="bloc bg-截屏2022-05-07-2019-53-22 l-bloc" id="bloc-0">
+	<div class="container bloc-sm">
+		<div class="row">
+			<div class="col">
+				<nav class="navbar navbar-light row navbar-expand-md nav-invert" role="navigation">
+					<button id="nav-toggle" type="button" class="ui-navbar-toggler navbar-toggler border-0 p-0" data-toggle="collapse" data-target=".navbar-27707" aria-expanded="false" aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon"></span>
+					</button>
+					<div class="collapse navbar-collapse navbar-27707">
+						<ul class="site-navigation nav navbar-nav">
+							<li class="nav-item">
+								<a href="../../../../../../contracts/index.html" class="nav-link  ltc-white">主页</a>
+							</li>
+							<li class="nav-item">
+								<a href="../../../../../../contracts/draft.html" class="nav-link  ltc-white">起草合同</a>
+							</li>
+							<li class="nav-item">
+								<a href="../../../../../../contracts/select.html" class="nav-link  ltc-white">会签合同</a>
+							</li>
+							<li class="nav-item">
+								<a href="../../../../../../contracts/finalization.html" class="nav-link a-btn ltc-white">定稿合同</a>
+							</li>
+							<li class="nav-item">
+								<a href="../../../../../../contracts/approval.html" class="nav-link a-btn ltc-white">审批合同</a>
+							</li>
+							<li class="nav-item">
+								<a href="../../../../../../contracts/sign.html" class="nav-link a-btn ltc-white">签订合同</a>
+							</li>
+						</ul>
+					</div><a class="navbar-brand mr-0" href="../../../../../../contracts/index.html">个人名字</a>
+				</nav>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- bloc-0 END -->
+<div class="container-lg bloc-no-padding-md">
+	<div class="row">
+
+	</div>
+	<div class="row m-lg-5">
+		<div class="col-lg-12">
+			<table id="customer_table" class="table table-hover table-bordered">
+				<tr>
+					<th>用户id</th>
+					<th>用户名</th>
+					<th>用户角色描述</th>
+					<th>操作</th>
+				</tr>
+				<tr v-for="user in users">
+					<td>{{user.userid}}</td>
+					<td>{{user.username}}</td>
+					<td>{{user.userdescription}}</td>
+					<td>
+						<a href="#">删除</a>
+						<a href="#" :href="'http://localhost:8080/toRights/'+user.username">权限管理</a>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+
+</div>
+
+<!-- ScrollToTop Button -->
+<a class="bloc-button btn btn-d scrollToTop" onclick="scrollToTarget('1',this)"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 32 32"><path class="scroll-to-top-btn-icon" d="M30,22.656l-14-13-14,13"/></svg></a>
+<!-- ScrollToTop Button END-->
+
+
+<!-- bloc-2 -->
+<div class="bloc l-bloc" id="bloc-2">
+	<div class="container bloc-lg">
+		<div class="row">
+			<div class="col-12">
+				<h5 class="mg-md text-lg-center">
+					北京交通大学实训小组荣誉出品
+				</h5>
+				<p class="text-lg-center">
+					XZX HCB FBF ZCX WJ
+				</p>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- bloc-2 END -->
+
+</div>
+<!-- Main container END -->
+    
+
+
+<!-- Additional JS -->
+<script th:src="@{/js/jquery.min.js}" src="../../static/js/jquery.min.js?7482"></script>
+<script th:src="@{/js/bootstrap.bundle.min.js?6777}" src="../../static/js/bootstrap.bundle.min.js?6777"></script>
+<script th:src="@{/js/blocs.min.js?2512}" src="../../static/js/blocs.min.js?2512"></script>
+<script th:src="@{/js/lazysizes.min.js}" src="../../static/js/lazysizes.min.js" defer></script>
+<script th:src="@{/js/jquery.min.js}"  type="text/javascript" charset="utf-8"></script>
+<script th:src="@{/js/vue.js}"  type="text/javascript" charset="utf-8"></script>
+<script th:src="@{/js/axios.min.js}"  type="text/javascript" charset="utf-8"></script>
+
+<script>
+	var customerTableVue = new Vue({
+		el:"#customer_table",
+		dara:{//定义数据
+			search_url: "user/listUser/",
+			now_page:1,
+			users:[],
+			//一些常量
+			OK :200
+		},
+		methods:{
+			listAllUser:function (){
+				//发送请求
+				axios({
+					method: "get",
+					url : customerTableVue.search_url+"1"
+				}).then(function (value) {
+					if(value.data.code === customerTableVue.OK){
+						//成功获取到数据渲染表格
+						customerTableVue.users = value.data.object;
+					}else{
+						alert("服务器错误,获取数据失败！");
+					}
+				}).catch();
+			}
+		},
+		mounted:function () {
+			this.listAllUser();
+		}
+	});
+</script>
+
+</body>
+</html>
