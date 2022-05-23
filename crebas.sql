@@ -1,124 +1,125 @@
-/*
- Navicat MySQL Data Transfer
+/*==============================================================*/
+/* DBMS name:      MySQL 5.0                                    */
+/* Created on:     2022/5/23 11:03:08                           */
+/*==============================================================*/
 
- Source Server         : localhost_3306
- Source Server Type    : MySQL
- Source Server Version : 50736
- Source Host           : localhost:3306
- Source Schema         : demo
 
- Target Server Type    : MySQL
- Target Server Version : 50736
- File Encoding         : 65001
+drop table if exists User;
 
- Date: 22/05/2022 20:08:36
-*/
+drop table if exists contract;
 
-SET NAMES utf8mb4;
-SET FOREIGN_KEY_CHECKS = 0;
+drop table if exists contract_attachment;
 
--- ----------------------------
--- Table structure for contract
--- ----------------------------
-DROP TABLE IF EXISTS `contract`;
-CREATE TABLE `contract`  (
-  `contractId` int(11) NOT NULL AUTO_INCREMENT,
-  `contractName` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
-  `customerId` int(11) NULL DEFAULT NULL,
-  `beginTime` date NULL DEFAULT NULL,
-  `endTime` date NULL DEFAULT NULL,
-  `content` text CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL,
-  `drafterId` int(11) NULL DEFAULT NULL,
-  `type` int(11) NULL DEFAULT NULL,
-  `failureTimes` int(11) NULL DEFAULT NULL,
-  PRIMARY KEY (`contractId`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+drop table if exists contract_process;
 
--- ----------------------------
--- Table structure for contract_attachment
--- ----------------------------
-DROP TABLE IF EXISTS `contract_attachment`;
-CREATE TABLE `contract_attachment`  (
-  `contractId` int(11) NULL DEFAULT NULL,
-  `fileName` varchar(100) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
-  `path` varchar(100) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
-  `type` varchar(20) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
-  `uploadTime` datetime NULL DEFAULT NULL
-) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+drop table if exists customer;
 
--- ----------------------------
--- Table structure for contract_process
--- ----------------------------
-DROP TABLE IF EXISTS `contract_process`;
-CREATE TABLE `contract_process`  (
-  `contractId` int(11) NULL DEFAULT NULL,
-  `userId` int(11) NULL DEFAULT NULL,
-  `type` int(11) NULL DEFAULT NULL,
-  `state` int(11) NULL DEFAULT NULL,
-  `content` text CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL,
-  `time` datetime NULL DEFAULT NULL,
-  PRIMARY KEY (`Use_userId`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+drop table if exists log;
 
--- ----------------------------
--- Table structure for customer
--- ----------------------------
-DROP TABLE IF EXISTS `customer`;
-CREATE TABLE `customer`  (
-  `customerId` int(11) NOT NULL AUTO_INCREMENT,
-  `customerName` varchar(40) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
-  `address` varchar(100) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
-  `phone` varchar(20) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
-  `code` varchar(10) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
-  `bank` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
-  `account` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
-  PRIMARY KEY (`customerId`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+drop table if exists rights;
 
--- ----------------------------
--- Table structure for log
--- ----------------------------
-DROP TABLE IF EXISTS `log`;
-CREATE TABLE `log`  (
-  `userId` int(11) NULL DEFAULT NULL,
-  `content` text CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL,
-  `time` datetime NULL DEFAULT NULL
-) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+drop table if exists role_right;
 
--- ----------------------------
--- Table structure for rights
--- ----------------------------
-DROP TABLE IF EXISTS `role_right`;
-CREATE TABLE `role_right`  (
-  `userId` int(11) NULL DEFAULT NULL,
-  `rightId` int(11) NULL DEFAULT NULL,
-  `description` varchar(100) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
-  PRIMARY KEY (`Use_userId`, `rol_rightId`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+/*==============================================================*/
+/* Table: User                                                  */
+/*==============================================================*/
+create table User
+(
+   userId               int not null AUTO_INCREMENT,
+   userName             varchar(20),
+   userDescription      varchar(20),
+   password             varchar(40),
+   email                varchar(20),
+   primary key (userId)
+);
 
--- ----------------------------
--- Table structure for role_right
--- ----------------------------
-DROP TABLE IF EXISTS `rights`;
-CREATE TABLE `rights`  (
-  `rightId` int(11) NOT NULL,
-  `rightName` varchar(40) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
-  `description` varchar(100) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
-  `functions` varchar(500) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
-  PRIMARY KEY (`rightId`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+/*==============================================================*/
+/* Table: contract                                              */
+/*==============================================================*/
+create table contract
+(
+   contractId           int not null AUTO_INCREMENT,
+   contractName         varchar(50),
+   customerId           int,
+   beginTime            date,
+   endTime              date,
+   content              text,
+   drafterId            int,
+   type                 int,
+   failureTimes         int,
+	 primary key (contractId)
+);
 
--- ----------------------------
--- Table structure for user
--- ----------------------------
-DROP TABLE IF EXISTS `user`;
-CREATE TABLE `user`  (
-  `userId` int(11) NOT NULL AUTO_INCREMENT,
-  `userName` varchar(20) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
-  `userDescription` varchar(20) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
-  `password` varchar(40) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
-  `email` varchar(20) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
-  PRIMARY KEY (`userId`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+/*==============================================================*/
+/* Table: contract_attachment                                   */
+/*==============================================================*/
+create table contract_attachment
+(
+   contractId           int,
+   fileName             varchar(100),
+   path                 varchar(100),
+   type                 varchar(20),
+   uploadTime           datetime
+);
 
-SET FOREIGN_KEY_CHECKS = 1;
+/*==============================================================*/
+/* Table: contract_process                                      */
+/*==============================================================*/
+create table contract_process
+(
+   contractId           int not null,
+   userId               int not null,
+   type                 int,
+   state                int,
+   content              text,
+   time                 datetime,
+   primary key (contractId,userId)
+);
+
+/*==============================================================*/
+/* Table: customer                                              */
+/*==============================================================*/
+create table customer
+(
+   customerId           int not null AUTO_INCREMENT,
+   customerName         varchar(40),
+   address              varchar(100),
+   phone                varchar(20),
+   code                 varchar(10),
+   bank                 varchar(50),
+   account              varchar(50),
+	 primary key(customerId)
+);
+
+/*==============================================================*/
+/* Table: log                                                   */
+/*==============================================================*/
+create table log
+(
+   userId               int,
+   content              text,
+   time                 datetime
+);
+
+/*==============================================================*/
+/* Table: rights                                                */
+/*==============================================================*/
+create table rights
+(
+   rightId              int not null,
+   rightName            varchar(40),
+   description          varchar(100),
+   functions            varchar(500),
+   primary key (rightId)
+);
+
+/*==============================================================*/
+/* Table: role_right                                            */
+/*==============================================================*/
+create table role_right
+(
+   userId               int not null,
+   rightId              int not null,
+   description          varchar(100),
+   primary key (userId,rightId)
+);
