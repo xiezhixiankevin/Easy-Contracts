@@ -5,7 +5,9 @@ import bjtu.pt.easycontracts.pojo.table.RoleRightExample;
 import bjtu.pt.easycontracts.pojo.table.RoleRightKey;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface RoleRightMapper {
     int countByExample(RoleRightExample example);
 
