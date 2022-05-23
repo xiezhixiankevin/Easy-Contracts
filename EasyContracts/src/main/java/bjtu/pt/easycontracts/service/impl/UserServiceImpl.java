@@ -69,12 +69,34 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean ifExistUser(String username) {
-        return false;
+    public boolean ifExistUser(String username)
+    {
+        UserExample userExample = new UserExample();
+        userExample.createCriteria().andUsernameEqualTo(username);
+        List<User> users = userMapper.selectByExample(userExample);
+        if (users.isEmpty())
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     @Override
-    public boolean ifExistUser(Integer id) {
-        return false;
+    public boolean ifExistUser(Integer id)
+    {
+        UserExample userExample = new UserExample();
+        userExample.createCriteria().andUseridEqualTo(id);
+        List<User> users = userMapper.selectByExample(userExample);
+        if (users.isEmpty())
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }

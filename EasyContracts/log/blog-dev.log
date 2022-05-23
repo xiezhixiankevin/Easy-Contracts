@@ -17,3 +17,38 @@
 2022-05-23 11:18:13.088  INFO 25296 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
 2022-05-23 11:18:13.088  INFO 25296 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
 2022-05-23 11:18:13.090  INFO 25296 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2022-05-23 14:18:35.313  INFO 1180 --- [restartedMain] b.p.e.EasyContractsApplication           : Starting EasyContractsApplication using Java 18.0.1.1 on DESKTOP-SEESNEQ with PID 1180 (D:\WebShiXun\Easy-Contracts\EasyContracts\target\classes started by 91112 in D:\WebShiXun\Easy-Contracts\EasyContracts)
+2022-05-23 14:18:35.314  INFO 1180 --- [restartedMain] b.p.e.EasyContractsApplication           : The following 1 profile is active: "dev"
+2022-05-23 14:18:35.354  INFO 1180 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2022-05-23 14:18:35.354  INFO 1180 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2022-05-23 14:18:36.044  INFO 1180 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2022-05-23 14:18:36.045  INFO 1180 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2022-05-23 14:18:36.077  INFO 1180 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 14 ms. Found 0 Redis repository interfaces.
+2022-05-23 14:18:36.659  INFO 1180 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2022-05-23 14:18:36.666  INFO 1180 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2022-05-23 14:18:36.666  INFO 1180 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.62]
+2022-05-23 14:18:36.731  INFO 1180 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2022-05-23 14:18:36.732  INFO 1180 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1377 ms
+2022-05-23 14:18:37.615  INFO 1180 --- [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2022-05-23 14:18:37.791  INFO 1180 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2022-05-23 14:18:37.819  INFO 1180 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2022-05-23 14:18:37.829  INFO 1180 --- [restartedMain] b.p.e.EasyContractsApplication           : Started EasyContractsApplication in 2.848 seconds (JVM running for 3.491)
+2022-05-23 14:18:43.629  INFO 1180 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-05-23 14:18:43.629  INFO 1180 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2022-05-23 14:18:43.630  INFO 1180 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2022-05-23 15:22:45.993  INFO 15012 --- [restartedMain] b.p.e.EasyContractsApplication           : Starting EasyContractsApplication using Java 18.0.1.1 on DESKTOP-SEESNEQ with PID 15012 (D:\WebShiXun\Easy-Contracts\EasyContracts\target\classes started by 91112 in D:\WebShiXun\Easy-Contracts\EasyContracts)
+2022-05-23 15:22:46.006  INFO 15012 --- [restartedMain] b.p.e.EasyContractsApplication           : The following 1 profile is active: "dev"
+2022-05-23 15:22:46.044  INFO 15012 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2022-05-23 15:22:46.044  INFO 15012 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2022-05-23 15:22:46.693  INFO 15012 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2022-05-23 15:22:46.695  INFO 15012 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2022-05-23 15:22:46.716  INFO 15012 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 9 ms. Found 0 Redis repository interfaces.
+2022-05-23 15:22:47.157  INFO 15012 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2022-05-23 15:22:47.164  INFO 15012 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2022-05-23 15:22:47.165  INFO 15012 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.62]
+2022-05-23 15:22:47.247  INFO 15012 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2022-05-23 15:22:47.247  INFO 15012 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1202 ms
+2022-05-23 15:22:48.122  INFO 15012 --- [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2022-05-23 15:22:48.301  INFO 15012 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2022-05-23 15:22:48.331  INFO 15012 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2022-05-23 15:22:48.340  INFO 15012 --- [restartedMain] b.p.e.EasyContractsApplication           : Started EasyContractsApplication in 2.742 seconds (JVM running for 3.451)
