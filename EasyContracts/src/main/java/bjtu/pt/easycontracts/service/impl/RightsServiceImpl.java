@@ -1,5 +1,6 @@
 package bjtu.pt.easycontracts.service.impl;
 
+import bjtu.pt.easycontracts.service.UserService;
 import bjtu.pt.easycontracts.mapper.RightsMapper;
 import bjtu.pt.easycontracts.mapper.RoleRightMapper;
 import bjtu.pt.easycontracts.pojo.table.Rights;
@@ -26,28 +27,56 @@ import java.util.List;
 public class RightsServiceImpl implements RightsService {
 
     @Autowired
-    private RightsMapper rightsMapper;
-    @Autowired
     private RoleRightMapper roleRightMapper;
+    @Autowired
+    private UserService userService;
+    @Autowired
+    private RightsMapper rightsMapper;
 
     @Override
     public int allocationRights(int userId, List<Rights> rights) {
-        return 0;
+        RoleRightExample roleRightExample = new RoleRightExample();
+        roleRightExample.createCriteria().andUseridEqualTo(userId);//类似于where后面的内容
+        roleRightMapper.deleteByExample(roleRightExample);
+
+        for(int i=0;i<rights.size();i++){
+            RoleRight roleRight=new RoleRight();
+            roleRight.setUserid(userId);
+            roleRight.setRightid(rights.get(i).getRightid());
+            roleRightMapper.insert(roleRight);
+        }
+        return 1;
     }
 
     @Override
     public int allocationRights(String username, List<Rights> rights) {
-        return 0;
+        int userId=userService.getUserByUserName(username).getUserid();
+        if(allocationRights(userId,rights)==1){
+            return 1;
+        }
+        else{
+            return 0;
+        }
     }
 
     @Override
     public int allocationRights(int userId, Rights rights) {
-        return 0;
+        RoleRight roleRight=new RoleRight();
+        roleRight.setUserid(userId);
+        roleRight.setRightid(rights.getRightid());
+        roleRightMapper.insert(roleRight);
+        return 1;
     }
 
     @Override
     public int allocationRights(String username, Rights rights) {
-        return 0;
+        int userId=userService.getUserByUserName(username).getUserid();
+        if(allocationRights(userId, rights)==1){
+            return 1;
+        }
+        else{
+            return 0;
+        }
     }
 
     @Override
