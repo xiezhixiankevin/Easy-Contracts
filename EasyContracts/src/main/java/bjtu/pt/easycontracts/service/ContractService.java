@@ -22,10 +22,10 @@ public interface ContractService {
     */
     List<Contract> listContractSelective(Contract contract);//wj
 
-    //添加合同
+    //添加合同，其实就是起草
     int addContract(Contract contract);//zxc
 
-    //删除合同
+    //删除合同 process表里对应的也要删除
     int deleteContract(int id);//wj
 
     //修改合同

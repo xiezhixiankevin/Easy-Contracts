@@ -2,8 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="bjtu.pt.easycontracts.mapper.ContractProcessMapper" >
   <resultMap id="BaseResultMap" type="bjtu.pt.easycontracts.pojo.table.ContractProcess" >
-    <id column="contractId" property="contractid" jdbcType="INTEGER" />
-    <id column="userId" property="userid" jdbcType="INTEGER" />
+    <result column="contractId" property="contractid" jdbcType="INTEGER" />
+    <result column="userId" property="userid" jdbcType="INTEGER" />
     <result column="type" property="type" jdbcType="INTEGER" />
     <result column="state" property="state" jdbcType="INTEGER" />
     <result column="time" property="time" jdbcType="TIMESTAMP" />
@@ -105,20 +105,6 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="bjtu.pt.easycontracts.pojo.table.ContractProcessKey" >
-    select 
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from contract_process
-    where contractId = #{contractid,jdbcType=INTEGER}
-      and userId = #{userid,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="bjtu.pt.easycontracts.pojo.table.ContractProcessKey" >
-    delete from contract_process
-    where contractId = #{contractid,jdbcType=INTEGER}
-      and userId = #{userid,jdbcType=INTEGER}
-  </delete>
   <delete id="deleteByExample" parameterType="bjtu.pt.easycontracts.pojo.table.ContractProcessExample" >
     delete from contract_process
     <if test="_parameter != null" >
@@ -230,41 +216,5 @@
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
-  </update>
-  <update id="updateByPrimaryKeySelective" parameterType="bjtu.pt.easycontracts.pojo.table.ContractProcess" >
-    update contract_process
-    <set >
-      <if test="type != null" >
-        type = #{type,jdbcType=INTEGER},
-      </if>
-      <if test="state != null" >
-        state = #{state,jdbcType=INTEGER},
-      </if>
-      <if test="time != null" >
-        time = #{time,jdbcType=TIMESTAMP},
-      </if>
-      <if test="content != null" >
-        content = #{content,jdbcType=LONGVARCHAR},
-      </if>
-    </set>
-    where contractId = #{contractid,jdbcType=INTEGER}
-      and userId = #{userid,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="bjtu.pt.easycontracts.pojo.table.ContractProcess" >
-    update contract_process
-    set type = #{type,jdbcType=INTEGER},
-      state = #{state,jdbcType=INTEGER},
-      time = #{time,jdbcType=TIMESTAMP},
-      content = #{content,jdbcType=LONGVARCHAR}
-    where contractId = #{contractid,jdbcType=INTEGER}
-      and userId = #{userid,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="bjtu.pt.easycontracts.pojo.table.ContractProcess" >
-    update contract_process
-    set type = #{type,jdbcType=INTEGER},
-      state = #{state,jdbcType=INTEGER},
-      time = #{time,jdbcType=TIMESTAMP}
-    where contractId = #{contractid,jdbcType=INTEGER}
-      and userId = #{userid,jdbcType=INTEGER}
   </update>
 </mapper>
