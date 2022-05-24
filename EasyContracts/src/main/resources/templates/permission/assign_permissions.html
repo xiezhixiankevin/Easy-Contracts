@@ -80,7 +80,7 @@
 					权限管理
 				</h1>
 				<h3 class="mg-md" >
-					用户名：<span id="username_span" th:text="${username}">xxxxx </span>
+					用户名：<span id="username_span" class="text-danger" th:text="${username}">xxxxx </span>
 				</h3>
 				<div class="divider-h">
 				</div>
@@ -288,17 +288,20 @@
 				<div class="row"><br></div>
 				<div class="row"><br></div>
 				<div class="row">
-					<div class="col-md-4">
+					<div class="col-md-6">
+
+					</div>
+					<div class="col-md-2">
 						<button  v-on:click="selectAllFunc()" class="bloc-button btn btn-lg btn-block btn-azure btn-保存-style" type="button">
 							全选<br>
 						</button>
 					</div>
-					<div class="col-md-4">
+					<div class="col-md-2">
 						<button v-on:click="reverseSelection()" class="bloc-button btn btn-lg btn-block btn-azure btn-保存-style" type="button">
 							反选<br>
 						</button>
 					</div>
-					<div class="col-md-4">
+					<div class="col-md-2">
 						<button v-on:click="savePermisson()" class="bloc-button btn btn-lg btn-block btn-azure btn-保存-style" type="button">
 							保存<br>
 						</button>
