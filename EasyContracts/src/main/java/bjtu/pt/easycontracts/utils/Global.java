@@ -43,9 +43,23 @@ public class Global {
     public static final int PERMISSION_DELETE_CUSTOMER = 19;
     public static final int PERMISSION_ASSIGN_PERMISSIONS = 20;
 
+    /* contract表状态定义 */
+    public static final int WAITING = 1;// 等待分配
+    public static final int COUNTERSIGNING = 2; // 正在会签
+    public static final int FINALIZING = 3; // 正在定稿
+    public static final int EXAMMING = 4; // 正在审批
+    public static final int SIGNING = 5; // 正在签订
+    public static final int FINISH = 6; // 完成
 
+    /* contract_process表状态定义 */
+    public static final int COUNTERSIGN = 1; // 会签状态
+    public static final int FINALIZE = 2; // 定稿状态
+    public static final int EXAM = 3; // 审批状态
+    public static final int SIGN = 4; // 签订状态
 
-
-
-
+    /* contract_process表对应的当前阶段定义 */
+    public static final int NOT_COME = 0; // 未到此状态
+    public static final int DOING = 1; // 正在此状态
+    public static final int PASS = 2; // 通过此状态
+    public static final int VETO = 3; // 在该状态中被否决
 }
