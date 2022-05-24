@@ -4,7 +4,9 @@ import bjtu.pt.easycontracts.pojo.table.Log;
 import bjtu.pt.easycontracts.pojo.table.LogExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface LogMapper {
     int countByExample(LogExample example);
 

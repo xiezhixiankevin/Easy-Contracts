@@ -4,7 +4,9 @@ import bjtu.pt.easycontracts.pojo.table.ContractAttachment;
 import bjtu.pt.easycontracts.pojo.table.ContractAttachmentExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface ContractAttachmentMapper {
     int countByExample(ContractAttachmentExample example);
 
