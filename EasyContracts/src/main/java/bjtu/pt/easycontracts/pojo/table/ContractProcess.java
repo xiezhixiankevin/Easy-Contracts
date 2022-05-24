@@ -53,7 +53,7 @@ public class ContractProcess {
         return time;
     }
 
-    public void setTime(String time) {
+    public void setTime(Date time) {
         this.time = time;
     }
 

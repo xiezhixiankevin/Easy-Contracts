@@ -10,9 +10,9 @@ import bjtu.pt.easycontracts.service.ContractService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
+import java.util.Date;
 import java.util.List;
 import bjtu.pt.easycontracts.utils.Global;
 
@@ -115,18 +115,18 @@ public class ContractServiceImpl implements ContractService
             /* 如果是合同对应会签阶段的记录，则修改状态并写入内容 */
             if (contractProcess.getType() == Global.COUNTERSIGN)
             {
-                SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                Date date = new Date();
                 contractProcess.setState(Global.PASS);
                 contractProcess.setContent(opinion);
-                contractProcess.setTime(df.format(System.currentTimeMillis()));
+                contractProcess.setTime(date);
             }
 
             /* 如果合同对应定稿阶段的记录，则修改状态 */
             if (contractProcess.getType() == Global.FINALIZE)
             {
-                SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                java.util.Date date = new java.util.Date();
                 contractProcess.setState(Global.DOING);
-                contractProcess.setTime(df.format(System.currentTimeMillis()));
+                contractProcess.setTime(date);
             }
 
             /* 更新数据库对应记录内容 */
@@ -177,10 +177,10 @@ public class ContractServiceImpl implements ContractService
             /* 如果是合同对应签订阶段的记录，则修改状态并写入内容 */
             if (contractProcess.getType() == Global.COUNTERSIGN)
             {
-                SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                Date date = new Date();
                 contractProcess.setState(Global.PASS);
                 contractProcess.setContent(opinion);
-                contractProcess.setTime(df.format(System.currentTimeMillis()));
+                contractProcess.setTime(date);
             }
 
             /* 更新数据库对应记录内容 */
