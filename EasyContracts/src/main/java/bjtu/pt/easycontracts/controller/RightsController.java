@@ -3,12 +3,15 @@ package bjtu.pt.easycontracts.controller;
 import java.util.*;
 
 import bjtu.pt.easycontracts.pojo.table.Rights;
+import bjtu.pt.easycontracts.pojo.table.User;
 import bjtu.pt.easycontracts.service.RightsService;
 import bjtu.pt.easycontracts.service.UserService;
 import bjtu.pt.easycontracts.utils.Global;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpSession;
 
 /**
  * <Description> RightsController
@@ -32,10 +35,14 @@ public class RightsController {
     @PostMapping("/allocationRights")
     @ResponseBody
     public String allocationRights(@RequestBody List<Integer> rights,
-                                   @RequestParam("username") String username){
+                                   @RequestParam("username") String username,
+                                   HttpSession session){
             if (userService.ifExistUser(username)){
                 List<Rights> rightList = rightsService.createRightList(rights);
                 rightsService.allocationRights(username,rightList);
+                User nowUser = (User) session.getAttribute("nowUser");
+                nowUser.setUserRights(rightsService.listRights(nowUser.getUserid()));
+                session.setAttribute("nowUser",nowUser);
                 return String.valueOf(Global.SUCCESS);
             }
             return String.valueOf(Global.FAIL);

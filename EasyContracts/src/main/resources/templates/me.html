@@ -47,8 +47,8 @@
 							<li class="nav-item">
 								<a href="loginup.html" th:href="@{/}" class="nav-link a-btn ltc-white">首页</a>
 							</li>
-							<li class="nav-item">
-								<a href="draft.html" class="nav-link  ltc-white">起草合同</a>
+							<li th:if="${session.nowUser.ifHasRight(1)}" class="nav-item">
+								<a href="contract/draft.html" th:href="@{/toDraft}" class="nav-link  ltc-white">起草合同</a>
 							</li>
 							<li class="nav-item">
 								<a href="select.html" class="nav-link  ltc-white">会签合同</a>
@@ -63,7 +63,8 @@
 								<a href="sign.html" class="nav-link a-btn ltc-white">签订合同</a>
 							</li>
 						</ul>
-					</div><a class="navbar-brand mr-0" href="/index.html"> xzx <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16"><path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg></a>
+					</div>
+					<a class="navbar-brand mr-0" href="/index.html"> xzx <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16"><path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg></a>
 
 				</nav>
 			</div>
@@ -137,7 +138,7 @@
 						您也可以：
 					</h6>
 					<div class="text-center container-div-style">
-						<a href="draft.html" class="btn btn-lg btn-10-style btn-azure">起草合同<br></a>
+						<a href="contract/draft.html" class="btn btn-lg btn-10-style btn-azure">起草合同<br></a>
 					</div>
 				</div>
 			</div>
