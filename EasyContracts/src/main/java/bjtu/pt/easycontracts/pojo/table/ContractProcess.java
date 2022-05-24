@@ -1,5 +1,7 @@
 package bjtu.pt.easycontracts.pojo.table;
 
+import org.springframework.stereotype.Repository;
+
 import java.util.Date;
 
 public class ContractProcess {

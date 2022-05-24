@@ -9,6 +9,7 @@ import bjtu.pt.easycontracts.pojo.table.ContractProcessExample;
 import bjtu.pt.easycontracts.service.ContractProcessService;
 import org.springframework.beans.factory.annotation.Autowired;
 
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -16,8 +17,8 @@ import java.util.Map;
 
 import static bjtu.pt.easycontracts.utils.Global.*;
 
-
-public class ContractProcessServiceImpl implements ContractProcessService {
+public class ContractProcessServiceImpl implements ContractProcessService
+{
     @Autowired
     private ContractProcessMapper contractProcessMapper;
     @Autowired
@@ -51,19 +52,31 @@ public class ContractProcessServiceImpl implements ContractProcessService {
 
         Map<Integer, List<Contract>> listConTractUserNeedDeal=new HashMap<Integer, List<Contract>>();
         if(!contractsList1.isEmpty())
-        listConTractUserNeedDeal.put(COUNTERSIGN,contractsList1);
+            listConTractUserNeedDeal.put(COUNTERSIGN,contractsList1);
         if(!contractsList2.isEmpty())
-        listConTractUserNeedDeal.put(FINALIZE,contractsList2);
+            listConTractUserNeedDeal.put(FINALIZE,contractsList2);
         if(!contractsList3.isEmpty())
-        listConTractUserNeedDeal.put(EXAM,contractsList3);
+            listConTractUserNeedDeal.put(EXAM,contractsList3);
         if(!contractsList4.isEmpty())
-        listConTractUserNeedDeal.put(SIGN,contractsList4);
+            listConTractUserNeedDeal.put(SIGN,contractsList4);
         return listConTractUserNeedDeal;
     }
 
     @Override
-    public int updateProcess(int userId, int contractId, ContractProcess contractProcess) {
-        return 0;
+    public int updateProcess(int userId, int contractId, ContractProcess contractProcess)
+    {
+        ContractProcessExample contractProcessExample = new ContractProcessExample();
+        ContractProcessExample.Criteria criteria = contractProcessExample.createCriteria();
+
+        /* 添加检索条件 */
+        criteria.andUseridEqualTo(userId);
+        criteria.andContractidEqualTo(contractId);
+
+        /* 更新内容 */
+        contractProcessMapper.updateByExampleSelective(contractProcess , contractProcessExample);
+
+        /* 返回当前合同所处状态 */
+        return contractProcess.getType();
     }
 
     @Override

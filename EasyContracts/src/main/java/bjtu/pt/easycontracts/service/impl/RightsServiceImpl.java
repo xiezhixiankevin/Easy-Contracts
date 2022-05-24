@@ -127,10 +127,12 @@ public class RightsServiceImpl implements RightsService {
     @Override
     public List<Rights> createRightList(List<Integer> rights) {
         List<Rights> result = new ArrayList<>();
-        for (Integer id : rights){
-            Rights right = rightsMapper.selectByPrimaryKey(id);
-            if (right!=null){
-                result.add(right);
+        for (int i = 1; i <= rights.size(); i++) {
+            if (rights.get(i-1)==1){
+                Rights right = rightsMapper.selectByPrimaryKey(i);
+                if (right!=null){
+                    result.add(right);
+                }
             }
         }
         return result;
