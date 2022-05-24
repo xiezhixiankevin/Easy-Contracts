@@ -8,6 +8,7 @@
 	<meta name="robots" content="index, follow">
     <link rel="shortcut icon" type="image/png" href="../../../../../../contracts/favicon.png">
 
+<!--	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">-->
 	<link rel="stylesheet" type="text/css" href="../../static/css/bootstrap.min.css?9188" th:href="@{/css/bootstrap.min.css?9188}">
 	<link rel="stylesheet" type="text/css" href="../../static/css/style.css?8116" th:href="@{/css/style.css?8116}">
 	<link rel="stylesheet" type="text/css" href="../../static/css/animate.min.css?7456" th:href="@{/css/animate.min.css?7456}">
@@ -62,7 +63,7 @@
 								<a href="../../../../../../contracts/sign.html" class="nav-link a-btn ltc-white">签订合同</a>
 							</li>
 						</ul>
-					</div><a class="navbar-brand mr-0" href="../../../../../../contracts/index.html">个人名字</a>
+					</div><a class="navbar-brand mr-0" href="/index.html"> xzx <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16"><path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg></a>
 				</nav>
 			</div>
 		</div>
@@ -287,8 +288,15 @@
 				<div class="row"><br></div>
 				<div class="row">
 					<div class="col-md-4">
+						<button  class="bloc-button btn btn-lg btn-block btn-azure btn-保存-style" type="button">
+							全选<br>
+						</button>
 					</div>
-					<div class="col-md-4"></div>
+					<div class="col-md-4">
+						<button  class="bloc-button btn btn-lg btn-block btn-azure btn-保存-style" type="button">
+							反选<br>
+						</button>
+					</div>
 					<div class="col-md-4">
 						<button v-on:click="savePermisson()" class="bloc-button btn btn-lg btn-block btn-azure btn-保存-style" type="button">
 							保存<br>

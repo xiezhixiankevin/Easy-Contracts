@@ -63,7 +63,8 @@
 								<a href="sign.html" class="nav-link a-btn ltc-white">签订合同</a>
 							</li>
 						</ul>
-					</div><a class="navbar-brand mr-0" href="index.html">个人名字</a>
+					</div><a class="navbar-brand mr-0" href="/index.html"> xzx <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16"><path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg></a>
+
 				</nav>
 			</div>
 		</div>
@@ -82,6 +83,9 @@
 							其他操作：
 						</h6>
 						<a href="index.html" th:href="@{/toSelectUser}" th:if="${session.nowUser.ifHasRight(20)}" class="btn btn-d btn-lg btn-6-style btn-style-none">权限管理</a>
+						<a href="index.html" th:href="@{/toaddCustomer}" th:if="${session.nowUser.ifHasRight(16)}" class="btn btn-d btn-lg btn-6-style btn-style-none">新增客户</a>
+						<a href="index.html" th:href="@{/toSelectCustomer}" th:if="${session.nowUser.ifHasRight(17)}" class="btn btn-d btn-lg btn-6-style btn-style-none">客户管理</a>
+						<a href="index.html" th:href="@{/toSelectUser}" th:if="${session.nowUser.ifHasRight(13)}" class="btn btn-d btn-lg btn-6-style btn-style-none">用户管理</a>
 					</div>
 				</div>
 			</div>
