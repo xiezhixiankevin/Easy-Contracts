@@ -4,6 +4,7 @@ import bjtu.pt.easycontracts.mapper.UserMapper;
 import bjtu.pt.easycontracts.pojo.table.User;
 import bjtu.pt.easycontracts.pojo.table.UserExample;
 import bjtu.pt.easycontracts.service.UserService;
+import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -66,9 +67,23 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> listUser() {
-        List<User> users =userMapper.selectByExample(null);
-        return users;
+    public List<User> listUser(int pn) {
+        PageHelper.startPage(pn,5); //每页显示5个数据
+        return userMapper.selectByExample(null);
+    }
+
+    @Override
+    public List<User> listUserSelective(User user, int pn) {
+        UserExample userExample = new UserExample();
+        UserExample.Criteria criteria = userExample.createCriteria();
+        if (user.getUsername()!=null&&user.getUsername().length()!=0){
+            criteria.andUsernameLike("%"+user.getUsername()+"%");
+        }
+        if(user.getUserdescription()!=null&&user.getUserdescription().length()!=0){
+            criteria.andUserdescriptionLike("%"+user.getUserdescription()+"%");
+        }
+        PageHelper.startPage(pn,5); //每页显示5个数据
+        return userMapper.selectByExample(userExample);
     }
 
     @Override

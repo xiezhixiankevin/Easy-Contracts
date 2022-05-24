@@ -8,6 +8,7 @@ import bjtu.pt.easycontracts.pojo.table.ContractProcess;
 import bjtu.pt.easycontracts.pojo.table.ContractProcessExample;
 import bjtu.pt.easycontracts.service.ContractService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.sql.Date;
 import java.text.SimpleDateFormat;
@@ -15,6 +16,7 @@ import java.time.Instant;
 import java.util.List;
 import bjtu.pt.easycontracts.utils.Global;
 
+@Service
 public class ContractServiceImpl implements ContractService
 {
     @Autowired

@@ -38,7 +38,8 @@ public interface UserService {
     String retrievePassword(String username); //根据用户名查询密码并返回，调用此方法的前提是验证码输入正确
 
     /*通用部分*/
-    List<User> listUser(); //获取数据库中的所有用户 fbf
+    List<User> listUser(int pn); //获取数据库中的所有用户 fbf
+    List<User> listUserSelective(User user,int pn); //xzx
     User getUserById(Integer id); //根据id获取用户 fbf
     User getUserByUserName(String username); //xzx
     boolean ifExistUser(String username); //wj
