@@ -1,5 +1,7 @@
 package bjtu.pt.easycontracts.pojo.table;
 
+import org.springframework.stereotype.Repository;
+
 import java.util.Date;
 
 public class ContractProcess {
@@ -51,7 +53,7 @@ public class ContractProcess {
         return time;
     }
 
-    public void setTime(Date time) {
+    public void setTime(String time) {
         this.time = time;
     }
 
