@@ -5,9 +5,11 @@ import bjtu.pt.easycontracts.pojo.table.Contract;
 import bjtu.pt.easycontracts.pojo.table.ContractExample;
 import bjtu.pt.easycontracts.service.ContractService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class ContractServiceImpl implements ContractService
 {
     @Autowired

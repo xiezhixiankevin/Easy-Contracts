@@ -8,6 +8,7 @@ import bjtu.pt.easycontracts.service.RightsService;
 import bjtu.pt.easycontracts.service.UserService;
 import bjtu.pt.easycontracts.utils.Global;
 import bjtu.pt.easycontracts.utils.ReturnObject;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -99,10 +100,13 @@ public class UserController {
      */
     @GetMapping("/listUser/{pageNum}")
     @ResponseBody
-    public ReturnObject<List<User>> listUser(User user,
+    public ReturnObject<PageInfo> listUser(User user,
                                              @PathVariable("pageNum")Integer pageNum){
-        List<User> userList = userService.listUser();
-        ReturnObject<List<User>> result = new ReturnObject<>(Global.SUCCESS,userList);
+
+        List<User> userList = userService.listUserSelective(user,pageNum);
+        PageInfo pageInfo = new PageInfo(userList,5);
+        ReturnObject<PageInfo> result = new ReturnObject<>(Global.SUCCESS,pageInfo);
+
         return result;
     }
 
