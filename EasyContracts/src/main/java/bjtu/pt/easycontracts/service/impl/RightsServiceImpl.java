@@ -14,6 +14,9 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+import static bjtu.pt.easycontracts.utils.Global.FAIL;
+import static bjtu.pt.easycontracts.utils.Global.SUCCESS;
+
 /**
  * <Description> RightsServiceImpl
  *
@@ -45,17 +48,17 @@ public class RightsServiceImpl implements RightsService {
             roleRight.setRightid(rights.get(i).getRightid());
             roleRightMapper.insert(roleRight);
         }
-        return 1;
+        return SUCCESS;
     }
 
     @Override
     public int allocationRights(String username, List<Rights> rights) {
         int userId=userService.getUserByUserName(username).getUserid();
         if(allocationRights(userId,rights)==1){
-            return 1;
+            return SUCCESS;
         }
         else{
-            return 0;
+            return FAIL;
         }
     }
 
@@ -65,17 +68,17 @@ public class RightsServiceImpl implements RightsService {
         roleRight.setUserid(userId);
         roleRight.setRightid(rights.getRightid());
         roleRightMapper.insert(roleRight);
-        return 1;
+        return SUCCESS;
     }
 
     @Override
     public int allocationRights(String username, Rights rights) {
         int userId=userService.getUserByUserName(username).getUserid();
         if(allocationRights(userId, rights)==1){
-            return 1;
+            return SUCCESS;
         }
         else{
-            return 0;
+            return FAIL;
         }
     }
 

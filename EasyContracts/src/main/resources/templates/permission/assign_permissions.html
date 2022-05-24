@@ -221,6 +221,7 @@
 					</div>
 				</div>
 				<div class="divider-h">
+					<br><br>
 				</div>
 				<div class="row">
 					<div class="col">
@@ -283,17 +284,17 @@
 
 
 				</div>
-				<div class="row"><br><br><br><br><br></div>
+				<div class="row"><br></div>
 				<div class="row"><br></div>
 				<div class="row"><br></div>
 				<div class="row">
 					<div class="col-md-4">
-						<button  class="bloc-button btn btn-lg btn-block btn-azure btn-保存-style" type="button">
+						<button  v-on:click="selectAllFunc()" class="bloc-button btn btn-lg btn-block btn-azure btn-保存-style" type="button">
 							全选<br>
 						</button>
 					</div>
 					<div class="col-md-4">
-						<button  class="bloc-button btn btn-lg btn-block btn-azure btn-保存-style" type="button">
+						<button v-on:click="reverseSelection()" class="bloc-button btn btn-lg btn-block btn-azure btn-保存-style" type="button">
 							反选<br>
 						</button>
 					</div>
@@ -381,11 +382,138 @@
 						alert("权限更改失败！");
 					}
 				}).catch();
+			},
+
+			selectAllFunc: function() {
+				var rights = []; //数组，1表示勾选上权限
+				var username =document.getElementById("username_span").innerText;
+				//遍历获取用户勾选情况 permission
+				var rightsid = "permission";
+				for (var i = 1; i <= this.right_num; i++) {
+					rightsid += i.toString();
+					if (!$("#"+rightsid).get(0).checked) {
+						$("#"+rightsid).get(0).checked = true
+					}
+					rightsid = "permission";
+				}
+
+			},
+
+			reverseSelection: function() {
+				var rights = []; //数组，1表示勾选上权限
+				var username =document.getElementById("username_span").innerText;
+				//遍历获取用户勾选情况 permission
+				var rightsid = "permission";
+				for (var i = 1; i <= this.right_num; i++) {
+					rightsid += i.toString();
+					if ($("#"+rightsid).get(0).checked) {
+						$("#"+rightsid).get(0).checked = false;
+					} else {
+						$("#"+rightsid).get(0).checked = true;
+					}
+					rightsid = "permission";
+				}
+
 			}
 		}
 	});
+</script>
+
+
+<script>
+	function triggerChangeForSelectCustomer(){
+		$("#permission1").trigger("change");
+		$("#permission2").trigger("change");
+		$("#permission3").trigger("change");
+		$("#permission4").trigger("change");
+		$("#permission11").trigger("change");
+		$("#permission13").trigger("change");
+		$("#permission14").trigger("change");
+		$("#permission15").trigger("change");
+		$("#permission17").trigger("change");
+		$("#permission18").trigger("change");
+		$("#permission19").trigger("change");
+
+
+	}
+
+	$("#permission13").change(function() {
+		if ($("#permission13").get(0).checked)
+		{
+			$("#permission14").get(0).checked = true
+		}
+	});
+
+	$("#permission15").change(function() {
+			if ($("#permission15").get(0).checked)
+			{
+				$("#permission14").get(0).checked = true
+			}
+	});
+
+	$("#permission14").change(function() {
+		if (($("#permission15").get(0).checked || $("#permission13").get(0).checked) && !$("#permission14").get(0).checked)
+		{
+			alert("选择编辑或删除用户时，必须保留查询用户权限！");
+			$("#permission14").get(0).checked = true;
+		}
+	});
+
+	$("#permission1").change(function() {
+		$("#permission2").get(0).checked = $("#permission1").get(0).checked
+	});
+
+	$("#permission2").change(function() {
+		$("#permission1").get(0).checked = $("#permission2").get(0).checked
+	});
+
+	$("#permission17").change(function() {
+		if ($("#permission17").get(0).checked)
+		{
+			$("#permission18").get(0).checked = true
+		}
+	});
+
+	$("#permission19").change(function() {
+		if ($("#permission19").get(0).checked)
+		{
+			$("#permission18").get(0).checked = true
+		}
+	});
+
+	$("#permission18").change(function() {
+		if (($("#permission17").get(0).checked || $("#permission19").get(0).checked) && !$("#permission18").get(0).checked)
+		{
+			alert("选择编辑或删除客户时，必须保留查询客户权限！");
+			$("#permission18").get(0).checked = true;
+		}
+	});
+
+	$("#permission4").change(function() {
+		if ($("#permission4").get(0).checked)
+		{
+			$("#permission3").get(0).checked = true
+		}
+	});
+
+	$("#permission3").change(function() {
+		if (($("#permission4").get(0).checked || $("#permission11").get(0).checked) && !$("#permission3").get(0).checked)
+		{
+			alert("选择删除合同或流程查询时，必须保留查询合同权限！");
+			$("#permission3").get(0).checked = true;
+		}
+	});
+
+	$("#permission11").change(function() {
+		if ($("#permission11").get(0).checked)
+		{
+			$("#permission3").get(0).checked = true
+		}
+	});
+
 
 </script>
+
 
 </body>
 </html>
