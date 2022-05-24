@@ -20,23 +20,23 @@ public interface ContractService {
     如果想条件查询，传入一个contract对象，比如你想查名称带有北交大的，就设置contract的名称属性为北交大，再传入
     如果想查询全部的合同，传入一个null即可
     */
-    List<Contract> listContractSelective(Contract contract);
+    List<Contract> listContractSelective(Contract contract);//wj
 
     //添加合同
-    int addContract(Contract contract);
+    int addContract(Contract contract);//zxc
 
     //删除合同
-    int deleteContract(int id);
+    int deleteContract(int id);//wj
 
     //修改合同
-    int updateContract(int id,Contract newContract);
+    int updateContract(int id,Contract newContract);//zxc
 
     //给合同添加会签意见(每次添加会签以及后记得判断一下是不是所有会签人均已会签，是的话修改合同状态)
-    int countersignContract(int contractId ,int userId ,String opinion);
+    int countersignContract(int contractId ,int userId ,String opinion);//wj
 
     //给合同添加审批意见，并且记得修改被打回次数并更改状态为定稿，当然一次审批即通过则无需修改被打回次数并进入下一状态
-    int examineConTract(int contractId ,int userId , String opinion , boolean ifPass);
+    int examineConTract(int contractId ,int userId , String opinion , boolean ifPass);//zxc
 
     //签订合同
-    int signContract(int contractId ,int userId ,String opinion);
+    int signContract(int contractId ,int userId ,String opinion);//wj
 }

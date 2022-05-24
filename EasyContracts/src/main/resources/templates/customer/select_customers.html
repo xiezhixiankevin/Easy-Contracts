@@ -140,7 +140,6 @@
 		var customerTableVue = new Vue({
 		el:"#customer_table",
 		data:{//定义数据
-			search_url: "user/listUser/",
 			now_page:1,
 			users:[],
 			//一些常量
@@ -151,7 +150,7 @@
 				//发送请求
 				axios({
 					method: "get",
-					url : customerTableVue.search_url+"1"
+					url : "user/listUser/"+"1"
 				}).then(function (value) {
 					if(value.data.code === customerTableVue.OK){
 						//成功获取到数据渲染表格

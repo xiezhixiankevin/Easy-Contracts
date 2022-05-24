@@ -19,7 +19,8 @@ public interface ContractProcessService {
     //根据用户id查出当前他需要处理的所有合同
     /**
      * @return 返回值说明：Integer表示哪一类操作，比如需要他会签，还是审批
+     *
      * */
-    Map<Integer, List<Contract>> listConTractUserNeedDeal(int userId);
+    Map<Integer, List<Contract>> listConTractUserNeedDeal(int userId);//zxc
 
 }

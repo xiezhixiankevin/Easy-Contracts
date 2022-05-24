@@ -79,11 +79,8 @@
 					权限管理
 				</h1>
 				<h3 class="mg-md" >
-					<span id="username_span">用户名：xxxxx </span> <span>昵称:xxxx</span>
+					用户名：<span id="username_span" th:text="${username}">xxxxx </span>
 				</h3>
-				<button v-on:click="savePermisson()" class="bloc-button btn btn-lg btn-block btn-azure btn-保存-style" type="button">
-					保存<br>
-				</button>
 				<div class="divider-h">
 				</div>
 				<div class="row">
@@ -282,6 +279,21 @@
 					</div>
 					<div class="col">
 					</div>
+
+
+				</div>
+				<div class="row"><br></div>
+				<div class="row"><br></div>
+				<div class="row"><br></div>
+				<div class="row">
+					<div class="col-md-4">
+					</div>
+					<div class="col-md-4"></div>
+					<div class="col-md-4">
+						<button v-on:click="savePermisson()" class="bloc-button btn btn-lg btn-block btn-azure btn-保存-style" type="button">
+							保存<br>
+						</button>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -327,8 +339,7 @@
 <script>
 	var rightsVue = new Vue({
 		el:"#bloc-17",
-		dara:{//定义数据
-			jump_url: "rights/allocationRights",
+		data:{//定义数据
 			right_num: 20,
 			//一些常量
 			OK :200
@@ -336,7 +347,7 @@
 		methods:{
 			savePermisson:function (){
 				var rights = []; //数组，1表示勾选上权限
-				var username =$("#username_span");
+				var username =document.getElementById("username_span").innerText;
 				//遍历获取用户勾选情况 permission
 				var rightsid = "permission";
 				for (var i = 1; i <= this.right_num; i++) {
@@ -348,14 +359,15 @@
 					}
 					rightsid = "permission";
 				}
+				JSON.stringify(rights);
 				//发送请求
 				axios({
 					method: "post",
-					url : rightsVue.jump_url,
-					params : {username:username,rights:rights}
-
+					url : "http://localhost:8080/rights/allocationRights",
+					params:{username:username},
+					data : rights
 				}).then(function (value) {
-					if(value.data.code === rightsVue.OK){
+					if(value.data == rightsVue.OK){
 						alert("权限更改成功！");
 					}else{
 						alert("权限更改失败！");

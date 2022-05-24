@@ -8,9 +8,7 @@ import bjtu.pt.easycontracts.service.UserService;
 import bjtu.pt.easycontracts.utils.Global;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * <Description> RightsController
@@ -32,8 +30,9 @@ public class RightsController {
     private UserService userService;
 
     @PostMapping("/allocationRights")
-    public String allocationRights(@RequestParam("username")String username,
-                                   @RequestParam("rights[]")List<Integer> rights){
+    @ResponseBody
+    public String allocationRights(@RequestBody List<Integer> rights,
+                                   @RequestParam("username") String username){
             if (userService.ifExistUser(username)){
                 List<Rights> rightList = rightsService.createRightList(rights);
                 rightsService.allocationRights(username,rightList);

@@ -21,11 +21,11 @@ mybatis:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl   #用于控制台打印sql语句
     map-underscore-to-camel-case: true
 
-#日志配置
-logging:
-  level:
-    root: info
-    com.xiezhixian.mygit: debug
-  file:
-    name: log/blog-dev.log
+##日志配置
+#logging:
+#  level:
+#    root: info
+#    com.xiezhixian.mygit: debug
+#  file:
+#    name: log/blog-dev.log
 

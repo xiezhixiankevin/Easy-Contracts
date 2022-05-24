@@ -101,8 +101,9 @@ public class UserController {
     @ResponseBody
     public ReturnObject<List<User>> listUser(User user,
                                              @PathVariable("pageNum")Integer pageNum){
-
-        return null;
+        List<User> userList = userService.listUser();
+        ReturnObject<List<User>> result = new ReturnObject<>(Global.SUCCESS,userList);
+        return result;
     }
 
 }
