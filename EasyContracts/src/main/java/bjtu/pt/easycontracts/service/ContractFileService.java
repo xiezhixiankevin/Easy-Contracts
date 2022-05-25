@@ -20,7 +20,6 @@ public interface ContractFileService {
     //删除附件(从数据库和服务器从都删除)
     int deleteContractFile(int id);
 
-    int addFile(MultipartFile file,String path);
 
     int deleteFile(String filePath);
 }

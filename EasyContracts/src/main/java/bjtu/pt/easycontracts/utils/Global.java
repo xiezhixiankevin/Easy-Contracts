@@ -62,4 +62,7 @@ public class Global {
     public static final int DOING = 1; // 正在此状态
     public static final int PASS = 2; // 通过此状态
     public static final int VETO = 3; // 在该状态中被否决
+
+    //文件上传路径
+    public static final String FILE_PATH = "F://files";
 }

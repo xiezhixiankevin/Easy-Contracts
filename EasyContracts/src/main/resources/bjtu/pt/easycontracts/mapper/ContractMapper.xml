@@ -126,7 +126,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="bjtu.pt.easycontracts.pojo.table.Contract" >
+  <insert id="insert" parameterType="bjtu.pt.easycontracts.pojo.table.Contract" useGeneratedKeys="true" keyProperty="contractid">
     insert into contract (contractId, contractName, customerId, 
       beginTime, endTime, drafterId, 
       type, failureTimes, content
@@ -136,7 +136,7 @@
       #{type,jdbcType=INTEGER}, #{failuretimes,jdbcType=INTEGER}, #{content,jdbcType=LONGVARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="bjtu.pt.easycontracts.pojo.table.Contract" >
+  <insert id="insertSelective" parameterType="bjtu.pt.easycontracts.pojo.table.Contract" useGeneratedKeys="true" keyProperty="contractid">
     insert into contract
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="contractid != null" >

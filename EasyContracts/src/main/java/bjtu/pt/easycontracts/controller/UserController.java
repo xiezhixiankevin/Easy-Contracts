@@ -113,13 +113,8 @@ public class UserController {
     @GetMapping("/delete/{userID}")
     @ResponseBody
     public String deleteUser(@PathVariable("userID")Integer userID){
-        int i =  userService.deleteUser(userID);
-        if(i>0) {
-            return "Success";
-        }
-        else{
-            return "Error";
-        }
+        userService.deleteUser(userID);//i返回的是影响的行数，所以=0代表没有这个人，并不表示失败
+        return String.valueOf(Global.SUCCESS);
     }
 
 }

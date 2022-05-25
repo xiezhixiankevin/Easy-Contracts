@@ -57,7 +57,7 @@ public class ContractServiceImpl implements ContractService
     @Override
     public int addContract(Contract contract) {
         contractMapper.insert(contract);
-        return SUCCESS;
+        return contract.getContractid();
     }
 
     @Override

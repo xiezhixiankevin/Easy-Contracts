@@ -1,7 +1,9 @@
 package bjtu.pt.easycontracts.controller;
 
 import bjtu.pt.easycontracts.pojo.table.Contract;
+import bjtu.pt.easycontracts.pojo.table.ContractAttachment;
 import bjtu.pt.easycontracts.pojo.table.User;
+import bjtu.pt.easycontracts.service.ContractFileService;
 import bjtu.pt.easycontracts.utils.Global;
 import bjtu.pt.easycontracts.utils.ReturnObject;
 import bjtu.pt.easycontracts.utils.TimeUtil;
@@ -14,6 +16,8 @@ import java.io.FileNotFoundException;
 import bjtu.pt.easycontracts.service.ContractProcessService;
 import bjtu.pt.easycontracts.service.ContractService;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import static bjtu.pt.easycontracts.utils.Global.*;
@@ -32,9 +36,11 @@ import static bjtu.pt.easycontracts.utils.Global.*;
 public class ContractController {
 
     @Autowired
-    ContractService contractService;
+    private ContractService contractService;
     @Autowired
-    ContractProcessService contractProcessService;
+    private ContractProcessService contractProcessService;
+    @Autowired
+    private ContractFileService contractFileService;
     /*
     * 返回满足条件的合同list，以json的格式
     * */
@@ -58,7 +64,7 @@ public class ContractController {
     *起草合同按钮映射到此方法
     * */
     @PostMapping("/draft")
-    public @ResponseBody String draftContract(MultipartFile upload, Contract contract, HttpSession session) throws FileNotFoundException {
+    public String draftContract(MultipartFile upload, Contract contract, HttpSession session) throws FileNotFoundException {
 
         User user = (User)session.getAttribute("nowUser");
         //设置起草人id
@@ -66,9 +72,19 @@ public class ContractController {
         //将前端传来的时间字符串转成date并填入
         contract.setBegintime(TimeUtil.strToDate(contract.getBeginTimeStr()));
         contract.setEndtime(TimeUtil.strToDate(contract.getEndTimeStr()));
+        //其他设置
+        contract.setType(Global.WAITING);
+        //1.先保存合同
+        int id = contractService.addContract(contract);
+        //2.保存附件
+        ContractAttachment contractAttachment = new ContractAttachment();
+        contractAttachment.setContractid(id);
+        contractAttachment.setUploadtime(new Date());
+        contractAttachment.setType("普通文件");
+        contractFileService.addContractFile(contractAttachment,upload);
 
 
-        return null;
+        return "info/success";
     }
 
     /*
@@ -114,16 +130,6 @@ public class ContractController {
         return null;
     }
 
-    @PostMapping("/crate")
-    public String crateContract(Contract contract){
-        int i = contractService.addContract(contract);
-        if(i==SUCCESS){
-            return "Success";
-        }
-        else{
-            return "Error";
-        }
-    }
 
 
 }
