@@ -3,6 +3,7 @@ package bjtu.pt.easycontracts.service;
 import bjtu.pt.easycontracts.pojo.table.Contract;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * <Description> ContractService
@@ -39,4 +40,10 @@ public interface ContractService {
 
     //签订合同
     int signContract(int contractId ,int userId ,String opinion);//wj
+
+    //获取到当前合同还需要分配哪些过程(会签，定稿...) //zxc
+    Map<Integer,Boolean> getNeedAllocationOfContract(int contractId);
+
+    //返回当前数据库中所有等待分配的合同以及每个合同还需分配哪些权限 //fbf
+    List<Contract> getNeedAllocationContracts();
 }

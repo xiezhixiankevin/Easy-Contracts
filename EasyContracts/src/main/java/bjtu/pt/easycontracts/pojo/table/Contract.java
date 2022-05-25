@@ -26,6 +26,8 @@ public class Contract {
     private String endTimeStr;
     private String customerName;
 
+    private boolean[] needAllocationProcess = {true,true,true,true};//数组的0，1，2，3分别代表会签，定稿，审批，签订
+
     public String getBeginTimeStr() {
         return beginTimeStr;
     }
@@ -120,5 +122,13 @@ public class Contract {
 
     public void setContent(String content) {
         this.content = content == null ? null : content.trim();
+    }
+
+    public boolean[] getNeedAllocationProcess() {
+        return needAllocationProcess;
+    }
+
+    public void setNeedAllocationProcess(int index,boolean ifNeed) {
+        needAllocationProcess[index] = ifNeed;
     }
 }
