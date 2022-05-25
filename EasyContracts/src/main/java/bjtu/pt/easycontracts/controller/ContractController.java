@@ -1,11 +1,17 @@
 package bjtu.pt.easycontracts.controller;
 
+import bjtu.pt.easycontracts.mapper.ContractMapper;
 import bjtu.pt.easycontracts.pojo.table.Contract;
+import bjtu.pt.easycontracts.service.ContractService;
+import bjtu.pt.easycontracts.utils.ReturnObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
+import bjtu.pt.easycontracts.service.ContractService;
 import java.io.FileNotFoundException;
+import java.util.List;
+import java.util.Map;
 
 /**
  * <Description> ContractController
@@ -20,14 +26,17 @@ import java.io.FileNotFoundException;
 @Controller
 public class ContractController {
 
+    @Autowired
+    ContractService contractService;
+
     /*
-    * 返回满足条件的合同list，以json的格式
-    * */
-    @GetMapping("/list/{title}/{id}/{status}")
+     * 返回满足条件的合同list，以json的格式
+     * */
+    @GetMapping("/list")
     @ResponseBody
-    public String listContracts(@PathVariable(value = "title",required = false)String title,
-                                @PathVariable(value = "id",required = false)String id,
-                                @PathVariable(value = "status",required = false)String status){
+    public ReturnObject<Map<Integer, List<Contract>>> listContracts(@RequestParam(value = "title",required = false)String title,
+                                                                    @RequestParam(value = "id",required = false)String id,
+                                                                    @RequestParam(value = "status",required = false)String status){
 
         return null;
     }
@@ -84,6 +93,16 @@ public class ContractController {
         return null;
     }
 
+    @PostMapping("/crate")
+    public String crateContract(Contract contract){
+        int i = contractService.addContract(contract);
+        if(i>0){
+            return "Success";
+        }
+        else{
+            return "Error";
+        }
+    }
 
 
 }

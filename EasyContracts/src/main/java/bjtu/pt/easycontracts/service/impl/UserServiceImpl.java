@@ -7,8 +7,9 @@ import bjtu.pt.easycontracts.service.UserService;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
+
+import static bjtu.pt.easycontracts.utils.Global.*;
 
 /**
  * <Description> UserServiceImpl
@@ -132,6 +133,10 @@ public class UserServiceImpl implements UserService {
         {
             return false;
         }
+    }
+
+    public int deleteUser(Integer userID){
+        return userMapper.deleteByPrimaryKey(userID);
     }
 
 }

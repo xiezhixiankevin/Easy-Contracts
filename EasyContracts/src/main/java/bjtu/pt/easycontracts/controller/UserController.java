@@ -110,4 +110,16 @@ public class UserController {
         return result;
     }
 
+    @GetMapping("/delete/{userID}")
+    @ResponseBody
+    public String deleteUser(@PathVariable("userID")Integer userID){
+        int i =  userService.deleteUser(userID);
+        if(i>0) {
+            return "Success";
+        }
+        else{
+            return "Error";
+        }
+    }
+
 }
