@@ -2,6 +2,7 @@ package bjtu.pt.easycontracts.controller;
 
 import bjtu.pt.easycontracts.mapper.ContractMapper;
 import bjtu.pt.easycontracts.pojo.table.Contract;
+import bjtu.pt.easycontracts.service.ContractProcessService;
 import bjtu.pt.easycontracts.service.ContractService;
 import bjtu.pt.easycontracts.utils.ReturnObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import bjtu.pt.easycontracts.service.ContractService;
 import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.Map;
+import static bjtu.pt.easycontracts.utils.Global.*;
 
 /**
  * <Description> ContractController
@@ -28,19 +30,25 @@ public class ContractController {
 
     @Autowired
     ContractService contractService;
-
+    @Autowired
+    ContractProcessService contractProcessService;
     /*
      * 返回满足条件的合同list，以json的格式
      * */
     @GetMapping("/list")
     @ResponseBody
-    public ReturnObject<Map<Integer, List<Contract>>> listContracts(@RequestParam(value = "title",required = false)String title,
+    public List<Contract> listContracts(@RequestParam(value = "title",required = false)String title,
                                                                     @RequestParam(value = "id",required = false)String id,
                                                                     @RequestParam(value = "status",required = false)String status){
 
         return null;
     }
 
+    @GetMapping("/todeal")
+    @ResponseBody
+    public Map<Integer, List<Contract>> listConTractToDeal(Integer userID){
+        return contractProcessService.listConTractUserNeedDeal(userID);
+    }
     /*
     *起草合同按钮映射到此方法
     * */
@@ -96,7 +104,7 @@ public class ContractController {
     @PostMapping("/crate")
     public String crateContract(Contract contract){
         int i = contractService.addContract(contract);
-        if(i>0){
+        if(i==SUCCESS){
             return "Success";
         }
         else{
