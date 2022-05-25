@@ -216,6 +216,11 @@ button{
 	padding:0;
 }
 
+/* = Icons
+-------------------------------------------------------------- */
+.icon-xl{
+	font-size:100px!important;
+}
 
 
 /* = Text & Icon Styles
@@ -331,6 +336,7 @@ h1,h2,h3,h4,h5,h6,p,label,.btn,a{
 }
 .btn-button-style{
 	width:100%;
+	border-radius:13px 13px 13px 13px;
 }
 .btn-padding-top{
 	padding-top:6px;
@@ -378,6 +384,12 @@ h1,h2,h3,h4,h5,h6,p,label,.btn,a{
 }
 .btn-保存-style{
 	width:100%;
+}
+.h1-您没有权限！-style{
+	width:21.78%;
+}
+.p-style{
+	width:52.67%;
 }
 
 /* = Colour
