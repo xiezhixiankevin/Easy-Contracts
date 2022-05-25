@@ -2,6 +2,7 @@ package bjtu.pt.easycontracts.controller;
 
 import bjtu.pt.easycontracts.pojo.table.Contract;
 import bjtu.pt.easycontracts.pojo.table.User;
+import bjtu.pt.easycontracts.utils.Global;
 import bjtu.pt.easycontracts.utils.ReturnObject;
 import bjtu.pt.easycontracts.utils.TimeUtil;
 import org.springframework.stereotype.Controller;
@@ -10,7 +11,12 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
 import java.io.FileNotFoundException;
-import java.util.*;
+import bjtu.pt.easycontracts.service.ContractProcessService;
+import bjtu.pt.easycontracts.service.ContractService;
+import org.springframework.beans.factory.annotation.Autowired;
+import java.util.List;
+import java.util.Map;
+import static bjtu.pt.easycontracts.utils.Global.*;
 
 /**
  * <Description> ContractController
@@ -25,6 +31,10 @@ import java.util.*;
 @Controller
 public class ContractController {
 
+    @Autowired
+    ContractService contractService;
+    @Autowired
+    ContractProcessService contractProcessService;
     /*
     * 返回满足条件的合同list，以json的格式
     * */
@@ -37,8 +47,13 @@ public class ContractController {
         return null;
     }
 
-
-
+    @GetMapping("/todeal")
+    @ResponseBody
+    public ReturnObject<Map<Integer, List<Contract>>> listConTractToDeal(Integer userID){
+        Map<Integer, List<Contract>> integerListMap = contractProcessService.listConTractUserNeedDeal(userID);
+        ReturnObject<Map<Integer, List<Contract>>> returnObject = new ReturnObject<>( SUCCESS,integerListMap);
+        return returnObject;
+    }
     /*
     *起草合同按钮映射到此方法
     * */
@@ -99,6 +114,16 @@ public class ContractController {
         return null;
     }
 
+    @PostMapping("/crate")
+    public String crateContract(Contract contract){
+        int i = contractService.addContract(contract);
+        if(i==SUCCESS){
+            return "Success";
+        }
+        else{
+            return "Error";
+        }
+    }
 
 
 }

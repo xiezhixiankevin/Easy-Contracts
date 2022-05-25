@@ -2,7 +2,6 @@ package bjtu.pt.easycontracts.service;
 
 
 import bjtu.pt.easycontracts.pojo.table.User;
-
 import java.util.List;
 
 /**
@@ -44,5 +43,5 @@ public interface UserService {
     User getUserByUserName(String username); //xzx
     boolean ifExistUser(String username); //wj
     boolean ifExistUser(Integer id); //wj
-
+    int deleteUser(Integer userID);
 }

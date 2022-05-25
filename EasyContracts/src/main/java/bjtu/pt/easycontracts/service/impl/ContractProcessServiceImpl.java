@@ -8,6 +8,7 @@ import bjtu.pt.easycontracts.pojo.table.ContractProcess;
 import bjtu.pt.easycontracts.pojo.table.ContractProcessExample;
 import bjtu.pt.easycontracts.service.ContractProcessService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 
 import java.util.ArrayList;
@@ -16,7 +17,7 @@ import java.util.List;
 import java.util.Map;
 
 import static bjtu.pt.easycontracts.utils.Global.*;
-
+@Service
 public class ContractProcessServiceImpl implements ContractProcessService
 {
     @Autowired
