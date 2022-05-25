@@ -37,7 +37,9 @@ public class CustomerServiceImpl implements CustomerService
     public List<Customer> listCustomerSelective(Customer customer) {
         CustomerExample customerExample = new CustomerExample();
         CustomerExample.Criteria criteria = customerExample.createCriteria();
-
+        if(customer==null){
+            return customerMapper.selectByExample(null);
+        }
         if (customer.getAccount() != null)
             criteria.andAccountEqualTo(customer.getAccount());
         if (customer.getCode() != null)
@@ -53,8 +55,6 @@ public class CustomerServiceImpl implements CustomerService
         if (customer.getPhone() != null)
             criteria.andPhoneEqualTo(customer.getPhone());
 
-        List<Customer> customerList = customerMapper.selectByExample(customerExample);
-
-        return customerList;
+        return customerMapper.selectByExample(customerExample);
     }
 }

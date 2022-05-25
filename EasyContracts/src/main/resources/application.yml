@@ -30,9 +30,9 @@ spring:
     properties.mail.smtp.starttls.required: true
     properties.mail.smtp.ssl.enable: true
     default-encoding: utf-8
-
 #分页pageHelper
 pagehelper:
   helper-dialect: mysql
   reasonable: true
   support-methods-arguments: true
+

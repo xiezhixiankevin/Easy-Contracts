@@ -1,7 +1,9 @@
 package bjtu.pt.easycontracts.controller;
 
 import bjtu.pt.easycontracts.pojo.table.User;
+import bjtu.pt.easycontracts.service.CustomerService;
 import bjtu.pt.easycontracts.utils.Global;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +24,10 @@ import javax.servlet.http.HttpSession;
 
 @Controller
 public class SkipController {
+
+
+    @Autowired
+    private CustomerService customerService;
 
     //跳转到注册页面，
     @GetMapping("/toRegister")
@@ -50,38 +56,40 @@ public class SkipController {
     //跳转到select用户页面
     @GetMapping("/toSelectUser")
     public String toSelectUser(){
-        return "customer/select_customers";
+        return "user/select_users";
     }
 
     //跳转到create用户页面
     @GetMapping("/toCreateUser")
     public String toCreateUser(){
-        return "customer/create_customers";
+        return "user/create_users";
     }
 
     //跳转到modify用户页面
     @GetMapping("/toModifyUser")
     public String toModifyUser(){
-        return "customer/modify_customers";
+        return "user/modify_users";
     }
 
     //跳转到权限分配页面
     @GetMapping("/toRights/{username}")
-    public String toRights(@PathVariable("username")String username, Model model){
+    public String toRights(@PathVariable("username")String username, Model model,HttpSession session){
+        User nowUser = (User)session.getAttribute("nowUser");
+        if (!nowUser.ifHasRight(Global.PERMISSION_ASSIGN_PERMISSIONS)){
+            return "error/noRight";
+        }
         model.addAttribute("username",username);
         return "permission/assign_permissions";
     }
 
     //跳转到起草合同页面如果
     @GetMapping("/toDraft")
-    public String toDraft(HttpSession session){
+    public String toDraft(HttpSession session,Model model){
         User nowUser = (User)session.getAttribute("nowUser");
-        if (nowUser==null){
-            return "error/loginFirst";
-        }
         if (!nowUser.ifHasRight(Global.PERMISSION_DRAFT_CONTRACT)){
             return "error/noRight";
         }
+        model.addAttribute("customers",customerService.listCustomerSelective(null));
         return "contract/draft";
     }
 

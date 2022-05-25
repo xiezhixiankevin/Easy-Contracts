@@ -78,7 +78,7 @@
 	<div class="container bloc-lg">
 		<div class="row">
 			<div class="col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
-				<form id="form_26540" enctype="multipart/form-data">
+				<form id="form_26540" th:action="@{/contract/draft}" method="post" enctype="multipart/form-data">
 					<h1 class="mg-md">
 						起草合同
 					</h1>
@@ -86,24 +86,24 @@
 						<label>
 							合同名称<br>
 						</label>
-						<input id="name_26540" class="form-control" required data-validation-required-message="合同名称是必要的" />
+						<input name="contractname" id="name_26540" class="form-control" required data-validation-required-message="合同名称是必要的" />
 					</div>
 					<div class="form-group">
 						<label>
 							合同生效时间<br>
 						</label>
-						<input id="start_time" class="form-control" type="date" required data-validation-required-message="时间是必要的" />
+						<input name="beginTimeStr" d="start_time" class="form-control" type="date" required data-validation-required-message="时间是必要的" />
 					</div>
 					<div class="form-group">
 						<label>
 							合同失效时间<br>
 						</label>
-						<input id="end_time" class="form-control" type="date" required data-validation-required-message="时间是必要的" />
+						<input name="endTimeStr" id="end_time" class="form-control" type="date" required data-validation-required-message="时间是必要的" />
 					</div>
 					<div class="form-group">
 						<label>
 							合同内容<br>
-						</label><textarea id="content" class="form-control" rows="4" cols="50" required></textarea>
+						</label><textarea name="content" id="content" class="form-control" rows="4" cols="50" required></textarea>
 					</div>
 					<div class="form-group container-div-0-style">
 						<label>
@@ -111,7 +111,9 @@
 						</label>
 						<div class="row">
 							<div class="col-lg-8">
-								<select class="form-control"></select>
+								<select name="customerid" class="form-control">
+									<option name="yy" value="qqqq" th:each="custmoer : ${customers}" th:value="${custmoer.getCustomerid()}" th:text="${custmoer.getCustomername()}">1111</option>
+								</select>
 							</div>
 							<div class="col">
 								<button class="form-control btn btn-success">你也可以新增客户</button>
@@ -124,7 +126,7 @@
 						</label>
 						<div class="row">
 							<div class="col-lg-9">
-								<input type="file" class="file" multiple>
+								<input type="file" class="file" name="upload" multiple="multiple">
 							</div>
 						</div>
 					</div> 
