@@ -34,7 +34,7 @@ public class ContractServiceImpl implements ContractService
         if (contract.getCustomerid() != null)
             criteria.andContractidEqualTo(contract.getCustomerid());
         if (contract.getContractname() != null)
-            criteria.andContractnameLike(contract.getContractname());
+            criteria.andContractnameLike('%' + contract.getContractname() + '%');
         if (contract.getContractid() != null)
             criteria.andContractidEqualTo(contract.getContractid());
         if (contract.getBegintime() != null)
@@ -85,6 +85,8 @@ public class ContractServiceImpl implements ContractService
     public int countersignContract(int contractId, int userId, String opinion)
     {
         int updateLine = 0;
+        int notFinishedCount = 0; // 判断还有多少会签人员没有完成会签操作
+
         ContractExample contractExample = new ContractExample();
         ContractProcessExample contractProcessExample = new ContractProcessExample();
 
@@ -92,18 +94,13 @@ public class ContractServiceImpl implements ContractService
         contractExample.createCriteria().andContractidEqualTo(contractId);
 
         /* 添加contractprocess表的检索条件 */
-        contractProcessExample.createCriteria().andUseridEqualTo(userId);
         contractProcessExample.createCriteria().andContractidEqualTo(contractId);
 
         /* 找到对应的记录 */
         Contract contract = contractMapper.selectByPrimaryKey(contractId);
-        List<ContractProcess> contractProcessList = contractProcessMapper.selectByExample(contractProcessExample);
+        List<ContractProcess> contractProcessList = contractProcessMapper.selectByExampleWithBLOBs(contractProcessExample);
 
-        /* 修改contract记录状态为正在定稿状态 */
-        contract.setType(3);
-        updateLine += contractMapper.updateByPrimaryKey(contract);
-
-        /* 遍历修改contract记录,正在会签状态的改为通过会签状态并将会签内容输入进去，未到定稿状态的改为正在定稿状态 */
+        /* 遍历修改contractProcess记录,正在会签状态的改为通过会签状态并将会签内容输入进去 */
         for (ContractProcess contractProcess : contractProcessList)
         {
             ContractProcessExample contractProcessExample1 = new ContractProcessExample();// 专门用来更新一条相应记录
@@ -114,25 +111,50 @@ public class ContractServiceImpl implements ContractService
             criteria.andUseridEqualTo(contractProcess.getUserid());
             criteria.andTypeEqualTo(contractProcess.getType());
 
-            /* 如果是合同对应会签阶段的记录，则修改状态并写入内容 */
+            /* 如果是合同对应会签阶段的记录，如果是对应的会签人员则修改状态并写入内容，如果是别的会签人员则看是否已完成会签内容 */
             if (contractProcess.getType() == Global.COUNTERSIGN)
             {
-                Date date = new Date();
-                contractProcess.setState(Global.PASS);
-                contractProcess.setContent(opinion);
-                contractProcess.setTime(date);
-            }
-
-            /* 如果合同对应定稿阶段的记录，则修改状态 */
-            if (contractProcess.getType() == Global.FINALIZE)
-            {
-                java.util.Date date = new java.util.Date();
-                contractProcess.setState(Global.DOING);
-                contractProcess.setTime(date);
+                if (contractProcess.getUserid() != userId)
+                {
+                    if (contractProcess.getContent() == null)
+                        notFinishedCount++;
+                }
+                else
+                {
+                    Date date = new Date();
+                    contractProcess.setState(Global.PASS);
+                    contractProcess.setContent(opinion);
+                    contractProcess.setTime(date);
+                }
             }
 
             /* 更新数据库对应记录内容 */
-            updateLine += contractProcessMapper.updateByExample(contractProcess , contractProcessExample1);
+            updateLine += contractProcessMapper.updateByExampleWithBLOBs(contractProcess , contractProcessExample1);
+        }
+
+        /* 判断是否所有会签人员都已完成会签，如果都完成，则再次遍历，找到定稿阶段的记录，更改状态 */
+        if (notFinishedCount == 0)
+        {
+            for (ContractProcess contractProcess : contractProcessList)
+            {
+                ContractProcessExample contractProcessExample1 = new ContractProcessExample();// 专门用来更新一条相应记录
+                ContractProcessExample.Criteria criteria = contractProcessExample1.createCriteria();
+
+                /* 更新检索条件 */
+                criteria.andContractidEqualTo(contractProcess.getContractid());
+                criteria.andUseridEqualTo(contractProcess.getUserid());
+                criteria.andTypeEqualTo(contractProcess.getType());
+
+                if (contractProcess.getType() == Global.FINALIZE)
+                {
+                    contractProcess.setState(Global.DOING);
+                    updateLine += contractProcessMapper.updateByExampleWithBLOBs(contractProcess , contractProcessExample1);
+                }
+            }
+
+            /* 修改contract记录状态为正在定稿状态 */
+            contract.setType(3);
+            updateLine += contractMapper.updateByPrimaryKey(contract);
         }
 
         return updateLine;
@@ -210,17 +232,17 @@ public class ContractServiceImpl implements ContractService
         /* 添加contract表的检索条件 */
         contractExample.createCriteria().andContractidEqualTo(contractId);
 
-        /* 添加contractprocess表的检索条件 */
+        /* 添加contractProcess表的检索条件 */
         contractProcessExample.createCriteria().andUseridEqualTo(userId);
         contractProcessExample.createCriteria().andContractidEqualTo(contractId);
 
         /* 找到对应的记录 */
         Contract contract = contractMapper.selectByPrimaryKey(contractId);
-        List<ContractProcess> contractProcessList = contractProcessMapper.selectByExample(contractProcessExample);
+        List<ContractProcess> contractProcessList = contractProcessMapper.selectByExampleWithBLOBs(contractProcessExample);
 
         /* 修改contract记录状态修改为完成状态 */
         contract.setType(Global.FINISH);
-        updateLine += contractMapper.updateByPrimaryKey(contract);
+        updateLine += contractMapper.updateByPrimaryKeyWithBLOBs(contract);
 
         /* 遍历修改contract记录,正在签订状态的改为通过签订状态并将签订内容输入进去 */
         for (ContractProcess contractProcess : contractProcessList)
@@ -240,10 +262,10 @@ public class ContractServiceImpl implements ContractService
                 contractProcess.setState(Global.PASS);
                 contractProcess.setContent(opinion);
                 contractProcess.setTime(date);
-            }
 
-            /* 更新数据库对应记录内容 */
-            updateLine += contractProcessMapper.updateByExample(contractProcess , contractProcessExample1);
+                /* 更新数据库对应记录内容 */
+                updateLine += contractProcessMapper.updateByExampleWithBLOBs(contractProcess , contractProcessExample1);
+            }
         }
 
         return updateLine;

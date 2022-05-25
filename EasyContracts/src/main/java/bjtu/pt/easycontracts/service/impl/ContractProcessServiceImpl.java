@@ -73,7 +73,7 @@ public class ContractProcessServiceImpl implements ContractProcessService
         criteria.andContractidEqualTo(contractId);
 
         /* 更新内容 */
-        contractProcessMapper.updateByExampleSelective(contractProcess , contractProcessExample);
+        contractProcessMapper.updateByExampleWithBLOBs(contractProcess , contractProcessExample);
 
         /* 返回当前合同所处状态 */
         return contractProcess.getType();
