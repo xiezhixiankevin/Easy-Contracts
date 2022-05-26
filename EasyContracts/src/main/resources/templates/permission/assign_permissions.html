@@ -439,23 +439,25 @@
 		$("#permission17").trigger("change");
 		$("#permission18").trigger("change");
 		$("#permission19").trigger("change");
-
+		$("#permission20").trigger("change");
 
 	}
 
 	$("#permission13").change(function() {
 		if ($("#permission13").get(0).checked)
 		{
-			$("#permission14").get(0).checked = true
+			$("#permission14").get(0).checked = true;
 		}
 	});
 
 	$("#permission15").change(function() {
 			if ($("#permission15").get(0).checked)
 			{
-				$("#permission14").get(0).checked = true
+				$("#permission14").get(0).checked = true;
 			}
 	});
+
+
 
 	$("#permission14").change(function() {
 		if (($("#permission15").get(0).checked || $("#permission13").get(0).checked) && !$("#permission14").get(0).checked)
@@ -466,24 +468,24 @@
 	});
 
 	$("#permission1").change(function() {
-		$("#permission2").get(0).checked = $("#permission1").get(0).checked
+		$("#permission2").get(0).checked = $("#permission1").get(0).checked;
 	});
 
 	$("#permission2").change(function() {
-		$("#permission1").get(0).checked = $("#permission2").get(0).checked
+		$("#permission1").get(0).checked = $("#permission2").get(0).checked;
 	});
 
 	$("#permission17").change(function() {
 		if ($("#permission17").get(0).checked)
 		{
-			$("#permission18").get(0).checked = true
+			$("#permission18").get(0).checked = true;
 		}
 	});
 
 	$("#permission19").change(function() {
 		if ($("#permission19").get(0).checked)
 		{
-			$("#permission18").get(0).checked = true
+			$("#permission18").get(0).checked = true;
 		}
 	});
 
@@ -498,7 +500,7 @@
 	$("#permission4").change(function() {
 		if ($("#permission4").get(0).checked)
 		{
-			$("#permission3").get(0).checked = true
+			$("#permission3").get(0).checked = true;
 		}
 	});
 
@@ -513,7 +515,32 @@
 	$("#permission11").change(function() {
 		if ($("#permission11").get(0).checked)
 		{
+			$("#permission3").get(0).checked = true;
+		}
+	});
+
+	$("#permission20").change(function() {
+		if ($("#permission20").get(0).checked)
+		{
+			$("#permission1").get(0).checked = true
+			$("#permission2").get(0).checked = true
 			$("#permission3").get(0).checked = true
+			$("#permission4").get(0).checked = true
+			$("#permission5").get(0).checked = true
+			$("#permission6").get(0).checked = true
+			$("#permission7").get(0).checked = true
+			$("#permission8").get(0).checked = true
+			$("#permission9").get(0).checked = true
+			$("#permission10").get(0).checked = true
+			$("#permission11").get(0).checked = true
+			$("#permission12").get(0).checked = true
+			$("#permission13").get(0).checked = true
+			$("#permission14").get(0).checked = true
+			$("#permission15").get(0).checked = true
+			$("#permission16").get(0).checked = true
+			$("#permission17").get(0).checked = true
+			$("#permission18").get(0).checked = true
+			$("#permission19").get(0).checked = true
 		}
 	});
 
