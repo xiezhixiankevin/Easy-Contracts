@@ -2,10 +2,9 @@ package bjtu.pt.easycontracts.service.impl;
 
 import bjtu.pt.easycontracts.mapper.ContractMapper;
 import bjtu.pt.easycontracts.mapper.ContractProcessMapper;
-import bjtu.pt.easycontracts.pojo.table.Contract;
-import bjtu.pt.easycontracts.pojo.table.ContractExample;
-import bjtu.pt.easycontracts.pojo.table.ContractProcess;
-import bjtu.pt.easycontracts.pojo.table.ContractProcessExample;
+import bjtu.pt.easycontracts.pojo.table.*;
+import bjtu.pt.easycontracts.service.EmailService;
+import bjtu.pt.easycontracts.service.UserService;
 
 import bjtu.pt.easycontracts.service.ContractService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +25,10 @@ public class ContractServiceImpl implements ContractService
     private ContractMapper contractMapper;
     @Autowired
     private ContractProcessMapper contractProcessMapper;
+    @Autowired
+    private UserService userService;
+    @Autowired
+    private EmailService emailService;
 
     @Override
     public List<Contract> listContractSelective(Contract contract)
@@ -75,6 +78,13 @@ public class ContractServiceImpl implements ContractService
         deleteLine += contractMapper.deleteByExample(contractExample);
         deleteLine += contractProcessMapper.deleteByExample(contractProcessExample);
 
+        /* 将删除信息发送给所有该合同的操作员 */
+        List<User> usersAboutContract = userService.getUsersAboutContract(id);
+        for (User user : usersAboutContract)
+        {
+            emailService.sendSimpleMail(user.getEmail() , "Contract Delete" , "The contract with id " + id + "has been deleted, remember to check!");
+        }
+
         return deleteLine;
     }
 
@@ -82,6 +92,14 @@ public class ContractServiceImpl implements ContractService
     public int updateContract(int id, Contract newContract) {
         deleteContract(id);
         addContract(newContract);
+
+        /* 将更新信息发送给所有操作员 */
+        List<User> usersAboutContract = userService.getUsersAboutContract(id);
+        for (User user : usersAboutContract)
+        {
+            emailService.sendSimpleMail(user.getEmail() , "Contract Update" , "The contract with id " + id + "has been updated, remember to check!");
+        }
+
         return SUCCESS;
     }
 
@@ -161,6 +179,14 @@ public class ContractServiceImpl implements ContractService
             updateLine += contractMapper.updateByPrimaryKey(contract);
         }
 
+        /* 将该操作员已完成会签操作的信息发送给所有操作员 */
+        List<User> usersAboutContract = userService.getUsersAboutContract(contractId);
+        for (User user : usersAboutContract)
+        {
+            emailService.sendSimpleMail(user.getEmail() , "Contract Countersign" , "The operator with id " + userId + "has finished the countersign" +
+                    " on contract with id " + contractId + ", remember to check!");
+        }
+
         return updateLine;
     }
 
@@ -223,6 +249,15 @@ public class ContractServiceImpl implements ContractService
             contractMapper.updateByExample(contract,contractExample);
             return SUCCESS;
         }
+
+        /* 将该操作员已完成审批操作的信息发送给所有操作员 */
+        List<User> usersAboutContract = userService.getUsersAboutContract(contractId);
+        for (User user : usersAboutContract)
+        {
+            emailService.sendSimpleMail(user.getEmail() , "Contract Examine" , "The operator with id " + userId + "has finished the examine" +
+                    " on contract with id " + contractId + ", remember to check!");
+        }
+
         return SUCCESS;
     }
 
@@ -270,6 +305,14 @@ public class ContractServiceImpl implements ContractService
                 /* 更新数据库对应记录内容 */
                 updateLine += contractProcessMapper.updateByExampleWithBLOBs(contractProcess , contractProcessExample1);
             }
+        }
+
+        /* 将该操作员已完成签订操作的信息发送给所有操作员 */
+        List<User> usersAboutContract = userService.getUsersAboutContract(contractId);
+        for (User user : usersAboutContract)
+        {
+            emailService.sendSimpleMail(user.getEmail() , "Contract Sign" , "The operator with id " + userId + "has finished the sign" +
+                    " on contract with id " + contractId + ", remember to check!");
         }
 
         return updateLine;

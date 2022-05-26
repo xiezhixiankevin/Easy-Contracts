@@ -44,4 +44,7 @@ public interface UserService {
     boolean ifExistUser(String username); //wj
     boolean ifExistUser(Integer id); //wj
     int deleteUser(Integer userID);
+
+    /* 传入合同id，得到所有该合同操作员的user对象 */
+    List<User> getUsersAboutContract(int contractId);
 }

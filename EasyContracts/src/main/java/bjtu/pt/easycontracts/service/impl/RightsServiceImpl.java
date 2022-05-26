@@ -1,12 +1,10 @@
 package bjtu.pt.easycontracts.service.impl;
 
+import bjtu.pt.easycontracts.pojo.table.*;
+import bjtu.pt.easycontracts.service.EmailService;
 import bjtu.pt.easycontracts.service.UserService;
 import bjtu.pt.easycontracts.mapper.RightsMapper;
 import bjtu.pt.easycontracts.mapper.RoleRightMapper;
-import bjtu.pt.easycontracts.pojo.table.Rights;
-import bjtu.pt.easycontracts.pojo.table.RightsExample;
-import bjtu.pt.easycontracts.pojo.table.RoleRight;
-import bjtu.pt.easycontracts.pojo.table.RoleRightExample;
 import bjtu.pt.easycontracts.service.RightsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,11 +34,15 @@ public class RightsServiceImpl implements RightsService {
     @Autowired
     private RightsMapper rightsMapper;
 
+    @Autowired
+    private EmailService emailService;
+
     @Override
     public int allocationRights(int userId, List<Rights> rights) {
         RoleRightExample roleRightExample = new RoleRightExample();
         roleRightExample.createCriteria().andUseridEqualTo(userId);//类似于where后面的内容
         roleRightMapper.deleteByExample(roleRightExample);
+        User user = userService.getUserById(userId);
 
         for(int i=0;i<rights.size();i++){
             RoleRight roleRight=new RoleRight();
@@ -48,6 +50,10 @@ public class RightsServiceImpl implements RightsService {
             roleRight.setRightid(rights.get(i).getRightid());
             roleRightMapper.insert(roleRight);
         }
+
+        /* 向用户发送邮件，告知已获得权限 */
+        emailService.sendSimpleMail(user.getEmail() , "Allocate Right" , "You have got rights, remember to check!");
+
         return SUCCESS;
     }
 
@@ -55,6 +61,9 @@ public class RightsServiceImpl implements RightsService {
     public int allocationRights(String username, List<Rights> rights) {
         int userId=userService.getUserByUserName(username).getUserid();
         if(allocationRights(userId,rights)==1){
+            /* 向用户发送邮件，告知已获得权限 */
+            User user = userService.getUserByUserName(username);
+            emailService.sendSimpleMail(user.getEmail() , "Allocate Right" , "You have got rights, remember to check!");
             return SUCCESS;
         }
         else{
@@ -68,6 +77,9 @@ public class RightsServiceImpl implements RightsService {
         roleRight.setUserid(userId);
         roleRight.setRightid(rights.getRightid());
         roleRightMapper.insert(roleRight);
+        /* 向用户发送邮件，告知已获得权限 */
+        User user = userService.getUserById(userId);
+        emailService.sendSimpleMail(user.getEmail() , "Allocate Right" , "You have got rights, remember to check!");
         return SUCCESS;
     }
 
@@ -75,6 +87,9 @@ public class RightsServiceImpl implements RightsService {
     public int allocationRights(String username, Rights rights) {
         int userId=userService.getUserByUserName(username).getUserid();
         if(allocationRights(userId, rights)==1){
+            /* 向用户发送邮件，告知已获得权限 */
+            User user = userService.getUserByUserName(username);
+            emailService.sendSimpleMail(user.getEmail() , "Allocate Right" , "You have got rights, remember to check!");
             return SUCCESS;
         }
         else{
@@ -86,7 +101,16 @@ public class RightsServiceImpl implements RightsService {
     public int deleteRights(int userId) {
         RoleRightExample example = new RoleRightExample();
         example.createCriteria().andUseridEqualTo(userId);
-        return roleRightMapper.deleteByExample(example);
+        int lines;
+        lines = roleRightMapper.deleteByExample(example);
+        /* 向用户发送邮件，告知已获得权限 */
+        if (lines != 0)
+        {
+            User user = userService.getUserById(userId);
+            emailService.sendSimpleMail(user.getEmail() , "Allocate Right" , "Your rights have been deleted, remember to check!");
+        }
+
+        return lines;
         // TODO: 错误处理
     }
 
