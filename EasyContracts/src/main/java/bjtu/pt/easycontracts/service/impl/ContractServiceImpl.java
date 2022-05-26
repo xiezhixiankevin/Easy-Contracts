@@ -170,7 +170,7 @@ public class ContractServiceImpl implements ContractService
         //Date
         java.util.Date date=new java.util.Date();
         contractProcess.setTime(date);
-
+        contractProcess.setType(EXAM);
         contractProcess.setContractid(contractId);
         contractProcess.setContent(opinion);
         contractProcess.setUserid(userId);
@@ -206,7 +206,7 @@ public class ContractServiceImpl implements ContractService
         }else if(flag1==contractProcessList.size()){
             //将合同进程表里数据 status改成0
             ContractProcessExample contractProcessExample2=new ContractProcessExample();
-            contractProcessExample.createCriteria().andContractidEqualTo(contractId).andTypeEqualTo(EXAM);
+            contractProcessExample2.createCriteria().andContractidEqualTo(contractId).andTypeEqualTo(EXAM);
             List <ContractProcess> contractProcessList2 = contractProcessMapper.selectByExample(contractProcessExample2);
             for(int k=0;k<contractProcessList2.size();k++){
                 contractProcessList2.get(k).setState(NOT_COME);
