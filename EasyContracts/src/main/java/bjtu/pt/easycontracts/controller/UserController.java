@@ -110,7 +110,7 @@ public class UserController {
         return result;
     }
 
-    @GetMapping("/delete/{userID}")
+    @PostMapping("/delete/{userID}")
     @ResponseBody
     public String deleteUser(@PathVariable("userID")Integer userID){
         userService.deleteUser(userID);//i返回的是影响的行数，所以=0代表没有这个人，并不表示失败
