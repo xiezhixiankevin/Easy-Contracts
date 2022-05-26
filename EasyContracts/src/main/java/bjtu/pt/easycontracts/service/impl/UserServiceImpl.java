@@ -1,13 +1,18 @@
 package bjtu.pt.easycontracts.service.impl;
 
+import bjtu.pt.easycontracts.mapper.ContractProcessMapper;
 import bjtu.pt.easycontracts.mapper.UserMapper;
+import bjtu.pt.easycontracts.pojo.table.ContractProcess;
+import bjtu.pt.easycontracts.pojo.table.ContractProcessExample;
 import bjtu.pt.easycontracts.pojo.table.User;
 import bjtu.pt.easycontracts.pojo.table.UserExample;
+import bjtu.pt.easycontracts.service.EmailService;
 import bjtu.pt.easycontracts.service.UserService;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import java.util.List;
+
+import java.util.*;
 
 
 /**
@@ -26,6 +31,12 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserMapper userMapper;
 
+    @Autowired
+    private ContractProcessMapper contractProcessMapper;
+
+    @Autowired
+    private EmailService emailService;
+
     @Override
     public User registerUser(User user) {
         // 判断是否已存在该用户
@@ -38,6 +49,10 @@ public class UserServiceImpl implements UserService {
         }
         // 否则注册为新的用户
         userMapper.insert(user);
+
+        /* 成功后告知对方已成功注册 */
+        emailService.sendSimpleMail(user.getEmail() , "Register Notice" , "Register successfully! Welcome to use our products, if you have any " +
+                "comments, please feel free to feedback, we will actively improve, thank you.");
 
         return user;
     }
@@ -136,6 +151,45 @@ public class UserServiceImpl implements UserService {
 
     public int deleteUser(Integer userID){
         return userMapper.deleteByPrimaryKey(userID);
+    }
+
+    @Override
+    public List<User> getUsersAboutContract(int contractId)
+    {
+        List<User> users = new ArrayList<>();
+        ContractProcessExample contractProcessExample = new ContractProcessExample();
+        List<ContractProcess> contractProcesses;
+
+        /* 通过合同id在contractProcess表中找到所有的合同操作员的记录 */
+        contractProcessExample.createCriteria().andContractidEqualTo(contractId);
+        contractProcesses = contractProcessMapper.selectByExample(contractProcessExample);
+
+        /* 通过找到的记录遍历user表，获取这些操作员的全部信息 */
+        for (ContractProcess contractProcess : contractProcesses)
+        {
+            boolean isExist = false;
+            int userId = contractProcess.getUserid();
+
+            /* 如果该记录对应的操作员的相关信息还没有被存储到users中，则将其信息检索出来并存储 */
+            if (users.size() != 0)
+            {
+                for (User user : users)
+                {
+                    if (user.getUserid() == userId)
+                    {
+                        isExist = true;
+                    }
+                }
+            }
+
+            if (!isExist)
+            {
+                User user = userMapper.selectByPrimaryKey(userId);
+                users.add(user);
+            }
+        }
+
+        return users;
     }
 
 }
