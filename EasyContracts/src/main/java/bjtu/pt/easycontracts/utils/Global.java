@@ -57,7 +57,7 @@ public class Global {
     public static final int EXAM = 3; // 审批状态
     public static final int SIGN = 4; // 签订状态
 
-    /* contract_process表对应的当前阶段定义 */
+    /* contract_process表对应state的当前阶段定义 */
     public static final int NOT_COME = 0; // 未到此状态
     public static final int DOING = 1; // 正在此状态
     public static final int PASS = 2; // 通过此状态

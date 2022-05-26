@@ -280,6 +280,23 @@ public class ContractServiceImpl implements ContractService
 
     @Override
     public List<Contract> getNeedAllocationContracts() {
-        return null;
+        // 第一步--找出所有未分配所有权限党的合同(即contractType = WAITING)
+        ContractExample contractExample = new ContractExample();
+        contractExample.createCriteria().andTypeEqualTo(WAITING);
+        List<Contract> contractList = contractMapper.selectByExample(contractExample);
+
+        for(int i=0;i<contractList.size();i++){
+            // 第二步  获取对应合同的权限分配表(contract process)
+            ContractProcessExample contractProcessExample = new ContractProcessExample();
+            Contract contract = contractList.get(i);
+            contractProcessExample.createCriteria().andContractidEqualTo(contract.getContractid());
+            List<ContractProcess> contractProcessList = contractProcessMapper.selectByExample(contractProcessExample);
+
+            for(int j=0;j<contractProcessList.size();j++){
+                // 根据查到的权限刷新合同需要分配的权限
+                contract.setNeedAllocationProcess(contractProcessList.get(j).getType()-1,false);
+            }
+        }
+        return contractList;
     }
 }

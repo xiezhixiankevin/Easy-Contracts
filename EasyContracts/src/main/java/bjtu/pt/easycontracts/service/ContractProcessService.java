@@ -30,4 +30,6 @@ public interface ContractProcessService {
     //添加合同流程信息
     int insertProcess(ContractProcess contractProcess); //zxc
 
+    // 添加人员
+    int addUser(Integer contractid,Integer userid,Integer type);
 }
