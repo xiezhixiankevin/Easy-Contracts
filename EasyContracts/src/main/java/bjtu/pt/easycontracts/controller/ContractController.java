@@ -2,6 +2,7 @@ package bjtu.pt.easycontracts.controller;
 
 import bjtu.pt.easycontracts.pojo.table.Contract;
 import bjtu.pt.easycontracts.pojo.table.ContractAttachment;
+import bjtu.pt.easycontracts.pojo.table.ContractExample;
 import bjtu.pt.easycontracts.pojo.table.User;
 import bjtu.pt.easycontracts.service.ContractFileService;
 import bjtu.pt.easycontracts.utils.Global;
@@ -37,8 +38,10 @@ public class ContractController {
 
     @Autowired
     private ContractService contractService;
+
     @Autowired
     private ContractProcessService contractProcessService;
+
     @Autowired
     private ContractFileService contractFileService;
     /*
@@ -130,6 +133,13 @@ public class ContractController {
         return null;
     }
 
+    @GetMapping("/distribute")
+    @ResponseBody
+    public ReturnObject<List<Contract>> listConTractToDistribute(){
+        List<Contract> contractList = contractService.getNeedAllocationContracts();
+        ReturnObject<List<Contract>> returnObject = new ReturnObject<>( SUCCESS,contractList);
+        return returnObject;
+    }
 
 
 }

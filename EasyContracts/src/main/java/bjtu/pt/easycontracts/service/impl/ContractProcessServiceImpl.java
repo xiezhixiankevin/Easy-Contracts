@@ -17,9 +17,9 @@ import java.util.List;
 import java.util.Map;
 
 import static bjtu.pt.easycontracts.utils.Global.*;
+
 @Service
-public class ContractProcessServiceImpl implements ContractProcessService
-{
+public class ContractProcessServiceImpl implements ContractProcessService {
     @Autowired
     private ContractProcessMapper contractProcessMapper;
     @Autowired
@@ -84,5 +84,23 @@ public class ContractProcessServiceImpl implements ContractProcessService
     public int insertProcess(ContractProcess contractProcess) {
         contractProcessMapper.insert(contractProcess);
         return SUCCESS;
+    }
+
+    @Override
+    public int addUser(Integer contractid, Integer userid, Integer type) {
+        java.util.Date date = new java.util.Date();
+        ContractProcess contractProcess = new ContractProcess();
+        contractProcess.setContent(null);
+        contractProcess.setContractid(contractid);
+        contractProcess.setState(0);
+        contractProcess.setTime(date);
+        contractProcess.setUserid(userid);
+        contractProcess.setType(type);
+        if(contractProcessMapper.insert(contractProcess)>0){
+            return SUCCESS;
+        }
+        else {
+            return FAIL;
+        }
     }
 }
