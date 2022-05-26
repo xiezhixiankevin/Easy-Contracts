@@ -13,6 +13,8 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import static bjtu.pt.easycontracts.utils.Global.*;
 import java.util.Date;
+import java.util.Map;
+
 import bjtu.pt.easycontracts.utils.Global;
 
 @Service
@@ -269,5 +271,15 @@ public class ContractServiceImpl implements ContractService
         }
 
         return updateLine;
+    }
+
+    @Override
+    public Map<Integer, Boolean> getNeedAllocationOfContract(int contractId) {
+        return null;
+    }
+
+    @Override
+    public List<Contract> getNeedAllocationContracts() {
+        return null;
     }
 }

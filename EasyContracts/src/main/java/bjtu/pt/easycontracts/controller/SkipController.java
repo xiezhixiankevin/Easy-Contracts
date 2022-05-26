@@ -2,6 +2,8 @@ package bjtu.pt.easycontracts.controller;
 
 import bjtu.pt.easycontracts.pojo.table.User;
 import bjtu.pt.easycontracts.service.CustomerService;
+import bjtu.pt.easycontracts.service.RightsService;
+import bjtu.pt.easycontracts.service.UserService;
 import bjtu.pt.easycontracts.utils.Global;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,6 +29,10 @@ public class SkipController {
 
     @Autowired
     private CustomerService customerService;
+    @Autowired
+    private UserService userService;
+    @Autowired
+    private RightsService rightsService;
 
     //跳转到注册页面，
     @GetMapping("/toRegister")
@@ -77,7 +83,9 @@ public class SkipController {
         if (!nowUser.ifHasRight(Global.PERMISSION_ASSIGN_PERMISSIONS)){
             return "error/noRight";
         }
-        model.addAttribute("username",username);
+        User userToAssign = userService.getUserByUserName(username);
+        userToAssign.setUserRights(rightsService.listRights(userToAssign.getUserid()));
+        model.addAttribute("userToAssign",userToAssign);
         return "permission/assign_permissions";
     }
 

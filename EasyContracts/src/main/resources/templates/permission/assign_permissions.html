@@ -82,7 +82,7 @@
 					权限管理
 				</h1>
 				<h3 class="mg-md" >
-					用户名：<span id="username_span" class="text-danger" th:text="${username}">xxxxx </span>
+					用户名：<span id="username_span" class="text-danger" th:text="${userToAssign.getUsername()}">xxxxx </span>
 				</h3>
 				<div class="divider-h">
 				</div>
@@ -96,25 +96,25 @@
 							</div>
 							<div class="card-body">
 								<div class="custom-switch custom-control form-check-inline ">
-									<input class="custom-control-input" type="checkbox" id="permission1"  />
+									<input class="custom-control-input" th:checked="${userToAssign.ifHasRight(1)}? 'checked':'false'" type="checkbox" id="permission1"  />
 									<label class="custom-control-label" for="permission1">
 										起草合同
 									</label>
 								</div>
 								<div class="custom-switch custom-control">
-									<input class="custom-control-input" type="checkbox" id="permission2" />
+									<input class="custom-control-input" th:checked="${userToAssign.ifHasRight(2)}? 'checked':'false'" type="checkbox" id="permission2" />
 									<label class="custom-control-label" for="permission2">
 										定稿合同
 									</label>
 								</div>
 								<div class="custom-switch custom-control">
-									<input class="custom-control-input" type="checkbox" id="permission3" />
+									<input class="custom-control-input" th:checked="${userToAssign.ifHasRight(3)}? 'checked':'false'" type="checkbox" id="permission3" />
 									<label class="custom-control-label" for="permission3">
 										查询合同
 									</label>
 								</div>
 								<div class="custom-switch custom-control">
-									<input class="custom-control-input" type="checkbox" id="permission4" />
+									<input class="custom-control-input" th:checked="${userToAssign.ifHasRight(4)}? 'checked':'false'" type="checkbox" id="permission4" />
 									<label class="custom-control-label" for="permission4">
 										删除合同
 									</label>
@@ -131,19 +131,19 @@
 							</div>
 							<div class="card-body">
 								<div class="custom-switch custom-control form-check-inline">
-									<input class="custom-control-input" type="checkbox" id="permission5" />
+									<input class="custom-control-input" th:checked="${userToAssign.ifHasRight(5)}? 'checked':'false'" type="checkbox" id="permission5" />
 									<label class="custom-control-label" for="permission5">
 										会签合同
 									</label>
 								</div>
 								<div class="custom-switch custom-control">
-									<input class="custom-control-input" type="checkbox" id="permission6" />
+									<input class="custom-control-input" th:checked="${userToAssign.ifHasRight(6)}? 'checked':'false'" type="checkbox" id="permission6" />
 									<label class="custom-control-label" for="permission6">
 										审批合同
 									</label>
 								</div>
 								<div class="custom-switch custom-control">
-									<input class="custom-control-input" type="checkbox" id="permission7" />
+									<input class="custom-control-input" th:checked="${userToAssign.ifHasRight(7)}? 'checked':'false'" type="checkbox" id="permission7" />
 									<label class="custom-control-label" for="permission7">
 										签订合同
 									</label>
@@ -160,25 +160,25 @@
 							</div>
 							<div class="card-body">
 								<div class="custom-switch custom-control form-check-inline">
-									<input class="custom-control-input" type="checkbox" id="permission8" />
+									<input class="custom-control-input" th:checked="${userToAssign.ifHasRight(8)}? 'checked':'false'" type="checkbox" id="permission8" />
 									<label class="custom-control-label" for="permission8">
 										分配会签
 									</label>
 								</div>
 								<div class="custom-switch custom-control">
-									<input class="custom-control-input" type="checkbox" id="permission9" />
+									<input class="custom-control-input" th:checked="${userToAssign.ifHasRight(9)}? 'checked':'false'" type="checkbox" id="permission9" />
 									<label class="custom-control-label" for="permission9">
 										分配审批
 									</label>
 								</div>
 								<div class="custom-switch custom-control">
-									<input class="custom-control-input" type="checkbox" id="permission10" />
+									<input class="custom-control-input" th:checked="${userToAssign.ifHasRight(10)}? 'checked':'false'" type="checkbox" id="permission10" />
 									<label class="custom-control-label" for="permission10">
 										分配签订
 									</label>
 								</div>
 								<div class="custom-switch custom-control">
-									<input class="custom-control-input" type="checkbox" id="permission11" />
+									<input class="custom-control-input" th:checked="${userToAssign.ifHasRight(11)}? 'checked':'false'" type="checkbox" id="permission11" />
 									<label class="custom-control-label" for="permission11">
 										流程查询
 									</label>
@@ -195,25 +195,25 @@
 							</div>
 							<div class="card-body">
 								<div class="custom-switch custom-control form-check-inline">
-									<input class="custom-control-input" type="checkbox" id="permission12" />
+									<input class="custom-control-input" th:checked="${userToAssign.ifHasRight(12)}? 'checked':'false'" type="checkbox" id="permission12" />
 									<label class="custom-control-label" for="permission12">
 										新增用户
 									</label>
 								</div>
 								<div class="custom-switch custom-control">
-									<input class="custom-control-input" type="checkbox" id="permission13" />
+									<input class="custom-control-input" th:checked="${userToAssign.ifHasRight(13)}? 'checked':'false'" type="checkbox" id="permission13" />
 									<label class="custom-control-label" for="permission13">
 										编辑用户
 									</label>
 								</div>
 								<div class="custom-switch custom-control">
-									<input class="custom-control-input" type="checkbox" id="permission14" />
+									<input class="custom-control-input" th:checked="${userToAssign.ifHasRight(14)}? 'checked':'false'" type="checkbox" id="permission14" />
 									<label class="custom-control-label" for="permission14">
 										查询用户
 									</label>
 								</div>
 								<div class="custom-switch custom-control">
-									<input class="custom-control-input" type="checkbox" id="permission15" />
+									<input class="custom-control-input" th:checked="${userToAssign.ifHasRight(15)}? 'checked':'false'" type="checkbox" id="permission15" />
 									<label class="custom-control-label" for="permission15">
 										删除用户
 									</label>
@@ -235,25 +235,25 @@
 							</div>
 							<div class="card-body">
 								<div class="custom-switch custom-control form-check-inline">
-									<input class="custom-control-input" type="checkbox" id="permission16" />
+									<input class="custom-control-input" th:checked="${userToAssign.ifHasRight(16)}? 'checked':'false'" type="checkbox" id="permission16" />
 									<label class="custom-control-label" for="permission16">
 										新增客户
 									</label>
 								</div>
 								<div class="custom-switch custom-control">
-									<input class="custom-control-input" type="checkbox" id="permission17" />
+									<input class="custom-control-input" th:checked="${userToAssign.ifHasRight(17)}? 'checked':'false'" type="checkbox" id="permission17" />
 									<label class="custom-control-label" for="permission17">
 										编辑客户
 									</label>
 								</div>
 								<div class="custom-switch custom-control">
-									<input class="custom-control-input" type="checkbox" id="permission18" />
+									<input class="custom-control-input" th:checked="${userToAssign.ifHasRight(18)}? 'checked':'false'" type="checkbox" id="permission18" />
 									<label class="custom-control-label" for="permission18">
 										查询客户
 									</label>
 								</div>
 								<div class="custom-switch custom-control">
-									<input class="custom-control-input" type="checkbox" id="permission19" />
+									<input class="custom-control-input" th:checked="${userToAssign.ifHasRight(19)}? 'checked':'false'" type="checkbox" id="permission19" />
 									<label class="custom-control-label" for="permission19">
 										删除客户
 									</label>
@@ -270,7 +270,7 @@
 							</div>
 							<div class="card-body">
 								<div class="custom-switch custom-control form-check-inline">
-									<input class="custom-control-input" type="checkbox" id="permission20" />
+									<input class="custom-control-input" th:checked="${userToAssign.ifHasRight(20)}? 'checked':'false'" type="checkbox" id="permission20" />
 									<label class="custom-control-label" for="permission20">
 										配置权限
 									</label>
@@ -421,6 +421,7 @@
 
 			}
 		}
+
 	});
 </script>
 
