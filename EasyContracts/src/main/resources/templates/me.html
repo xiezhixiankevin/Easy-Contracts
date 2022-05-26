@@ -105,39 +105,42 @@
 									剩余会签
 								</h5>
 								<h1 class="mg-md h1-style">
-									23
-								</h1><a href="index.html" class="btn btn-lg btn-azure">前往会签<br></a>
+									{{toCountersignNumber}}
+								</h1><a href="index.html" class="btn btn-lg btn-azure" v-bind:class="toCountersignNumber==0?'disabled' : '' ">{{countersignIndex}}<br></a>
 							</div>
 							<div class="col text-lg-center">
 								<h5 class="mg-md">
 									剩余定稿
+
 								</h5>
 								<h1 class="mg-md h1-style">
-									16
-								</h1><a href="index.html" class="btn btn-lg btn-azure">前往定稿<br></a>
+									{{toFinalizeNumber}}
+								</h1><a href="index.html" class="btn btn-lg btn-azure" v-bind:class="toFinalizeNumber==0?'disabled' : '' ">{{finalizeIndex}}<br></a>
 							</div>
 							<div class="col text-lg-center">
 								<h5 class="mg-md">
+
 									剩余审批
 								</h5>
 								<h1 class="mg-md h1-style">
-									15
-								</h1><a href="index.html" class="btn btn-lg btn-azure">前往审批<br></a>
+									{{toExamNumber}}
+								</h1><a href="index.html" class="btn btn-lg btn-azure" v-bind:class="toExamNumber==0?'disabled' : '' ">{{examIndex}}<br></a>
 							</div>
 							<div class="col text-lg-center">
 								<h5 class="mg-md">
 									剩余签订
+
 								</h5>
 								<h1 class="mg-md h1-style">
-									8
-								</h1><a href="index.html" class="btn btn-lg btn-azure">审批签订<br></a>
+									{{toSignNumber}}
+								</h1><a href="index.html" class="btn btn-lg btn-azure" v-bind:class="toSignNumber==0?'disabled' : '' ">{{signIndex}}<br></a>
 							</div>
 						</div>
 					</div>
-					<h6 class="mg-md text-lg-center">
+					<h6 class="mg-md text-lg-center" th:if="${session.nowUser.ifHasRight(1)}">
 						您也可以：
 					</h6>
-					<div class="text-center container-div-style">
+					<div class="text-center container-div-style" th:if="${session.nowUser.ifHasRight(1)}">
 						<a href="contract/draft.html" class="btn btn-lg btn-10-style btn-azure">起草合同<br></a>
 					</div>
 				</div>
@@ -178,7 +181,71 @@
 <script th:src="@{/js/jquery.min.js}"  type="text/javascript" charset="utf-8"></script>
 <script th:src="@{/js/vue.js}"  type="text/javascript" charset="utf-8"></script>
 <script th:src="@{/js/axios.min.js}"  type="text/javascript" charset="utf-8"></script>
+<script th:inline="javascript">
+	var meVue = new Vue({
+		el: "#bloc-7",
+		data:{
+			// 常量
+			SUCCESS: 200,
+			COUNTERSIGN: 1,
+			FINALIZE: 2,
+			EXAM: 3,
+			SIGN: 4,
+			countersignIndex: "前往会签",
+			finalizeIndex: '前往定稿',
+			examIndex: '前往审批',
+			signIndex: '前往签订',
+			// 变量
+			toCountersignNumber: 0,
+			toFinalizeNumber: 0,
+			toExamNumber: 0,
+			toSignNumber: 0
+		},
+		mounted: function (){
+			this.getRightsList();
+		},
+		methods:{
+			getRightsList: function (){
+				var userID = [[${session.nowUser.userid}]];
+				axios({
+					method: "get",
+					url: "/contract/todeal",
+					params: {userID:userID}
+				}).then(
+						function (value) {
+							if (value.data.code === meVue.SUCCESS){
+								// 成功获取到数据
+								var maps = value.data.object;
+								if (maps[meVue.COUNTERSIGN] != null)
+								{
+									meVue.toCountersignNumber = maps[meVue.COUNTERSIGN].length;
+								} else {
+									meVue.countersignIndex = "无需会签";
+								}
+								if (maps[meVue.FINALIZE] != null) {
+									meVue.toFinalizeNumber = maps[meVue.FINALIZE].length;
+								} else {
+									meVue.finalizeIndex = "无需定稿";
+								}
+								if (maps[meVue.EXAM] != null) {
+									meVue.toExamNumber = maps[meVue.EXAM].length;
+								} else {
+									meVue.examIndex = "无需审批";
+								}
+								if (maps[meVue.SIGN] != null)
+								{
+									meVue.toSignNumber = maps[meVue.SIGN].length;
+								} else {
+									meVue.signIndex = "无需签订";
+								}
+							}
+						}
+				).catch();
+			}
 
+		}
+	});
+</script>
 
 </body>
 </html>
