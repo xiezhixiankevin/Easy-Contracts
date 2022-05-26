@@ -10,6 +10,8 @@ import bjtu.pt.easycontracts.pojo.table.ContractProcessExample;
 import bjtu.pt.easycontracts.service.ContractService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.HashMap;
 import java.util.List;
 import static bjtu.pt.easycontracts.utils.Global.*;
 import java.util.Date;
@@ -275,7 +277,43 @@ public class ContractServiceImpl implements ContractService
 
     @Override
     public Map<Integer, Boolean> getNeedAllocationOfContract(int contractId) {
-        return null;
+        ContractProcessExample contractProcessExample=new ContractProcessExample();
+        contractProcessExample.createCriteria().andContractidEqualTo(contractId);
+        List <ContractProcess> contractProcessList = contractProcessMapper.selectByExample(contractProcessExample);
+        int flag1=0;int flag2=0;int flag3=0;int flag4=0;//对应四种类型
+        for(int i=0;i<contractProcessList.size();i++){
+            if(contractProcessList.get(i).getType()==COUNTERSIGN){
+                flag1=1;
+            }
+            if(contractProcessList.get(i).getType()==FINALIZE){
+                flag2=1;
+            }
+            if(contractProcessList.get(i).getType()==EXAM){
+                flag3=1;
+            }
+            if(contractProcessList.get(i).getType()==SIGN){
+                flag4=1;
+            }
+        }
+
+        Map<Integer, Boolean> getNeedAllocationOfContractMap=new HashMap<Integer, Boolean>();
+        if(flag1==0)
+            getNeedAllocationOfContractMap.put(COUNTERSIGN,true);
+        else
+            getNeedAllocationOfContractMap.put(COUNTERSIGN,false);
+        if(flag2==0)
+            getNeedAllocationOfContractMap.put(FINALIZE,true);
+        else
+            getNeedAllocationOfContractMap.put(FINALIZE,false);
+        if(flag3==0)
+            getNeedAllocationOfContractMap.put(EXAM,true);
+        else
+            getNeedAllocationOfContractMap.put(EXAM,false);
+        if(flag4==0)
+            getNeedAllocationOfContractMap.put(SIGN,true);
+        else
+            getNeedAllocationOfContractMap.put(SIGN,false);
+        return getNeedAllocationOfContractMap;
     }
 
     @Override
