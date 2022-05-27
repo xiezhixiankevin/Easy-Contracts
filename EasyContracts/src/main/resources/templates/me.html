@@ -264,8 +264,8 @@
 								// 权限判断
 								if (![[${session.nowUser.ifHasRight(8)}]] && ![[${session.nowUser.ifHasRight(9)}]] && ![[${session.nowUser.ifHasRight(10)}]] && ![[${session.nowUser.ifHasRight(11)}]])
 								{
-									meVue.toCountersignNumber = 0;
-									meVue.countersignIndex = "无权会签";
+									meVue.waitingForAssigningNumber = 0;
+									meVue.waitingIndex = "无权分配";
 								}
 								if (![[${session.nowUser.ifHasRight(2)}]])
 								{
