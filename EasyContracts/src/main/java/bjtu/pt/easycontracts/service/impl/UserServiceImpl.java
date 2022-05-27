@@ -47,6 +47,7 @@ public class UserServiceImpl implements UserService {
         {
             return null;
         }
+
         // 否则注册为新的用户
         userMapper.insert(user);
 
