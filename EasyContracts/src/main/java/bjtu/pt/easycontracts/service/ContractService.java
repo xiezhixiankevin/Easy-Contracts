@@ -23,6 +23,8 @@ public interface ContractService {
     */
     List<Contract> listContractSelective(Contract contract);//wj
 
+    Contract getContractById(int contractId);//xzx
+
     //添加合同，其实就是起草
     int addContract(Contract contract);//zxc
 
@@ -43,6 +45,8 @@ public interface ContractService {
 
     //获取到当前合同还需要分配哪些过程(会签，定稿...) //zxc
     Map<Integer,Boolean> getNeedAllocationOfContract(int contractId);
+
+    Contract getContractOfNeedAssign(int contractId);//xzx
 
     //返回当前数据库中所有等待分配的合同以及每个合同还需分配哪些权限 //fbf
     List<Contract> getNeedAllocationContracts();

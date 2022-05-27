@@ -1,6 +1,8 @@
 package bjtu.pt.easycontracts.controller;
 
+import bjtu.pt.easycontracts.pojo.table.Contract;
 import bjtu.pt.easycontracts.pojo.table.User;
+import bjtu.pt.easycontracts.service.ContractService;
 import bjtu.pt.easycontracts.service.CustomerService;
 import bjtu.pt.easycontracts.service.RightsService;
 import bjtu.pt.easycontracts.service.UserService;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import javax.servlet.http.HttpSession;
+import java.util.Map;
 
 /**
  * <Description> SkipController
@@ -33,6 +36,8 @@ public class SkipController {
     private UserService userService;
     @Autowired
     private RightsService rightsService;
+    @Autowired
+    private ContractService contractService;
 
     //跳转到注册页面，
     @GetMapping("/toRegister")
@@ -74,6 +79,17 @@ public class SkipController {
     @GetMapping("/toModifyUser")
     public String toModifyUser(){
         return "user/modify_users";
+    }
+
+    //toAssignContract
+    //跳转到给合同进行人员分配页面
+    @GetMapping("/toAssignContract/{contractId}")
+    public String toAssignContract(@PathVariable("contractId")Integer contractId,Model model){
+        Contract contract = contractService.getContractOfNeedAssign(contractId);
+        Map<Integer, User> userMap = userService.getUserListByRightsForAssignContract();
+        model.addAttribute("contract",contract);
+        model.addAttribute("userMap",userMap);
+        return "contract/assign_contract";
     }
 
     //跳转到查询需要分配合同页面

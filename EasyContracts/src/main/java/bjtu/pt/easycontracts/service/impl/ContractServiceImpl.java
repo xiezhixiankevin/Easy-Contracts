@@ -67,6 +67,11 @@ public class ContractServiceImpl implements ContractService
     }
 
     @Override
+    public Contract getContractById(int contractId) {
+        return contractMapper.selectByPrimaryKey(contractId);
+    }
+
+    @Override
     public int addContract(Contract contract) {
         contractMapper.insert(contract);
         return contract.getContractid();
@@ -362,6 +367,26 @@ public class ContractServiceImpl implements ContractService
         else
             getNeedAllocationOfContractMap.put(SIGN,false);
         return getNeedAllocationOfContractMap;
+    }
+
+    @Override
+    public Contract getContractOfNeedAssign(int contractId) {
+        Contract contract = getContractById(contractId);
+        Map<Integer, Boolean> map = getNeedAllocationOfContract(contractId);
+        if (!map.get(COUNTERSIGN)){
+            contract.setNeedAllocationProcess(COUNTERSIGN-1,false);
+        }
+        if (!map.get(FINALIZE)){
+            contract.setNeedAllocationProcess(FINALIZE-1,false);
+        }
+        if (!map.get(EXAM)){
+            contract.setNeedAllocationProcess(EXAM-1,false);
+        }
+        if (!map.get(SIGN)){
+            contract.setNeedAllocationProcess(SIGN-1,false);
+        }
+        setContract(contract);
+        return contract;
     }
 
     @Override
