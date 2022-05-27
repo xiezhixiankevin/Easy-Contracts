@@ -116,7 +116,7 @@
 									<option name="yy" value="qqqq" th:each="custmoer : ${customers}" th:value="${custmoer.getCustomerid()}" th:text="${custmoer.getCustomername()}">1111</option>
 								</select>
 							</div>
-							<div class="col">
+							<div th:if="${session.nowUser.ifHasRight(16)}" class="col">
 								<button class="form-control btn btn-success">你也可以新增客户</button>
 							</div>
 						</div>
