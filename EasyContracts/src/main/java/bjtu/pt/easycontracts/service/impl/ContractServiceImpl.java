@@ -4,6 +4,8 @@ import bjtu.pt.easycontracts.mapper.ContractMapper;
 import bjtu.pt.easycontracts.mapper.ContractProcessMapper;
 import bjtu.pt.easycontracts.mapper.CustomerMapper;
 import bjtu.pt.easycontracts.pojo.table.*;
+import bjtu.pt.easycontracts.service.EmailService;
+import bjtu.pt.easycontracts.service.UserService;
 
 import bjtu.pt.easycontracts.service.ContractService;
 import com.github.pagehelper.PageHelper;
@@ -13,6 +15,8 @@ import org.springframework.stereotype.Service;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+import java.util.HashMap;
+import java.util.List;
 import static bjtu.pt.easycontracts.utils.Global.*;
 
 import bjtu.pt.easycontracts.utils.Global;
@@ -26,6 +30,10 @@ public class ContractServiceImpl implements ContractService
     private ContractProcessMapper contractProcessMapper;
     @Autowired
     private CustomerMapper customerMapper;
+    @Autowired
+    private UserService userService;
+    @Autowired
+    private EmailService emailService;
 
     @Override
     public List<Contract> listContractSelective(Contract contract)
@@ -75,6 +83,13 @@ public class ContractServiceImpl implements ContractService
         deleteLine += contractMapper.deleteByExample(contractExample);
         deleteLine += contractProcessMapper.deleteByExample(contractProcessExample);
 
+        /* 将删除信息发送给所有该合同的操作员 */
+        List<User> usersAboutContract = userService.getUsersAboutContract(id);
+        for (User user : usersAboutContract)
+        {
+            emailService.sendSimpleMail(user.getEmail() , "Contract Delete" , "The contract with id " + id + "has been deleted, remember to check!");
+        }
+
         return deleteLine;
     }
 
@@ -82,6 +97,14 @@ public class ContractServiceImpl implements ContractService
     public int updateContract(int id, Contract newContract) {
         deleteContract(id);
         addContract(newContract);
+
+        /* 将更新信息发送给所有操作员 */
+        List<User> usersAboutContract = userService.getUsersAboutContract(id);
+        for (User user : usersAboutContract)
+        {
+            emailService.sendSimpleMail(user.getEmail() , "Contract Update" , "The contract with id " + id + "has been updated, remember to check!");
+        }
+
         return SUCCESS;
     }
 
@@ -161,6 +184,14 @@ public class ContractServiceImpl implements ContractService
             updateLine += contractMapper.updateByPrimaryKey(contract);
         }
 
+        /* 将该操作员已完成会签操作的信息发送给所有操作员 */
+        List<User> usersAboutContract = userService.getUsersAboutContract(contractId);
+        for (User user : usersAboutContract)
+        {
+            emailService.sendSimpleMail(user.getEmail() , "Contract Countersign" , "The operator with id " + userId + "has finished the countersign" +
+                    " on contract with id " + contractId + ", remember to check!");
+        }
+
         return updateLine;
     }
 
@@ -172,7 +203,7 @@ public class ContractServiceImpl implements ContractService
         //Date
         java.util.Date date=new java.util.Date();
         contractProcess.setTime(date);
-
+        contractProcess.setType(EXAM);
         contractProcess.setContractid(contractId);
         contractProcess.setContent(opinion);
         contractProcess.setUserid(userId);
@@ -208,7 +239,7 @@ public class ContractServiceImpl implements ContractService
         }else if(flag1==contractProcessList.size()){
             //将合同进程表里数据 status改成0
             ContractProcessExample contractProcessExample2=new ContractProcessExample();
-            contractProcessExample.createCriteria().andContractidEqualTo(contractId).andTypeEqualTo(EXAM);
+            contractProcessExample2.createCriteria().andContractidEqualTo(contractId).andTypeEqualTo(EXAM);
             List <ContractProcess> contractProcessList2 = contractProcessMapper.selectByExample(contractProcessExample2);
             for(int k=0;k<contractProcessList2.size();k++){
                 contractProcessList2.get(k).setState(NOT_COME);
@@ -223,6 +254,15 @@ public class ContractServiceImpl implements ContractService
             contractMapper.updateByExample(contract,contractExample);
             return SUCCESS;
         }
+
+        /* 将该操作员已完成审批操作的信息发送给所有操作员 */
+        List<User> usersAboutContract = userService.getUsersAboutContract(contractId);
+        for (User user : usersAboutContract)
+        {
+            emailService.sendSimpleMail(user.getEmail() , "Contract Examine" , "The operator with id " + userId + "has finished the examine" +
+                    " on contract with id " + contractId + ", remember to check!");
+        }
+
         return SUCCESS;
     }
 
@@ -272,12 +312,56 @@ public class ContractServiceImpl implements ContractService
             }
         }
 
+        /* 将该操作员已完成签订操作的信息发送给所有操作员 */
+        List<User> usersAboutContract = userService.getUsersAboutContract(contractId);
+        for (User user : usersAboutContract)
+        {
+            emailService.sendSimpleMail(user.getEmail() , "Contract Sign" , "The operator with id " + userId + "has finished the sign" +
+                    " on contract with id " + contractId + ", remember to check!");
+        }
+
         return updateLine;
     }
 
     @Override
     public Map<Integer, Boolean> getNeedAllocationOfContract(int contractId) {
-        return null;
+        ContractProcessExample contractProcessExample=new ContractProcessExample();
+        contractProcessExample.createCriteria().andContractidEqualTo(contractId);
+        List <ContractProcess> contractProcessList = contractProcessMapper.selectByExample(contractProcessExample);
+        int flag1=0;int flag2=0;int flag3=0;int flag4=0;//对应四种类型
+        for(int i=0;i<contractProcessList.size();i++){
+            if(contractProcessList.get(i).getType()==COUNTERSIGN){
+                flag1=1;
+            }
+            if(contractProcessList.get(i).getType()==FINALIZE){
+                flag2=1;
+            }
+            if(contractProcessList.get(i).getType()==EXAM){
+                flag3=1;
+            }
+            if(contractProcessList.get(i).getType()==SIGN){
+                flag4=1;
+            }
+        }
+
+        Map<Integer, Boolean> getNeedAllocationOfContractMap=new HashMap<Integer, Boolean>();
+        if(flag1==0)
+            getNeedAllocationOfContractMap.put(COUNTERSIGN,true);
+        else
+            getNeedAllocationOfContractMap.put(COUNTERSIGN,false);
+        if(flag2==0)
+            getNeedAllocationOfContractMap.put(FINALIZE,true);
+        else
+            getNeedAllocationOfContractMap.put(FINALIZE,false);
+        if(flag3==0)
+            getNeedAllocationOfContractMap.put(EXAM,true);
+        else
+            getNeedAllocationOfContractMap.put(EXAM,false);
+        if(flag4==0)
+            getNeedAllocationOfContractMap.put(SIGN,true);
+        else
+            getNeedAllocationOfContractMap.put(SIGN,false);
+        return getNeedAllocationOfContractMap;
     }
 
     @Override

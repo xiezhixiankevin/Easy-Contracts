@@ -27,6 +27,12 @@ public class ContractProcessServiceImpl implements ContractProcessService {
 
     @Override
     public Map<Integer, List<Contract>> listConTractUserNeedDeal(int userId) {
+        // 获得所有待分配的合同
+        List<Contract> contractsList0 = new ArrayList<>();
+        ContractExample waitingContracts = new ContractExample();
+        waitingContracts.createCriteria().andTypeEqualTo(WAITING);
+        contractsList0 = contractMapper.selectByExample(waitingContracts);
+
         List<Contract> contractsList1=new ArrayList<>();
         List<Contract> contractsList2=new ArrayList<>();
         List<Contract> contractsList3=new ArrayList<>();
@@ -52,6 +58,10 @@ public class ContractProcessServiceImpl implements ContractProcessService {
         }
 
         Map<Integer, List<Contract>> listConTractUserNeedDeal=new HashMap<Integer, List<Contract>>();
+        // FIXME: 这里的待分配和其他的不同
+        if(!contractsList0.isEmpty())
+            listConTractUserNeedDeal.put(0, contractsList0);
+        // FIXME: 如果要修改以下代码请告知，因为涉及到 me.html
         if(!contractsList1.isEmpty())
             listConTractUserNeedDeal.put(COUNTERSIGN,contractsList1);
         if(!contractsList2.isEmpty())
