@@ -28,7 +28,7 @@ public class Contract {
     private boolean ifBeginFirst = false;
     private boolean ifEndFirst = false;
 
-    private boolean[] needAllocationProcess = {true,true,true,true};//数组的0，1，2，3分别代表会签，定稿，审批，签订
+    private boolean[] needAllocationProcess = {true,false,true,true};//数组的0，1，2，3分别代表会签，定稿，审批，签订
 
     public String getBeginTimeStr() {
         return beginTimeStr;
