@@ -102,6 +102,15 @@
 						<div class="row">
 							<div class="col text-lg-center">
 								<h5 class="mg-md">
+									可分配
+
+								</h5>
+								<h1 class="mg-md h1-style">
+									{{waitingForAssigningNumber}}
+								</h1><a href="index.html" class="btn btn-lg btn-azure" v-bind:class="waitingForAssigningNumber==0?'disabled' : '' ">{{waitingIndex}}<br></a>
+							</div>
+							<div class="col text-lg-center">
+								<h5 class="mg-md">
 									剩余会签
 								</h5>
 								<h1 class="mg-md h1-style">
@@ -135,15 +144,7 @@
 									{{toSignNumber}}
 								</h1><a href="index.html" class="btn btn-lg btn-azure" v-bind:class="toSignNumber==0?'disabled' : '' ">{{signIndex}}<br></a>
 							</div>
-							<div class="col text-lg-center">
-								<h5 class="mg-md">
-									等待分配
 
-								</h5>
-								<h1 class="mg-md h1-style">
-									15
-								</h1><a href="index.html" class="btn btn-lg btn-azure" v-bind:class="toSignNumber==0?'disabled' : '' ">{{signIndex}}<br></a>
-							</div>
 						</div>
 					</div>
 					<h6 class="mg-md text-lg-center" th:if="${session.nowUser.ifHasRight(1)}">
@@ -196,15 +197,18 @@
 		data:{
 			// 常量
 			SUCCESS: 200,
+			WAIT: 0,
 			COUNTERSIGN: 1,
 			FINALIZE: 2,
 			EXAM: 3,
 			SIGN: 4,
+			waitingIndex: "前往分配",
 			countersignIndex: "前往会签",
 			finalizeIndex: '前往定稿',
 			examIndex: '前往审批',
 			signIndex: '前往签订',
 			// 变量
+			waitingForAssigningNumber: 0,
 			toCountersignNumber: 0,
 			toFinalizeNumber: 0,
 			toExamNumber: 0,
@@ -216,6 +220,7 @@
 		methods:{
 			getRightsList: function (){
 				var userID = [[${session.nowUser.userid}]];
+
 				axios({
 					method: "get",
 					url: "/contract/todeal",
@@ -223,8 +228,16 @@
 				}).then(
 						function (value) {
 							if (value.data.code === meVue.SUCCESS){
-								// 成功获取到数据
 								var maps = value.data.object;
+								// 成功获取到数据
+
+								if (maps[meVue.WAIT] != null)
+								{
+									meVue.waitingForAssigningNumber = maps[meVue.WAIT].length;
+								} else {
+									meVue.waitingIndex = "无需分配";
+								}
+
 								if (maps[meVue.COUNTERSIGN] != null)
 								{
 									meVue.toCountersignNumber = maps[meVue.COUNTERSIGN].length;
@@ -247,6 +260,36 @@
 								} else {
 									meVue.signIndex = "无需签订";
 								}
+
+								// 权限判断
+								if (![[${session.nowUser.ifHasRight(8)}]] && ![[${session.nowUser.ifHasRight(9)}]] && ![[${session.nowUser.ifHasRight(10)}]] && ![[${session.nowUser.ifHasRight(11)}]])
+								{
+									meVue.toCountersignNumber = 0;
+									meVue.countersignIndex = "无权会签";
+								}
+								if (![[${session.nowUser.ifHasRight(2)}]])
+								{
+									meVue.toFinalizeNumber = 0;
+									meVue.finalizeIndex = "无权定稿";
+								}
+								if (![[${session.nowUser.ifHasRight(5)}]])
+								{
+									meVue.toCountersignNumber = 0;
+									meVue.countersignIndex = "无权会签";
+								}
+								if (![[${session.nowUser.ifHasRight(6)}]])
+								{
+									meVue.toExamNumber = 0;
+									meVue.examIndex = "无权审批";
+								}
+								if (![[${session.nowUser.ifHasRight(7)}]])
+								{
+									meVue.toSignNumber = 0;
+									meVue.signIndex = "无权签订";
+								}
+
+							} else {
+								alert("服务器连接失败。请刷新重试。")
 							}
 						}
 				).catch();
