@@ -194,7 +194,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Map<Integer, User> getUserListByRightsForAssignContract() {
+    public Map<Integer, List<User>> getUserListByRightsForAssignContract() {
         return null;
     }
 
