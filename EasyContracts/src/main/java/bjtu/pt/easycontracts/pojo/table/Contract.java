@@ -25,6 +25,8 @@ public class Contract {
     private String beginTimeStr;
     private String endTimeStr;
     private String customerName;
+    private boolean ifBeginFirst = false;
+    private boolean ifEndFirst = false;
 
     private boolean[] needAllocationProcess = {true,true,true,true};//数组的0，1，2，3分别代表会签，定稿，审批，签订
 
@@ -130,5 +132,21 @@ public class Contract {
 
     public void setNeedAllocationProcess(int index,boolean ifNeed) {
         needAllocationProcess[index] = ifNeed;
+    }
+
+    public boolean isIfEndFirst() {
+        return ifEndFirst;
+    }
+
+    public void setIfEndFirst(boolean ifEndFirst) {
+        this.ifEndFirst = ifEndFirst;
+    }
+
+    public boolean isIfBeginFirst() {
+        return ifBeginFirst;
+    }
+
+    public void setIfBeginFirst(boolean ifBeginFirst) {
+        this.ifBeginFirst = ifBeginFirst;
     }
 }

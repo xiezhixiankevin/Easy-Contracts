@@ -76,6 +76,13 @@ public class SkipController {
         return "user/modify_users";
     }
 
+    //跳转到查询需要分配合同页面
+    @GetMapping("/toselectCNeedAssign")
+    public String toselectCNeedAssign(Model model){
+        model.addAttribute("customers",customerService.listCustomerSelective(null));
+        return "contract/select_contract_needAllocation";
+    }
+
     //跳转到权限分配页面
     @GetMapping("/toRights/{username}")
     public String toRights(@PathVariable("username")String username, Model model,HttpSession session){

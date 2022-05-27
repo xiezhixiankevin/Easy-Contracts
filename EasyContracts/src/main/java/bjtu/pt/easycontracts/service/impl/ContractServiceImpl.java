@@ -2,18 +2,18 @@ package bjtu.pt.easycontracts.service.impl;
 
 import bjtu.pt.easycontracts.mapper.ContractMapper;
 import bjtu.pt.easycontracts.mapper.ContractProcessMapper;
-import bjtu.pt.easycontracts.pojo.table.Contract;
-import bjtu.pt.easycontracts.pojo.table.ContractExample;
-import bjtu.pt.easycontracts.pojo.table.ContractProcess;
-import bjtu.pt.easycontracts.pojo.table.ContractProcessExample;
+import bjtu.pt.easycontracts.mapper.CustomerMapper;
+import bjtu.pt.easycontracts.pojo.table.*;
 
 import bjtu.pt.easycontracts.service.ContractService;
+import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import java.util.List;
+
+import java.text.SimpleDateFormat;
+import java.util.*;
+
 import static bjtu.pt.easycontracts.utils.Global.*;
-import java.util.Date;
-import java.util.Map;
 
 import bjtu.pt.easycontracts.utils.Global;
 
@@ -24,6 +24,8 @@ public class ContractServiceImpl implements ContractService
     private ContractMapper contractMapper;
     @Autowired
     private ContractProcessMapper contractProcessMapper;
+    @Autowired
+    private CustomerMapper customerMapper;
 
     @Override
     public List<Contract> listContractSelective(Contract contract)
@@ -289,6 +291,7 @@ public class ContractServiceImpl implements ContractService
             // 第二步  获取对应合同的权限分配表(contract process)
             ContractProcessExample contractProcessExample = new ContractProcessExample();
             Contract contract = contractList.get(i);
+            setContract(contract);
             contractProcessExample.createCriteria().andContractidEqualTo(contract.getContractid());
             List<ContractProcess> contractProcessList = contractProcessMapper.selectByExample(contractProcessExample);
 
@@ -298,5 +301,66 @@ public class ContractServiceImpl implements ContractService
             }
         }
         return contractList;
+    }
+
+    @Override
+    public List<Contract> getNeedAllocationContracts(Contract _contract,Integer pn) {
+        // 第一步--找出所有未分配所有权限的合同(即contractType = WAITING)
+        ContractExample contractExample = new ContractExample();
+        ContractExample.Criteria criteria = contractExample.createCriteria();
+        criteria.andTypeEqualTo(WAITING);
+        if (_contract.getContractname()!=null){
+            criteria.andContractnameLike("%"+_contract.getContractname()+"%");
+        }
+        if (_contract.getContent()!=null){
+            criteria.andContractnameLike("%"+_contract.getContent()+"%");
+        }
+        if (_contract.getCustomerid()!=null){
+            criteria.andCustomeridEqualTo(_contract.getCustomerid());
+        }
+        PageHelper.startPage(pn,5); //每页显示5个数据
+        List<Contract> contractList = contractMapper.selectByExample(contractExample);
+
+        for(int i=0;i<contractList.size();i++){
+            // 第二步  获取对应合同的权限分配表(contract process)
+            ContractProcessExample contractProcessExample = new ContractProcessExample();
+            Contract contract = contractList.get(i);
+            setContract(contract);
+            contractProcessExample.createCriteria().andContractidEqualTo(contract.getContractid());
+            List<ContractProcess> contractProcessList = contractProcessMapper.selectByExample(contractProcessExample);
+
+            for(int j=0;j<contractProcessList.size();j++){
+                // 根据查到的权限刷新合同需要分配的权限
+                contract.setNeedAllocationProcess(contractProcessList.get(j).getType()-1,false);
+            }
+        }
+        if (_contract.isIfBeginFirst()){
+            contractList.sort(new Comparator<Contract>() {
+                @Override
+                public int compare(Contract o1, Contract o2) {
+                    return o1.getBegintime().compareTo(o2.getBegintime());
+                }
+            });
+        }
+        if (_contract.isIfEndFirst()){
+            contractList.sort(new Comparator<Contract>() {
+                @Override
+                public int compare(Contract o1, Contract o2) {
+                    return o1.getEndtime().compareTo(o2.getEndtime());
+                }
+            });
+        }
+        return contractList;
+    }
+
+    //此方法用来给Contract设置一些初始化的信息，如把Date转成字符串
+    private void setContract(Contract contract){
+        //设置时间为字符串
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        contract.setBeginTimeStr(simpleDateFormat.format(contract.getBegintime()));
+        contract.setEndTimeStr(simpleDateFormat.format(contract.getEndtime()));
+        //设置客户名
+        Customer customer = customerMapper.selectByPrimaryKey(contract.getCustomerid());
+        contract.setCustomerName(customer.getCustomername());
     }
 }

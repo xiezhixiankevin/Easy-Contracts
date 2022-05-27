@@ -46,4 +46,7 @@ public interface ContractService {
 
     //返回当前数据库中所有等待分配的合同以及每个合同还需分配哪些权限 //fbf
     List<Contract> getNeedAllocationContracts();
+
+    //条件返回当前数据库中所有等待分配的合同以及每个合同还需分配哪些权限 //xzx
+    List<Contract> getNeedAllocationContracts(Contract contract,Integer pn);
 }

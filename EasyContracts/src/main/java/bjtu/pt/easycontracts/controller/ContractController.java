@@ -8,6 +8,7 @@ import bjtu.pt.easycontracts.service.ContractFileService;
 import bjtu.pt.easycontracts.utils.Global;
 import bjtu.pt.easycontracts.utils.ReturnObject;
 import bjtu.pt.easycontracts.utils.TimeUtil;
+import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -45,15 +46,25 @@ public class ContractController {
     @Autowired
     private ContractFileService contractFileService;
     /*
-    * 返回满足条件的合同list，以json的格式
+    * 返回满足条件的合同list，
     * */
-    @GetMapping("/list")
+    @GetMapping("/list/{pn}")
     @ResponseBody
-    public ReturnObject<List<Contract>> listContracts(@RequestParam(value = "title",required = false)String title,
-                                                                   @RequestParam(value = "id",required = false)String id,
-                                                                   @RequestParam(value = "status",required = false)String status){
+    public ReturnObject<PageInfo> listContracts(Contract contract, @PathVariable("pn")Integer pn){
 
         return null;
+    }
+
+    /*
+     * 返回满足条件的合同list，以json的格式
+     * */
+    @GetMapping("/list_needAssign/{pn}")
+    @ResponseBody
+    public ReturnObject<PageInfo> listContractsNeedAssign(Contract contract, @PathVariable("pn")Integer pn){
+        List<Contract> contractList = contractService.getNeedAllocationContracts(contract, pn);
+        PageInfo pageInfo = new PageInfo(contractList,5);
+        ReturnObject<PageInfo> result = new ReturnObject<>(Global.SUCCESS,pageInfo);
+        return result;
     }
 
     @GetMapping("/todeal")
