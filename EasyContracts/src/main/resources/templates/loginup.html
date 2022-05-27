@@ -69,12 +69,18 @@
 							用户名<br>
 						</label>
 						<input id="name_38623" name="username" class="form-control" required data-validation-required-message="请输入用户名。" placeholder="请输入用户名……" />
+                        <div style="color:red">
+                            <label v-show="usern">用户名格式不正确！长度：3-8，不含特殊字符</label>
+                        </div>
 					</div>
 					<div class="form-group">
 						<label>
 							邮箱<br>
 						</label>
 						<input id="email_38623" name="email" class="form-control" type="email" data-error-validation-msg="邮箱格式不正确。" required placeholder="请输入邮箱……" data-validation-required-message="请输入邮箱来注册。" />
+						<div style="color:red">
+							<label v-show="hide_error">邮箱格式不正确</label>
+						</div>
 					</div>
 					<div class="">
 						<label>
@@ -100,6 +106,9 @@
 							密码<br>
 						</label>
 						<input name="password" class="form-control" placeholder="请输入密码……" type="password" id="input_password" />
+                        <div style="color:red">
+                            <label v-show="userp">密码格式错误！长度：6-20</label>
+                        </div>
 					</div>
 					<div class="form-group">
 						<label>
@@ -174,6 +183,13 @@
 			CODE_ERROR:201,
 			NAME_EXIST:202
 		},
+        data () {
+            return {
+                hide_error: false,
+                usern:false,
+                userp:false
+            }
+        },
 		//定义方法
 		methods: {
 			//1.注册方法
@@ -183,46 +199,71 @@
 				var code = $("#code_38623").val();
 				var password = $("#input_password").val();
 				var repeatPassword = $("#input_repeatPassword").val();
-				if(password!==repeatPassword){
-					alert("2次密码不一致!");
-					return;
-				}
-				axios({
-					method: "post",
-					url: "user/register",
-					params :{username,email,code,password}
-				})
-						.then(function (value) {
+                var REGEX_NAME=/[a-zA-Z]{3,8} */;
+                this.usern = false;
+                this.userp=false;
+                if(!REGEX_NAME.test(username)){
+                    this.usern = true;
+                }
+                if(password.length<6){
+                    this.userp=true;
+                }
+                if(password.length>20){
+                    this.userp=true;
+                }
+                if(password!==repeatPassword){
+                    alert("2次密码不一致!");
+                    return;
+                }
+                if(!usern){
+                    if(!userp){
+                        axios({
+                            method: "post",
+                            url: "user/register",
+                            params :{username,email,code,password}
+                        })
+                            .then(function (value) {
 
-							if(value.data.code === registerForm.OK){
-								alert("注册成功！即将跳转到登录页面");
-								//注册成功跳转到登录页面
-								window.location.href = registerForm.jump_url;
-							}else if(value.data.code === registerForm.CODE_ERROR){
-								alert("验证码错误");
-							}else if(value.data.code === registerForm.NAME_EXIST){
-								alert("用户名已存在");
-							}
-						})
-						.catch();
+                                if(value.data.code === registerForm.OK){
+                                    alert("注册成功！即将跳转到登录页面");
+                                    //注册成功跳转到登录页面
+                                    window.location.href = registerForm.jump_url;
+                                }else if(value.data.code === registerForm.CODE_ERROR){
+                                    alert("验证码错误");
+                                }else if(value.data.code === registerForm.NAME_EXIST){
+                                    alert("用户名已存在");
+                                }
+                            })
+                            .catch();
+                    }
+                }
 			},
 			//2.发送验证码方法
 			sendCode:function (){
+			    var REGEX=/[1-9][0-9]{7,11}@[a-zA-Z]{2,4}.com/;
 				var email = $("#email_38623").val();
 				var type = "1";
-				axios({
-					method: "get",
-					url: "user/register/sendCode",
-					params: {email,type}
-				})
-						.then(function (value) {
-							if(value.data === registerForm.OK) {
-								alert("发送成功请查收邮件！");
-							}else{
-								alert("发送次数已达上限，请间隔一小时重试或者换一个邮箱！");
-							}
-						})
-						.catch();
+				this.hide_error = false;
+				if(!REGEX.test(email)){
+				    this.hide_error = true;
+                }
+                else {
+                    axios({
+                        method: "get",
+                        url: "user/register/sendCode",
+                        params: {email,type}
+                    })
+                        .then(function (value) {
+                            if(value.data === registerForm.OK) {
+                                alert("发送成功请查收邮件！");
+                            }
+                            else{
+                                alert("发送次数已达上限，请间隔一小时重试或者换一个邮箱！");
+                            }
+                        })
+                        .catch();
+                }
+
 			}
 		}
 	});
