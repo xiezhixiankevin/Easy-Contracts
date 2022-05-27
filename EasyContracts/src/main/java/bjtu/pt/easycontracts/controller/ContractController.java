@@ -1,9 +1,6 @@
 package bjtu.pt.easycontracts.controller;
 
-import bjtu.pt.easycontracts.pojo.table.Contract;
-import bjtu.pt.easycontracts.pojo.table.ContractAttachment;
-import bjtu.pt.easycontracts.pojo.table.ContractExample;
-import bjtu.pt.easycontracts.pojo.table.User;
+import bjtu.pt.easycontracts.pojo.table.*;
 import bjtu.pt.easycontracts.service.ContractFileService;
 import bjtu.pt.easycontracts.utils.Global;
 import bjtu.pt.easycontracts.utils.ReturnObject;
@@ -96,7 +93,14 @@ public class ContractController {
         contractAttachment.setUploadtime(new Date());
         contractAttachment.setType("普通文件");
         contractFileService.addContractFile(contractAttachment,upload);
-
+        //3.设置定稿人为起草人
+        ContractProcess contractProcess = new ContractProcess();
+        contractProcess.setContractid(id);
+        contractProcess.setTime(new Date());
+        contractProcess.setType(FINALIZE);
+        contractProcess.setState(NOT_COME);
+        contractProcess.setUserid(user.getUserid());
+        contractProcessService.insertProcess(contractProcess);
 
         return "info/success";
     }
