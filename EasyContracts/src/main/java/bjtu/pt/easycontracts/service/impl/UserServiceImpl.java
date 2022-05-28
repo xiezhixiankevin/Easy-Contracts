@@ -1,13 +1,12 @@
 package bjtu.pt.easycontracts.service.impl;
 
 import bjtu.pt.easycontracts.mapper.ContractProcessMapper;
+import bjtu.pt.easycontracts.mapper.RoleRightMapper;
 import bjtu.pt.easycontracts.mapper.UserMapper;
-import bjtu.pt.easycontracts.pojo.table.ContractProcess;
-import bjtu.pt.easycontracts.pojo.table.ContractProcessExample;
-import bjtu.pt.easycontracts.pojo.table.User;
-import bjtu.pt.easycontracts.pojo.table.UserExample;
+import bjtu.pt.easycontracts.pojo.table.*;
 import bjtu.pt.easycontracts.service.EmailService;
 import bjtu.pt.easycontracts.service.UserService;
+import bjtu.pt.easycontracts.utils.Global;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,6 +35,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private EmailService emailService;
+
+    @Autowired
+    private RoleRightMapper roleRightMapper;
 
     @Override
     public User registerUser(User user) {
@@ -191,6 +193,62 @@ public class UserServiceImpl implements UserService {
         }
 
         return users;
+    }
+
+    @Override
+    public Map<Integer,List<User>> getUserListByRightsForAssignContract()
+    {
+        // 会签
+        List<User> countersignUsers = new ArrayList<>();
+        // 查询符合条件的 RoleRight
+        List<RoleRight> roleRights = new ArrayList<>();
+        RoleRightExample example = new RoleRightExample();
+        example.createCriteria().andRightidEqualTo(Global.PERMISSION_COUNTERSIGN_CONTRACT);
+        roleRights = roleRightMapper.selectByExample(example);
+        for (RoleRight eachRoleRight: roleRights)
+        {
+            // 通过 RoleRight 获得 User
+            User temp = userMapper.selectByPrimaryKey(eachRoleRight.getUserid());
+            countersignUsers.add(temp);
+        }
+
+        // 审批
+        List<User> examUsers = new ArrayList<>();
+        roleRights = new ArrayList<>();
+        example = new RoleRightExample();
+        example.createCriteria().andRightidEqualTo(Global.PERMISSION_APPROVE_CONTRACT);
+        roleRights = roleRightMapper.selectByExample(example);
+        for (RoleRight eachRoleRight: roleRights)
+        {
+            // 通过 RoleRight 获得 User
+            User temp = userMapper.selectByPrimaryKey(eachRoleRight.getUserid());
+            examUsers.add(temp);
+        }
+
+        // 签订
+        List<User> signUsers = new ArrayList<>();
+        roleRights = new ArrayList<>();
+        example = new RoleRightExample();
+        example.createCriteria().andRightidEqualTo(Global.PERMISSION_SIGN_CONTRACT);
+        roleRights = roleRightMapper.selectByExample(example);
+        for (RoleRight eachRoleRight: roleRights)
+        {
+            // 通过 RoleRight 获得 User
+            User temp = userMapper.selectByPrimaryKey(eachRoleRight.getUserid());
+            signUsers.add(temp);
+        }
+
+        // Map<Integer, List<Contract>> listConTractUserNeedDeal=new HashMap<Integer, List<Contract>>();
+        Map<Integer, List<User>> listUsers = new HashMap<>();
+
+        listUsers.put(Global.PERMISSION_COUNTERSIGN_CONTRACT, countersignUsers);
+        listUsers.put(Global.PERMISSION_APPROVE_CONTRACT, examUsers);
+        listUsers.put(Global.PERMISSION_SIGN_CONTRACT, signUsers);
+
+
+        return listUsers;
+
+
     }
 
 }

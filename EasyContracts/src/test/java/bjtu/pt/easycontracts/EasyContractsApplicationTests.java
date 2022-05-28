@@ -3,26 +3,34 @@ package bjtu.pt.easycontracts;
 
 
 
-
+import bjtu.pt.easycontracts.service.UserService;
+import bjtu.pt.easycontracts.pojo.table.User;
+import bjtu.pt.easycontracts.utils.Global;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.List;
 
-import static bjtu.pt.easycontracts.utils.Global.WAITING;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import static bjtu.pt.easycontracts.utils.Global.*;
 
 
 @SpringBootTest
 class EasyContractsApplicationTests {
-
+    @Autowired
+    UserService userService;
 
     @Test
     void contextLoads() {
-        String regex = "[1-9]{8,12}@[a-zA-Z]{2,4}.com";
-        String sss = "123456789145@BJtU.com";
-        System.out.println("---------------------");
-        System.out.println(sss.matches(regex));
-        System.out.println("---------------------");
+
+        Map<Integer, List<User>> temp = new HashMap<>();
+        temp = userService.getUserListByRightsForAssignContract();
+        System.out.println("_________TEST____________________________");
+        System.out.println(temp.get(PERMISSION_SIGN_CONTRACT).size());
+        System.out.println("_________TEST____________________________");
+       
     }
 }
