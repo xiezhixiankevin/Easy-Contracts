@@ -196,8 +196,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Map<Integer,List<User>> getUserListByRightsForAssignContract()
-    {
+    public Map<Integer,List<User>> getUserListByRightsForAssignContract() {
         // 会签
         List<User> countersignUsers = new ArrayList<>();
         // 查询符合条件的 RoleRight
@@ -205,8 +204,7 @@ public class UserServiceImpl implements UserService {
         RoleRightExample example = new RoleRightExample();
         example.createCriteria().andRightidEqualTo(Global.PERMISSION_COUNTERSIGN_CONTRACT);
         roleRights = roleRightMapper.selectByExample(example);
-        for (RoleRight eachRoleRight: roleRights)
-        {
+        for (RoleRight eachRoleRight : roleRights) {
             // 通过 RoleRight 获得 User
             User temp = userMapper.selectByPrimaryKey(eachRoleRight.getUserid());
             countersignUsers.add(temp);
@@ -218,8 +216,7 @@ public class UserServiceImpl implements UserService {
         example = new RoleRightExample();
         example.createCriteria().andRightidEqualTo(Global.PERMISSION_APPROVE_CONTRACT);
         roleRights = roleRightMapper.selectByExample(example);
-        for (RoleRight eachRoleRight: roleRights)
-        {
+        for (RoleRight eachRoleRight : roleRights) {
             // 通过 RoleRight 获得 User
             User temp = userMapper.selectByPrimaryKey(eachRoleRight.getUserid());
             examUsers.add(temp);
@@ -231,8 +228,7 @@ public class UserServiceImpl implements UserService {
         example = new RoleRightExample();
         example.createCriteria().andRightidEqualTo(Global.PERMISSION_SIGN_CONTRACT);
         roleRights = roleRightMapper.selectByExample(example);
-        for (RoleRight eachRoleRight: roleRights)
-        {
+        for (RoleRight eachRoleRight : roleRights) {
             // 通过 RoleRight 获得 User
             User temp = userMapper.selectByPrimaryKey(eachRoleRight.getUserid());
             signUsers.add(temp);
@@ -247,8 +243,5 @@ public class UserServiceImpl implements UserService {
 
 
         return listUsers;
-
-
     }
-
 }

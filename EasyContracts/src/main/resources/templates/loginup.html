@@ -115,6 +115,9 @@
 							请重复输入密码<br>
 						</label>
 						<input class="form-control" placeholder="请输入密码……" type="password" id="input_repeatPassword" />
+						<div style="color:red">
+							<label v-show="usert">两次密码不一致</label>
+						</div>
 					</div>
 					<div class="form-check">
 						<input class="form-check-input" type="checkbox" id="optin_38623" name="optin_38623" data-validation-minchecked-minchecked="1" data-validation-minchecked-message="必须同意才能继续使用。" checked="checked" />
@@ -187,7 +190,8 @@
             return {
                 hide_error: false,
                 usern:false,
-                userp:false
+                userp:false,
+				usert:false
             }
         },
 		//定义方法
@@ -212,29 +216,30 @@
                     this.userp=true;
                 }
                 if(password!==repeatPassword){
-                    alert("2次密码不一致!");
-                    return;
+                    this.usert=true;
                 }
                 if(!usern){
                     if(!userp){
-                        axios({
-                            method: "post",
-                            url: "user/register",
-                            params :{username,email,code,password}
-                        })
-                            .then(function (value) {
-
-                                if(value.data.code === registerForm.OK){
-                                    alert("注册成功！即将跳转到登录页面");
-                                    //注册成功跳转到登录页面
-                                    window.location.href = registerForm.jump_url;
-                                }else if(value.data.code === registerForm.CODE_ERROR){
-                                    alert("验证码错误");
-                                }else if(value.data.code === registerForm.NAME_EXIST){
-                                    alert("用户名已存在");
-                                }
+                        if(!usert){
+                            axios({
+                                method: "post",
+                                url: "user/register",
+                                params :{username,email,code,password}
                             })
-                            .catch();
+                                .then(function (value) {
+
+                                    if(value.data.code === registerForm.OK){
+                                        alert("注册成功！即将跳转到登录页面");
+                                        //注册成功跳转到登录页面
+                                        window.location.href = registerForm.jump_url;
+                                    }else if(value.data.code === registerForm.CODE_ERROR){
+                                        alert("验证码错误");
+                                    }else if(value.data.code === registerForm.NAME_EXIST){
+                                        alert("用户名已存在");
+                                    }
+                                })
+                                .catch();
+						}
                     }
                 }
 			},
