@@ -119,7 +119,7 @@
 									<br>
 								</div>
 								<div class="">
-									<select th:if="${session.nowUser.ifHasRight(8)}" class="form-control selectpicker" multiple data-live-search="true"  data-actions-box="true"  >
+									<select id="counterSignSelect" th:if="${session.nowUser.ifHasRight(8)}" class="form-control selectpicker" multiple data-live-search="true"  data-actions-box="true"  >
 										<option v-for="user in list_counterSign" :value="user.userid">{{user.username}}</option>
 									</select>
 									<select th:if="${!session.nowUser.ifHasRight(8)}" disabled class="form-control selectpicker" multiple data-live-search="true"  data-actions-box="true"  >
@@ -152,7 +152,7 @@
 
 						</div>
 						<div class="form-group">
-							<select th:if="${session.nowUser.ifHasRight(9)}" class="form-control selectpicker" multiple data-live-search="true"  data-actions-box="true"  >
+							<select id="examSelect" th:if="${session.nowUser.ifHasRight(9)}" class="form-control selectpicker" multiple data-live-search="true"  data-actions-box="true"  >
 								<option v-for="user in list_exam" :value="user.userid">{{user.username}}</option>
 							</select>
 							<select th:if="${!session.nowUser.ifHasRight(9)}" disabled class="form-control selectpicker" multiple data-live-search="true"  data-actions-box="true"  >
@@ -183,7 +183,7 @@
 
 						</div>
 						<div class="form-group">
-							<select th:if="${session.nowUser.ifHasRight(10)}" class="form-control selectpicker" multiple data-live-search="true"  data-actions-box="true"  >
+							<select id="signSelect" th:if="${session.nowUser.ifHasRight(10)}" class="form-control selectpicker" multiple data-live-search="true"  data-actions-box="true"  >
 								<option v-for="user in list_sign" :value="user.userid">{{user.username}}</option>
 							</select>
 							<select th:if="${!session.nowUser.ifHasRight(10)}" disabled class="form-control selectpicker" multiple data-live-search="true"  data-actions-box="true"  >
@@ -269,6 +269,34 @@
 					globalVue.list_exam = map[3];
 					globalVue.list_sign = map[4];
 				});
+			},
+			assignUser:function () {
+				var userMap = new Map();
+				//获取各个流程分配的人员
+				var counterSignUser = [];
+				var examUser = [];
+				var signUser = [];
+				//会签
+				var var1 = document.getElementById("counterSignSelect");
+				for(i = 0;i<var1.length;i++){
+					if(var1.options[i].selected){
+						counterSignUser.push(var1.options[i].value);
+					}
+				}
+				//审批
+				var var2 = document.getElementById("examSelect");
+				for(i = 0;i<var2.length;i++){
+					if(var2.options[i].selected){
+						examUser.push(var2.options[i].value);
+					}
+				}
+				//签订
+				var var3 = document.getElementById("signSelect");
+				for(i = 0;i<var3.length;i++){
+					if(var3.options[i].selected){
+						signUser.push(var3.options[i].value);
+					}
+				}
 			}
 		},
 		mounted:function () {

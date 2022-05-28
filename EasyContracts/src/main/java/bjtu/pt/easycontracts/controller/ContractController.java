@@ -64,6 +64,7 @@ public class ContractController {
         return result;
     }
 
+    //tome界面展示当前任务
     @GetMapping("/todeal")
     @ResponseBody
     public ReturnObject<Map<Integer, List<Contract>>> listConTractToDeal(Integer userID){
@@ -156,5 +157,14 @@ public class ContractController {
         return returnObject;
     }
 
+    /*
+    * 为合同分配人员
+    * */
+    @PostMapping("/assignUser")
+    @ResponseBody
+    public String assignUser(@RequestParam("contractId")Integer contractId,
+                             @RequestBody Map<Integer,List<Integer>> userMap){
+        return null;
+    }
 
 }
