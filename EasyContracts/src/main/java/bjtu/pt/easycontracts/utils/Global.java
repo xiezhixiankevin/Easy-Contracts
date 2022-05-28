@@ -51,11 +51,11 @@ public class Global {
     public static final int SIGNING = 5; // 正在签订
     public static final int FINISH = 6; // 完成
 
-    /* contract_process表状态定义 */
-    public static final int COUNTERSIGN = 1; // 会签状态
-    public static final int FINALIZE = 2; // 定稿状态
-    public static final int EXAM = 3; // 审批状态
-    public static final int SIGN = 4; // 签订状态
+    /* contract_process表类型type定义 */
+    public static final int COUNTERSIGN = 1; // 会签
+    public static final int FINALIZE = 2; // 定稿
+    public static final int EXAM = 3; // 审批
+    public static final int SIGN = 4; // 签订
 
     /* contract_process表对应state的当前阶段定义 */
     public static final int NOT_COME = 0; // 未到此状态

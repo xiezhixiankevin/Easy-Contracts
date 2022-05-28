@@ -113,4 +113,75 @@ public class ContractProcessServiceImpl implements ContractProcessService {
             return FAIL;
         }
     }
+
+    @Override
+    public int assignUsers(Integer contractId,Map<Integer, List<Integer>> users) {
+        //分配会签
+        List<Integer> userList = users.get(PERMISSION_COUNTERSIGN_CONTRACT);
+        if (!userList.isEmpty()){
+            for (Integer userId : userList) {
+                ContractProcess contractProcess = new ContractProcess(contractId,userId,COUNTERSIGN);
+                insertProcess(contractProcess);
+            }
+        }
+        //分配审批
+        userList = users.get(PERMISSION_APPROVE_CONTRACT);
+        if (!userList.isEmpty()){
+            for (Integer userId : userList) {
+                ContractProcess contractProcess = new ContractProcess(contractId,userId,EXAM);
+                insertProcess(contractProcess);
+            }
+        }
+        //分配签订
+        userList = users.get(PERMISSION_SIGN_CONTRACT);
+        if (!userList.isEmpty()){
+            for (Integer userId : userList) {
+                ContractProcess contractProcess = new ContractProcess(contractId,userId,SIGN);
+                insertProcess(contractProcess);
+            }
+        }
+        //分配后检查是否合同已经每一个过程都有人了，是的话修改合同状态为会签
+        if (ifAssignAll(contractId)){
+            Contract contract = new Contract();
+            contract.setType(COUNTERSIGNING);
+            ContractExample contractExample = new ContractExample();
+            contractExample.createCriteria().andContractidEqualTo(contractId);
+            contractMapper.updateByExampleSelective(contract,contractExample);
+        }
+        return SUCCESS;
+    }
+
+    @Override
+    public boolean ifAssignAll(Integer contractId) {
+        ContractProcessExample contractProcessExample = new ContractProcessExample();
+        contractProcessExample.createCriteria().andContractidEqualTo(contractId);
+        List<ContractProcess> contractProcesses = contractProcessMapper.selectByExample(contractProcessExample);
+        boolean[] flag = {false,false,false,false};
+        for (ContractProcess contractProcess : contractProcesses) {
+            if (contractProcess.getType()==COUNTERSIGN){
+                flag[COUNTERSIGN-1] = true;
+            }
+            if (contractProcess.getType()==FINALIZE){
+                flag[FINALIZE-1] = true;
+            }
+            if (contractProcess.getType()==EXAM){
+                flag[EXAM-1] = true;
+            }
+            if (contractProcess.getType()==SIGN){
+                flag[SIGN-1] = true;
+            }
+            int times = 0;
+            for (boolean b : flag) {
+                if (b){
+                    times++;
+                }
+            }
+            if (times == 4){
+                return true;
+            }
+        }
+        return false;
+    }
+
+
 }

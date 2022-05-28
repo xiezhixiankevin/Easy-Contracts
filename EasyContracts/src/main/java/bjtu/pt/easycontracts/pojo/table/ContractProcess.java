@@ -1,6 +1,7 @@
 package bjtu.pt.easycontracts.pojo.table;
 
-import org.springframework.stereotype.Repository;
+
+import bjtu.pt.easycontracts.utils.Global;
 
 import java.util.Date;
 
@@ -11,11 +12,27 @@ public class ContractProcess {
 
     private Integer type;
 
-    private Integer state;
+    private Integer state = Global.NOT_COME;
 
-    private Date time;
+    private Date time = new Date();
 
-    private String content;
+    private String content = "";
+
+    public ContractProcess() {
+    }
+
+    public ContractProcess(Integer contractid, Integer userid, Integer type, Integer state) {
+        this.contractid = contractid;
+        this.userid = userid;
+        this.type = type;
+        this.state = state;
+    }
+
+    public ContractProcess(Integer contractid, Integer userid, Integer type) {
+        this.contractid = contractid;
+        this.userid = userid;
+        this.type = type;
+    }
 
     public Integer getContractid() {
         return contractid;

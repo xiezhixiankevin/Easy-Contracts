@@ -50,5 +50,5 @@ public interface UserService {
     List<User> getUsersAboutContract(int contractId);
 
     //将数据库中的用户按权限进行返回()//只需要会签，审批，签订
-    Map<Integer,List<User>> getUserListByRightsForAssignContract();//hcb
+    Map<Integer,List<User>> getUserListByRightsForAssignContract();
 }

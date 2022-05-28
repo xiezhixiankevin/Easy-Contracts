@@ -164,7 +164,8 @@ public class ContractController {
     @ResponseBody
     public String assignUser(@RequestParam("contractId")Integer contractId,
                              @RequestBody Map<Integer,List<Integer>> userMap){
-        return null;
+
+        return String.valueOf(contractProcessService.assignUsers(contractId,userMap));
     }
 
 }

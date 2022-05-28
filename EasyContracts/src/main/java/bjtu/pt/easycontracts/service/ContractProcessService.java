@@ -32,4 +32,10 @@ public interface ContractProcessService {
 
     // 添加人员
     int addUser(Integer contractid,Integer userid,Integer type);
+
+    //一次性为合同分配多个人员
+    int assignUsers(Integer contractId,Map<Integer,List<Integer>> users);//xzx
+
+    //查看某一合同是否已全部分配
+    boolean ifAssignAll(Integer contractId);//xzx
 }

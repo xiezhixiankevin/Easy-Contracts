@@ -120,7 +120,7 @@
 								</div>
 								<div class="">
 									<select id="counterSignSelect" th:if="${session.nowUser.ifHasRight(8)}" class="form-control selectpicker" multiple data-live-search="true"  data-actions-box="true"  >
-										<option v-for="user in list_counterSign" :value="user.userid">{{user.username}}</option>
+<!--										<option v-for="user in list_counterSign" :value="user.userid">{{user.username}}</option>-->
 									</select>
 									<select th:if="${!session.nowUser.ifHasRight(8)}" disabled class="form-control selectpicker" multiple data-live-search="true"  data-actions-box="true"  >
 									</select>
@@ -153,7 +153,7 @@
 						</div>
 						<div class="form-group">
 							<select id="examSelect" th:if="${session.nowUser.ifHasRight(9)}" class="form-control selectpicker" multiple data-live-search="true"  data-actions-box="true"  >
-								<option v-for="user in list_exam" :value="user.userid">{{user.username}}</option>
+<!--								<option v-for="user in list_exam" :value="user.userid">{{user.username}}</option>-->
 							</select>
 							<select th:if="${!session.nowUser.ifHasRight(9)}" disabled class="form-control selectpicker" multiple data-live-search="true"  data-actions-box="true"  >
 							</select>
@@ -184,7 +184,7 @@
 						</div>
 						<div class="form-group">
 							<select id="signSelect" th:if="${session.nowUser.ifHasRight(10)}" class="form-control selectpicker" multiple data-live-search="true"  data-actions-box="true"  >
-								<option v-for="user in list_sign" :value="user.userid">{{user.username}}</option>
+<!--								<option v-for="user in list_sign" :value="user.userid">{{user.username}}</option>-->
 							</select>
 							<select th:if="${!session.nowUser.ifHasRight(10)}" disabled class="form-control selectpicker" multiple data-live-search="true"  data-actions-box="true"  >
 							</select>
@@ -200,7 +200,7 @@
 					<br>
 
 				</div>
-				<button class="btn btn-lg btn-button-style btn-azure bloc-button" type="submit">
+				<button v-on:click="assignUser" class="btn btn-lg btn-button-style btn-azure bloc-button" type="submit">
 						确定分配
 					</button>
 			</div>
@@ -235,7 +235,7 @@
 	</div>
 </div>
 <!-- bloc-2 END -->
-
+<input type="hidden" id="contractIdInput" th:value="${contract.contractid}">
 </div>
 <!-- Main container END -->
 
@@ -265,38 +265,61 @@
 				}).then(function (value) {
 					var map = value.data.object;
 					//设置各个list
-					globalVue.list_counterSign = map[1];
-					globalVue.list_exam = map[3];
-					globalVue.list_sign = map[4];
+					globalVue.list_counterSign = map[5];
+					globalVue.list_exam = map[6];
+					globalVue.list_sign = map[7];
+					//此处不能使用vue动态绑定，要手动一个个append否则会不显示
+					for (let i = 0; i < globalVue.list_counterSign.length; i++) {
+						var user = globalVue.list_counterSign[i];
+						$('#counterSignSelect').append("<option value=" + user.userid + ">"+ user.username + "</option>")
+					}
+					for (let i = 0; i < globalVue.list_exam.length; i++) {
+						var user = globalVue.list_exam[i];
+						$('#examSelect').append("<option value=" + user.userid + ">"+ user.username + "</option>")
+					}
+					for (let i = 0; i < globalVue.list_sign.length; i++) {
+						var user = globalVue.list_sign[i];
+						$('#signSelect').append("<option value=" + user.userid + ">"+ user.username + "</option>")
+					}
+					$('#counterSignSelect').selectpicker('refresh');
+					$('#counterSignSelect').selectpicker('render');
+					$('#examSelect').selectpicker('refresh');
+					$('#examSelect').selectpicker('render');
+					$('#signSelect').selectpicker('refresh');
+					$('#signSelect').selectpicker('render');
 				});
 			},
 			assignUser:function () {
-				var userMap = new Map();
+				var userMap = {};
+				var contractId = $("#contractIdInput").val();
 				//获取各个流程分配的人员
 				var counterSignUser = [];
 				var examUser = [];
 				var signUser = [];
 				//会签
-				var var1 = document.getElementById("counterSignSelect");
-				for(i = 0;i<var1.length;i++){
-					if(var1.options[i].selected){
-						counterSignUser.push(var1.options[i].value);
-					}
-				}
+				$("#counterSignSelect option:selected").each(function () {
+					counterSignUser.push($(this).val());
+				})
 				//审批
-				var var2 = document.getElementById("examSelect");
-				for(i = 0;i<var2.length;i++){
-					if(var2.options[i].selected){
-						examUser.push(var2.options[i].value);
-					}
-				}
+				$("#examSelect option:selected").each(function () {
+					examUser.push($(this).val());
+				})
 				//签订
-				var var3 = document.getElementById("signSelect");
-				for(i = 0;i<var3.length;i++){
-					if(var3.options[i].selected){
-						signUser.push(var3.options[i].value);
-					}
-				}
+				$("#signSelect option:selected").each(function () {
+					signUser.push($(this).val());
+				})
+				userMap[5] = counterSignUser; //会签
+				userMap[6] = examUser; //审批
+				userMap[7] = signUser; //签订
+				JSON.stringify(userMap);
+				axios({
+					method:"post",
+					url: "/contract/assignUser",
+					params:{contractId:contractId},
+					data:userMap //这里千万不能加大括号！！！！！
+				}).then(function (value) {
+					alert("分配成功！即将返回上一个页面")
+				});
 			}
 		},
 		mounted:function () {
