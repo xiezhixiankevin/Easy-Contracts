@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import javax.servlet.http.HttpSession;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -87,9 +86,7 @@ public class SkipController {
     @GetMapping("/toAssignContract/{contractId}")
     public String toAssignContract(@PathVariable("contractId")Integer contractId,Model model){
         Contract contract = contractService.getContractOfNeedAssign(contractId);
-        Map<Integer, List<User>> userMap = userService.getUserListByRightsForAssignContract();
         model.addAttribute("contract",contract);
-        model.addAttribute("userMap",userMap);
         return "contract/assign_contract";
     }
 

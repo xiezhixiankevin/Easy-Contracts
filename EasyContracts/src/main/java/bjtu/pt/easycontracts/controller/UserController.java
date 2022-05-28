@@ -117,4 +117,11 @@ public class UserController {
         return String.valueOf(Global.SUCCESS);
     }
 
+    @GetMapping("/listUserByRight")
+    @ResponseBody
+    public ReturnObject<Map<Integer, List<User>>> listUserByRight(){
+        Map<Integer, List<User>> map = userService.getUserListByRightsForAssignContract();
+        return new ReturnObject<>(Global.SUCCESS,map);
+    }
+
 }

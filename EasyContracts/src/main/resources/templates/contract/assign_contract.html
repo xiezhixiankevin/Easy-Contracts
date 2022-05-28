@@ -18,7 +18,7 @@
 	<!-- Bootstrap 核心 CSS 文件 -->
 
 	<link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-	<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+	<script src="" th:src="@{/js/jquery.min.js}"></script>
 
 	<!--  Bootstrap 核心 JavaScript 文件 -->
 	<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -89,11 +89,13 @@
 <div class="bloc l-bloc" id="bloc-22">
 	<div class="container bloc-lg">
 		<div class="row">
-			<div class="col-sm-10 offset-sm-1 col-md-8 offset-md-2 text-md-left text-center offset-lg-0 col-lg-12">
+			<div class="col-lg-3"></div>
+			<div class="col-lg-6 offset-sm-1 col-md-8 offset-md-2 text-md-left text-center offset-lg-0 ">
 				<h1 class="mg-md">
-					分配人员<br>
+					为合同分配人员<br>
 				</h1>
-				<h3 th:text="${contract.contractid}" class="mg-md">
+				合同名:
+				<h3 th:text="${contract.contractname}" class="mg-md">
 					这里是合同名字
 				</h3>
 				<div >
@@ -102,8 +104,9 @@
 				</div>
 			</div>
 		</div>
-		<div class="row">
-				<div class="col-lg-12 ">
+		<div class="row" th:if="${contract.getNeedAllocationProcess()[0]}">
+				<div class="col-lg-3"></div>
+				<div class="col-lg-6 ">
 					<div class="card">
 						<div class="card-header">
 							<h3 class="mg-clear">
@@ -116,12 +119,10 @@
 									<br>
 								</div>
 								<div class="">
-									<select class="form-control selectpicker" multiple data-live-search="true"  data-actions-box="true"  >
-										<option value="1">系统管理员</option>
-										<option value="2">销售</option>
-										<option value="3">客户经理</option>
-										<option value="4">技术经理</option>
-										<option value="5">人事</option>
+									<select th:if="${session.nowUser.ifHasRight(8)}" class="form-control selectpicker" multiple data-live-search="true"  data-actions-box="true"  >
+										<option v-for="user in list_counterSign" :value="user.userid">{{user.username}}</option>
+									</select>
+									<select th:if="${!session.nowUser.ifHasRight(8)}" disabled class="form-control selectpicker" multiple data-live-search="true"  data-actions-box="true"  >
 									</select>
 									</div>
 							</div>
@@ -131,10 +132,14 @@
 
 		</div>
 		<div class="row">
-			<br>
+			&nbsp;
 		</div>
 		<div class="row">
-			<div class="col-lg-12">
+			&nbsp;
+		</div>
+		<div class="row" th:if="${contract.getNeedAllocationProcess()[2]}">
+			<div class="col-lg-3"></div>
+			<div class="col-lg-6">
 				<div class="card">
 					<div class="card-header">
 						<h3 class="mg-clear">
@@ -147,12 +152,10 @@
 
 						</div>
 						<div class="form-group">
-							<select class="form-control selectpicker" multiple data-live-search="true"  data-actions-box="true"  >
-								<option value="1">系统管理员</option>
-								<option value="2">销售</option>
-								<option value="3">客户经理</option>
-								<option value="4">技术经理</option>
-								<option value="5">人事</option>
+							<select th:if="${session.nowUser.ifHasRight(9)}" class="form-control selectpicker" multiple data-live-search="true"  data-actions-box="true"  >
+								<option v-for="user in list_exam" :value="user.userid">{{user.username}}</option>
+							</select>
+							<select th:if="${!session.nowUser.ifHasRight(9)}" disabled class="form-control selectpicker" multiple data-live-search="true"  data-actions-box="true"  >
 							</select>
 						</div>
 					</div>
@@ -160,10 +163,14 @@
 			</div>
 		</div>
 		<div class="row">
-			<br>
+			&nbsp;
 		</div>
 		<div class="row">
-			<div class="col-lg-12">
+			&nbsp;
+		</div>
+		<div class="row" th:if="${contract.getNeedAllocationProcess()[3]}">
+			<div class="col-lg-3"></div>
+			<div class="col-lg-6">
 				<div class="card">
 					<div class="card-header">
 						<h3 class="mg-clear">
@@ -176,12 +183,10 @@
 
 						</div>
 						<div class="form-group">
-							<select class="form-control selectpicker" multiple data-live-search="true"  data-actions-box="true" >
-								<option value="1">系统管理员</option>
-								<option value="2">销售</option>
-								<option value="3">客户经理</option>
-								<option value="4">技术经理</option>
-								<option value="5">人事</option>
+							<select th:if="${session.nowUser.ifHasRight(10)}" class="form-control selectpicker" multiple data-live-search="true"  data-actions-box="true"  >
+								<option v-for="user in list_sign" :value="user.userid">{{user.username}}</option>
+							</select>
+							<select th:if="${!session.nowUser.ifHasRight(10)}" disabled class="form-control selectpicker" multiple data-live-search="true"  data-actions-box="true"  >
 							</select>
 						</div>
 					</div>
@@ -231,21 +236,45 @@
 </div>
 <!-- bloc-2 END -->
 
-	<select class="form-control selectpicker" multiple data-live-search="true"  data-actions-box="true"  >
-		<option value="1">系统管理员</option>
-		<option value="2">销售</option>
-		<option value="3">客户经理</option>
-		<option value="4">技术经理</option>
-		<option value="5">人事</option>
-	</select>
-
 </div>
 <!-- Main container END -->
-    
 
 
+<script th:src="@{/js/vue.js}"  type="text/javascript" charset="utf-8"></script>
+<script th:src="@{/js/axios.min.js}"  type="text/javascript" charset="utf-8"></script>
 
-
-
+<script>
+	var globalVue = new Vue({
+		el:"#bloc-22",
+		//定义数据
+		data: {
+			list_counterSign:[],
+			list_exam:[],
+			list_sign:[],
+			//一些常量
+			OK :200,
+			CODE_ERROR:201,
+			NAME_EXIST:202
+		},
+		//定义方法
+		methods: {
+			getUserList:function () {
+				axios({
+					method: "get",
+					url: "/user/listUserByRight",
+				}).then(function (value) {
+					var map = value.data.object;
+					//设置各个list
+					globalVue.list_counterSign = map[1];
+					globalVue.list_exam = map[3];
+					globalVue.list_sign = map[4];
+				});
+			}
+		},
+		mounted:function () {
+			this.getUserList();
+		}
+	});
+</script>
 </body>
 </html>
