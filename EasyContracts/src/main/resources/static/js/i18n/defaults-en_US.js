@@ -24,7 +24,7 @@
 
 (function ($) {
   $.fn.selectpicker.defaults = {
-    noneSelectedText: 'Nothing selected',
+    noneSelectedText: '没有可选择的人员',
     noneResultsText: 'No results match {0}',
     countSelectedText: function (numSelected, numTotal) {
       return (numSelected == 1) ? '{0} item selected' : '{0} items selected';
@@ -35,8 +35,8 @@
         (numGroup == 1) ? 'Group limit reached ({n} item max)' : 'Group limit reached ({n} items max)'
       ];
     },
-    selectAllText: 'Select All',
-    deselectAllText: 'Deselect All',
+    selectAllText: '全选',
+    deselectAllText: '全不选',
     multipleSeparator: ', '
   };
 })(jQuery);
