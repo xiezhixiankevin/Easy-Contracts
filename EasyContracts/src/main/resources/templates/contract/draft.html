@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html"
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="">
@@ -87,19 +87,31 @@
 						<label>
 							合同名称<br>
 						</label>
-						<input name="contractname" id="name_26540" class="form-control" required data-validation-required-message="合同名称是必要的" />
+						<input name="contractname" id="name_26540" class="form-control" required data-validation-required-message="合同名称是必要的"/>
+						<div style="color:red">
+							<label v-show="checkContract">合同名称不为空</label>
+						</div>
 					</div>
 					<div class="form-group">
 						<label>
 							合同生效时间<br>
 						</label>
-						<input name="beginTimeStr" d="start_time" class="form-control" type="date" required data-validation-required-message="时间是必要的" />
+						<input name="beginTimeStr" id="start_time" class="form-control" type="date" required data-validation-required-message="时间是必要的" />
+						<div style="color:red">
+							<label v-if="checkBeginTime">开始时间不为空</label>
+						</div>
 					</div>
 					<div class="form-group">
 						<label>
 							合同失效时间<br>
 						</label>
 						<input name="endTimeStr" id="end_time" class="form-control" type="date" required data-validation-required-message="时间是必要的" />
+						<div style="color:red">
+							<label v-if="checkEndTime">结束时间不为空</label>
+						</div>
+						<div style="color:red">
+							<label v-if="checkEndTime2">结束时间大于开始时间</label>
+						</div>
 					</div>
 					<div class="form-group">
 						<label>
@@ -131,7 +143,7 @@
 							</div>
 						</div>
 					</div> 
-					<button class="bloc-button btn btn-lg btn-block btn-azure" type="submit">
+					<button v-on:click="send()" class="bloc-button btn btn-lg btn-block btn-azure" type="button" >
 						起草合同<br>
 					</button>
 				</form>
@@ -172,6 +184,59 @@
 <script th:src="@{/js/vue.js}"  type="text/javascript" charset="utf-8"></script>
 <script th:src="@{/js/axios.min.js}"  type="text/javascript" charset="utf-8"></script>
 
+<script>
+	var draft=new Vue({
+		el:"#form_26540",  //作用范围：id=form_38623的标签及其内部
+		data: {
+			checkBeginTime:true,
+			checkEndTime:false,
+			checkContract:false,
+			checkEndTime2:false,
+		},
+		data () {
+			return {
+				checkBeginTime:false,
+				checkEndTime:false,
+				checkContract:false,
+				checkEndTime2:false,
+			}
+		},
+		methods:{
+			send:function (){
+				var name= $("#name_26540").val();
+				var date1=$("#start_time").val();
+				var y1=date1.split("-")[0];
+				var m1=date1.split("-")[1];
+				var d1=date1.split("-")[2];
+				var time1=new Date(y1,m1,d1);
+				var date2=$("#end_time").val();
+				var y2=date2.split("-")[0];
+				var m2=date2.split("-")[1];
+				var d2=date2.split("-")[2];
+				var time2=new Date(y2,m2,d2);
+				var dayCount =(time2 - time1);
 
+				this.checkContract=false;
+				this.checkBeginTime=false;
+				this.checkEndTime=false;
+				this.checkEndTime2=false;
+				if(name.length==0){
+					this.checkContract=true;
+				}else if(date1.length==0){
+					this.checkBeginTime=true;
+				}else if(date2.length==0){
+					this.checkEndTime=true;
+				}
+				else if(dayCount<0){
+					this.checkEndTime2=true;
+				}else{
+					//submit
+				}
+
+
+			}
+		}
+	})
+</script>
 </body>
 </html>
