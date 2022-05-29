@@ -72,9 +72,9 @@ public class ContractProcessServiceImpl implements ContractProcessService {
             listConTractUserNeedDeal.put(SIGN,contractsList4);
 
         //查询对应userId具有分配能力的 待分配的合同
-        //查询处在待分配的contract
-        List<Contract> contractsList5=new ArrayList<>();
 
+        List<Contract> contractsList5=new ArrayList<>();
+        //查询处在待分配的contract
         List<Contract> distributedContractsList = new ArrayList<>();
         ContractExample distributedContract=new ContractExample();
         distributedContract.createCriteria().andTypeEqualTo(WAITING);
@@ -99,7 +99,7 @@ public class ContractProcessServiceImpl implements ContractProcessService {
             flag5=0;
             if(rights.get(1)==true){
                 for(int j=0;j<distributedContractProcessList.size();j++){
-                    if(distributedContractProcessList.get(j).getType()!=EXAM){
+                    if(distributedContractProcessList.get(j).getType()==EXAM){
                         flag5=1;//如果存在 flag就为1 即不需要操作
                     }
                 }
@@ -110,7 +110,7 @@ public class ContractProcessServiceImpl implements ContractProcessService {
             flag5=0;
             if(rights.get(2)==true){
                 for(int j=0;j<distributedContractProcessList.size();j++){
-                    if(distributedContractProcessList.get(j).getType()!=SIGN){
+                    if(distributedContractProcessList.get(j).getType()==SIGN){
                         flag5=1;//如果存在 flag就为1 即不需要操作
                     }
                 }
@@ -121,7 +121,7 @@ public class ContractProcessServiceImpl implements ContractProcessService {
             flag5=0;
         }
         if(!contractsList5.isEmpty())
-            listConTractUserNeedDeal.put(5,contractsList4);// key 为5 表示待分配的合同
+            listConTractUserNeedDeal.put(5,contractsList5);// key 为5 表示待分配的合同
         return listConTractUserNeedDeal;
     }
 
