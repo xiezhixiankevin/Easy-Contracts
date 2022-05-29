@@ -27,6 +27,7 @@ public class Contract {
     private String customerName;
     private boolean ifBeginFirst = false;
     private boolean ifEndFirst = false;
+    private Integer onlyWhich = 0;
 
     private boolean[] needAllocationProcess = {true,false,true,true};//数组的0，1，2，3分别代表会签，定稿，审批，签订
 
@@ -148,5 +149,13 @@ public class Contract {
 
     public void setIfBeginFirst(boolean ifBeginFirst) {
         this.ifBeginFirst = ifBeginFirst;
+    }
+
+    public Integer getOnlyWhich() {
+        return onlyWhich;
+    }
+
+    public void setOnlyWhich(Integer onlyWhich) {
+        this.onlyWhich = onlyWhich;
     }
 }

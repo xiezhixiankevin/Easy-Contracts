@@ -22,7 +22,8 @@ public interface ContractProcessService {
      * @return 返回值说明：Integer表示哪一类操作，比如需要他会签，还是审批
      *
      * */
-    Map<Integer, List<Contract>> listConTractUserNeedDeal(int userId);//zxc
+    //right[0] [1] [2]分别代表分配会签权，分配审批权，分配签订权
+    Map<Integer, List<Contract>> listConTractUserNeedDeal(int userId,List<Boolean> rights);//zxc
 
     //修改合同流程信息
     int updateProcess(int userId, int contractId, ContractProcess contractProcess);//wj

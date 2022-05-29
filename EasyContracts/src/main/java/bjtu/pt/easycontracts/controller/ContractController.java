@@ -2,6 +2,7 @@ package bjtu.pt.easycontracts.controller;
 
 import bjtu.pt.easycontracts.pojo.table.*;
 import bjtu.pt.easycontracts.service.ContractFileService;
+import bjtu.pt.easycontracts.service.RightsService;
 import bjtu.pt.easycontracts.utils.Global;
 import bjtu.pt.easycontracts.utils.ReturnObject;
 import bjtu.pt.easycontracts.utils.TimeUtil;
@@ -16,6 +17,7 @@ import bjtu.pt.easycontracts.service.ContractProcessService;
 import bjtu.pt.easycontracts.service.ContractService;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -42,6 +44,9 @@ public class ContractController {
 
     @Autowired
     private ContractFileService contractFileService;
+
+    @Autowired
+    private RightsService rightsService;
     /*
     * 返回满足条件的合同list，
     * */
@@ -68,10 +73,36 @@ public class ContractController {
     @GetMapping("/todeal")
     @ResponseBody
     public ReturnObject<Map<Integer, List<Contract>>> listConTractToDeal(Integer userID){
-        Map<Integer, List<Contract>> integerListMap = contractProcessService.listConTractUserNeedDeal(userID);
+        List<Boolean> rights = new ArrayList<>();
+        if (rightsService.ifUserHasRights(userID,Global.PERMISSION_ASSIGN_COUNTERSIGN)!=null){
+            rights.add(true);
+        }else {
+            rights.add(false);
+        }
+        if (rightsService.ifUserHasRights(userID,Global.PERMISSION_ASSIGN_APPROVE)!=null){
+            rights.add(true);
+        }else {
+            rights.add(false);
+        }
+        if (rightsService.ifUserHasRights(userID,Global.PERMISSION_ASSIGN_SIGN)!=null){
+            rights.add(true);
+        }else {
+            rights.add(false);
+        }
+        Map<Integer, List<Contract>> integerListMap = contractProcessService.listConTractUserNeedDeal(userID,rights);
         ReturnObject<Map<Integer, List<Contract>>> returnObject = new ReturnObject<>( SUCCESS,integerListMap);
         return returnObject;
     }
+
+    @GetMapping("/select_contractTodeal/{pn}")
+    @ResponseBody
+    public ReturnObject<PageInfo> select_contractTodeal(Contract contract, Integer userID,@PathVariable("pn")Integer pn){
+        List<Contract> contractList = contractService.listContractUserNeedDeal(contract, userID, pn);
+        PageInfo pageInfo = new PageInfo(contractList,5);
+        ReturnObject<PageInfo> result = new ReturnObject<>(Global.SUCCESS,pageInfo);
+        return result;
+    }
+
     /*
     *起草合同按钮映射到此方法
     * */

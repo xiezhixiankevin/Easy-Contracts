@@ -1,6 +1,7 @@
 package bjtu.pt.easycontracts.service;
 
 import bjtu.pt.easycontracts.pojo.table.Contract;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 import java.util.Map;
@@ -53,4 +54,7 @@ public interface ContractService {
 
     //条件返回当前数据库中所有等待分配的合同以及每个合同还需分配哪些权限 //xzx
     List<Contract> getNeedAllocationContracts(Contract contract,Integer pn);
+
+    //条件返回一个用户要处理的所有合同  不包括分配!!
+    List<Contract> listContractUserNeedDeal(Contract contract, Integer userID,Integer pn);//xzx
 }

@@ -16,7 +16,7 @@ public class ContractProcess {
 
     private Date time = new Date();
 
-    private String content = "";
+    private String content;
 
     public ContractProcess() {
     }

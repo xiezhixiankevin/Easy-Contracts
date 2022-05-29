@@ -26,7 +26,7 @@ public class ContractProcessServiceImpl implements ContractProcessService {
     private ContractMapper contractMapper;
 
     @Override
-    public Map<Integer, List<Contract>> listConTractUserNeedDeal(int userId) {
+    public Map<Integer, List<Contract>> listConTractUserNeedDeal(int userId,List<Boolean> rights) {
         // 获得所有待分配的合同
         List<Contract> contractsList0 = new ArrayList<>();
         ContractExample waitingContracts = new ContractExample();
@@ -38,7 +38,7 @@ public class ContractProcessServiceImpl implements ContractProcessService {
         List<Contract> contractsList3=new ArrayList<>();
         List<Contract> contractsList4=new ArrayList<>();
 
-        List<ContractProcess> contractProcessList=new ArrayList<>();
+        List<ContractProcess> contractProcessList;
         ContractProcessExample contractProcessExample=new ContractProcessExample();
         contractProcessExample.createCriteria().andUseridEqualTo(userId).andStateEqualTo(DOING);
         contractProcessList=contractProcessMapper.selectByExample(contractProcessExample);
@@ -72,6 +72,7 @@ public class ContractProcessServiceImpl implements ContractProcessService {
             listConTractUserNeedDeal.put(SIGN,contractsList4);
         return listConTractUserNeedDeal;
     }
+
 
     @Override
     public int updateProcess(int userId, int contractId, ContractProcess contractProcess)
@@ -140,13 +141,20 @@ public class ContractProcessServiceImpl implements ContractProcessService {
                 insertProcess(contractProcess);
             }
         }
-        //分配后检查是否合同已经每一个过程都有人了，是的话修改合同状态为会签
+        //分配后检查是否合同已经每一个过程都有人了，是的话修改合同状态为会签,并把所有的会签process的state改成DOING
         if (ifAssignAll(contractId)){
+            //
             Contract contract = new Contract();
             contract.setType(COUNTERSIGNING);
             ContractExample contractExample = new ContractExample();
             contractExample.createCriteria().andContractidEqualTo(contractId);
             contractMapper.updateByExampleSelective(contract,contractExample);
+            //
+            ContractProcess contractProcess = new ContractProcess();
+            contractProcess.setState(DOING);
+            ContractProcessExample contractProcessExample = new ContractProcessExample();
+            contractProcessExample.createCriteria().andContractidEqualTo(contractId).andTypeEqualTo(COUNTERSIGN);
+            contractProcessMapper.updateByExampleSelective(contractProcess,contractProcessExample);
         }
         return SUCCESS;
     }

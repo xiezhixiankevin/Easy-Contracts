@@ -1,0 +1,349 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+	<meta name="robots" content="index, follow">
+    <link rel="shortcut icon" type="image/png" href="../../../../../../contracts/favicon.png">
+
+<!--	<link href="../../lib/bootstrap-3.4.1-dist/bootstrap-3.4.1-dist/css/bootstrap.min.css" th:href="@{/lib/bootstrap-3.4.1-dist/bootstrap-3.4.1-dist/css/bootstrap.min.css}" rel="stylesheet">-->
+<!--	<script src="../../lib/bootstrap-3.4.1-dist/bootstrap-3.4.1-dist/js/bootstrap.min.js" th:src="@{/lib/bootstrap-3.4.1-dist/bootstrap-3.4.1-dist/js/bootstrap.min.js}"  ></script>-->
+	<link rel="stylesheet" type="text/css" href="../../static/css/bootstrap.min.css?9188" th:href="@{/css/bootstrap.min.css?9188}">
+	<link rel="stylesheet" type="text/css" href="../../static/css/style.css?8116" th:href="@{/css/style.css?8116}">
+	<link rel="stylesheet" type="text/css" href="../../static/css/animate.min.css?7456" th:href="@{/css/animate.min.css?7456}">
+	<link href='https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900&display=swap&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+    <title>select_contract_needAllocation</title>
+
+
+    
+<!-- Analytics -->
+ 
+<!-- Analytics END -->
+    
+</head>
+<body>
+
+<!-- Preloader -->
+<div id="page-loading-blocs-notifaction" class="page-preloader"></div>
+<!-- Preloader END -->
+
+
+<!-- Main container -->
+<div class="page-container">
+    
+<!-- bloc-0 -->
+<div class="bloc bg-截屏2022-05-07-2019-53-22 l-bloc" id="bloc-0">
+	<div class="container bloc-sm">
+		<div class="row">
+			<div class="col">
+				<nav th:replace="_fragments :: nav" class="navbar navbar-light row navbar-expand-md nav-invert" role="navigation">
+					<button id="nav-toggle" type="button" class="ui-navbar-toggler navbar-toggler border-0 p-0" data-toggle="collapse" data-target=".navbar-27707" aria-expanded="false" aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon"></span>
+					</button>
+					<div class="collapse navbar-collapse navbar-27707">
+						<ul class="site-navigation nav navbar-nav">
+							<li class="nav-item">
+								<a href="loginup.html" th:href="@{/}" class="nav-link a-btn ltc-white">首页</a>
+							</li>
+							<li th:if="${session.nowUser.ifHasRight(1)}" class="nav-item">
+								<a href="contract/draft.html" th:href="@{/toDraft}" class="nav-link  ltc-white">起草合同</a>
+							</li>
+							<li th:if="${session.nowUser.ifHasRight(5)}" class="nav-item">
+								<a href="select.html" th:href="@{/toCounterSign}" class="nav-link  ltc-white">会签合同</a>
+							</li>
+							<li th:if="${session.nowUser.ifHasRight(2)}" class="nav-item">
+								<a href="finalization.html" th:href="@{/toFinalize}" class="nav-link a-btn ltc-white">定稿合同</a>
+							</li>
+							<li th:if="${session.nowUser.ifHasRight(6)}" class="nav-item">
+								<a href="approval.html" th:href="@{/toExamine}" class="nav-link a-btn ltc-white">审批合同</a>
+							</li>
+							<li th:if="${session.nowUser.ifHasRight(7)}" class="nav-item">
+								<a href="sign.html" th:href="@{/toSign}" class="nav-link a-btn ltc-white">签订合同</a>
+							</li>
+						</ul>
+					</div>
+					<a class="navbar-brand mr-0" href="/index.html"> xzx <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16"><path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg></a>
+
+				</nav>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- bloc-0 END -->
+<div id="contract_div" class="container-lg p-lg-5">
+	<div class="row ">
+		<div class="col-md-10">
+			<div class="input-group mb-3">
+				<div class="input-group-append">
+					<span class="input-group-text" id="basic-addon2">合同名:</span>
+				</div>
+				<input id="Cname_input" type="text" class="form-control input-mini">
+				&nbsp;
+				&nbsp;
+				<div class="input-group-append">
+					<span class="input-group-text" id="basic-addon1">合同内容:</span>
+				</div>
+				<input id="Ccontent_input" type="text" class="form-control">
+				&nbsp;<div class="input-group-append">
+				<span class="input-group-text" id="basic-addon3">客户名:</span>
+				</div>
+				<select id="Ccustomer_select"  class="form-control">
+					<option value=""></option>
+					<option value="" th:value="${customer.getCustomerid()}" th:each="customer : ${customers}" th:text="${customer.getCustomername()}"></option>
+				</select>
+				&nbsp;
+			</div>
+		</div>
+		<div class="col-md-2">
+			<button v-on:click="listContractSelective(1)" type="button" class="btn btn-success">
+				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+					<path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+				</svg>
+				Search
+			</button>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md">
+			<input type="checkbox" @change="changeCSBox"  id="counterSignBox"> 只看会签
+			&nbsp;
+			<input type="checkbox" @change="changeFZBox"  id="finalizeBox"> 只看定稿
+			&nbsp;
+			<input type="checkbox" @change="changeEXBox"  id="examBox"> 只看审批
+			&nbsp;
+			<input type="checkbox" @change="changeSNBox"  id="signBOx"> 只看签订
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-lg-12">
+			<table id="customer_table" class="table table-hover table-bordered">
+				<tr>
+					<th>合同id</th>
+					<th>合同名</th>
+					<th>客户</th>
+					<th>开始时间</th>
+					<th>结束时间</th>
+					<th>操作</th>
+				</tr>
+				<tr v-for="contract in contracts">
+					<td>{{contract.contractid}}</td>
+					<td>{{contract.contractname}}</td>
+					<td>{{contract.customerName}}</td>
+					<td>{{contract.beginTimeStr}}</td>
+					<td>{{contract.endTimeStr}}</td>
+					<td>
+						<a  href="#" v-show="contract.type==2" :href="'http://localhost:8080/toAssignContract/'+contract.contractid" th:if="${session.nowUser.ifHasRight(5)}">
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-plus-fill" viewBox="0 0 16 16">
+								<path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+								<path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
+							</svg>前往会签
+						</a>
+						<a href="#" v-show="contract.type==3" :href="'http://localhost:8080/toAssignContract/'+contract.contractid" th:if="${session.nowUser.ifHasRight(2)}" >
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
+								<path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
+								<path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
+							</svg>前往定稿
+						</a>&nbsp;&nbsp;
+						<a href="#" v-show="contract.type==4" :href="'http://localhost:8080/toAssignContract/'+contract.contractid" th:if="${session.nowUser.ifHasRight(6)}" >
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
+								<path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
+								<path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
+							</svg>前往审批
+						</a>
+						&nbsp;&nbsp;
+						<a href="#" v-show="contract.type==5" :href="'http://localhost:8080/toAssignContract/'+contract.contractid" th:if="${session.nowUser.ifHasRight(7)}" >
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+								<path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+								<path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+							</svg>前往签订
+						</a>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-2">
+			<input type="checkbox" @change="changeBeginBox"  id="startTimeBox"> 按开始时间升序
+		</div>
+		<div class="col-md-2">
+			<input type="checkbox" @change="changeEndBox"  id="endTimeBox"> 按结束时间升序
+		</div>
+		<div class="col-md-5 "></div>
+
+		<div class="col-md-3 ">
+			<nav aria-label="Page navigation example">
+				<ul class="pagination">
+					<li v-on:click="prePage(pageInfo.prePage)" class="page-item" v-bind:class="pageInfo.isFirstPage?'disabled' : '' ">
+						<a class="page-link" href="#" aria-label="Previous">
+							<span aria-hidden="true">&laquo;</span>
+						</a>
+					</li>
+					<li v-on:click="listContractSelective(num)" class="page-item" v-for="num in pageInfo.navigatepageNums">
+						<a class="page-link" href="#">{{num}}</a>
+					</li>
+					<li v-on:click="nextPage(pageInfo.nextPage)" class="page-item" v-bind:class="pageInfo.isLastPage?'disabled' : '' ">
+						<a class="page-link" href="#" aria-label="Next">
+							<span aria-hidden="true">&raquo;</span>
+						</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+
+</div>
+
+<!-- ScrollToTop Button -->
+<a class="bloc-button btn btn-d scrollToTop" onclick="scrollToTarget('1',this)"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 32 32"><path class="scroll-to-top-btn-icon" d="M30,22.656l-14-13-14,13"/></svg></a>
+<!-- ScrollToTop Button END-->
+
+
+<!-- bloc-2 -->
+<div class="bloc l-bloc" id="bloc-2">
+	<div class="container bloc-lg">
+		<div class="row">
+			<div class="col-12">
+				<h5 class="mg-md text-lg-center">
+					北京交通大学实训小组荣誉出品
+				</h5>
+				<p class="text-lg-center">
+					XZX HCB FBF ZCX WJ
+				</p>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- bloc-2 END -->
+<input type="hidden" id="userID_input" th:value="${session.nowUser.getUserid()}">
+</div>
+<!-- Main container END -->
+    
+
+
+<!-- Additional JS -->
+<script th:src="@{/js/jquery.min.js}" src="../../static/js/jquery.min.js?7482"></script>
+<script th:src="@{/js/bootstrap.bundle.min.js?6777}" src="../../static/js/bootstrap.bundle.min.js?6777"></script>
+<script th:src="@{/js/blocs.min.js?2512}" src="../../static/js/blocs.min.js?2512"></script>
+<script th:src="@{/js/lazysizes.min.js}" src="../../static/js/lazysizes.min.js" defer></script>
+<script th:src="@{/js/jquery.min.js}"  type="text/javascript" charset="utf-8"></script>
+<script th:src="@{/js/vue.js}"  type="text/javascript" charset="utf-8"></script>
+<script th:src="@{/js/axios.min.js}"  type="text/javascript" charset="utf-8"></script>
+
+<script>
+		var contractTableVue = new Vue({
+		el:"#contract_div",
+		data:{//定义数据
+			now_page:1,
+			contracts:[],
+			//一些常量
+			OK :200,
+			pageInfo:[],
+			Ctype: 0
+		},
+		methods:{
+			prePage:function (pageNum) {
+				if(contractTableVue.pageInfo.isFirstPage){
+					return;
+				}
+				this.listContractSelective(pageNum);
+			},
+			nextPage:function (pageNum) {
+				if(contractTableVue.pageInfo.isLastPage){
+					return;
+				}
+				this.listContractSelective(pageNum);
+			},
+			listContractSelective:function (pageNum) {
+				var contractname = $("#Cname_input").val();
+				var content = $("#Ccontent_input").val();
+				var customerid = $("#Ccustomer_select option:selected").val();
+				var beginTimeFirst = $("#startTimeBox").get(0).checked;
+				var endTimeFirst = $("#endTimeBox").get(0).checked;
+				var userId =$("#userID_input").val();
+				var onlyWhich = this.Ctype;
+				axios({
+					method: "get",
+					url : "contract/select_contractTodeal/"+pageNum.toString(),
+					params:{contractname:contractname,content:content,
+						    customerid:customerid,ifBeginFirst:beginTimeFirst,
+						    ifEndFirst:endTimeFirst,userID:userId,
+						    onlyWhich:onlyWhich}
+				}).then(function (value) {
+					if(value.data.code === contractTableVue.OK){
+						//成功获取到数据渲染表格
+						contractTableVue.contracts = value.data.object.list;
+						contractTableVue.pageInfo = value.data.object;
+					}else{
+						alert("服务器错误,获取数据失败！");
+					}
+				}).catch();
+			},
+			changeBeginBox:function () {
+				if($("#startTimeBox").get(0).checked){
+					$("#endTimeBox").get(0).checked = false;
+				}
+				this.listContractSelective(1);
+			},
+			changeEndBox:function () {
+				if($("#endTimeBox").get(0).checked){
+					$("#startTimeBox").get(0).checked = false;
+				}
+				this.listContractSelective(1);
+			},
+			changeCSBox:function () {
+				if($("#counterSignBox").get(0).checked){
+					$("#finalizeBox").get(0).checked = false;
+					$("#examBox").get(0).checked = false;
+					$("#signBOx").get(0).checked = false;
+					contractTableVue.Ctype = 2;
+				}else{
+					contractTableVue.Ctype = 0;
+				}
+				this.listContractSelective(1);
+			},
+			changeFZBox:function () {
+				if($("#finalizeBox").get(0).checked){
+					$("#counterSignBox").get(0).checked = false;
+					$("#examBox").get(0).checked = false;
+					$("#signBOx").get(0).checked = false;
+					contractTableVue.Ctype = 3;
+				}else{
+					contractTableVue.Ctype = 0;
+				}
+				this.listContractSelective(1);
+			},
+			changeEXBox:function () {
+				if($("#examBox").get(0).checked){
+					$("#counterSignBox").get(0).checked = false;
+					$("#finalizeBox").get(0).checked = false;
+					$("#signBOx").get(0).checked = false;
+					contractTableVue.Ctype = 4;
+				}else{
+					contractTableVue.Ctype = 0;
+				}
+				this.listContractSelective(1);
+			},
+			changeSNBox:function () {
+				if($("#signBOx").get(0).checked){
+					$("#counterSignBox").get(0).checked = false;
+					$("#finalizeBox").get(0).checked = false;
+					$("#examBox").get(0).checked = false;
+					contractTableVue.Ctype = 5;
+				}else{
+					contractTableVue.Ctype = 0;
+				}
+				this.listContractSelective(1);
+			}
+		},
+		mounted:function () {
+			this.listContractSelective(1);
+		}
+	});
+</script>
+
+</body>
+</html>

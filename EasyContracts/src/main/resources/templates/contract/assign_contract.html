@@ -319,6 +319,7 @@
 					data:userMap //这里千万不能加大括号！！！！！
 				}).then(function (value) {
 					alert("分配成功！即将返回上一个页面")
+					window.location.replace(document.referrer);
 				});
 			}
 		},

@@ -167,7 +167,7 @@
 					url: "user/login/" + username +"/"+password,
 				})
 						.then(function (value) {
-							if(value.data.code === loginForm.OK) {
+							if(value.data.code == 200) {
 								window.location.href = "toMe";
 							}else{
 								alert("用户名或密码错误");

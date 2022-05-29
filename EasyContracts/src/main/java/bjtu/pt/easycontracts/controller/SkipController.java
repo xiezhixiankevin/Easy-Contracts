@@ -81,6 +81,13 @@ public class SkipController {
         return "user/modify_users";
     }
 
+    //跳转到selectContract页面
+    @GetMapping("/toSelectContract")
+    public String toCounterSign(Model model){
+        model.addAttribute("customers",customerService.listCustomerSelective(null));
+        return "contract/selectContract";
+    }
+
     //toAssignContract
     //跳转到给合同进行人员分配页面
     @GetMapping("/toAssignContract/{contractId}")

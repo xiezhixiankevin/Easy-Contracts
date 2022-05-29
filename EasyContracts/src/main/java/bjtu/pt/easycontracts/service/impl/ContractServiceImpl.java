@@ -434,7 +434,7 @@ public class ContractServiceImpl implements ContractService
             // 第二步  获取对应合同的权限分配表(contract process)
             ContractProcessExample contractProcessExample = new ContractProcessExample();
             Contract contract = contractList.get(i);
-            setContract(contract);
+            setContract(contract); //初始化一些用于显示的信息
             contractProcessExample.createCriteria().andContractidEqualTo(contract.getContractid());
             List<ContractProcess> contractProcessList = contractProcessMapper.selectByExample(contractProcessExample);
 
@@ -459,6 +459,60 @@ public class ContractServiceImpl implements ContractService
                 }
             });
         }
+        return contractList;
+    }
+
+    @Override
+    public List<Contract> listContractUserNeedDeal(Contract contract, Integer userID, Integer pn) {
+        //1.查出用户参与的且state=DOING的所有合同id
+        ContractProcessExample contractProcessExample = new ContractProcessExample();
+        contractProcessExample.createCriteria().andUseridEqualTo(userID).andStateEqualTo(DOING);
+        List<ContractProcess> contractProcesses = contractProcessMapper.selectByExample(contractProcessExample);
+        //2.这些所有的合同过程都是该用户当前需要处理的，根据前面的筛选需求查出对应的合同
+        ContractExample contractExample = new ContractExample();
+        ContractExample.Criteria criteria = contractExample.createCriteria();
+        //条件填充
+        if (contract.getContractname()!=null){
+            criteria.andContractnameLike("%"+contract.getContractname()+"%");
+        }
+        if (contract.getContent()!=null){
+            criteria.andContractnameLike("%"+contract.getContent()+"%");
+        }
+        if (contract.getCustomerid()!=null){
+            criteria.andCustomeridEqualTo(contract.getCustomerid());
+        }
+        if (contract.getOnlyWhich()!=0){
+            criteria.andTypeEqualTo(contract.getOnlyWhich()); //只查出某一类，会签，定稿，审批，签订
+        }
+        //只查出属于改用户的
+        List<Integer> contractIdList = new ArrayList<>();
+        for (ContractProcess contractProcess : contractProcesses) {
+            contractIdList.add(contractProcess.getContractid());
+        }
+        criteria.andContractidIn(contractIdList);
+        PageHelper.startPage(pn,5); //每页显示5个数据
+        List<Contract> contractList = contractMapper.selectByExample(contractExample);
+        for (Contract each : contractList) {
+            setContract(each);
+        }
+
+        if (contract.isIfBeginFirst()){
+            contractList.sort(new Comparator<Contract>() {
+                @Override
+                public int compare(Contract o1, Contract o2) {
+                    return o1.getBegintime().compareTo(o2.getBegintime());
+                }
+            });
+        }
+        if (contract.isIfEndFirst()){
+            contractList.sort(new Comparator<Contract>() {
+                @Override
+                public int compare(Contract o1, Contract o2) {
+                    return o1.getEndtime().compareTo(o2.getEndtime());
+                }
+            });
+        }
+
         return contractList;
     }
 

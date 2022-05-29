@@ -22,16 +22,16 @@
         <a href="contract/draft.html" th:href="@{/toDraft}" class="nav-link  ltc-white">起草合同</a>
       </li>
       <li th:if="${session.nowUser.ifHasRight(5)}" class="nav-item">
-        <a href="select.html" th:href="@{/toCounterSign}" class="nav-link  ltc-white">会签合同</a>
+        <a href="select.html" th:href="@{/toSelectContract}" class="nav-link  ltc-white">会签合同</a>
       </li>
       <li th:if="${session.nowUser.ifHasRight(2)}" class="nav-item">
-        <a href="finalization.html" th:href="@{/toFinalize}" class="nav-link a-btn ltc-white">定稿合同</a>
+        <a href="finalization.html" th:href="@{/toSelectContract}" class="nav-link a-btn ltc-white">定稿合同</a>
       </li>
       <li th:if="${session.nowUser.ifHasRight(6)}" class="nav-item">
-        <a href="approval.html" th:href="@{/toExamine}" class="nav-link a-btn ltc-white">审批合同</a>
+        <a href="approval.html" th:href="@{/toSelectContract}" class="nav-link a-btn ltc-white">审批合同</a>
       </li>
       <li th:if="${session.nowUser.ifHasRight(7)}" class="nav-item">
-        <a href="sign.html" th:href="@{/toSign}" class="nav-link a-btn ltc-white">签订合同</a>
+        <a href="sign.html" th:href="@{/toSelectContract}" class="nav-link a-btn ltc-white">签订合同</a>
       </li>
     </ul>
   </div>
