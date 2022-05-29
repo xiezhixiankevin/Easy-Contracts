@@ -69,12 +69,18 @@
 							用户名<br>
 						</label>
 						<input id="name_38623" class="form-control" required data-validation-required-message="请输入用户名。" placeholder="请输入用户名……" />
+						<div style="color:red">
+							<label v-show="usern">用户名不能为空!</label>
+						</div>
 					</div>
 					<div class="form-group">
 						<label>
 							密码<br>
 						</label>
 						<input id="password_38623" class="form-control" type="password" required placeholder="请输入密码……" data-validation-required-message="请输入邮箱来注册。" />
+						<div style="color:red">
+							<label v-show="userp">密码不能为空</label>
+						</div>
 					</div> 
 					<button v-on:click="login()" type="button" class="btn btn-lg btn-button-style btn-azure bloc-button">
 						登录<br>
@@ -130,7 +136,13 @@
 		data: {
 			//一些常量
 			OK :200,
-			ERROR:203
+			ERROR:203,
+		},
+		data () {
+			return {
+				usern:false,
+				userp:false,
+			}
 		},
 		//定义方法
 		methods: {
@@ -138,6 +150,18 @@
 			login:function () {
 				var username = $("#name_38623").val();
 				var password = $("#password_38623").val();
+				this.usern = false;
+				this.userp = false;
+
+				if (username === "")
+				{
+					this.usern = true;
+				}
+				if (password === "")
+				{
+					this.userp = true;
+				}
+
 				axios({
 					method: "get",
 					url: "user/login/" + username +"/"+password,
