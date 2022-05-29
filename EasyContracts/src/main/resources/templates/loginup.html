@@ -216,7 +216,7 @@
                 if(password.length>20){
                     this.userp=true;
                 }
-                if(password!==repeatPassword){
+                if(password!=repeatPassword){
                     this.usert=true;
                 }
                 if(!this.usern){
@@ -229,7 +229,7 @@
                             })
                                 .then(function (value) {
 
-                                    if(value.data.code === 200){
+                                    if(value.data.code == 200){
                                         alert("注册成功！即将跳转到登录页面");
                                         //注册成功跳转到登录页面
                                         window.location.href = registerForm.jump_url;
