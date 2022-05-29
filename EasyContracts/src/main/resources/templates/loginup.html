@@ -203,9 +203,10 @@
 				var code = $("#code_38623").val();
 				var password = $("#input_password").val();
 				var repeatPassword = $("#input_repeatPassword").val();
-                var REGEX_NAME=/[a-zA-Z]{3,8} */;
+                var REGEX_NAME=/[a-zA-Z]{3,8}/;
                 this.usern = false;
                 this.userp=false;
+                this.usert=false;
                 if(!REGEX_NAME.test(username)){
                     this.usern = true;
                 }
@@ -218,9 +219,9 @@
                 if(password!==repeatPassword){
                     this.usert=true;
                 }
-                if(!usern){
-                    if(!userp){
-                        if(!usert){
+                if(!this.usern){
+                    if(!this.userp){
+                        if(!this.usert){
                             axios({
                                 method: "post",
                                 url: "user/register",
@@ -228,7 +229,7 @@
                             })
                                 .then(function (value) {
 
-                                    if(value.data.code === registerForm.OK){
+                                    if(value.data.code === 200){
                                         alert("注册成功！即将跳转到登录页面");
                                         //注册成功跳转到登录页面
                                         window.location.href = registerForm.jump_url;
@@ -245,21 +246,20 @@
 			},
 			//2.发送验证码方法
 			sendCode:function (){
-			    var REGEX=/[1-9][0-9]{7,11}@[a-zA-Z]{2,4}.com/;
+			    var REGEX=/[1-9][0-9]{7,11}@[a-zA-Z0-9]{2,4}.com/;
+			    var REGEX_BJTU=/[1-9][0-9]{7}@bjtu.edu.cn/;
 				var email = $("#email_38623").val();
 				var type = "1";
 				this.hide_error = false;
-				if(!REGEX.test(email)){
-				    this.hide_error = true;
-                }
-                else {
+                this.hide_error = REGEX.test(email)?false:!REGEX_BJTU.test(email);
+                if(!this.hide_error) {
                     axios({
                         method: "get",
                         url: "user/register/sendCode",
                         params: {email,type}
                     })
                         .then(function (value) {
-                            if(value.data === registerForm.OK) {
+                            if(value.data === 200) {
                                 alert("发送成功请查收邮件！");
                             }
                             else{
