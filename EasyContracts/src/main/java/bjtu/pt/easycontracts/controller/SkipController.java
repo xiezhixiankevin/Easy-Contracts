@@ -127,5 +127,8 @@ public class SkipController {
         model.addAttribute("customers",customerService.listCustomerSelective(null));
         return "contract/draft";
     }
-
+    @GetMapping("/toSign")
+    public String toSign(){
+        return "countersign";
+    }
 }
