@@ -70,6 +70,58 @@ public class ContractProcessServiceImpl implements ContractProcessService {
             listConTractUserNeedDeal.put(EXAM,contractsList3);
         if(!contractsList4.isEmpty())
             listConTractUserNeedDeal.put(SIGN,contractsList4);
+
+        //查询对应userId具有分配能力的 待分配的合同
+        //查询处在待分配的contract
+        List<Contract> contractsList5=new ArrayList<>();
+
+        List<Contract> distributedContractsList = new ArrayList<>();
+        ContractExample distributedContract=new ContractExample();
+        distributedContract.createCriteria().andTypeEqualTo(WAITING);
+        distributedContractsList = contractMapper.selectByExample(distributedContract);//所有type为WAITING的合同
+
+        ContractProcessExample contractProcessExample5=new ContractProcessExample();
+        List<ContractProcess> distributedContractProcessList;
+        int flag5=0;
+        for(int i=0;i<distributedContractsList.size();i++){
+            contractProcessExample5.createCriteria().andContractidEqualTo(distributedContractsList.get(i).getContractid());
+            distributedContractProcessList=contractProcessMapper.selectByExample(contractProcessExample5);// 合同流程表里所有合同为对应合同ID的合同流程
+            if(rights.get(0)==true){
+                for(int j=0;j<distributedContractProcessList.size();j++){
+                    if(distributedContractProcessList.get(j).getType()==COUNTERSIGN){
+                        flag5=1;//如果存在 flag就为1 即不需要操作
+                    }
+                }
+            }
+            if(flag5==0){
+                contractsList5.add(distributedContractsList.get(i));
+            }
+            flag5=0;
+            if(rights.get(1)==true){
+                for(int j=0;j<distributedContractProcessList.size();j++){
+                    if(distributedContractProcessList.get(j).getType()!=EXAM){
+                        flag5=1;//如果存在 flag就为1 即不需要操作
+                    }
+                }
+            }
+            if(flag5==0){
+                contractsList5.add(distributedContractsList.get(i));
+            }
+            flag5=0;
+            if(rights.get(2)==true){
+                for(int j=0;j<distributedContractProcessList.size();j++){
+                    if(distributedContractProcessList.get(j).getType()!=SIGN){
+                        flag5=1;//如果存在 flag就为1 即不需要操作
+                    }
+                }
+            }
+            if(flag5==0){
+                contractsList5.add(distributedContractsList.get(i));
+            }
+            flag5=0;
+        }
+        if(!contractsList5.isEmpty())
+            listConTractUserNeedDeal.put(5,contractsList4);// key 为5 表示待分配的合同
         return listConTractUserNeedDeal;
     }
 
