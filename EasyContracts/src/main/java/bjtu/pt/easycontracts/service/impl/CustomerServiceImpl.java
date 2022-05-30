@@ -42,8 +42,8 @@ public class CustomerServiceImpl implements CustomerService
         }
         if (customer.getAccount() != null)
             criteria.andAccountEqualTo(customer.getAccount());
-        if (customer.getCode() != null)
-            criteria.andCodeEqualTo(customer.getCode());
+        if (customer.getEmail() != null)
+            criteria.andEmailEqualTo(customer.getEmail());
         if (customer.getCustomerid() != null)
             criteria.andCustomeridEqualTo(customer.getCustomerid());
         if (customer.getAddress() != null)

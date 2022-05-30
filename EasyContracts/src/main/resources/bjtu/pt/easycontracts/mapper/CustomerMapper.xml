@@ -6,9 +6,10 @@
     <result column="customerName" property="customername" jdbcType="VARCHAR" />
     <result column="address" property="address" jdbcType="VARCHAR" />
     <result column="phone" property="phone" jdbcType="VARCHAR" />
-    <result column="code" property="code" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
     <result column="bank" property="bank" jdbcType="VARCHAR" />
     <result column="account" property="account" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -69,7 +70,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    customerId, customerName, address, phone, code, bank, account
+    customerId, customerName, address, phone, email, bank, account, remark
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="bjtu.pt.easycontracts.pojo.table.CustomerExample" >
     select
@@ -103,11 +104,11 @@
   </delete>
   <insert id="insert" parameterType="bjtu.pt.easycontracts.pojo.table.Customer" >
     insert into customer (customerId, customerName, address, 
-      phone, code, bank, 
-      account)
+      phone, email, bank, 
+      account, remark)
     values (#{customerid,jdbcType=INTEGER}, #{customername,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
-      #{phone,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, #{bank,jdbcType=VARCHAR}, 
-      #{account,jdbcType=VARCHAR})
+      #{phone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{bank,jdbcType=VARCHAR}, 
+      #{account,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="bjtu.pt.easycontracts.pojo.table.Customer" >
     insert into customer
@@ -124,14 +125,17 @@
       <if test="phone != null" >
         phone,
       </if>
-      <if test="code != null" >
-        code,
+      <if test="email != null" >
+        email,
       </if>
       <if test="bank != null" >
         bank,
       </if>
       <if test="account != null" >
         account,
+      </if>
+      <if test="remark != null" >
+        remark,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -147,14 +151,17 @@
       <if test="phone != null" >
         #{phone,jdbcType=VARCHAR},
       </if>
-      <if test="code != null" >
-        #{code,jdbcType=VARCHAR},
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
       </if>
       <if test="bank != null" >
         #{bank,jdbcType=VARCHAR},
       </if>
       <if test="account != null" >
         #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -179,14 +186,17 @@
       <if test="record.phone != null" >
         phone = #{record.phone,jdbcType=VARCHAR},
       </if>
-      <if test="record.code != null" >
-        code = #{record.code,jdbcType=VARCHAR},
+      <if test="record.email != null" >
+        email = #{record.email,jdbcType=VARCHAR},
       </if>
       <if test="record.bank != null" >
         bank = #{record.bank,jdbcType=VARCHAR},
       </if>
       <if test="record.account != null" >
         account = #{record.account,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -199,9 +209,10 @@
       customerName = #{record.customername,jdbcType=VARCHAR},
       address = #{record.address,jdbcType=VARCHAR},
       phone = #{record.phone,jdbcType=VARCHAR},
-      code = #{record.code,jdbcType=VARCHAR},
+      email = #{record.email,jdbcType=VARCHAR},
       bank = #{record.bank,jdbcType=VARCHAR},
-      account = #{record.account,jdbcType=VARCHAR}
+      account = #{record.account,jdbcType=VARCHAR},
+      remark = #{record.remark,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -218,14 +229,17 @@
       <if test="phone != null" >
         phone = #{phone,jdbcType=VARCHAR},
       </if>
-      <if test="code != null" >
-        code = #{code,jdbcType=VARCHAR},
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
       </if>
       <if test="bank != null" >
         bank = #{bank,jdbcType=VARCHAR},
       </if>
       <if test="account != null" >
         account = #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
       </if>
     </set>
     where customerId = #{customerid,jdbcType=INTEGER}
@@ -235,9 +249,10 @@
     set customerName = #{customername,jdbcType=VARCHAR},
       address = #{address,jdbcType=VARCHAR},
       phone = #{phone,jdbcType=VARCHAR},
-      code = #{code,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
       bank = #{bank,jdbcType=VARCHAR},
-      account = #{account,jdbcType=VARCHAR}
+      account = #{account,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR}
     where customerId = #{customerid,jdbcType=INTEGER}
   </update>
 </mapper>
