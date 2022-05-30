@@ -145,7 +145,10 @@ public class ContractController {
                                                     @RequestParam("userId")Integer userId,
                                                     @RequestParam("opinion")String opinion){
 
-        return null;
+        if(contractService.countersignContract(contractId,userId,opinion)==SUCCESS){
+            return INFO_SUCCESS;
+        }
+        return INFO_ERROR;
     }
 
     /*
