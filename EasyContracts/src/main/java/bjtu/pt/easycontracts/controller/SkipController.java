@@ -127,8 +127,18 @@ public class SkipController {
         model.addAttribute("customers",customerService.listCustomerSelective(null));
         return "contract/draft";
     }
+
+    @GetMapping("/toCounterSign/{contractId}")
+    public String toCounterSign(@PathVariable("contractId")Integer contractId,
+                                Model model){
+        model.addAttribute("contractId",contractId);
+        return "contract/countersign";
+    }
+
     @GetMapping("/toSign")
     public String toSign(){
         return "countersign";
     }
+
+
 }
