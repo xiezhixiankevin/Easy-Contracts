@@ -137,7 +137,7 @@ public class SkipController {
 
     @GetMapping("/toSign")
     public String toSign(){
-        return "countersign";
+        return "contract/countersign";
     }
 
 
