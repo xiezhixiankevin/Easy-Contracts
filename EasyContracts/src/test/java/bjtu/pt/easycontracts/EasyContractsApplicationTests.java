@@ -3,6 +3,8 @@ package bjtu.pt.easycontracts;
 
 
 
+import bjtu.pt.easycontracts.mapper.CustomerMapper;
+import bjtu.pt.easycontracts.pojo.table.Customer;
 import bjtu.pt.easycontracts.service.UserService;
 import bjtu.pt.easycontracts.pojo.table.User;
 import bjtu.pt.easycontracts.utils.Global;
@@ -21,16 +23,14 @@ import static bjtu.pt.easycontracts.utils.Global.*;
 @SpringBootTest
 class EasyContractsApplicationTests {
     @Autowired
-    UserService userService;
+    CustomerMapper customerMapper;
 
     @Test
     void contextLoads() {
-
-        Map<Integer, List<User>> temp = new HashMap<>();
-        temp = userService.getUserListByRightsForAssignContract();
+        Customer customer = new Customer();
         System.out.println("_________TEST____________________________");
-        System.out.println(temp.get(PERMISSION_SIGN_CONTRACT).size());
-        System.out.println("_________TEST____________________________");
+        int i = customerMapper.insert(customer);
+        System.out.println(i+"_________TEST____________________________");
        
     }
 }

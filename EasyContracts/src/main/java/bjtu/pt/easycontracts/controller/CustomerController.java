@@ -44,5 +44,14 @@ public class CustomerController {
         return String.valueOf(Global.SUCCESS);
     }
 
-
+    @PostMapping("/crate")
+    @ResponseBody
+    public String crateCustomer(Customer customer){
+        if(customerService.addCustomer(customer)>0){
+            return String.valueOf(Global.SUCCESS);
+        }
+        else {
+            return String.valueOf(Global.FAIL);
+        }
+    }
 }

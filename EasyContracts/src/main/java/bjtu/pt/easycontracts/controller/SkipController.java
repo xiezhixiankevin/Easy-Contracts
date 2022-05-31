@@ -147,4 +147,6 @@ public class SkipController {
     }
 
 
+    @GetMapping("/toAddCustomer")
+    public String toAddCustomer() {return "customer/create_customers";}
 }
