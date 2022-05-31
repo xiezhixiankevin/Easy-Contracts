@@ -77,6 +77,7 @@
 	<div class="container bloc-lg">
 		<div class="row">
 			<div class="col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3 text-md-left text-center">
+				<form id="form_26550" th:action="@{/contract/draft}" method="post" enctype="multipart/form-data">
 				<h1 class="mg-md">
 					创建客户
 				</h1>
@@ -121,9 +122,10 @@
 						备注<br>
 					</label><textarea class="form-control" rows="4" cols="50"></textarea>
 				</div>
-				<button class="btn btn-lg btn-button-style btn-azure bloc-button" type="submit">
-					提交<span class="special-tag-for-editing-text-with-html"></span><br>
+				<button v-on:click="send()" class="btn btn-lg btn-button-style btn-azure bloc-button" type="button">
+					提交<br>
 				</button>
+				</form>
 			</div>
 		</div>
 	</div>
