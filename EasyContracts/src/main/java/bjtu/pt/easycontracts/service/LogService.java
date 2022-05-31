@@ -23,7 +23,7 @@ public interface LogService {
 
     //查询日志
     //1.查询指定时间的日志
-    int listLogByTime(Log startLog,Log endLog);
+    List<Log> listLogByTime(Log startLog,Log endLog);
     //2.列出所有日志(最新的排在最前面)
     List<Log> listLog();
     //3.查询某个人的操作日志
