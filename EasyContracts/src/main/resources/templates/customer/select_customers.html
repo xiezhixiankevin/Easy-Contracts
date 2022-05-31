@@ -78,25 +78,28 @@
 		<div class="col-md-10">
 			<div class="input-group mb-3">
 				<div class="input-group-append">
-					<span class="input-group-text" id="basic-addon2">用户名:</span>
+					<span class="input-group-text" id="basic-addon2">客户名:</span>
 				</div>
-				<input id="username_input" type="text" class="form-control input-mini">
-				&nbsp;
+				<input id="customername_input" type="text" class="form-control input-mini">
 				&nbsp;
 				<div class="input-group-append">
-					<span class="input-group-text" id="basic-addon1">用户描述:</span>
+					<span class="input-group-text" id="basic-addon1">备注:</span>
 				</div>
-				<input id="userdescribe_input" type="text" class="form-control">
-				&nbsp;
+				<input id="remark_input" type="text" class="form-control">
 				&nbsp;
 				<div class="input-group-append">
-					<span class="input-group-text" id="basic-addon3">权限:</span>
+					<span class="input-group-text" id="basic-addon3">银行:</span>
 				</div>
-				<select id="rights_select" class="form-control"></select>
+				<input id="bank_input" type="text" class="form-control">
+				&nbsp;
+				<div class="input-group-append">
+					<span class="input-group-text" id="basic-addon3">地址:</span>
+				</div>
+				<input id="address_input" type="text" class="form-control">
 			</div>
 		</div>
 		<div class="col-md-2">
-			<button v-on:click="listUserSelective(1)" type="button" class="btn btn-success">
+			<button v-on:click="listCustomerSelective(1)" type="button" class="btn btn-success">
 				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
 					<path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
 				</svg>
@@ -108,23 +111,32 @@
 		<div class="col-lg-12">
 			<table id="customer_table" class="table table-hover table-bordered">
 				<tr>
-					<th>用户id</th>
-					<th>用户名</th>
-					<th>用户角色描述</th>
-					<th>操作</th>
+					<th>客户id</th>
+					<th>客户名</th>
+					<th>地址</th>
+					<th>电话号码</th>
+					<th>邮箱</th>
+					<th>银行</th>
+					<th>账户</th>
+					<th>备注</th>
 				</tr>
-				<tr v-for="user in users">
-					<td>{{user.userid}}</td>
-					<td>{{user.username}}</td>
-					<td>{{user.userdescription}}</td>
+				<tr v-for="customer in customers">
+					<td>{{customer.customerid}}</td>
+					<td>{{customer.customername}}</td>
+					<td>{{customer.address}}</td>
+					<td>{{customer.phone}}</td>
+					<td>{{customer.email}}</td>
+					<td>{{customer.bank}}</td>
+					<td>{{customer.account}}</td>
+					<td>{{customer.remark}}</td>
 					<td>
-						<a href="#" th:if="${session.nowUser.ifHasRight(15)}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash text-danger" viewBox="0 0 16 16">
+						<a v-on:click="deleteCustomer(customer.customerid)" href="#" th:if="${session.nowUser.ifHasRight(19)}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash text-danger" viewBox="0 0 16 16">
 							<path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
 							<path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
 						</svg>删除
 						</a>
 						&nbsp;&nbsp;
-						<a href="#" th:if="${session.nowUser.ifHasRight(13)}" ><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+						<a href="#" th:if="${session.nowUser.ifHasRight(17)}" ><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
 							<path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
 							<path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
 						</svg>编辑
@@ -144,7 +156,7 @@
 							<span aria-hidden="true">&laquo;</span>
 						</a>
 					</li>
-					<li v-on:click="listUserSelective(num)" class="page-item" v-for="num in pageInfo.navigatepageNums">
+					<li v-on:click="listCustomerSelective(num)" class="page-item" v-for="num in pageInfo.navigatepageNums">
 						<a class="page-link" href="#">{{num}}</a>
 					</li>
 					<li v-on:click="nextPage(pageInfo.nextPage)" class="page-item" v-bind:class="pageInfo.isLastPage?'disabled' : '' ">
@@ -200,7 +212,7 @@
 		el:"#customer_div",
 		data:{//定义数据
 			now_page:1,
-			users:[],
+			customers:[],
 			//一些常量
 			OK :200,
 			pageInfo:[]
@@ -219,21 +231,42 @@
 				this.listCustomerSelective(pageNum);
 			},
 			listCustomerSelective:function (pageNum) {
-				var username = $("#username_input").val();
-				var userdescription = $("#userdescribe_input").val();
+				var customername = $("#customername_input").val();
+				var remark = $("#remark_input").val();
+				var bank = $("#bank_input").val();
+				var address = $("#address_input").val();
 				axios({
 					method: "get",
-					url : "user/listUser/"+pageNum.toString(),
-					params:{username:username,userdescription:userdescription}
+					url : "customer/listCustomer/"+pageNum.toString(),
+					params:{customername:customername,remark:remark,bank:bank,address:address}
 				}).then(function (value) {
 					if(value.data.code === customerTableVue.OK){
 						//成功获取到数据渲染表格
-						customerTableVue.users = value.data.object.list;
+						customerTableVue.customers = value.data.object.list;
 						customerTableVue.pageInfo = value.data.object;
 					}else{
 						alert("服务器错误,获取数据失败！");
 					}
 				}).catch();
+			},
+			deleteCustomer:function (customerId) {
+				var kouling = prompt("请重复用户Id:");
+				if (kouling==customerId){
+					axios({
+						method: "post",
+						url : "customer/delete/"+customerId.toString()
+					}).then(function (value) {
+						if(value.data === customerTableVue.OK){
+							//成功获取删除给出提示并重新获取用户列表渲染表格
+							alert("删除成功！");
+							customerTableVue.listCustomerSelective(1);
+						}else{
+							alert("服务器错误,删除失败！");
+						}
+					}).catch();
+				}else if(kouling !=null) {
+					alert("id不一致!");
+				}
 			}
 		},
 		mounted:function () {

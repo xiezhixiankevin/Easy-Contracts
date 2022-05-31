@@ -26,4 +26,7 @@ public interface CustomerService {
 
     //查询客户(wj)
     List<Customer> listCustomerSelective(Customer customer);
+
+    //分页查询客户xzx
+    List<Customer> listCustomerSelectiveByPn(Customer customer,Integer pn);
 }
