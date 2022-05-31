@@ -9,11 +9,13 @@ public class Customer {
 
     private String phone;
 
-    private String code;
+    private String email;
 
     private String bank;
 
     private String account;
+
+    private String remark;
 
     public Integer getCustomerid() {
         return customerid;
@@ -47,12 +49,12 @@ public class Customer {
         this.phone = phone == null ? null : phone.trim();
     }
 
-    public String getCode() {
-        return code;
+    public String getEmail() {
+        return email;
     }
 
-    public void setCode(String code) {
-        this.code = code == null ? null : code.trim();
+    public void setEmail(String email) {
+        this.email = email == null ? null : email.trim();
     }
 
     public String getBank() {
@@ -69,5 +71,13 @@ public class Customer {
 
     public void setAccount(String account) {
         this.account = account == null ? null : account.trim();
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark == null ? null : remark.trim();
     }
 }

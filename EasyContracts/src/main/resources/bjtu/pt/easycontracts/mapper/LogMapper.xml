@@ -3,7 +3,9 @@
 <mapper namespace="bjtu.pt.easycontracts.mapper.LogMapper" >
   <resultMap id="BaseResultMap" type="bjtu.pt.easycontracts.pojo.table.Log" >
     <result column="userId" property="userid" jdbcType="INTEGER" />
+    <result column="contractId" property="contractid" jdbcType="INTEGER" />
     <result column="time" property="time" jdbcType="TIMESTAMP" />
+    <result column="operateType" property="operatetype" jdbcType="INTEGER" />
   </resultMap>
   <resultMap id="ResultMapWithBLOBs" type="bjtu.pt.easycontracts.pojo.table.Log" extends="BaseResultMap" >
     <result column="content" property="content" jdbcType="LONGVARCHAR" />
@@ -67,7 +69,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    userId, time
+    userId, contractId, time, operateType
   </sql>
   <sql id="Blob_Column_List" >
     content
@@ -109,10 +111,10 @@
     </if>
   </delete>
   <insert id="insert" parameterType="bjtu.pt.easycontracts.pojo.table.Log" >
-    insert into log (userId, time, content
-      )
-    values (#{userid,jdbcType=INTEGER}, #{time,jdbcType=TIMESTAMP}, #{content,jdbcType=LONGVARCHAR}
-      )
+    insert into log (userId, contractId, time, 
+      operateType, content)
+    values (#{userid,jdbcType=INTEGER}, #{contractid,jdbcType=INTEGER}, #{time,jdbcType=TIMESTAMP}, 
+      #{operatetype,jdbcType=INTEGER}, #{content,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="bjtu.pt.easycontracts.pojo.table.Log" >
     insert into log
@@ -120,8 +122,14 @@
       <if test="userid != null" >
         userId,
       </if>
+      <if test="contractid != null" >
+        contractId,
+      </if>
       <if test="time != null" >
         time,
+      </if>
+      <if test="operatetype != null" >
+        operateType,
       </if>
       <if test="content != null" >
         content,
@@ -131,8 +139,14 @@
       <if test="userid != null" >
         #{userid,jdbcType=INTEGER},
       </if>
+      <if test="contractid != null" >
+        #{contractid,jdbcType=INTEGER},
+      </if>
       <if test="time != null" >
         #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operatetype != null" >
+        #{operatetype,jdbcType=INTEGER},
       </if>
       <if test="content != null" >
         #{content,jdbcType=LONGVARCHAR},
@@ -151,8 +165,14 @@
       <if test="record.userid != null" >
         userId = #{record.userid,jdbcType=INTEGER},
       </if>
+      <if test="record.contractid != null" >
+        contractId = #{record.contractid,jdbcType=INTEGER},
+      </if>
       <if test="record.time != null" >
         time = #{record.time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.operatetype != null" >
+        operateType = #{record.operatetype,jdbcType=INTEGER},
       </if>
       <if test="record.content != null" >
         content = #{record.content,jdbcType=LONGVARCHAR},
@@ -165,7 +185,9 @@
   <update id="updateByExampleWithBLOBs" parameterType="map" >
     update log
     set userId = #{record.userid,jdbcType=INTEGER},
+      contractId = #{record.contractid,jdbcType=INTEGER},
       time = #{record.time,jdbcType=TIMESTAMP},
+      operateType = #{record.operatetype,jdbcType=INTEGER},
       content = #{record.content,jdbcType=LONGVARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -174,7 +196,9 @@
   <update id="updateByExample" parameterType="map" >
     update log
     set userId = #{record.userid,jdbcType=INTEGER},
-      time = #{record.time,jdbcType=TIMESTAMP}
+      contractId = #{record.contractid,jdbcType=INTEGER},
+      time = #{record.time,jdbcType=TIMESTAMP},
+      operateType = #{record.operatetype,jdbcType=INTEGER}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>

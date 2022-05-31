@@ -165,6 +165,66 @@ public class LogExample {
             return (Criteria) this;
         }
 
+        public Criteria andContractidIsNull() {
+            addCriterion("contractId is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andContractidIsNotNull() {
+            addCriterion("contractId is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andContractidEqualTo(Integer value) {
+            addCriterion("contractId =", value, "contractid");
+            return (Criteria) this;
+        }
+
+        public Criteria andContractidNotEqualTo(Integer value) {
+            addCriterion("contractId <>", value, "contractid");
+            return (Criteria) this;
+        }
+
+        public Criteria andContractidGreaterThan(Integer value) {
+            addCriterion("contractId >", value, "contractid");
+            return (Criteria) this;
+        }
+
+        public Criteria andContractidGreaterThanOrEqualTo(Integer value) {
+            addCriterion("contractId >=", value, "contractid");
+            return (Criteria) this;
+        }
+
+        public Criteria andContractidLessThan(Integer value) {
+            addCriterion("contractId <", value, "contractid");
+            return (Criteria) this;
+        }
+
+        public Criteria andContractidLessThanOrEqualTo(Integer value) {
+            addCriterion("contractId <=", value, "contractid");
+            return (Criteria) this;
+        }
+
+        public Criteria andContractidIn(List<Integer> values) {
+            addCriterion("contractId in", values, "contractid");
+            return (Criteria) this;
+        }
+
+        public Criteria andContractidNotIn(List<Integer> values) {
+            addCriterion("contractId not in", values, "contractid");
+            return (Criteria) this;
+        }
+
+        public Criteria andContractidBetween(Integer value1, Integer value2) {
+            addCriterion("contractId between", value1, value2, "contractid");
+            return (Criteria) this;
+        }
+
+        public Criteria andContractidNotBetween(Integer value1, Integer value2) {
+            addCriterion("contractId not between", value1, value2, "contractid");
+            return (Criteria) this;
+        }
+
         public Criteria andTimeIsNull() {
             addCriterion("time is null");
             return (Criteria) this;
@@ -222,6 +282,66 @@ public class LogExample {
 
         public Criteria andTimeNotBetween(Date value1, Date value2) {
             addCriterion("time not between", value1, value2, "time");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperatetypeIsNull() {
+            addCriterion("operateType is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperatetypeIsNotNull() {
+            addCriterion("operateType is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperatetypeEqualTo(Integer value) {
+            addCriterion("operateType =", value, "operatetype");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperatetypeNotEqualTo(Integer value) {
+            addCriterion("operateType <>", value, "operatetype");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperatetypeGreaterThan(Integer value) {
+            addCriterion("operateType >", value, "operatetype");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperatetypeGreaterThanOrEqualTo(Integer value) {
+            addCriterion("operateType >=", value, "operatetype");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperatetypeLessThan(Integer value) {
+            addCriterion("operateType <", value, "operatetype");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperatetypeLessThanOrEqualTo(Integer value) {
+            addCriterion("operateType <=", value, "operatetype");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperatetypeIn(List<Integer> values) {
+            addCriterion("operateType in", values, "operatetype");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperatetypeNotIn(List<Integer> values) {
+            addCriterion("operateType not in", values, "operatetype");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperatetypeBetween(Integer value1, Integer value2) {
+            addCriterion("operateType between", value1, value2, "operatetype");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperatetypeNotBetween(Integer value1, Integer value2) {
+            addCriterion("operateType not between", value1, value2, "operatetype");
             return (Criteria) this;
         }
     }

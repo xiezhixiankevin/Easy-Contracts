@@ -129,12 +129,6 @@
 							<path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
 						</svg>编辑
 						</a>
-						&nbsp;&nbsp;
-						<a href="#" th:if="${session.nowUser.ifHasRight(20)}" :href="'http://localhost:8080/toRights/'+user.username">
-							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list-ul text-dark" viewBox="0 0 16 16">
-								<path fill-rule="evenodd" d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm-3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
-							</svg>权限管理
-						</a>
 					</td>
 				</tr>
 			</table>
@@ -216,15 +210,15 @@
 				if(customerTableVue.pageInfo.isFirstPage){
 					return;
 				}
-				this.listUserSelective(pageNum);
+				this.listCustomerSelective(pageNum);
 			},
 			nextPage:function (pageNum) {
 				if(customerTableVue.pageInfo.isLastPage){
 					return;
 				}
-				this.listUserSelective(pageNum);
+				this.listCustomerSelective(pageNum);
 			},
-			listUserSelective:function (pageNum) {
+			listCustomerSelective:function (pageNum) {
 				var username = $("#username_input").val();
 				var userdescription = $("#userdescribe_input").val();
 				axios({
@@ -243,7 +237,7 @@
 			}
 		},
 		mounted:function () {
-			this.listUserSelective(1);
+			this.listCustomerSelective(1);
 		}
 	});
 </script>

@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import javax.servlet.http.HttpSession;
-import java.util.Map;
 
 /**
  * <Description> SkipController
@@ -127,8 +126,25 @@ public class SkipController {
         model.addAttribute("customers",customerService.listCustomerSelective(null));
         return "contract/draft";
     }
+
+    //跳转到合同会签页面
+    @GetMapping("/toCounterSign/{contractId}")
+    public String toCounterSign(@PathVariable("contractId")Integer contractId,
+                                Model model){
+        model.addAttribute("contractId",contractId);
+        return "contract/countersign";
+    }
+
+    //跳转到搜索客户页面
+    @GetMapping("/toSelectCustomer")
+    public String toSelectCustomer(){
+        return "customer/select_customers";
+    }
+
     @GetMapping("/toSign")
     public String toSign(){
-        return "countersign";
+        return "contract/countersign";
     }
+
+
 }
