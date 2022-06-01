@@ -164,7 +164,7 @@
 
 				axios({
 					method: "get",
-					url: "user/login/" + username +"/"+password,
+					url: "user/login/" + username +"/"+password
 				})
 						.then(function (value) {
 							if(value.data.code === 200) {

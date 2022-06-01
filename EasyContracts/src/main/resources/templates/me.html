@@ -83,7 +83,7 @@
 							其他操作：
 						</h6>
 						<a href="index.html" th:href="@{/toSelectUser}" th:if="${session.nowUser.ifHasRight(20)}" class="btn btn-d btn-lg btn-6-style btn-style-none">权限管理</a>
-						<a href="index.html" th:href="@{/toaddCustomer}" th:if="${session.nowUser.ifHasRight(16)}" class="btn btn-d btn-lg btn-6-style btn-style-none">新增客户</a>
+						<a href="index.html" th:href="@{/toAddCustomer}" th:if="${session.nowUser.ifHasRight(16)}" class="btn btn-d btn-lg btn-6-style btn-style-none">新增客户</a>
 						<a href="index.html" th:href="@{/toSelectCustomer}" th:if="${session.nowUser.ifHasRight(17)}" class="btn btn-d btn-lg btn-6-style btn-style-none">客户管理</a>
 						<a href="index.html" th:href="@{/toSelectUser}" th:if="${session.nowUser.ifHasRight(13)}" class="btn btn-d btn-lg btn-6-style btn-style-none">用户管理</a>
 					</div>
