@@ -190,12 +190,12 @@ public class ContractServiceImpl implements ContractService
         }
 
         /* 将该操作员已完成会签操作的信息发送给所有操作员 */
-        List<User> usersAboutContract = userService.getUsersAboutContract(contractId);
-        for (User user : usersAboutContract)
-        {
-            emailService.sendSimpleMail(user.getEmail() , "Contract Countersign" , "The operator with id " + userId + "has finished the countersign" +
-                    " on contract with id " + contractId + ", remember to check!");
-        }
+//        List<User> usersAboutContract = userService.getUsersAboutContract(contractId);
+//        for (User user : usersAboutContract)
+//        {
+//            emailService.sendSimpleMail(user.getEmail() , "Contract Countersign" , "The operator with id " + userId + "has finished the countersign" +
+//                    " on contract with id " + contractId + ", remember to check!");
+//        }
 
         return updateLine;
     }

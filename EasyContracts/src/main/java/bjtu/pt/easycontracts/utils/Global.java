@@ -65,6 +65,14 @@ public class Global {
     public static final int PASS = 2; // 通过此状态
     public static final int VETO = 3; // 在该状态中被否决
 
+    /* log表operateType字段相应的类型 */
+    /* public static final int COUNTERSIGN = 1; // 会签
+       public static final int FINALIZE = 2; // 定稿
+       public static final int EXAM = 3; // 审批
+       public static final int SIGN = 4; // 签订
+       此部分可以参照contract_process表type定义..待更新
+     */
+
     //文件上传路径
     public static final String FILE_PATH = "F://files";
 }

@@ -173,14 +173,38 @@
 <script th:src="@{/js/axios.min.js}"  type="text/javascript" charset="utf-8"></script>
 <!-- Additional JS END -->
 <script>
-    var draft=new Vue({
+    var customer=new Vue({
         el:"#form_26550",  //作用范围：id=form_38623的标签及其内部
         methods:{
             send:function (){
-                var textarea = $("#name_26558").val();
-                $("#name_26559").val(textarea);
-				var theForm = document.getElementById("form_26550");
-				theForm.submit();
+                var customername =  $("#name_26551").val();
+                var phone = $("#name_26552").val();
+                var address = $("#name_26553").val();
+                var email = $("#name_26554").val();
+                var bank = $("#name_26555").val();
+                var account = $("#name_26556").val();
+                var remark = $("#name_26558").val();
+                axios({
+                    method: "post",
+                    url: "customer/crate",
+                    params:{
+                        customername:customername,
+                        phone:phone,
+                        address:address,
+                        email:email,
+                        bank:bank,
+                        account:account,
+                        remark:remark
+					}
+                })
+                    .then(function (value) {
+                        if((String)(value.data)==="200") {
+                            alert("创建成功");
+                        }else{
+                            alert("创建失败");
+                        }
+                    })
+                    .catch();
             }
         }
     })

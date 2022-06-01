@@ -141,14 +141,13 @@ public class ContractController {
      *会签合同按钮映射到此方法
      * */
     @PostMapping("/countersign")
-    public String countersignContract(@RequestParam("contractId")Integer contractId,
-                                                    @RequestParam("userId")Integer userId,
-                                                    @RequestParam("opinion")String opinion){
-
-        if(contractService.countersignContract(contractId,userId,opinion)==SUCCESS){
-            return INFO_SUCCESS;
-        }
-        return INFO_ERROR;
+    @ResponseBody
+    public String countersignContract(Integer contractId,
+                                                    Integer userId,
+                                                   String opinion){
+        // TODO: 在下面这个方法中注释了群发邮件的方法，因为会报错
+        contractService.countersignContract(contractId,userId,opinion);
+        return INFO_SUCCESS;
     }
 
     /*
