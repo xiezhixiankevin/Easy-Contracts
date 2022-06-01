@@ -131,7 +131,7 @@ public class SkipController {
     @GetMapping("/toCounterSign/{contractId}")
     public String toCounterSign(@PathVariable("contractId")Integer contractId,
                                 Model model){
-        model.addAttribute("contractId",contractId);
+        model.addAttribute("contractObject",contractService.getContractById(contractId));
         return "contract/countersign";
     }
 

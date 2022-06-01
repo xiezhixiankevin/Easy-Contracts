@@ -30,7 +30,7 @@
 
 
 <!-- Main container -->
-<div class="page-container">
+<div class="page-container" id="all-page">
     
 <!-- bloc-0 -->
 <div class="bloc bg-截屏2022-05-07-2019-53-22 l-bloc " id="bloc-0">
@@ -80,16 +80,16 @@
 				<div class="card">
 					<div class="card-body">
 						<h1 class="mg-md">
-							合同名………………
+							{{contractName}}
 						</h1>
 						<p>
-							合同内容合同内容合同内容合同内容合同内容合同内容合同内容合同内容合同内容合同内容合同内容合同内容合同内容合同内容合同内容合同内容合同内容合同内容合同内容合同内容合同内容合同内容合同内容合同内容合同内容合同内容合同内容合同内容合同内容合同内容合同内容合同内容合同内容合同内容合同内容合同内容合同内容合同内容合同内容合同内容合同内容合同内容合同内容合同内容合同内容合同内容合同内容合同内容合同内容合同内容
+							{{contractContent}}
 						</p>
 						<h5 class="mg-md">
-							合同生效时间：2022.05.07-2022.99.99
+							合同生效时间：{{beginTimeStr}}-{{endTimeStr}}
 						</h5>
 						<h5 class="mg-md">
-							客户：xxxxxxx
+							客户：{{contractCustomerName}}
 						</h5>
 						<h5 class="mg-md">
 							附件：
@@ -101,7 +101,7 @@
 	</div>
 </div>
 <!-- bloc-10 END -->
-	<input type="hidden" th:value="${contractId}">
+<!--	<input type="hidden" th:value="${contractObject}">-->
 
 <!-- bloc-11 -->
 <div class="bloc l-bloc" id="bloc-11">
@@ -111,7 +111,13 @@
 				<div class="form-group">
 					<label>
 						会签意见：<br>
-					</label><textarea class="form-control" rows="4" cols="50"></textarea><a href="../index.html" class="btn btn-lg float-lg-right btn-azure">提交会签<br></a>
+					</label>
+					<textarea class="form-control" name="content" id="content" rows="4" cols="50"></textarea>
+<!--					<a v-on:click="submitCountersign()" class="btn btn-lg float-lg-right btn-azure">提交会签<br></a>-->
+					<button v-on:click="submitCountersign()" class="bloc-button btn btn-lg btn-block btn-azure" type="button" >
+						提交会签<br>
+					</button>
+
 				</div>
 			</div>
 		</div>
@@ -149,7 +155,58 @@
 <script th:src="@{/js/jquery.min.js}"  type="text/javascript" charset="utf-8"></script>
 <script th:src="@{/js/vue.js}"  type="text/javascript" charset="utf-8"></script>
 <script th:src="@{/js/axios.min.js}"  type="text/javascript" charset="utf-8"></script>
+<script th:inline="javascript">
+	var counterSignVue = new Vue({
+		el: "#all-page",
+		data: {
+			contractName: "",
+			contractContent: "",
+			contractCustomerName: "",
+			beginTimeStr : "",
+			endTimeStr : "",
+		},
+		mounted: function () {
+			this.getInitValues();
+		},
+		methods: {
+			getInitValues: function () {
+				this.contractName = [[${contractObject.contractname}]]
+				this.contractContent = [[${contractObject.content}]]
+				// TODO: 以下三个显示不出来，不知道为什么
+				this.contractCustomerName = [[${contractObject.customerName}]]
+				this.beginTimeStr = [[${contractObject.beginTimeStr}]]
+				this.endTimeStr = [[${contractObject.endTimeStr}]]
+			},
 
+			submitCountersign: function () {
+				var opinionContent = $("#content").val();
+				var contractID = [[${contractObject.contractid}]];
+				var userID = [[${session.nowUser.userid}]];
+
+				axios({
+					method: "post",
+					url: "/contract/countersign",
+					params:{
+						contractId: contractID,
+						userId: userID,
+						opinion: opinionContent
+					}
+				})
+						.then(function (value) {
+							if(value.data === "Operation SUCCEEDED") {
+								alert("会签成功!");
+							}else{
+								// TODO: 会提示错误，但是 DEBUG 发现 id 和 opinion 都提交成功了，问题未知
+								alert("错误：" + value.data);
+							}
+						})
+						.catch();
+
+
+			}
+		}
+	});
+</script>
 
 </body>
 </html>
