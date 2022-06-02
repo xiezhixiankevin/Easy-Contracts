@@ -118,6 +118,7 @@ public class ContractController {
         //其他设置
         contract.setType(Global.WAITING);
         //1.先保存合同
+
         int id = contractService.addContract(contract);
         //2.保存附件
         ContractAttachment contractAttachment = new ContractAttachment();
@@ -133,6 +134,7 @@ public class ContractController {
         contractProcess.setState(NOT_COME);
         contractProcess.setUserid(user.getUserid());
         contractProcessService.insertProcess(contractProcess);
+
 
         return "info/success";
     }

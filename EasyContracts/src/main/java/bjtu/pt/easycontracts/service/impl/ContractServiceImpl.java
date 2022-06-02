@@ -516,8 +516,9 @@ public class ContractServiceImpl implements ContractService
         return contractList;
     }
 
+    @Override
     //此方法用来给Contract设置一些初始化的信息，如把Date转成字符串
-    private void setContract(Contract contract){
+    public void setContract(Contract contract){
         //设置时间为字符串
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         contract.setBeginTimeStr(simpleDateFormat.format(contract.getBegintime()));

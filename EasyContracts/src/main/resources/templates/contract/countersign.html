@@ -96,34 +96,34 @@
 						</h5>
 					</div>
 				</div>
+				<br><br>
+				<label>
+					会签意见：<br>
+				</label>
+				<textarea class="form-control" name="content" id="content" rows="4" cols="50"></textarea>
+				<!--					<a v-on:click="submitCountersign()" class="btn btn-lg float-lg-right btn-azure">提交会签<br></a>-->
+				<br>
+				<button v-on:click="submitCountersign()" class="bloc-button btn btn-lg btn-block btn-azure" type="button" >
+					提交会签<br>
+				</button>
+
+
+
+
 			</div>
+
+
 		</div>
+
+
+
+
 	</div>
 </div>
 <!-- bloc-10 END -->
 <!--	<input type="hidden" th:value="${contractObject}">-->
 
-<!-- bloc-11 -->
-<div class="bloc l-bloc" id="bloc-11">
-	<div class="container bloc-lg">
-		<div class="row">
-			<div class="col text-md-left text-center">
-				<div class="form-group">
-					<label>
-						会签意见：<br>
-					</label>
-					<textarea class="form-control" name="content" id="content" rows="4" cols="50"></textarea>
-<!--					<a v-on:click="submitCountersign()" class="btn btn-lg float-lg-right btn-azure">提交会签<br></a>-->
-					<button v-on:click="submitCountersign()" class="bloc-button btn btn-lg btn-block btn-azure" type="button" >
-						提交会签<br>
-					</button>
 
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-<!-- bloc-11 END -->
 
 <!-- ScrollToTop Button -->
 <a class="bloc-button btn btn-d scrollToTop" onclick="scrollToTarget('1',this)"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 32 32"><path class="scroll-to-top-btn-icon" d="M30,22.656l-14-13-14,13"/></svg></a>
@@ -194,10 +194,10 @@
 				})
 						.then(function (value) {
 							if(value.data === "Operation SUCCEEDED") {
-								alert("会签成功!");
+								alert("会签成功！即将返回上一级页面。");
+								window.location.replace(document.referrer);
 							}else{
-								// TODO: 会提示错误，但是 DEBUG 发现 id 和 opinion 都提交成功了，问题未知
-								alert("错误：" + value.data);
+								alert("错误：" + value.data + "，请重试。");
 							}
 						})
 						.catch();

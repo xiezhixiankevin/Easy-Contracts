@@ -57,4 +57,7 @@ public interface ContractService {
 
     //条件返回一个用户要处理的所有合同  不包括分配!!
     List<Contract> listContractUserNeedDeal(Contract contract, Integer userID,Integer pn);//xzx
+
+    void setContract(Contract contract);
+
 }
