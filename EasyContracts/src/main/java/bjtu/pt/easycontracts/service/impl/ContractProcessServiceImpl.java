@@ -7,6 +7,8 @@ import bjtu.pt.easycontracts.pojo.table.ContractExample;
 import bjtu.pt.easycontracts.pojo.table.ContractProcess;
 import bjtu.pt.easycontracts.pojo.table.ContractProcessExample;
 import bjtu.pt.easycontracts.service.ContractProcessService;
+import bjtu.pt.easycontracts.service.UserService;
+import bjtu.pt.easycontracts.utils.Global;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +26,8 @@ public class ContractProcessServiceImpl implements ContractProcessService {
     private ContractProcessMapper contractProcessMapper;
     @Autowired
     private ContractMapper contractMapper;
+    @Autowired
+    private UserService userService;
 
     @Override
     public Map<Integer, List<Contract>> listConTractUserNeedDeal(int userId,List<Boolean> rights) {
@@ -144,6 +148,23 @@ public class ContractProcessServiceImpl implements ContractProcessService {
     }
 
     @Override
+    public int updateProcess(int userId, int contractId, int type, ContractProcess contractProcess) {
+        ContractProcessExample contractProcessExample = new ContractProcessExample();
+        ContractProcessExample.Criteria criteria = contractProcessExample.createCriteria();
+
+        /* 添加检索条件 */
+        criteria.andUseridEqualTo(userId);
+        criteria.andContractidEqualTo(contractId);
+        criteria.andTypeEqualTo(type);
+
+        /* 更新内容 */
+        contractProcessMapper.updateByExampleWithBLOBs(contractProcess , contractProcessExample);
+
+        /* 返回当前合同所处状态 */
+        return contractProcess.getType();
+    }
+
+    @Override
     public int insertProcess(ContractProcess contractProcess) {
         contractProcessMapper.insert(contractProcess);
         return SUCCESS;
@@ -241,6 +262,57 @@ public class ContractProcessServiceImpl implements ContractProcessService {
             }
         }
         return false;
+    }
+
+    @Override
+    public void finalize(int contractId, int userId) {
+        //修改定稿人的process
+        ContractProcess contractProcess = new ContractProcess(contractId, userId, FINALIZE, Global.PASS);
+        updateProcess(userId,contractId,Global.FINALIZE,contractProcess);
+        //设置所有审批人state
+        ContractProcessExample contractProcessExample = new ContractProcessExample();
+        contractProcessExample.createCriteria().andContractidEqualTo(contractId).andTypeEqualTo(Global.EXAM);
+        ContractProcess contractProcess1 = new ContractProcess();
+        contractProcess1.setState(DOING);
+        contractProcessMapper.updateByExampleSelective(contractProcess1,contractProcessExample);
+        //修改合同进入审批阶段
+        Contract contract = new Contract();
+        contract.setType(EXAMMING);
+        contract.setContractid(contractId);
+        contractMapper.updateByPrimaryKeySelective(contract);
+    }
+
+
+    @Override
+    public String getCounterSignOpinion(int contractId) {
+        //查出所有会签
+        ContractProcessExample contractProcessExample = new ContractProcessExample();
+        contractProcessExample.createCriteria().andContractidEqualTo(contractId).andTypeEqualTo(Global.COUNTERSIGN);
+        List<ContractProcess> contractProcesses = contractProcessMapper.selectByExampleWithBLOBs(contractProcessExample);
+        //拼接会签意见
+        StringBuilder stringBuilder = new StringBuilder();
+        for (ContractProcess contractProcess : contractProcesses) {
+            String content = contractProcess.getContent();
+            String username = userService.getUserById(contractProcess.getUserid()).getUsername();
+            stringBuilder.append(username).append(" :").append("\n").append(content).append("\n");
+        }
+        return stringBuilder.toString();
+    }
+
+    @Override
+    public String getExamOpinion(int contractId) {
+        //查出所有审批,只显示未通过
+        ContractProcessExample contractProcessExample = new ContractProcessExample();
+        contractProcessExample.createCriteria().andContractidEqualTo(contractId).andTypeEqualTo(EXAM).andStateEqualTo(VETO);
+        List<ContractProcess> contractProcesses = contractProcessMapper.selectByExampleWithBLOBs(contractProcessExample);
+        //拼接审批意见
+        StringBuilder stringBuilder = new StringBuilder();
+        for (ContractProcess contractProcess : contractProcesses) {
+            String content = contractProcess.getContent();
+            String username = userService.getUserById(contractProcess.getUserid()).getUsername();
+            stringBuilder.append(username).append(" : ").append(content).append("\n");
+        }
+        return stringBuilder.toString();
     }
 
 

@@ -56,14 +56,23 @@ public class ContractFileServiceImpl implements ContractFileService {
     }
 
     @Override
-    public int deleteContractFile(int id) {
-        return 0;
+    public int deleteContractFile(ContractAttachment contractAttachment) {
+       //先从数据库删除文件信息
+        ContractAttachmentExample contractAttachmentExample = new ContractAttachmentExample();
+        contractAttachmentExample.createCriteria().andPathEqualTo(contractAttachment.getPath());
+        contractAttachmentMapper.deleteByExample(contractAttachmentExample);
+       //再从服务器删除
+        return deleteFile(contractAttachment.getPath());
     }
 
 
     @Override
     public int deleteFile(String filePath) {
-        return 0;
+        File file = new File(filePath);
+        if (file.delete()){
+            return Global.SUCCESS;
+        }
+        return Global.FAIL;
     }
 
     @Override

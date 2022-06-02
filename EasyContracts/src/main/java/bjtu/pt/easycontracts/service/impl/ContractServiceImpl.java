@@ -88,28 +88,14 @@ public class ContractServiceImpl implements ContractService
         deleteLine += contractMapper.deleteByExample(contractExample);
         deleteLine += contractProcessMapper.deleteByExample(contractProcessExample);
 
-        /* 将删除信息发送给所有该合同的操作员 */
-        List<User> usersAboutContract = userService.getUsersAboutContract(id);
-        for (User user : usersAboutContract)
-        {
-            emailService.sendSimpleMail(user.getEmail() , "Contract Delete" , "The contract with id " + id + "has been deleted, remember to check!");
-        }
 
         return deleteLine;
     }
 
     @Override
     public int updateContract(int id, Contract newContract) {
-        deleteContract(id);
-        addContract(newContract);
-
-        /* 将更新信息发送给所有操作员 */
-        List<User> usersAboutContract = userService.getUsersAboutContract(id);
-        for (User user : usersAboutContract)
-        {
-            emailService.sendSimpleMail(user.getEmail() , "Contract Update" , "The contract with id " + id + "has been updated, remember to check!");
-        }
-
+        newContract.setContractid(id);
+        contractMapper.updateByPrimaryKeySelective(newContract);
         return SUCCESS;
     }
 

@@ -38,6 +38,8 @@ public class SkipController {
     private ContractService contractService;
     @Autowired
     private ContractFileService contractFileService;
+    @Autowired
+    private ContractProcessService contractProcessService;
 
     //跳转到注册页面，
     @GetMapping("/toRegister")
@@ -144,6 +146,32 @@ public class SkipController {
             model.addAttribute("file",null);
         }
         return "contract/countersign";
+    }
+
+    //跳转到合同定稿页面
+    @GetMapping("/toFinalize/{contractId}")
+    public String toFinalize(@PathVariable("contractId")Integer contractId,
+                                Model model){
+        Contract toCountersignContract = contractService.getContractById(contractId);
+        List<ContractAttachment> fileList = contractFileService.getContractFileListOfContract(contractId);
+        contractService.setContract(toCountersignContract); //设置时间等信息
+
+        if (!fileList.isEmpty()){
+            model.addAttribute("file",fileList.get(0));
+        }else {
+            model.addAttribute("file",null);
+        }
+
+        model.addAttribute("contractObject", toCountersignContract);
+        model.addAttribute("customers",customerService.listCustomerSelective(null));
+        if (toCountersignContract.getFailuretimes() >0){
+            model.addAttribute("exam",true); //标识是会签定稿，还是审批定稿
+            model.addAttribute("counterSignOpinion",contractProcessService.getExamOpinion(contractId));//审批意见
+        }else {
+            model.addAttribute("finalize",true); //标识是会签定稿，还是审批定稿
+            model.addAttribute("counterSignOpinion",contractProcessService.getCounterSignOpinion(contractId));//会签意见
+        }
+        return "contract/finalize";
     }
 
     //跳转到搜索客户页面

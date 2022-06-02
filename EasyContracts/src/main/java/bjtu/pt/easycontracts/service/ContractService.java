@@ -39,6 +39,11 @@ public interface ContractService {
     int countersignContract(int contractId ,int userId ,String opinion);//wj
 
     //给合同添加审批意见，并且记得修改被打回次数并更改状态为定稿，当然一次审批即通过则无需修改被打回次数并进入下一状态
+    /*审批合同
+     * 数据库中的content(参数的content是新加的审批意见)应该保留某种格式，因为审批可能有多次，例如如下格式
+     * 2015-02-23 15:41:23(第一次审批)(否决): 希望内容再多一点，附件再美化一下
+     * 2015-02-24 16:41:23(第二次审批)(通过): 这次不错
+     * */
     int examineConTract(int contractId ,int userId , String opinion , boolean ifPass);//zxc
 
     //签订合同
