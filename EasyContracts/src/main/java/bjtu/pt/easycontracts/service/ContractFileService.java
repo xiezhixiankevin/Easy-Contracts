@@ -2,6 +2,7 @@ package bjtu.pt.easycontracts.service;
 
 import bjtu.pt.easycontracts.pojo.table.ContractAttachment;
 import org.springframework.web.multipart.MultipartFile;
+import java.util.*;
 
 /**
  * <Description> ContractFileService
@@ -22,4 +23,8 @@ public interface ContractFileService {
 
 
     int deleteFile(String filePath);
+
+    ContractAttachment getContractAttachment(int contractId,String fileName);
+
+    List<ContractAttachment> getContractFileListOfContract(int contractId);
 }

@@ -1,11 +1,9 @@
 package bjtu.pt.easycontracts.controller;
 
 import bjtu.pt.easycontracts.pojo.table.Contract;
+import bjtu.pt.easycontracts.pojo.table.ContractAttachment;
 import bjtu.pt.easycontracts.pojo.table.User;
-import bjtu.pt.easycontracts.service.ContractService;
-import bjtu.pt.easycontracts.service.CustomerService;
-import bjtu.pt.easycontracts.service.RightsService;
-import bjtu.pt.easycontracts.service.UserService;
+import bjtu.pt.easycontracts.service.*;
 import bjtu.pt.easycontracts.utils.Global;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 /**
  * <Description> SkipController
@@ -37,6 +36,8 @@ public class SkipController {
     private RightsService rightsService;
     @Autowired
     private ContractService contractService;
+    @Autowired
+    private ContractFileService contractFileService;
 
     //跳转到注册页面，
     @GetMapping("/toRegister")
@@ -132,8 +133,16 @@ public class SkipController {
     public String toCounterSign(@PathVariable("contractId")Integer contractId,
                                 Model model){
         Contract toCountersignContract = contractService.getContractById(contractId);
+        //目前只能上传一个文件，后续考虑多个文件
+        List<ContractAttachment> fileList = contractFileService.getContractFileListOfContract(contractId);
+
         contractService.setContract(toCountersignContract);
         model.addAttribute("contractObject", toCountersignContract);
+        if (!fileList.isEmpty()){
+            model.addAttribute("file",fileList.get(0));
+        }else {
+            model.addAttribute("file",null);
+        }
         return "contract/countersign";
     }
 

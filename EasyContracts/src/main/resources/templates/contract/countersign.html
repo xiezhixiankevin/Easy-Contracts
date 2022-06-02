@@ -86,14 +86,16 @@
 							{{contractContent}}
 						</p>
 						<h5 class="mg-md">
-							合同生效时间：{{beginTimeStr}}-{{endTimeStr}}
+							合同生效时间：{{beginTimeStr}} to {{endTimeStr}}
 						</h5>
 						<h5 class="mg-md">
 							客户：{{contractCustomerName}}
 						</h5>
-						<h5 class="mg-md">
-							附件：
+						<h5 th:if="${file!=null}" class="mg-md">
+							附件：<span th:text="${file.getFilename()}"></span>
+
 						</h5>
+						<a href="" th:href="@{|/fileDown/${file.getFilename()}/${file.getContractid()}|}">下载附件</a>
 					</div>
 				</div>
 				<br><br>
@@ -164,6 +166,8 @@
 			contractCustomerName: "",
 			beginTimeStr : "",
 			endTimeStr : "",
+			fileName : "",
+			filePath : ""
 		},
 		mounted: function () {
 			this.getInitValues();
@@ -176,6 +180,8 @@
 				this.contractCustomerName = [[${contractObject.customerName}]]
 				this.beginTimeStr = [[${contractObject.beginTimeStr}]]
 				this.endTimeStr = [[${contractObject.endTimeStr}]]
+				this.filePath = [[${file.path}]]
+				this.fileName = [[${file.filename}]]
 			},
 
 			submitCountersign: function () {
@@ -204,6 +210,7 @@
 
 
 			}
+
 		}
 	});
 </script>

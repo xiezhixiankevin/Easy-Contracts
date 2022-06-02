@@ -2,6 +2,7 @@ package bjtu.pt.easycontracts.service.impl;
 
 import bjtu.pt.easycontracts.mapper.ContractAttachmentMapper;
 import bjtu.pt.easycontracts.pojo.table.ContractAttachment;
+import bjtu.pt.easycontracts.pojo.table.ContractAttachmentExample;
 import bjtu.pt.easycontracts.service.ContractFileService;
 import bjtu.pt.easycontracts.utils.Global;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,8 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 
 import java.io.*;
+import java.util.List;
+
 /**
  * <Description> ContractFileServiceImpl
  *
@@ -61,5 +64,25 @@ public class ContractFileServiceImpl implements ContractFileService {
     @Override
     public int deleteFile(String filePath) {
         return 0;
+    }
+
+    @Override
+    public ContractAttachment getContractAttachment(int contractId, String fileName) {
+        ContractAttachmentExample contractAttachmentExample = new ContractAttachmentExample();
+        contractAttachmentExample.createCriteria().andContractidEqualTo(contractId).andFilenameEqualTo(fileName);
+
+        List<ContractAttachment> attachmentList = contractAttachmentMapper.selectByExample(contractAttachmentExample);
+        if (attachmentList.isEmpty()){
+            return null;
+        }
+        return attachmentList.get(0);
+    }
+
+    @Override
+    public List<ContractAttachment> getContractFileListOfContract(int contractId) {
+        ContractAttachmentExample contractAttachmentExample = new ContractAttachmentExample();
+        contractAttachmentExample.createCriteria().andContractidEqualTo(contractId);
+
+        return contractAttachmentMapper.selectByExample(contractAttachmentExample);
     }
 }
