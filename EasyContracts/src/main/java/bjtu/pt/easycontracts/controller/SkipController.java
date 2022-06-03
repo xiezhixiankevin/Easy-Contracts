@@ -180,9 +180,13 @@ public class SkipController {
         return "customer/select_customers";
     }
 
-    @GetMapping("/toSign")
-    public String toSign(){
-        return "contract/countersign";
+    @GetMapping("/toSign/{contractId}")
+    public String toSign(@PathVariable("contractId")Integer contractId,
+                         Model model){
+        Contract toSignContract = contractService.getContractById(contractId);
+        contractService.setContract(toSignContract);
+        model.addAttribute("contractObject", toSignContract);
+        return "sign";
     }
 
 
