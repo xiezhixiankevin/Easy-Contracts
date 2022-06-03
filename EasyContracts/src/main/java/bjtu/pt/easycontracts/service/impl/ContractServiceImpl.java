@@ -189,14 +189,51 @@ public class ContractServiceImpl implements ContractService
     @Override
     public int examineConTract(int contractId, int userId, String opinion, boolean ifPass) {
         ContractProcessServiceImpl contractProcessServiceImpl=new ContractProcessServiceImpl();
-        ContractProcess contractProcess=new ContractProcess();
+        ContractProcess contractProcess = new ContractProcess();// 存储需要修改的contractProcess记录
+        ContractProcessExample contractProcessExample=new ContractProcessExample();
+        ContractProcessExample contractProcessExample1 = new ContractProcessExample();// 用于获取将要更新的contractProcess记录
+        Contract contract = contractMapper.selectByPrimaryKey(contractId); // 对应的合同记录
+        int failureTimes = contract.getFailuretimes(); // 记录在此次操作之前已经失败了几次
+        String content; // 该内容是此次的审批内容格式化之后真正要存储在数据库中的内容
+        java.util.Date date = new java.util.Date(); // 此次操作的时间
+
+        /* 获取将要修改的contractProcess记录 */
+        contractProcessExample1.createCriteria().andContractidEqualTo(contractId).andTypeEqualTo(EXAM).andUseridEqualTo(userId);
+        List<ContractProcess> contractProcesses = contractProcessMapper.selectByExample(contractProcessExample1);
+        if (contractProcesses.size() == 1) {
+            contractProcess = contractProcesses.get(0);
+        }
+        else {
+            return FAIL;
+        }
+        content = contractProcess.getContent();
+        if (content == null)
+            content = "";
+
+        /* 如果这是第一次审批，就不必加上换行符，否则在内容中先加上换行符，再格式化内容 */
+        if (failureTimes != 0)
+        {
+            content = content + '\n';
+        }
+
+        /* 格式化字符串内容 */
+        content = content + date.toString();//先加入时间
+        content = content + " (第" + Integer.toString(failureTimes + 1) + "次审批)"; // 加入审批次数
+        if (ifPass)
+        {
+            content = content + "(通过): ";
+        }
+        else
+        {
+            content = content + "(否决): ";
+        }
+        content = content + opinion; // 最后加上内容
 
         //Date
-        java.util.Date date=new java.util.Date();
         contractProcess.setTime(date);
         contractProcess.setType(EXAM);
         contractProcess.setContractid(contractId);
-        contractProcess.setContent(opinion);
+        contractProcess.setContent(content);
         contractProcess.setUserid(userId);
         if(ifPass==true){
             contractProcess.setState(PASS);
@@ -206,7 +243,6 @@ public class ContractServiceImpl implements ContractService
         contractProcessServiceImpl.updateProcess(userId,contractId,contractProcess);
 
         //检查
-        ContractProcessExample contractProcessExample=new ContractProcessExample();
         contractProcessExample.createCriteria().andContractidEqualTo(contractId).andTypeEqualTo(EXAM);
         List <ContractProcess> contractProcessList = contractProcessMapper.selectByExample(contractProcessExample);
         int flag1=0;//记录操作次数
@@ -221,7 +257,6 @@ public class ContractServiceImpl implements ContractService
             }
         }
         if(flag2==contractProcessList.size()){
-            Contract contract=contractMapper.selectByPrimaryKey(contractId);
             contract.setType(SIGNING);//进入下一阶段签订
             ContractExample contractExample=new ContractExample();
             contractExample.createCriteria().andContractidEqualTo(contractId);
@@ -236,8 +271,6 @@ public class ContractServiceImpl implements ContractService
                 contractProcessList2.get(k).setState(NOT_COME);
                 contractProcessServiceImpl.updateProcess(userId,contractId,contractProcessList2.get(k));
             }
-            //
-            Contract contract=contractMapper.selectByPrimaryKey(contractId);
             contract.setType(FINALIZING);//重新回到定稿阶段
             contract.setFailuretimes(contract.getFailuretimes()+1);
             ContractExample contractExample=new ContractExample();

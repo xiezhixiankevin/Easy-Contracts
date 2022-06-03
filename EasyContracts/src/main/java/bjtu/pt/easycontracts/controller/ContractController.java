@@ -211,8 +211,10 @@ public class ContractController {
     public String signContract(@RequestParam("contractId")Integer contractId,
                                       @RequestParam("userId")Integer userId,
                                       @RequestParam("opinion")String opinion){
-
-        return null;
+        if(contractService.signContract(contractId,userId,opinion)>0){
+            return INFO_SUCCESS;
+        }
+        return INFO_ERROR;
     }
 
     @GetMapping("/distribute")

@@ -80,16 +80,16 @@
 				<div class="card">
 					<div class="card-body">
 						<h1 class="mg-md">
-							合同名………………
+							{{contractName}}
 						</h1>
 						<p>
-							合同内容合同内容合同内容合同内容合同内容合同内容合同内容合同内容合同内容合同内容合同内容合同内容合同内容合同内容合同内容合同内容合同内容合同内容合同内容合同内容合同内容合同内容合同内容合同内容合同内容合同内容合同内容合同内容合同内容合同内容合同内容合同内容合同内容合同内容合同内容合同内容合同内容合同内容合同内容合同内容合同内容合同内容合同内容合同内容合同内容合同内容合同内容合同内容合同内容合同内容
+							{{contractContent}}
 						</p>
 						<h5 class="mg-md">
-							合同生效时间：2022.05.07-2022.99.99
+							合同生效时间：{{beginTimeStr}}-{{endTimeStr}}
 						</h5>
 						<h5 class="mg-md">
-							客户：xxxxxxx
+							客户：{{contractCustomerName}}
 						</h5>
 						<h5 class="mg-md">
 							附件：
@@ -110,7 +110,11 @@
 				<div class="form-group">
 					<label>
 						签订意见<br>
-					</label><textarea class="form-control" rows="4" cols="50"></textarea><a href="index.html" class="btn btn-lg float-lg-right btn-azure">提交签订<br></a>
+					</label>
+					<textarea class="form-control" id="textSign" rows="4" cols="50"></textarea><!a href="index.html" class="btn btn-lg float-lg-right btn-azure">提交签订<!br><!/a>
+					<button v-on:click="submitSign()" class="bloc-button btn btn-lg btn-block btn-azure" type="button" >
+						提交签订<br>
+					</button>
 				</div>
 			</div>
 		</div>
@@ -148,7 +152,56 @@
 <script th:src="@{/js/jquery.min.js}"  type="text/javascript" charset="utf-8"></script>
 <script th:src="@{/js/vue.js}"  type="text/javascript" charset="utf-8"></script>
 <script th:src="@{/js/axios.min.js}"  type="text/javascript" charset="utf-8"></script>
+<script th:inline="javascript">
+    var SignVue = new Vue({
+        el: "#all-page",
+        data: {
+            contractName: "",
+            contractContent: "",
+            contractCustomerName: "",
+            beginTimeStr : "",
+            endTimeStr : "",
+        },
+        mounted: function () {
+            this.getInitValues();
+        },
+        methods: {
+            getInitValues: function () {
+                this.contractName = [[${contractObject.contractname}]]
+                this.contractContent = [[${contractObject.content}]]
+                this.contractCustomerName = [[${contractObject.customerName}]]
+                this.beginTimeStr = [[${contractObject.beginTimeStr}]]
+                this.endTimeStr = [[${contractObject.endTimeStr}]]
+            },
 
+            submitSign: function () {
+                var contractID = [[${contractObject.contractid}]];
+                var userID = [[${session.nowUser.userid}]];
+                var opinion= $("#textSign").val();
+                axios({
+                    method: "post",
+                    url: "/contract/sign",
+                    params:{
+                        contractId: contractID,
+                        userId: userID,
+                        opinion: opinion
+                    }
+                })
+                    .then(function (value) {
+                        if(value.data === "Operation SUCCEEDED") {
+                            alert("签订成功！即将返回上一级页面。");
+                            window.location.replace(document.referrer);
+                        }else{
+                            alert("错误：" + value.data + "，请重试。");
+                        }
+                    })
+                    .catch();
+
+
+            }
+        }
+    });
+</script>
 
 </body>
 </html>
