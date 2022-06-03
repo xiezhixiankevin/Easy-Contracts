@@ -91,11 +91,11 @@
 						<h5 class="mg-md">
 							客户：{{contractCustomerName}}
 						</h5>
-						<h5 th:if="${file!=null}" class="mg-md">
+						<h5 th:if="${file.contractid!=null}" class="mg-md">
 							附件：<span th:text="${file.getFilename()}"></span>
 
 						</h5>
-						<a href="" th:href="@{|/fileDown/${file.getFilename()}/${file.getContractid()}|}">下载附件</a>
+						<a href="" th:if="${file.contractid!=null}" th:href="@{|/fileDown/${file.getFilename()}/${file.getContractid()}|}">下载附件</a>
 					</div>
 				</div>
 				<br><br>

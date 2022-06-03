@@ -148,13 +148,13 @@
 							</div>
 						</div>
 					</div>
-					<div th:if="${file!=null}" class="form-group container-div-0-style">
+					<div th:if="${file.contractid!=null}" class="form-group container-div-0-style">
 						<label>
 							当前附件:<span th:text="${file.getFilename()}"></span>
 						</label>
 						<div class="row">
 							<div class="col-lg">
-								<a href="" th:href="@{|/fileDown/${file.getFilename()}/${file.getContractid()}|}">下载附件</a>
+								<a th:if="${file.contractid!=null}" href="" th:href="@{|/fileDown/${file.getFilename()}/${file.getContractid()}|}">下载附件</a>
 							</div>
 						</div>
 					</div>

@@ -143,7 +143,8 @@ public class SkipController {
         if (!fileList.isEmpty()){
             model.addAttribute("file",fileList.get(0));
         }else {
-            model.addAttribute("file",null);
+            ContractAttachment contractAttachment = new ContractAttachment();
+            model.addAttribute("file",contractAttachment);
         }
         return "contract/countersign";
     }
@@ -159,7 +160,8 @@ public class SkipController {
         if (!fileList.isEmpty()){
             model.addAttribute("file",fileList.get(0));
         }else {
-            model.addAttribute("file",null);
+            ContractAttachment contractAttachment = new ContractAttachment();
+            model.addAttribute("file",contractAttachment);
         }
 
         model.addAttribute("contractObject", toCountersignContract);
