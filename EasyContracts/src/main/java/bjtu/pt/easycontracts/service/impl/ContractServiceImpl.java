@@ -34,6 +34,8 @@ public class ContractServiceImpl implements ContractService
     private UserService userService;
     @Autowired
     private EmailService emailService;
+    @Autowired
+    private ContractProcessServiceImpl contractProcessService;
 
     @Override
     public List<Contract> listContractSelective(Contract contract)
@@ -188,7 +190,6 @@ public class ContractServiceImpl implements ContractService
 
     @Override
     public int examineContract(int contractId, int userId, String opinion, boolean ifPass) {
-        ContractProcessServiceImpl contractProcessServiceImpl=new ContractProcessServiceImpl();
         ContractProcess contractProcess = new ContractProcess();// 存储需要修改的contractProcess记录
         ContractProcessExample contractProcessExample=new ContractProcessExample();
         ContractProcessExample contractProcessExample1 = new ContractProcessExample();// 用于获取将要更新的contractProcess记录
@@ -240,7 +241,7 @@ public class ContractServiceImpl implements ContractService
         }else{
             contractProcess.setState(VETO);
         }
-        contractProcessServiceImpl.updateProcess(userId,contractId,FINALIZE,contractProcess);
+        contractProcessService.updateProcess(userId,contractId,FINALIZE,contractProcess);
 
         //检查
         contractProcessExample.createCriteria().andContractidEqualTo(contractId).andTypeEqualTo(EXAM);
@@ -269,7 +270,7 @@ public class ContractServiceImpl implements ContractService
             List <ContractProcess> contractProcessList2 = contractProcessMapper.selectByExample(contractProcessExample2);
             for(int k=0;k<contractProcessList2.size();k++){
                 contractProcessList2.get(k).setState(NOT_COME);
-                contractProcessServiceImpl.updateProcess(userId,contractId,contractProcessList2.get(k));
+                contractProcessService.updateProcess(userId,contractId,contractProcessList2.get(k));
             }
             contract.setType(FINALIZING);//重新回到定稿阶段
             contract.setFailuretimes(contract.getFailuretimes()+1);

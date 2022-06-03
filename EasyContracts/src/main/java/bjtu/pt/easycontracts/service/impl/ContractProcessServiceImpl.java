@@ -22,6 +22,7 @@ import static bjtu.pt.easycontracts.utils.Global.*;
 
 @Service
 public class ContractProcessServiceImpl implements ContractProcessService {
+
     @Autowired
     private ContractProcessMapper contractProcessMapper;
     @Autowired
