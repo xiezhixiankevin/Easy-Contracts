@@ -144,7 +144,7 @@
 								</select>
 							</div>
 							<div th:if="${session.nowUser.ifHasRight(16)}" class="col">
-								<button class="form-control btn btn-success">你也可以新增客户</button>
+								<a th:href="@{/toAddCustomer}" class="form-control btn btn-success">你也可以新增客户</a>
 							</div>
 						</div>
 					</div>

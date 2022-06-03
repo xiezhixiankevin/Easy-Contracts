@@ -9,6 +9,8 @@ spring:
   servlet:
     multipart:
       enabled: true
+      max-file-size: 100MB
+      max-request-size: 200MB
   redis:
     host: 114.116.234.63
     password: shiwo2002625
