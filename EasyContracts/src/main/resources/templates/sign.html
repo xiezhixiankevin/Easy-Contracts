@@ -30,7 +30,7 @@
 
 
 <!-- Main container -->
-<div class="page-container">
+<div class="page-container" id="all-page">
     
 <!-- bloc-0 -->
 <div class="bloc bg-截屏2022-05-07-2019-53-22 l-bloc " id="bloc-0">
@@ -161,6 +161,8 @@
             contractCustomerName: "",
             beginTimeStr : "",
             endTimeStr : "",
+            fileName : "",
+            filePath : ""
         },
         mounted: function () {
             this.getInitValues();
@@ -172,6 +174,8 @@
                 this.contractCustomerName = [[${contractObject.customerName}]]
                 this.beginTimeStr = [[${contractObject.beginTimeStr}]]
                 this.endTimeStr = [[${contractObject.endTimeStr}]]
+                this.filePath = [[${file.path}]]
+                this.fileName = [[${file.filename}]]
             },
 
             submitSign: function () {
