@@ -43,6 +43,7 @@ public interface ContractService {
      * 数据库中的content(参数的content是新加的审批意见)应该保留某种格式，因为审批可能有多次，例如如下格式
      * 2015-02-23 15:41:23(第一次审批)(否决): 希望内容再多一点，附件再美化一下
      * 2015-02-24 16:41:23(第二次审批)(通过): 这次不错
+     *
      * */
     int examineConTract(int contractId ,int userId , String opinion , boolean ifPass);//zxc
 
