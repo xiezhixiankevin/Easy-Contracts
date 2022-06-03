@@ -30,7 +30,7 @@
 
 
 <!-- Main container -->
-<div class="page-container" id="all-page">
+<div class="page-container" id="Sign">
     
 <!-- bloc-0 -->
 <div class="bloc bg-截屏2022-05-07-2019-53-22 l-bloc " id="bloc-0">
@@ -154,15 +154,13 @@
 <script th:src="@{/js/axios.min.js}"  type="text/javascript" charset="utf-8"></script>
 <script th:inline="javascript">
     var SignVue = new Vue({
-        el: "#all-page",
+        el: "#Sign",
         data: {
             contractName: "",
             contractContent: "",
             contractCustomerName: "",
             beginTimeStr : "",
-            endTimeStr : "",
-            fileName : "",
-            filePath : ""
+            endTimeStr : ""
         },
         mounted: function () {
             this.getInitValues();
@@ -174,8 +172,6 @@
                 this.contractCustomerName = [[${contractObject.customerName}]]
                 this.beginTimeStr = [[${contractObject.beginTimeStr}]]
                 this.endTimeStr = [[${contractObject.endTimeStr}]]
-                this.filePath = [[${file.path}]]
-                this.fileName = [[${file.filename}]]
             },
 
             submitSign: function () {

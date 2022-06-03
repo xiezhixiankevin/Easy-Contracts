@@ -5,6 +5,7 @@ package bjtu.pt.easycontracts;
 
 import bjtu.pt.easycontracts.mapper.CustomerMapper;
 import bjtu.pt.easycontracts.pojo.table.Customer;
+import bjtu.pt.easycontracts.service.ContractService;
 import bjtu.pt.easycontracts.service.UserService;
 import bjtu.pt.easycontracts.pojo.table.User;
 import bjtu.pt.easycontracts.utils.Global;
@@ -23,14 +24,14 @@ import static bjtu.pt.easycontracts.utils.Global.*;
 @SpringBootTest
 class EasyContractsApplicationTests {
     @Autowired
-    CustomerMapper customerMapper;
+    ContractService contractService;
 
     @Test
     void contextLoads() {
         Customer customer = new Customer();
         System.out.println("_________TEST____________________________");
-        int i = customerMapper.insert(customer);
-        System.out.println(i+"_________TEST____________________________");
+        contractService.signContract(8,1,"这不可能");
+        System.out.println("_________TEST____________________________");
        
     }
 }

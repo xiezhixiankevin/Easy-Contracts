@@ -324,7 +324,7 @@ public class ContractServiceImpl implements ContractService
             criteria.andTypeEqualTo(contractProcess.getType());
 
             /* 如果是合同对应签订阶段的记录，则修改状态并写入内容 */
-            if (contractProcess.getType() == Global.COUNTERSIGN)
+            if (contractProcess.getType() == Global.SIGN)
             {
                 Date date = new Date();
                 contractProcess.setState(Global.PASS);
