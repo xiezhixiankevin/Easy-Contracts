@@ -241,7 +241,9 @@ public class ContractServiceImpl implements ContractService
         }else{
             contractProcess.setState(VETO);
         }
-        contractProcessService.updateProcess(userId,contractId,FINALIZE,contractProcess);
+
+
+        contractProcessService.updateProcess(userId,contractId,EXAM,contractProcess);
 
         //检查
         contractProcessExample.createCriteria().andContractidEqualTo(contractId).andTypeEqualTo(EXAM);
@@ -270,7 +272,7 @@ public class ContractServiceImpl implements ContractService
             List <ContractProcess> contractProcessList2 = contractProcessMapper.selectByExample(contractProcessExample2);
             for(int k=0;k<contractProcessList2.size();k++){
                 contractProcessList2.get(k).setState(NOT_COME);
-                contractProcessService.updateProcess(userId,contractId,contractProcessList2.get(k));
+                contractProcessService.updateProcess(userId,contractId,EXAM,contractProcessList2.get(k));
             }
             contract.setType(FINALIZING);//重新回到定稿阶段
             contract.setFailuretimes(contract.getFailuretimes()+1);
@@ -278,6 +280,7 @@ public class ContractServiceImpl implements ContractService
             contractExample.createCriteria().andContractidEqualTo(contractId);
             contractMapper.updateByExample(contract,contractExample);
             return SUCCESS;
+
         }
 
         /* 将该操作员已完成审批操作的信息发送给所有操作员 */

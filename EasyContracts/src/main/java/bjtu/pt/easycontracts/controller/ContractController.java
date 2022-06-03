@@ -206,7 +206,7 @@ public class ContractController {
         if (code == SUCCESS)
             return "SUCCESS";
         else
-            return "审批失败，后端错误。";
+            return "审批失败，后端错误";
     }
 
     /*
