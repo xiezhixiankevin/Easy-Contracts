@@ -213,6 +213,7 @@ public class ContractController {
      *签订合同按钮映射到此方法
      * */
     @PostMapping("/sign")
+    @ResponseBody
     public String signContract(@RequestParam("contractId")Integer contractId,
                                       @RequestParam("userId")Integer userId,
                                       @RequestParam("opinion")String opinion){
