@@ -187,7 +187,7 @@ public class ContractServiceImpl implements ContractService
     }
 
     @Override
-    public int examineConTract(int contractId, int userId, String opinion, boolean ifPass) {
+    public int examineContract(int contractId, int userId, String opinion, boolean ifPass) {
         ContractProcessServiceImpl contractProcessServiceImpl=new ContractProcessServiceImpl();
         ContractProcess contractProcess = new ContractProcess();// 存储需要修改的contractProcess记录
         ContractProcessExample contractProcessExample=new ContractProcessExample();
@@ -240,7 +240,7 @@ public class ContractServiceImpl implements ContractService
         }else{
             contractProcess.setState(VETO);
         }
-        contractProcessServiceImpl.updateProcess(userId,contractId,contractProcess);
+        contractProcessServiceImpl.updateProcess(userId,contractId,FINALIZE,contractProcess);
 
         //检查
         contractProcessExample.createCriteria().andContractidEqualTo(contractId).andTypeEqualTo(EXAM);

@@ -176,6 +176,15 @@ public class SkipController {
         return "contract/finalize";
     }
 
+
+    @GetMapping("/toExamine/{contractId}")
+    public String toExamine(@PathVariable("contractId")Integer contractId, Model model) {
+        Contract toCountersignContract = contractService.getContractById(contractId);
+        contractService.setContract(toCountersignContract);
+        model.addAttribute("contractObject", toCountersignContract);
+        return "contract/examine";
+    }
+
     //跳转到搜索客户页面
     @GetMapping("/toSelectCustomer")
     public String toSelectCustomer(){

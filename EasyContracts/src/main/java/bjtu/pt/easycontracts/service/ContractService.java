@@ -1,7 +1,6 @@
 package bjtu.pt.easycontracts.service;
 
 import bjtu.pt.easycontracts.pojo.table.Contract;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 import java.util.Map;
@@ -45,7 +44,7 @@ public interface ContractService {
      * 2015-02-24 16:41:23(第二次审批)(通过): 这次不错
      *
      * */
-    int examineConTract(int contractId ,int userId , String opinion , boolean ifPass);//zxc
+    int examineContract(int contractId , int userId , String opinion , boolean ifPass);//zxc
 
     //签订合同
     int signContract(int contractId ,int userId ,String opinion);//wj

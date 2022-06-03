@@ -182,9 +182,7 @@ public class ContractController {
      * */
     @PostMapping("/countersign")
     @ResponseBody
-    public String countersignContract(Integer contractId,
-                                                    Integer userId,
-                                                   String opinion){
+    public String countersignContract(Integer contractId, Integer userId, String opinion){
         // TODO: 在下面这个方法中注释了群发邮件的方法，因为会报错
         contractService.countersignContract(contractId,userId,opinion);
         return INFO_SUCCESS;
@@ -195,13 +193,20 @@ public class ContractController {
     /*
      *审批合同按钮映射到此方法
      * */
-    @PostMapping("/examine/{ifPass}")
-    public String examineContract(@RequestParam("contractId")Integer contractId,
-                                  @RequestParam("userId")Integer userId,
-                                  @RequestParam("opinion")String opinion,
-                                  @PathVariable("ifPass")Integer ifPass){
+    @PostMapping("/examine") // ifPass
+    @ResponseBody
+    public String examineContract(Integer contractId, Integer userId, String opinion, Integer ifPass){
+        boolean ifPassBoolean = false;
+        if (ifPass == 1)
+        {
+            ifPassBoolean = true;
+        }
 
-        return null;
+        int code = contractService.examineContract(contractId, userId, opinion, ifPassBoolean);
+        if (code == SUCCESS)
+            return "SUCCESS";
+        else
+            return "审批失败，后端错误。";
     }
 
     /*
