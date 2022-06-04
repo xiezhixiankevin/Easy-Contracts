@@ -200,7 +200,7 @@ public class ContractServiceImpl implements ContractService
 
         /* 获取将要修改的contractProcess记录 */
         contractProcessExample1.createCriteria().andContractidEqualTo(contractId).andTypeEqualTo(EXAM).andUseridEqualTo(userId);
-        List<ContractProcess> contractProcesses = contractProcessMapper.selectByExample(contractProcessExample1);
+        List<ContractProcess> contractProcesses = contractProcessMapper.selectByExampleWithBLOBs(contractProcessExample1);
         if (contractProcesses.size() == 1) {
             contractProcess = contractProcesses.get(0);
         }
@@ -263,24 +263,37 @@ public class ContractServiceImpl implements ContractService
             contract.setType(SIGNING);//进入下一阶段签订
             ContractExample contractExample=new ContractExample();
             contractExample.createCriteria().andContractidEqualTo(contractId);
-            contractMapper.updateByExample(contract,contractExample);
+            contractMapper.updateByExampleWithBLOBs(contract,contractExample);
             return SUCCESS;
         }else if(flag1==contractProcessList.size()){
             //将合同进程表里数据 status改成0
             ContractProcessExample contractProcessExample2=new ContractProcessExample();
             contractProcessExample2.createCriteria().andContractidEqualTo(contractId).andTypeEqualTo(EXAM);
-            List <ContractProcess> contractProcessList2 = contractProcessMapper.selectByExample(contractProcessExample2);
+            List <ContractProcess> contractProcessList2 = contractProcessMapper.selectByExampleWithBLOBs(contractProcessExample2);
             for(int k=0;k<contractProcessList2.size();k++){
-                contractProcessList2.get(k).setState(NOT_COME);
-                contractProcessService.updateProcess(userId,contractId,EXAM,contractProcessList2.get(k));
+                ContractProcess contractProcess1 = contractProcessList2.get(k);
+                contractProcess1.setState(NOT_COME);
+                contractProcessService.updateProcess(contractProcess1.getUserid(),contractProcess1.getContractid(),EXAM,contractProcess1);
             }
             contract.setType(FINALIZING);//重新回到定稿阶段
             contract.setFailuretimes(contract.getFailuretimes()+1);
             ContractExample contractExample=new ContractExample();
             contractExample.createCriteria().andContractidEqualTo(contractId);
-            contractMapper.updateByExample(contract,contractExample);
-            return SUCCESS;
+            contractMapper.updateByExampleWithBLOBs(contract,contractExample);
 
+            /* 将contractProcess表中的该合同的定稿阶段的状态设置为正在进行中1 */
+            ContractProcessExample contractProcessExample3 = new ContractProcessExample();
+            ContractProcessExample.Criteria contractProcessExample3Criteria = contractProcessExample3.createCriteria();
+            contractProcessExample3Criteria.andContractidEqualTo(contractId).andTypeEqualTo(FINALIZE);
+            List<ContractProcess> contractProcessList1 = contractProcessMapper.selectByExample(contractProcessExample3);
+            for (ContractProcess process : contractProcessList1) {
+                ContractProcessExample contractProcessExample4 = new ContractProcessExample();
+                ContractProcessExample.Criteria contractProcessExample4Criteria = contractProcessExample4.createCriteria();
+                contractProcessExample4Criteria.andContractidEqualTo(contractId).andUseridEqualTo(process.getUserid()).andTypeEqualTo(process.getType());
+                process.setState(DOING);
+                contractProcessMapper.updateByExampleWithBLOBs(process , contractProcessExample4);
+            }
+            return SUCCESS;
         }
 
         /* 将该操作员已完成审批操作的信息发送给所有操作员 */
@@ -298,15 +311,16 @@ public class ContractServiceImpl implements ContractService
     public int signContract(int contractId, int userId, String opinion)
     {
         int updateLine = 0;
+        boolean allFinished = false; // 判断是否所有签订阶段的负责人都完成了操作
         ContractExample contractExample = new ContractExample();
         ContractProcessExample contractProcessExample = new ContractProcessExample();
+        ContractProcessExample.Criteria criteria = contractProcessExample.createCriteria();
 
         /* 添加contract表的检索条件 */
         contractExample.createCriteria().andContractidEqualTo(contractId);
 
         /* 添加contractProcess表的检索条件 */
-        contractProcessExample.createCriteria().andUseridEqualTo(userId);
-        contractProcessExample.createCriteria().andContractidEqualTo(contractId);
+        criteria.andUseridEqualTo(userId);
 
         /* 找到对应的记录 */
         Contract contract = contractMapper.selectByPrimaryKey(contractId);
@@ -320,7 +334,6 @@ public class ContractServiceImpl implements ContractService
         for (ContractProcess contractProcess : contractProcessList)
         {
             ContractProcessExample contractProcessExample1 = new ContractProcessExample();// 专门用来更新一条相应记录
-            ContractProcessExample.Criteria criteria = contractProcessExample1.createCriteria();
 
             /* 更新检索条件 */
             criteria.andContractidEqualTo(contractProcess.getContractid());
