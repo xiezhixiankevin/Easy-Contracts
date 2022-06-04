@@ -29,4 +29,21 @@ public interface LogService {
     //3.查询某个人的操作日志
     List<Log> listLogByUserId(int userId);
 
+    /**
+     * 添加会签,定稿,审批,签订,起草日志,删除合同
+     */
+    void addType1Log(int userId,int contractId,int type);
+
+    /**
+     * 添加客户,修改客户,删除客户
+     */
+    void addType2Log(String customerName,int userId,int type);
+
+    /**
+     * 修改用户,删除用户,分配权限
+     * @param userId1 被操作者
+     * @param userId2 操作者
+     */
+    void addType3Log(int userId1,int userId2,int type);
+
 }

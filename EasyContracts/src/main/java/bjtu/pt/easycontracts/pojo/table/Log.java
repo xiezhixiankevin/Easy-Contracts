@@ -7,11 +7,21 @@ public class Log {
 
     private Integer contractid;
 
-    private Date time;
+    private Date time = new Date();
 
     private Integer operatetype;
 
     private String content;
+
+    public Log() {
+    }
+
+    public Log(Integer userid, Integer contractid, Integer operatetype, String content) {
+        this.userid = userid;
+        this.contractid = contractid;
+        this.operatetype = operatetype;
+        this.content = content;
+    }
 
     public Integer getUserid() {
         return userid;

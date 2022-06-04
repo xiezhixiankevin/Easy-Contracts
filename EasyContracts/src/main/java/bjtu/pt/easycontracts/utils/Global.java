@@ -66,12 +66,20 @@ public class Global {
     public static final int VETO = 3; // 在该状态中被否决
 
     /* log表operateType字段相应的类型 */
-    /* public static final int COUNTERSIGN = 1; // 会签
-       public static final int FINALIZE = 2; // 定稿
-       public static final int EXAM = 3; // 审批
-       public static final int SIGN = 4; // 签订
-       此部分可以参照contract_process表type定义..待更新
-     */
+    public static final int COUNTERSIGN_LOG = 1; // 会签
+    public static final int FINALIZE_LOG = 2; // 定稿
+    public static final int EXAM_LOG = 3; // 审批
+    public static final int SIGN_LOG = 4; // 签订
+    public static final int DRAFT_LOG = 5; // 起草
+    public static final int ASSIGN_PERMISSION_LOG = 6; // 分配权限
+    public static final int ADD_CUSTOMER_LOG = 7; // 添加客户
+    public static final int MODIFY_CUSTOMER_LOG = 8; //修改客户
+    public static final int DELETE_CUSTOMER_LOG = 9; //删除客户
+    public static final int MODIFY_USER_LOG = 10; //修改用户
+    public static final int DELETE_USER_LOG = 11; //删除用户
+    public static final int MODIFY_OWN_LOG = 12; //个人信息修改
+    public static final int DELETE_CONTRACT_LOG = 13;//删除合同
+
 
     //文件上传路径
     public static final String FILE_PATH = "F://files";
