@@ -310,47 +310,61 @@ public class ContractServiceImpl implements ContractService
     @Override
     public int signContract(int contractId, int userId, String opinion)
     {
-        int updateLine = 0;
-        boolean allFinished = false; // 判断是否所有签订阶段的负责人都完成了操作
-        ContractExample contractExample = new ContractExample();
-        ContractProcessExample contractProcessExample = new ContractProcessExample();
+        int updateLine = 0; // 记录更改的记录数，作为返回值
+        ContractExample contractExample = new ContractExample(); // 查找contract表对应的合同记录
+        ContractProcessExample contractProcessExample = new ContractProcessExample(); // 查找该合同的所有签订阶段的记录
         ContractProcessExample.Criteria criteria = contractProcessExample.createCriteria();
+        boolean isAllFinished = true; // 用于判断是否所有的签订人员都已完成了签订
 
         /* 添加contract表的检索条件 */
         contractExample.createCriteria().andContractidEqualTo(contractId);
 
         /* 添加contractProcess表的检索条件 */
-        criteria.andUseridEqualTo(userId);
+        criteria.andUseridEqualTo(contractId).andTypeEqualTo(SIGN);
 
         /* 找到对应的记录 */
         Contract contract = contractMapper.selectByPrimaryKey(contractId);
         List<ContractProcess> contractProcessList = contractProcessMapper.selectByExampleWithBLOBs(contractProcessExample);
 
-        /* 修改contract记录状态修改为完成状态 */
-        contract.setType(Global.FINISH);
-        updateLine += contractMapper.updateByPrimaryKeyWithBLOBs(contract);
-
-        /* 遍历修改contract记录,正在签订状态的改为通过签订状态并将签订内容输入进去 */
+        /* 遍历所有该合同的签订记录，判断是否所有的人员都已完成签订 */
         for (ContractProcess contractProcess : contractProcessList)
         {
-            ContractProcessExample contractProcessExample1 = new ContractProcessExample();// 专门用来更新一条相应记录
-
-            /* 更新检索条件 */
-            criteria.andContractidEqualTo(contractProcess.getContractid());
-            criteria.andUseridEqualTo(contractProcess.getUserid());
-            criteria.andTypeEqualTo(contractProcess.getType());
-
-            /* 如果是合同对应签订阶段的记录，则修改状态并写入内容 */
-            if (contractProcess.getType() == Global.SIGN)
+            /* 如果是本次签订的人员本身，则更新记录 */
+            if (contractProcess.getUserid() == userId)
             {
+                ContractProcessExample contractProcessExampleThisUser = new ContractProcessExample();
+                ContractProcess contractProcess1;
                 Date date = new Date();
-                contractProcess.setState(Global.PASS);
-                contractProcess.setContent(opinion);
-                contractProcess.setTime(date);
-
-                /* 更新数据库对应记录内容 */
-                updateLine += contractProcessMapper.updateByExampleWithBLOBs(contractProcess , contractProcessExample1);
+                contractProcessExampleThisUser.createCriteria().andContractidEqualTo(contractId).andUseridEqualTo(userId).andTypeEqualTo(SIGN);
+                List<ContractProcess> contractProcessList1 = contractProcessMapper.selectByExampleWithBLOBs(contractProcessExampleThisUser);
+                if (contractProcessList1.size() == 1)
+                {
+                    contractProcess1 = contractProcessList1.get(0);
+                    contractProcess1.setContent(opinion);
+                    contractProcess1.setTime(date);
+                    contractProcess1.setState(PASS);
+                    contractProcessMapper.updateByExampleWithBLOBs(contractProcess1 , contractProcessExampleThisUser);
+                    updateLine++;
+                }
+                else
+                {
+                    return  FAIL;
+                }
             }
+            else
+            {
+                if (contractProcess.getState() != PASS)
+                {
+                    isAllFinished = false;
+                }
+            }
+        }
+
+        /* 如果所有的签订人员已完成签订，则将contract对应记录的状态更改 */
+        if (isAllFinished)
+        {
+            contract.setType(FINISH);
+            contractMapper.updateByPrimaryKey(contract);
         }
 
         /* 将该操作员已完成签订操作的信息发送给所有操作员 */
