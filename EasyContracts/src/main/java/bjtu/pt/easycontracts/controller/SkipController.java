@@ -168,7 +168,7 @@ public class SkipController {
         model.addAttribute("customers",customerService.listCustomerSelective(null));
         if (toCountersignContract.getFailuretimes() >0){
             model.addAttribute("exam",true); //标识是会签定稿，还是审批定稿
-            model.addAttribute("counterSignOpinion",contractProcessService.getExamOpinion(contractId));//审批意见
+            model.addAttribute("examOpinion",contractProcessService.getExamOpinion(contractId));//审批意见
         }else {
             model.addAttribute("finalize",true); //标识是会签定稿，还是审批定稿
             model.addAttribute("counterSignOpinion",contractProcessService.getCounterSignOpinion(contractId));//会签意见

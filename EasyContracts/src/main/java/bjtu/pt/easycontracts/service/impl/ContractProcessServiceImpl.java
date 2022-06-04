@@ -304,14 +304,14 @@ public class ContractProcessServiceImpl implements ContractProcessService {
     public String getExamOpinion(int contractId) {
         //查出所有审批,只显示未通过
         ContractProcessExample contractProcessExample = new ContractProcessExample();
-        contractProcessExample.createCriteria().andContractidEqualTo(contractId).andTypeEqualTo(EXAM).andStateEqualTo(VETO);
+        contractProcessExample.createCriteria().andContractidEqualTo(contractId).andTypeEqualTo(EXAM);
         List<ContractProcess> contractProcesses = contractProcessMapper.selectByExampleWithBLOBs(contractProcessExample);
         //拼接审批意见
         StringBuilder stringBuilder = new StringBuilder();
         for (ContractProcess contractProcess : contractProcesses) {
             String content = contractProcess.getContent();
             String username = userService.getUserById(contractProcess.getUserid()).getUsername();
-            stringBuilder.append(username).append(" : ").append(content).append("\n");
+            stringBuilder.append(username).append(" : ").append("\n").append(content).append("\n");
         }
         return stringBuilder.toString();
     }

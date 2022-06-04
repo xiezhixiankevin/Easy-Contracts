@@ -89,7 +89,7 @@
 					审批意见
 				</h1>
 				<div th:if="${exam!=null}" class="row">
-					<textarea  readonly="true" name="content" id="content" class="form-control" rows="29" cols="50" required>kevin : 希望字体再大一点&#10;bruce : 附件再完善一下&#10;mike : 很好！&#10;bruce : 附件再完善一下asdasdassssssssssssssssssssssssqwewqeq大苏打实打实的阿达萨达萨达萨达萨达是小区围墙外的是否撒大苏打撒旦撒大苏打撒旦2&#10;bruce : 附件再完善一下&#10;bruce : 附件再完善一下&#10;bruce : 附件再完善一下&#10;bruce : 附件再完善一下</textarea>
+					<textarea  readonly="true" th:text="${examOpinion}" name="content" id="content" class="form-control" rows="29" cols="50" required>kevin : 希望字体再大一点&#10;bruce : 附件再完善一下&#10;mike : 很好！&#10;bruce : 附件再完善一下asdasdassssssssssssssssssssssssqwewqeq大苏打实打实的阿达萨达萨达萨达萨达是小区围墙外的是否撒大苏打撒旦撒大苏打撒旦2&#10;bruce : 附件再完善一下&#10;bruce : 附件再完善一下&#10;bruce : 附件再完善一下&#10;bruce : 附件再完善一下</textarea>
 				</div>
 			</div>
 			<div class=" col-lg-6 ">
