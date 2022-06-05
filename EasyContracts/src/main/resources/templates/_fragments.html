@@ -15,9 +15,6 @@
       <li class="nav-item">
         <a href="loginup.html" th:href="@{/}" class="nav-link a-btn ltc-white">首页</a>
       </li>
-      <li class="nav-item">
-        <a href="loginup.html" th:href="@{/toMe}" class="nav-link a-btn ltc-white">Me</a>
-      </li>
       <li th:if="${session.nowUser.ifHasRight(1)}" class="nav-item">
         <a href="contract/draft.html" th:href="@{/toDraft}" class="nav-link  ltc-white">起草合同</a>
       </li>
