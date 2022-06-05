@@ -117,6 +117,7 @@ public class ContractController {
         contract.setEndtime(TimeUtil.strToDate(contract.getEndTimeStr()));
         //其他设置
         contract.setType(Global.WAITING);
+        contract.setFailuretimes(0);
         //1.先保存合同
 
         int id = contractService.addContract(contract);
