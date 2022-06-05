@@ -333,7 +333,7 @@ public class ContractServiceImpl implements ContractService
         contractExample.createCriteria().andContractidEqualTo(contractId);
 
         /* 添加contractProcess表的检索条件 */
-        criteria.andUseridEqualTo(contractId).andTypeEqualTo(SIGN);
+        criteria.andContractidEqualTo(contractId).andTypeEqualTo(SIGN);
 
         /* 找到对应的记录 */
         Contract contract = contractMapper.selectByPrimaryKey(contractId);
