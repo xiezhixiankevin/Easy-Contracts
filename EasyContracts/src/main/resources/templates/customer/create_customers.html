@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="">
@@ -63,7 +63,7 @@
 							</li>
 						</ul>
 					</div>
-					<a class="navbar-brand mr-0" href="/index.html"> xzx <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16"><path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg></a>
+					<a class="navbar-brand mr-0" href="/toMe"> xzx <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16"><path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg></a>
 
 				</nav>
 			</div>
@@ -86,12 +86,18 @@
 						姓名<br>
 					</label>
 					<input name="customername" id="name_26551" class="form-control" />
+					<div style="color:red">
+						<label v-show="cun">客户名不能为空!</label>
+					</div>
 				</div>
 				<div class="form-group">
 					<label>
 						电话<br>
 					</label>
 					<input name="phone" id="name_26552" class="form-control" />
+					<div style="color:red">
+						<label v-show="cup">电话不能为空!</label>
+					</div>
 				</div>
 				<div class="form-group">
 					<label>
@@ -104,6 +110,9 @@
 						邮箱<br>
 					</label>
 					<input name="email" id="name_26554" class="form-control" />
+					<div style="color:red">
+						<label v-show="cue">邮箱不能为空!</label>
+					</div>
 				</div>
 				<div class="form-group">
 					<label>
@@ -175,6 +184,13 @@
 <script>
     var customer=new Vue({
         el:"#form_26550",  //作用范围：id=form_38623的标签及其内部
+        data () {
+            return {
+                cun:false,
+                cup:false,
+                cue:false
+            }
+        },
         methods:{
             send:function (){
                 var customername =  $("#name_26551").val();
@@ -184,27 +200,46 @@
                 var bank = $("#name_26555").val();
                 var account = $("#name_26556").val();
                 var remark = $("#name_26558").val();
-                axios({
-                    method: "post",
-                    url: "customer/crate",
-                    params:{
-                        customername:customername,
-                        phone:phone,
-                        address:address,
-                        email:email,
-                        bank:bank,
-                        account:account,
-                        remark:remark
-					}
-                })
-                    .then(function (value) {
-                        if((String)(value.data)==="200") {
-                            alert("创建成功");
-                        }else{
-                            alert("创建失败");
+                this.cue=false;
+                this.cun=false;
+                this.cup=false;
+                if(customername.length==0){
+                    this.cun=true;
+                }
+                if(phone.length==0){
+                    this.cup=true;
+                }
+                if(email.length==0){
+                    this.cue=true;
+                }
+                if(!this.cue){
+                    if(!this.cun) {
+                        if (!this.cup) {
+                            axios({
+                                method: "post",
+                                url: "customer/crate",
+                                params:{
+                                    customername:customername,
+                                    phone:phone,
+                                    address:address,
+                                    email:email,
+                                    bank:bank,
+                                    account:account,
+                                    remark:remark
+                                }
+                            })
+                                .then(function (value) {
+                                    if((String)(value.data)==="200") {
+                                        alert("创建成功");
+                                    }else{
+                                        alert("创建失败");
+                                    }
+                                })
+                                .catch();
                         }
-                    })
-                    .catch();
+                    }
+                }
+
             }
         }
     })

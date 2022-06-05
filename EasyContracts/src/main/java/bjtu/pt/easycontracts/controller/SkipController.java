@@ -2,6 +2,7 @@ package bjtu.pt.easycontracts.controller;
 
 import bjtu.pt.easycontracts.pojo.table.Contract;
 import bjtu.pt.easycontracts.pojo.table.ContractAttachment;
+import bjtu.pt.easycontracts.pojo.table.Customer;
 import bjtu.pt.easycontracts.pojo.table.User;
 import bjtu.pt.easycontracts.service.*;
 import bjtu.pt.easycontracts.utils.Global;
@@ -203,4 +204,12 @@ public class SkipController {
 
     @GetMapping("/toAddCustomer")
     public String toAddCustomer() {return "customer/create_customers";}
+
+    @GetMapping("/toModifyCustomer/{customerId}")
+    public String toModifyCustomer(@PathVariable("customerId")Integer customerId,
+                                   Model model) {
+        Customer customer = customerService.selectById(customerId);
+        model.addAttribute("customerObject", customer);
+        return "customer/modify_customers";
+    }
 }

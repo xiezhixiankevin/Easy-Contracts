@@ -54,4 +54,14 @@ public class CustomerController {
             return String.valueOf(Global.FAIL);
         }
     }
+    @PostMapping("/modify")
+    @ResponseBody
+    public String modifyCustomer(Customer customer){
+        if(customerService.updateCustomer(customer.getCustomerid(),customer)>0){
+            return String.valueOf(Global.SUCCESS);
+        }
+        else {
+            return String.valueOf(Global.FAIL);
+        }
+    }
 }

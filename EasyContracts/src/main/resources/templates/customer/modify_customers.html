@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="">
@@ -13,7 +13,7 @@
 	<link rel="stylesheet" type="text/css" href="../../static/css/animate.min.css?7456" th:href="@{/css/animate.min.css?7456}">
 	<link href='https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
 	<link href='https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900&display=swap&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
-    <title>create_customers-1</title>
+    <title>modify_customers</title>
 
 
     
@@ -63,7 +63,7 @@
 							</li>
 						</ul>
 					</div>
-					<a class="navbar-brand mr-0" href="/index.html"> xzx <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16"><path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg></a>
+					<a class="navbar-brand mr-0" href="/toMe"> xzx <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16"><path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg></a>
 
 				</nav>
 			</div>
@@ -77,53 +77,64 @@
 	<div class="container bloc-lg">
 		<div class="row">
 			<div class="col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3 text-md-left text-center">
+				<form id="form" th:action="@{/customer/modify}" method="post" enctype="multipart/form-data">
 				<h1 class="mg-md">
 					修改客户信息
 				</h1>
-				<div class="form-group">
-					<label>
-						姓名<br>
-					</label>
-					<input class="form-control" />
-				</div>
-				<div class="form-group">
-					<label>
-						电话<br>
-					</label>
-					<input class="form-control" />
-				</div>
-				<div class="form-group">
-					<label>
-						地址<br>
-					</label>
-					<input class="form-control" />
-				</div>
-				<div class="form-group">
-					<label>
-						邮箱<br>
-					</label>
-					<input class="form-control" />
-				</div>
-				<div class="form-group">
-					<label>
-						银行名称<br>
-					</label>
-					<input class="form-control" />
-				</div>
-				<div class="form-group">
-					<label>
-						银行账号<br>
-					</label>
-					<input class="form-control" />
+					<div class="form-group">
+						<label>
+							姓名<br>
+						</label>
+						<input name="customername" id="name_26551" th:value="${customerObject.customername}"class="form-control" />
+						<div style="color:red">
+							<label v-show="cun">客户名不能为空!</label>
+						</div>
+					</div>
+					<div class="form-group">
+						<label>
+							电话<br>
+						</label>
+						<input name="phone" id="name_26552" th:value="${customerObject.phone}"class="form-control" />
+						<div style="color:red">
+							<label v-show="cup">电话不能为空!</label>
+						</div>
+					</div>
+					<div class="form-group">
+						<label>
+							地址<br>
+						</label>
+						<input name="address" id="name_26553" th:value="${customerObject.address}" class="form-control" />
+					</div>
+					<div class="form-group">
+						<label>
+							邮箱<br>
+						</label>
+						<input name="email" id="name_26554" th:value="${customerObject.email}"class="form-control" />
+						<div style="color:red">
+							<label v-show="cue">邮箱不能为空!</label>
+						</div>
+					</div>
+					<div class="form-group">
+						<label>
+							银行名称<br>
+						</label>
+						<input name="bank" id="name_26555" th:value="${customerObject.bank}"class="form-control" />
+					</div>
+					<div class="form-group">
+						<label>
+							银行账号<br>
+						</label>
+						<input name="account" id="name_26556" th:value="${customerObject.account}"class="form-control" />
 				</div>
 				<div class="form-group">
 					<label>
 						备注<br>
-					</label><textarea class="form-control" rows="4" cols="50"></textarea>
+					</label><textarea id="name_26557" class="form-control" th:value="${customerObject.remark}" rows="4" cols="50"></textarea>
 				</div>
-				<button class="btn btn-lg btn-button-style btn-azure bloc-button" type="submit">
-					提交<span class="special-tag-for-editing-text-with-html"></span><br>
+				<button v-on:click="send()" class="bloc-button btn btn-lg btn-block btn-azure" type="button">
+					提交<br>
 				</button>
+				</form>
 			</div>
 		</div>
 	</div>
@@ -166,6 +177,70 @@
 <script th:src="@{/js/vue.js}"  type="text/javascript" charset="utf-8"></script>
 <script th:src="@{/js/axios.min.js}"  type="text/javascript" charset="utf-8"></script>
 
+<script>
+    var customer=new Vue({
+        el:"#form",  //作用范围：id=form_38623的标签及其内部
+        data () {
+            return {
+                cun:false,
+                cup:false,
+                cue:false
+            }
+        },
+        methods:{
+            send:function (){
+                var customername =  $("#name_26551").val();
+                var phone = $("#name_26552").val();
+                var address = $("#name_26553").val();
+                var email = $("#name_26554").val();
+                var bank = $("#name_26555").val();
+                var account = $("#name_26556").val();
+                var remark = $("#name_26557").val();
+                var customerid = [[${customerObject.customerid}]];
+                this.cue=false;
+                this.cun=false;
+                this.cup=false;
+                if(customername.length==0){
+                    this.cun=true;
+				}
+                if(phone.length==0){
+                    this.cup=true;
+                }
+                if(email.length==0){
+                    this.cue=true;
+                }
+                if(!this.cue){
+                    if(!this.cun){
+                        if(!this.cup){
+                            axios({
+                                method: "post",
+                                url: "/customer/modify",
+                                params:{
+                                    customerid:customerid,
+                                    customername:customername,
+                                    phone:phone,
+                                    address:address,
+                                    email:email,
+                                    bank:bank,
+                                    account:account,
+                                    remark:remark
+                                }
+                            })
+                                .then(function (value) {
+                                    if((String)(value.data)==="200") {
+                                        alert("修改成功");
+                                    }else{
+                                        alert("修改失败");
+                                    }
+                                })
+                                .catch();
+						}
+					}
+				}
 
+            }
+        }
+    })
+</script>
 </body>
 </html>
