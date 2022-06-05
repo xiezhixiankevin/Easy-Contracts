@@ -21,7 +21,7 @@ public interface ContractService {
     如果想条件查询，传入一个contract对象，比如你想查名称带有北交大的，就设置contract的名称属性为北交大，再传入
     如果想查询全部的合同，传入一个null即可
     */
-    List<Contract> listContractSelective(Contract contract);//wj
+    List<Contract> listContractSelective(Contract contract,int pn);//wj
 
     Contract getContractById(int contractId);//xzx
 

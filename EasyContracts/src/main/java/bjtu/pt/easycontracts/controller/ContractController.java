@@ -54,7 +54,10 @@ public class ContractController {
     @ResponseBody
     public ReturnObject<PageInfo> listContracts(Contract contract, @PathVariable("pn")Integer pn){
 
-        return null;
+        List<Contract> contractList = contractService.listContractSelective(contract, pn);
+        PageInfo pageInfo = new PageInfo(contractList,5);
+        ReturnObject<PageInfo> result = new ReturnObject<>(Global.SUCCESS,pageInfo);
+        return result;
     }
 
     /*
