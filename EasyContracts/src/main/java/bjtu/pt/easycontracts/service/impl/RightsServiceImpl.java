@@ -1,5 +1,6 @@
 package bjtu.pt.easycontracts.service.impl;
 
+import bjtu.pt.easycontracts.mapper.ContractProcessMapper;
 import bjtu.pt.easycontracts.pojo.table.*;
 import bjtu.pt.easycontracts.service.EmailService;
 import bjtu.pt.easycontracts.service.UserService;
@@ -10,10 +11,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-import static bjtu.pt.easycontracts.utils.Global.FAIL;
-import static bjtu.pt.easycontracts.utils.Global.SUCCESS;
+import static bjtu.pt.easycontracts.utils.Global.*;
 
 /**
  * <Description> RightsServiceImpl
@@ -33,14 +35,67 @@ public class RightsServiceImpl implements RightsService {
     private UserService userService;
     @Autowired
     private RightsMapper rightsMapper;
+    @Autowired
+    private ContractProcessMapper contractProcessMapper;
 
     @Autowired
     private EmailService emailService;
 
     @Override
     public int allocationRights(int userId, List<Rights> rights) {
+        //检查是否能删除权限
         RoleRightExample roleRightExample = new RoleRightExample();
         roleRightExample.createCriteria().andUseridEqualTo(userId);//类似于where后面的内容
+        List<RoleRight> roleRightList=new ArrayList<>();
+        roleRightList=roleRightMapper.selectByExample(roleRightExample);//用户已有的权限
+        int flagSELECT=0;//合同查询
+        int flagFINALIZE=0;//合同定稿
+        int flagCOUNTERSIGN=0;//合同会签
+        int flagAPPROVE=0;//合同审批
+        int flagSIGN=0;//合同签订
+        //修改后的权限
+        for(int i=0;i<rights.size();i++){
+            if(rights.get(i).getRightid()==PERMISSION_SELECT_CONTRACT){
+                flagSELECT=1;
+            }
+            if(rights.get(i).getRightid()==PERMISSION_FINALIZE_CONTRACT){
+                flagFINALIZE=1;
+            }
+            if(rights.get(i).getRightid()==PERMISSION_COUNTERSIGN_CONTRACT){
+                flagCOUNTERSIGN=1;
+            }
+            if(rights.get(i).getRightid()==PERMISSION_APPROVE_CONTRACT){
+                flagAPPROVE=1;
+            }
+            if(rights.get(i).getRightid()==PERMISSION_SIGN_CONTRACT){
+                flagSIGN=1;
+            }
+        }
+        //修改前的权限
+        for(int i=0;i<roleRightList.size();i++){
+            if(checkDelete(userId,roleRightList.get(i).getRightid())==PERMISSION_SELECT_CONTRACT){
+                if(flagSELECT==0)
+                    return PERMISSION_SELECT_CONTRACT;
+            }
+            else if(checkDelete(userId,roleRightList.get(i).getRightid())==PERMISSION_FINALIZE_CONTRACT){
+                if(flagFINALIZE==0)
+                    return PERMISSION_FINALIZE_CONTRACT;
+            }
+            else if(checkDelete(userId,roleRightList.get(i).getRightid())==PERMISSION_COUNTERSIGN_CONTRACT){
+                if(flagCOUNTERSIGN==0)
+                    return PERMISSION_COUNTERSIGN_CONTRACT;
+            }
+            else if(checkDelete(userId,roleRightList.get(i).getRightid())==PERMISSION_APPROVE_CONTRACT){
+                if(flagAPPROVE==0)
+                    return PERMISSION_APPROVE_CONTRACT;
+            }
+            else if(checkDelete(userId,roleRightList.get(i).getRightid())==PERMISSION_SIGN_CONTRACT){
+                if(flagSIGN==0)
+                    return PERMISSION_SIGN_CONTRACT;
+            }
+        }
+
+
         roleRightMapper.deleteByExample(roleRightExample);
         User user = userService.getUserById(userId);
 
@@ -99,6 +154,16 @@ public class RightsServiceImpl implements RightsService {
 
     @Override
     public int deleteRights(int userId) {
+        //检查能否删除
+        RoleRightExample roleRightExample = new RoleRightExample();
+        roleRightExample.createCriteria().andUseridEqualTo(userId);//类似于where后面的内容
+        List<RoleRight> roleRightList=new ArrayList<>();
+        roleRightList=roleRightMapper.selectByExample(roleRightExample);//用户已有的权限
+        for(int i=0;i<roleRightList.size();i++){
+            if(checkDelete(userId,roleRightList.get(i).getRightid())!=SUCCESS)
+                return checkDelete(userId,roleRightList.get(i).getRightid());
+        }
+
         RoleRightExample example = new RoleRightExample();
         example.createCriteria().andUseridEqualTo(userId);
         int lines;
@@ -160,5 +225,40 @@ public class RightsServiceImpl implements RightsService {
             }
         }
         return result;
+    }
+
+    @Override
+    public int checkDelete(int userId,int rightId)
+    {
+        ContractProcessExample contractProcessExample=new ContractProcessExample();
+        contractProcessExample.createCriteria().andUseridEqualTo(userId);
+        List<ContractProcess> contractProcessList=new ArrayList<>();
+        contractProcessList=contractProcessMapper.selectByExample(contractProcessExample);
+        for(int i=0;i<contractProcessList.size();i++) {
+            if (contractProcessList.get(i).getUserid() == userId) {
+                if (contractProcessList.get(i).getType() == COUNTERSIGN && rightId==PERMISSION_COUNTERSIGN_CONTRACT) {
+                    return PERMISSION_COUNTERSIGN_CONTRACT;
+                }
+                if (contractProcessList.get(i).getType() == FINALIZE && rightId==PERMISSION_FINALIZE_CONTRACT) {
+                    return PERMISSION_FINALIZE_CONTRACT;
+                }
+                if (contractProcessList.get(i).getType() == EXAM && rightId==PERMISSION_APPROVE_CONTRACT) {
+                    return PERMISSION_APPROVE_CONTRACT;
+                }
+                if (contractProcessList.get(i).getType() == SIGN && rightId==PERMISSION_SIGN_CONTRACT) {
+                    return PERMISSION_SIGN_CONTRACT;
+                }
+            }
+        }
+
+        //查询合同功能
+        if(rightId==PERMISSION_SELECT_CONTRACT){
+            for(int i=0;i<contractProcessList.size();i++) {
+                if (contractProcessList.get(i).getUserid() == userId){
+                    return PERMISSION_SELECT_CONTRACT;
+                }
+            }
+        }
+        return SUCCESS;
     }
 }
