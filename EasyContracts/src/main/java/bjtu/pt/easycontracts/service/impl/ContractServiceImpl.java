@@ -264,6 +264,19 @@ public class ContractServiceImpl implements ContractService
             ContractExample contractExample=new ContractExample();
             contractExample.createCriteria().andContractidEqualTo(contractId);
             contractMapper.updateByExampleWithBLOBs(contract,contractExample);
+
+            /* 将process表中签订部分state设为1 */
+            ContractProcessExample contractProcessExample2 = new ContractProcessExample();
+            contractProcessExample2.createCriteria().andContractidEqualTo(contractId).andTypeEqualTo(SIGN);
+            List<ContractProcess> contractProcessList1 = contractProcessMapper.selectByExampleWithBLOBs(contractProcessExample2);
+            for (ContractProcess process : contractProcessList1)
+            {
+                ContractProcessExample contractProcessExample3 = new ContractProcessExample();
+                contractProcessExample3.createCriteria().andContractidEqualTo(process.getContractid()).andUseridEqualTo(process.getUserid()).andTypeEqualTo(process.getType());
+                process.setState(DOING);
+                contractProcessMapper.updateByExampleWithBLOBs(process , contractProcessExample3);
+            }
+
             return SUCCESS;
         }else if(flag1==contractProcessList.size()){
             //将合同进程表里数据 status改成0
