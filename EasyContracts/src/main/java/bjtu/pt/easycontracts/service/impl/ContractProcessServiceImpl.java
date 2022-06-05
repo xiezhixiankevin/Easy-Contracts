@@ -278,7 +278,8 @@ public class ContractProcessServiceImpl implements ContractProcessService {
         contractProcessMapper.updateByExampleSelective(contractProcess1,contractProcessExample);
         //修改合同进入审批阶段
         Contract contract = new Contract();
-        contract.setFailuretimes(null);
+        Contract contract1 = contractMapper.selectByPrimaryKey(contractId);
+        contract.setFailuretimes(contract1.getFailuretimes());
         contract.setType(EXAMMING);
         contract.setContractid(contractId);
         contractMapper.updateByPrimaryKeySelective(contract);

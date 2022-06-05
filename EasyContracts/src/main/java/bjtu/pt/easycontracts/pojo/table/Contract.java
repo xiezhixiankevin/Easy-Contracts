@@ -17,7 +17,7 @@ public class Contract {
 
     private Integer type;
 
-    private Integer failuretimes = 0;
+    private Integer failuretimes;
 
     private String content;
 
