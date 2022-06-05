@@ -3,6 +3,7 @@ package bjtu.pt.easycontracts.service;
 import bjtu.pt.easycontracts.pojo.table.Rights;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * <Description> RoleService
@@ -34,4 +35,7 @@ public interface RightsService {
 
     //根据list的值返回一个List<Rights>
     List<Rights> createRightList(List<Integer> rights);//xzx
+
+    //判断能否删除某个权限
+    int checkDelete(int userId,int rightId);
 }
