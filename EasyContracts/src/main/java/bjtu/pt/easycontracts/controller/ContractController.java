@@ -246,5 +246,12 @@ public class ContractController {
         return String.valueOf(contractProcessService.assignUsers(contractId,userMap));
     }
 
+    @PostMapping("/delete/{id}")
+    @ResponseBody
+    public String delete(@PathVariable("id")Integer id){
+        contractService.deleteContract(id);
+        return String.valueOf(SUCCESS);
+    }
+
 
 }

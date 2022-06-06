@@ -82,7 +82,9 @@ public class ContractServiceImpl implements ContractService
 
     @Override
     public Contract getContractById(int contractId) {
-        return contractMapper.selectByPrimaryKey(contractId);
+        Contract contract = contractMapper.selectByPrimaryKey(contractId);
+        setContract(contract);
+        return contract;
     }
 
     @Override
