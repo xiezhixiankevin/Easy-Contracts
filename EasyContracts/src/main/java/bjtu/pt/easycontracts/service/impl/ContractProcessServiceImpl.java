@@ -2,11 +2,9 @@ package bjtu.pt.easycontracts.service.impl;
 
 import bjtu.pt.easycontracts.mapper.ContractMapper;
 import bjtu.pt.easycontracts.mapper.ContractProcessMapper;
-import bjtu.pt.easycontracts.pojo.table.Contract;
-import bjtu.pt.easycontracts.pojo.table.ContractExample;
-import bjtu.pt.easycontracts.pojo.table.ContractProcess;
-import bjtu.pt.easycontracts.pojo.table.ContractProcessExample;
+import bjtu.pt.easycontracts.pojo.table.*;
 import bjtu.pt.easycontracts.service.ContractProcessService;
+import bjtu.pt.easycontracts.service.EmailService;
 import bjtu.pt.easycontracts.service.UserService;
 import bjtu.pt.easycontracts.utils.Global;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +27,8 @@ public class ContractProcessServiceImpl implements ContractProcessService {
     private ContractMapper contractMapper;
     @Autowired
     private UserService userService;
+    @Autowired
+    private EmailService emailService;
 
     @Override
     public Map<Integer, List<Contract>> listConTractUserNeedDeal(int userId,List<Boolean> rights) {
@@ -318,5 +318,25 @@ public class ContractProcessServiceImpl implements ContractProcessService {
         return stringBuilder.toString();
     }
 
+    @Override
+    public void sendEmailRemind(Contract contract)
+    {
+        ContractProcessExample contractProcessExample=new ContractProcessExample();
+        contractProcessExample.createCriteria().andTypeEqualTo(NOT_COME).andContractidEqualTo(contract.getContractid());
+        List<ContractProcess> contractProcessList=new ArrayList<>();
+        contractProcessList=contractProcessMapper.selectByExample(contractProcessExample);
 
+        for(int i=0;i<contractProcessList.size();i++){
+            User user = userService.getUserById(contractProcessList.get(i).getUserid());
+            if(contractProcessList.get(i).getType()==COUNTERSIGN)
+            emailService.sendSimpleMail(user.getEmail() , "Remind the work" , "You have work of countersign contract to be done, remember to finish it!");
+            if(contractProcessList.get(i).getType()==FINALIZE)
+                emailService.sendSimpleMail(user.getEmail() , "Remind the work" , "You have work of finalize contract to be done, remember to finish it!");
+            if(contractProcessList.get(i).getType()==EXAM)
+                emailService.sendSimpleMail(user.getEmail() , "Remind the work" , "You have work of exam contract to be done, remember to finish it!");
+            if(contractProcessList.get(i).getType()==SIGN)
+                emailService.sendSimpleMail(user.getEmail() , "Remind the work" , "You have work of sign contract to be done, remember to finish it!");
+        }
+
+    }
 }
