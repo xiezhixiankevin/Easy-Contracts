@@ -1,8 +1,7 @@
 package bjtu.pt.easycontracts.controller;
 
 import bjtu.pt.easycontracts.pojo.table.*;
-import bjtu.pt.easycontracts.service.ContractFileService;
-import bjtu.pt.easycontracts.service.RightsService;
+import bjtu.pt.easycontracts.service.*;
 import bjtu.pt.easycontracts.utils.Global;
 import bjtu.pt.easycontracts.utils.ReturnObject;
 import bjtu.pt.easycontracts.utils.TimeUtil;
@@ -13,8 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
 import java.io.FileNotFoundException;
-import bjtu.pt.easycontracts.service.ContractProcessService;
-import bjtu.pt.easycontracts.service.ContractService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
@@ -47,6 +45,9 @@ public class ContractController {
 
     @Autowired
     private RightsService rightsService;
+
+    @Autowired
+    private LogService logService;
     /*
     * 返回满足条件的合同list，
     * */
@@ -139,6 +140,8 @@ public class ContractController {
         contractProcess.setUserid(user.getUserid());
         contractProcessService.insertProcess(contractProcess);
 
+        /* 添加起草日志 */
+        logService.addType1Log(user.getUserid(), contract.getContractid() , DRAFT_LOG);
 
         return "info/success";
     }
@@ -178,6 +181,10 @@ public class ContractController {
             contractAttachment.setType("普通文件");
             contractFileService.addContractFile(contractAttachment,upload);
         }
+
+        /* 添加定稿日志 */
+        logService.addType1Log(user.getUserid(), contract.getContractid() , FINALIZE_LOG);
+
         return "info/success_finalize";
     }
 
@@ -189,6 +196,8 @@ public class ContractController {
     public String countersignContract(Integer contractId, Integer userId, String opinion){
         // TODO: 在下面这个方法中注释了群发邮件的方法，因为会报错
         contractService.countersignContract(contractId,userId,opinion);
+        /* 添加会签日志 */
+        logService.addType1Log(userId , contractId , COUNTERSIGN_LOG);
         return INFO_SUCCESS;
     }
 
@@ -208,7 +217,11 @@ public class ContractController {
 
         int code = contractService.examineContract(contractId, userId, opinion, ifPassBoolean);
         if (code == SUCCESS)
+        {
+            /* 添加日志 */
+            logService.addType1Log(userId , contractId , EXAM_LOG);
             return "SUCCESS";
+        }
         else
             return "审批失败，后端错误";
     }
@@ -222,6 +235,8 @@ public class ContractController {
                                       @RequestParam("userId")Integer userId,
                                       @RequestParam("opinion")String opinion){
         if(contractService.signContract(contractId,userId,opinion)>0){
+            /* 添加日志 */
+            logService.addType1Log(userId , contractId , SIGN_LOG);
             return INFO_SUCCESS;
         }
         return INFO_ERROR;

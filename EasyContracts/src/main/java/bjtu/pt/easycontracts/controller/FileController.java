@@ -2,6 +2,7 @@ package bjtu.pt.easycontracts.controller;
 
 import bjtu.pt.easycontracts.pojo.table.ContractAttachment;
 import bjtu.pt.easycontracts.service.ContractFileService;
+import bjtu.pt.easycontracts.service.LogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;

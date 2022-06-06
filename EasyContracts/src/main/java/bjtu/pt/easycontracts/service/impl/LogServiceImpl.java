@@ -5,9 +5,11 @@ import bjtu.pt.easycontracts.pojo.table.Log;
 import bjtu.pt.easycontracts.pojo.table.LogExample;
 import bjtu.pt.easycontracts.service.LogService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class LogServiceImpl implements LogService
 {
     @Autowired

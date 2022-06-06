@@ -5,6 +5,7 @@ import bjtu.pt.easycontracts.mapper.ContractProcessMapper;
 import bjtu.pt.easycontracts.mapper.CustomerMapper;
 import bjtu.pt.easycontracts.pojo.table.*;
 import bjtu.pt.easycontracts.service.EmailService;
+import bjtu.pt.easycontracts.service.LogService;
 import bjtu.pt.easycontracts.service.UserService;
 
 import bjtu.pt.easycontracts.service.ContractService;
@@ -36,6 +37,8 @@ public class ContractServiceImpl implements ContractService
     private EmailService emailService;
     @Autowired
     private ContractProcessServiceImpl contractProcessService;
+    @Autowired
+    private LogService logService;
 
     @Override
     public List<Contract> listContractSelective(Contract contract,int pn)
