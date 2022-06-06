@@ -91,6 +91,13 @@ public class SkipController {
         return "contract/selectContract";
     }
 
+    //跳转到selectAllContract页面
+    @GetMapping("/toSelectAllContract")
+    public String toSelectAllContract(Model model){
+        model.addAttribute("customers",customerService.listCustomerSelective(null));
+        return "contract/selectAllContract";
+    }
+
     //toAssignContract
     //跳转到给合同进行人员分配页面
     @GetMapping("/toAssignContract/{contractId}")
