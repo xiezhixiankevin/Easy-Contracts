@@ -91,6 +91,25 @@ public class SkipController {
         return "contract/selectContract";
     }
 
+    //跳转到contractInfo页面
+    @GetMapping("/toShowContract/{id}")
+    public String toShowContract(@PathVariable("id")Integer id,Model model){
+        Contract contract = contractService.getContractById(id);
+
+        //目前只能上传一个文件，后续考虑多个文件
+        List<ContractAttachment> fileList = contractFileService.getContractFileListOfContract(id);
+
+        if (!fileList.isEmpty()){
+            model.addAttribute("file",fileList.get(0));
+        }else {
+            ContractAttachment contractAttachment = new ContractAttachment();
+            model.addAttribute("file",contractAttachment);
+        }
+
+        model.addAttribute("contractObject",contract);
+        return "contract/contractInfo";
+    }
+
     //跳转到selectAllContract页面
     @GetMapping("/toSelectAllContract")
     public String toSelectAllContract(Model model){
