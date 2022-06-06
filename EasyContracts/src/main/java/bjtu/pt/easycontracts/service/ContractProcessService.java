@@ -50,4 +50,7 @@ public interface ContractProcessService {
     String getCounterSignOpinion(int contractId);//xzx
     //获取格式化的审批意见
     String getExamOpinion(int contractId);//xzx
+
+    //发邮件提醒没有处理合同的人
+    void sendEmailRemind (Contract contract);
 }
