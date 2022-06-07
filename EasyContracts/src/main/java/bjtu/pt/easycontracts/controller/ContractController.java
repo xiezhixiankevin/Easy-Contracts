@@ -260,7 +260,6 @@ public class ContractController {
 
         return String.valueOf(contractProcessService.assignUsers(contractId,userMap));
     }
-
     @PostMapping("/delete/{id}")
     @ResponseBody
     public String delete(@PathVariable("id")Integer id){
@@ -268,5 +267,13 @@ public class ContractController {
         return String.valueOf(SUCCESS);
     }
 
+    @PostMapping("/toRemind/{contractid}")
+    @ResponseBody
+    public String remindUser(@PathVariable("contractid")Integer contractid){
+
+        Contract contract = contractService.getContractById(contractid);
+        contractProcessService.sendEmailRemind(contract);
+        return String.valueOf(SUCCESS);
+    }
 
 }
