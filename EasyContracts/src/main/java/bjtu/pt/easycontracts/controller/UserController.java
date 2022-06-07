@@ -4,6 +4,7 @@ import bjtu.pt.easycontracts.pojo.logic.Code;
 import bjtu.pt.easycontracts.pojo.table.Rights;
 import bjtu.pt.easycontracts.pojo.table.User;
 import bjtu.pt.easycontracts.service.CodeService;
+import bjtu.pt.easycontracts.service.LogService;
 import bjtu.pt.easycontracts.service.RightsService;
 import bjtu.pt.easycontracts.service.UserService;
 import bjtu.pt.easycontracts.utils.Global;
@@ -35,6 +36,9 @@ public class UserController {
     private UserService userService;
     @Autowired
     private RightsService rightsService;
+
+    @Autowired
+    private LogService logService;
 
     /*
     * 注册请求，注册成功跳转到登录页面;失败重定向(redirect:xxx)到注册页面，并给出相应提示
@@ -112,8 +116,13 @@ public class UserController {
 
     @PostMapping("/delete/{userID}")
     @ResponseBody
-    public String deleteUser(@PathVariable("userID")Integer userID){
+    public String deleteUser(@PathVariable("userID")Integer userID , HttpSession session){
         userService.deleteUser(userID);//i返回的是影响的行数，所以=0代表没有这个人，并不表示失败
+
+        /* 添加日志 */
+        User user = (User) session.getAttribute("nowUser");
+        logService.addType3Log(userID , user.getUserid() , Global.DELETE_USER_LOG);
+
         return String.valueOf(Global.SUCCESS);
     }
 

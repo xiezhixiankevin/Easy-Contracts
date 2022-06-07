@@ -322,7 +322,7 @@ public class ContractProcessServiceImpl implements ContractProcessService {
     public void sendEmailRemind(Contract contract)
     {
         ContractProcessExample contractProcessExample=new ContractProcessExample();
-        contractProcessExample.createCriteria().andTypeEqualTo(NOT_COME).andContractidEqualTo(contract.getContractid());
+        contractProcessExample.createCriteria().andTypeEqualTo(DOING).andContractidEqualTo(contract.getContractid());
         List<ContractProcess> contractProcessList=new ArrayList<>();
         contractProcessList=contractProcessMapper.selectByExample(contractProcessExample);
 
