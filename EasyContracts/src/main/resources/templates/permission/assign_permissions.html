@@ -377,7 +377,7 @@
 				//发送请求
 				axios({
 					method: "post",
-					url : "http://localhost:8080/rights/allocationRights",
+					url : "/rights/allocationRights",
 					params:{username:username},
 					data : rights
 				}).then(function (value) {

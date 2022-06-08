@@ -15,7 +15,7 @@
 	<link rel="stylesheet" type="text/css" href="../../static/css/animate.min.css?7456" th:href="@{/css/animate.min.css?7456}">
 	<link href='https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
 	<link href='https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900&display=swap&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
-    <title>select_customers</title>
+    <title>select_users</title>
 
 
     
@@ -125,7 +125,7 @@
 						</svg>编辑
 						</a>
 						&nbsp;&nbsp;
-						<a href="#" th:if="${session.nowUser.ifHasRight(20)}" :href="'http://localhost:8080/toRights/'+user.username">
+						<a href="#" th:if="${session.nowUser.ifHasRight(20)}" :href="'/toRights/'+user.username">
 							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list-ul text-dark" viewBox="0 0 16 16">
 								<path fill-rule="evenodd" d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm-3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
 							</svg>权限管理

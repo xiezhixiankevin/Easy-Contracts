@@ -82,5 +82,6 @@ public class Global {
 
 
     //文件上传路径
-    public static final String FILE_PATH = "F://files";
+//    public static final String FILE_PATH = "F://files"; //windows
+    public static final String FILE_PATH = "/home/project/EasyContract/files"; //linux
 }
