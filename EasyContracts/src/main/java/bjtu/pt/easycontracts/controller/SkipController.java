@@ -208,6 +208,17 @@ public class SkipController {
     public String toExamine(@PathVariable("contractId")Integer contractId, Model model) {
         Contract toCountersignContract = contractService.getContractById(contractId);
         contractService.setContract(toCountersignContract);
+
+        //目前只能上传一个文件，后续考虑多个文件
+        List<ContractAttachment> fileList = contractFileService.getContractFileListOfContract(contractId);
+
+        if (!fileList.isEmpty()){
+            model.addAttribute("file",fileList.get(0));
+        }else {
+            ContractAttachment contractAttachment = new ContractAttachment();
+            model.addAttribute("file",contractAttachment);
+        }
+
         model.addAttribute("contractObject", toCountersignContract);
         return "contract/examine";
     }
@@ -223,6 +234,17 @@ public class SkipController {
                          Model model){
         Contract toSignContract = contractService.getContractById(contractId);
         contractService.setContract(toSignContract);
+
+        //目前只能上传一个文件，后续考虑多个文件
+        List<ContractAttachment> fileList = contractFileService.getContractFileListOfContract(contractId);
+
+        if (!fileList.isEmpty()){
+            model.addAttribute("file",fileList.get(0));
+        }else {
+            ContractAttachment contractAttachment = new ContractAttachment();
+            model.addAttribute("file",contractAttachment);
+        }
+
         model.addAttribute("contractObject", toSignContract);
         return "sign";
     }
