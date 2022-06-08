@@ -234,9 +234,9 @@
                                         alert("注册成功！即将跳转到登录页面");
                                         //注册成功跳转到登录页面
                                         window.location.href = registerForm.jump_url;
-                                    }else if(value.data.code === registerForm.CODE_ERROR){
+                                    }else if(value.data.code == 201){
                                         alert("验证码错误");
-                                    }else if(value.data.code === registerForm.NAME_EXIST){
+                                    }else if(value.data.code == 202){
                                         alert("用户名已存在");
                                     }
                                 })

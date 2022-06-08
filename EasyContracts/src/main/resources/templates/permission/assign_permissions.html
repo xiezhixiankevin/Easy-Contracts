@@ -383,7 +383,10 @@
 				}).then(function (value) {
 					if(value.data == rightsVue.OK){
 						alert("权限更改成功！");
-					}else{
+					}else if(value.data == 203){
+						alert("当前有未处理合同，无法删除权限，请先处理合同！");
+					}
+					else{
 						alert("权限更改失败！");
 					}
 				}).catch();

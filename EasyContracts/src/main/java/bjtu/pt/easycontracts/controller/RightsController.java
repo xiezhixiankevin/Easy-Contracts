@@ -43,7 +43,12 @@ public class RightsController {
                                    HttpSession session){
             if (userService.ifExistUser(username)){
                 List<Rights> rightList = rightsService.createRightList(rights);
-                rightsService.allocationRights(username,rightList);
+                int result = rightsService.allocationRights(username, rightList);
+
+                if (result != Global.SUCCESS){
+                    //不能删除权限
+                    return String.valueOf(Global.ERROR);
+                }
                 User nowUser = (User) session.getAttribute("nowUser");
                 User userOperated = userService.getUserByUserName(username);
                 nowUser.setUserRights(rightsService.listRights(nowUser.getUserid()));

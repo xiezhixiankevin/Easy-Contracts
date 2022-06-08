@@ -118,6 +118,7 @@ public class UserController {
     @ResponseBody
     public String deleteUser(@PathVariable("userID")Integer userID , HttpSession session){
         userService.deleteUser(userID);//i返回的是影响的行数，所以=0代表没有这个人，并不表示失败
+        rightsService.deleteRights(userID); //把用户的权限一起删除
 
         /* 添加日志 */
         User user = (User) session.getAttribute("nowUser");
