@@ -178,7 +178,6 @@
 		el:"#div_form_38623",  //作用范围：id=form_38623的标签及其内部
 		//定义数据
 		data: {
-			ifRegisterOK:false, //判断是否成功注册
 			// jump_url:"http://114.116.234.63:8080/toLogin", //注册成功需要跳转的页面地址，服务器
 			jump_url:"http://localhost:8080/toLogin", //注册成功需要跳转的页面地址，本地
 
@@ -208,6 +207,7 @@
                 this.usern = false;
                 this.userp=false;
                 this.usert=false;
+                var url = this.jump_url;
                 if(!REGEX_NAME.test(username)){
                     this.usern = true;
                 }
@@ -233,7 +233,8 @@
                                     if(value.data.code == 200){
                                         alert("注册成功！即将跳转到登录页面");
                                         //注册成功跳转到登录页面
-                                        window.location.href = registerForm.jump_url;
+                                        window.location.href = "http://localhost:8080/toLogin";//本地
+										// window.location.href = "http://114.116.234.63:8080/toLogin";//服务器
                                     }else if(value.data.code == 201){
                                         alert("验证码错误");
                                     }else if(value.data.code == 202){
