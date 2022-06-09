@@ -1,6 +1,7 @@
 package bjtu.pt.easycontracts.service;
 
 
+import bjtu.pt.easycontracts.pojo.table.Customer;
 import bjtu.pt.easycontracts.pojo.table.User;
 import java.util.List;
 import java.util.Map;
@@ -48,6 +49,8 @@ public interface UserService {
 
     /* 传入合同id，得到所有该合同操作员的user对象 */
     List<User> getUsersAboutContract(int contractId);
+
+    int updateUser(int userId, User user);
 
     //将数据库中的用户按权限进行返回()//只需要会签，审批，签订
     Map<Integer,List<User>> getUserListByRightsForAssignContract();

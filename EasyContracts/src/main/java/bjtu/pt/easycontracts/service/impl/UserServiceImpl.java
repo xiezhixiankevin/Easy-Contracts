@@ -40,6 +40,16 @@ public class UserServiceImpl implements UserService {
     private RoleRightMapper roleRightMapper;
 
     @Override
+    public int updateUser(int userId, User user) {
+        User nowUser = getUserById(userId);
+        List<Rights> haveRights = nowUser.getUserRights();
+        UserExample userExample = new UserExample();
+        userExample.createCriteria().andUseridEqualTo(userId);
+        user.setUserRights(haveRights);
+        return userMapper.updateByExample(user, userExample);
+    }
+
+    @Override
     public User registerUser(User user) {
         // 判断是否已存在该用户
         UserExample userExample = new UserExample();

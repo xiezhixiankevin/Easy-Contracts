@@ -17,6 +17,8 @@ import java.util.*;
 
 import javax.servlet.http.HttpSession;
 
+import static bjtu.pt.easycontracts.utils.Global.SUCCESS;
+
 /**
  * <Description> UserController
  *
@@ -49,13 +51,13 @@ public class UserController {
 
         String email = user.getEmail();
         int checkCode = codeService.checkCode(new Code(email, codeValue), Global.REGISTER);
-        if (checkCode == Global.SUCCESS)
+        if (checkCode == SUCCESS)
         {
             User user1 = userService.registerUser(user);
             if(user1==null){
                 return new ReturnObject<>(Global.NAME_EXIST, null);
             }
-            return new ReturnObject<>(Global.SUCCESS, user1);
+            return new ReturnObject<>(SUCCESS, user1);
         } else {
             return new ReturnObject<>(Global.CODE_ERROR, null);
         }
@@ -77,7 +79,7 @@ public class UserController {
             user.setUserRights(rights);
             session.setAttribute("nowUser", user);
         }
-            return new ReturnObject<>(Global.SUCCESS, user);
+            return new ReturnObject<>(SUCCESS, user);
     }
 
     /*
@@ -109,7 +111,7 @@ public class UserController {
 
         List<User> userList = userService.listUserSelective(user,pageNum);
         PageInfo pageInfo = new PageInfo(userList,5);
-        ReturnObject<PageInfo> result = new ReturnObject<>(Global.SUCCESS,pageInfo);
+        ReturnObject<PageInfo> result = new ReturnObject<>(SUCCESS,pageInfo);
 
         return result;
     }
@@ -124,14 +126,29 @@ public class UserController {
         User user = (User) session.getAttribute("nowUser");
         logService.addType3Log(userID , user.getUserid() , Global.DELETE_USER_LOG);
 
-        return String.valueOf(Global.SUCCESS);
+        return String.valueOf(SUCCESS);
     }
 
     @GetMapping("/listUserByRight")
     @ResponseBody
     public ReturnObject<Map<Integer, List<User>>> listUserByRight(){
         Map<Integer, List<User>> map = userService.getUserListByRightsForAssignContract();
-        return new ReturnObject<>(Global.SUCCESS,map);
+        return new ReturnObject<>(SUCCESS,map);
+    }
+
+    @GetMapping("/modifyUserInfo")
+    @ResponseBody
+    public String modifyUserInfo(Integer userId, String email,
+                                 String username, String password, String description) {
+        User newUser = new User();
+        newUser.setUserid(userId);
+        newUser.setEmail(email);
+        newUser.setPassword(password);
+        newUser.setUsername(username);
+        newUser.setUserdescription(description);
+        userService.updateUser(userId, newUser);
+        return "SUCCESS";
+
     }
 
 }
