@@ -38,3 +38,5 @@ pagehelper:
   reasonable: true
   support-methods-arguments: true
 
+#系统的一些数据
+AdminCode: "you are not Admin!"

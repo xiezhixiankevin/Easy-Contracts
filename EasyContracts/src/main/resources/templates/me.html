@@ -86,6 +86,7 @@
 						<a href="index.html" th:href="@{/toAddCustomer}" th:if="${session.nowUser.ifHasRight(16)}" class="btn btn-d btn-lg btn-6-style btn-style-none">新增客户</a>
 						<a href="index.html" th:href="@{/toSelectCustomer}" th:if="${session.nowUser.ifHasRight(17)}" class="btn btn-d btn-lg btn-6-style btn-style-none">客户管理</a>
 						<a href="index.html" th:href="@{/toSelectUser}" th:if="${session.nowUser.ifHasRight(13)}" class="btn btn-d btn-lg btn-6-style btn-style-none">用户管理</a>
+						<a v-on:click="getAdmin()" href="#" class="btn btn-d btn-lg btn-6-style btn-style-none">成为管理员</a>
 					</div>
 				</div>
 			</div>
@@ -291,6 +292,20 @@
 							}
 						}
 				).catch();
+			},
+			getAdmin: function () {
+				var code = prompt("请输入管理员邀请码:");
+				axios({
+					method: "post",
+					url: "/rights/toBeAdmin",
+					params: {code:code}
+				}).then(function (value) {
+					if(value.data == 200){
+						alert("您以获得管理员权限，刷新页面查看吧！");
+					}else{
+						alert("抱歉，邀请码不正确！");
+					}
+				});
 			}
 
 		}

@@ -115,7 +115,7 @@ public class RightsServiceImpl implements RightsService {
     @Override
     public int allocationRights(String username, List<Rights> rights) {
         int userId=userService.getUserByUserName(username).getUserid();
-        if(allocationRights(userId,rights)==1){
+        if(allocationRights(userId,rights)==SUCCESS){
             /* 向用户发送邮件，告知已获得权限 */
             User user = userService.getUserByUserName(username);
             emailService.sendSimpleMail(user.getEmail() , "Allocate Right" , "You have got rights, remember to check!");
@@ -141,7 +141,7 @@ public class RightsServiceImpl implements RightsService {
     @Override
     public int allocationRights(String username, Rights rights) {
         int userId=userService.getUserByUserName(username).getUserid();
-        if(allocationRights(userId, rights)==1){
+        if(allocationRights(userId, rights)==SUCCESS){
             /* 向用户发送邮件，告知已获得权限 */
             User user = userService.getUserByUserName(username);
             emailService.sendSimpleMail(user.getEmail() , "Allocate Right" , "You have got rights, remember to check!");
