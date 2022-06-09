@@ -87,7 +87,7 @@
 						<a href="index.html" th:href="@{/toSelectCustomer}" th:if="${session.nowUser.ifHasRight(17)}" class="btn btn-d btn-lg btn-6-style btn-style-none">客户管理</a>
 						<a href="index.html" th:href="@{/toSelectUser}" th:if="${session.nowUser.ifHasRight(13)}" class="btn btn-d btn-lg btn-6-style btn-style-none">用户管理</a>
 						<a v-on:click="getAdmin()" href="#" class="btn btn-d btn-lg btn-6-style btn-style-none">成为管理员</a>
-						<a href="index.html" th:href="@{/toModifyUser}" class="btn btn-d btn-lg btn-6-style btn-style-none">修改信息</a>
+						<a href="index.html" th:href="'/toModifyUser/'+${session.nowUser.getUserid()}" class="btn btn-d btn-lg btn-6-style btn-style-none">修改信息</a>
 					</div>
 				</div>
 			</div>

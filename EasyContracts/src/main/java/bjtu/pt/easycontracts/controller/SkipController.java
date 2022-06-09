@@ -79,8 +79,10 @@ public class SkipController {
     }
 
     //跳转到modify用户页面
-    @GetMapping("/toModifyUser")
-    public String toModifyUser(){
+    @GetMapping("/toModifyUser/{userId}")
+    public String toModifyUser(@PathVariable("userId")Integer userId, Model model){
+        User selectedUser = userService.getUserById(userId);
+        model.addAttribute("selectedUser", selectedUser);
         return "user/modify_users";
     }
 
