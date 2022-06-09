@@ -73,7 +73,6 @@ public class SkipController {
             }
         }
         return "index";
-
     }
 
     //跳转到me页面

@@ -88,6 +88,7 @@
 						<a href="index.html" th:href="@{/toSelectUser}" th:if="${session.nowUser.ifHasRight(13)}" class="btn btn-d btn-lg btn-6-style btn-style-none">用户管理</a>
 						<a v-on:click="getAdmin()" href="#" class="btn btn-d btn-lg btn-6-style btn-style-none">成为管理员</a>
 						<a href="index.html" th:href="'/toModifyUser/'+${session.nowUser.getUserid()}" class="btn btn-d btn-lg btn-6-style btn-style-none">修改信息</a>
+						<a v-on:click="deleteCookie()" href="#" class="btn btn-d btn-lg btn-6-style btn-style-none">退出登录</a>
 					</div>
 				</div>
 			</div>
@@ -218,6 +219,13 @@
 			this.getRightsList();
 		},
 		methods:{
+			deleteCookie: function () {
+				var d = new Date();
+				d.setTime(d.getTime() + (-1*24*60*60*1000));
+				var expires = "expires="+d.toUTCString();
+				document.cookie = "id=; " +expires;
+				window.location.href="/";
+			},
 			getRightsList: function (){
 				var userID = [[${session.nowUser.userid}]];
 
