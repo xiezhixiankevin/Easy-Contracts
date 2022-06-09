@@ -1,9 +1,6 @@
 package bjtu.pt.easycontracts.controller;
 
-import bjtu.pt.easycontracts.pojo.table.Contract;
-import bjtu.pt.easycontracts.pojo.table.ContractAttachment;
-import bjtu.pt.easycontracts.pojo.table.Customer;
-import bjtu.pt.easycontracts.pojo.table.User;
+import bjtu.pt.easycontracts.pojo.table.*;
 import bjtu.pt.easycontracts.service.*;
 import bjtu.pt.easycontracts.utils.Global;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
@@ -56,8 +55,25 @@ public class SkipController {
 
     //跳转到首页
     @GetMapping("/")
-    public String toIndex(){
+    public String toIndex(HttpSession session, HttpServletRequest request){
+        Cookie[] cookies = request.getCookies();
+
+        if (cookies != null) {
+            for (Cookie cookie: cookies) {
+                System.out.println(cookie.getName() + ":" + cookie.getValue());
+                if (cookie.getName().equals("id")) {
+                    System.out.println("SUCCESS READ SAVED INFO");
+                    String userId = cookie.getValue();
+                    User user = userService.getUserById(Integer.parseInt(userId));
+                    List<Rights> rights = rightsService.listRights(user.getUserid());
+                    user.setUserRights(rights);
+                    session.setAttribute("nowUser", user);
+                    return "me";
+                }
+            }
+        }
         return "index";
+
     }
 
     //跳转到me页面

@@ -15,6 +15,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import java.util.*;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import static bjtu.pt.easycontracts.utils.Global.SUCCESS;
@@ -70,7 +72,7 @@ public class UserController {
     @ResponseBody
     public ReturnObject<User> loginUser(@PathVariable("username")String username,
                                         @PathVariable("password")String password,
-                                        HttpSession session){
+                                        HttpSession session, HttpServletResponse response){
         User user = userService.loginUser(username,password);
         if(user==null){
             return new ReturnObject<>(Global.ERROR, null);
@@ -78,7 +80,12 @@ public class UserController {
             List<Rights> rights = rightsService.listRights(user.getUserid());
             user.setUserRights(rights);
             session.setAttribute("nowUser", user);
+            Cookie cookie = new Cookie("id", String.valueOf(user.getUserid()));
+            cookie.setPath("/");
+            response.addCookie(cookie);
+            System.out.println("登录 Cookie saved");
         }
+
             return new ReturnObject<>(SUCCESS, user);
     }
 
