@@ -277,4 +277,16 @@ public class SkipController {
         model.addAttribute("customerObject", customer);
         return "customer/modify_customers";
     }
+
+    @GetMapping("/toLog")
+    public String toLog(Model model) {
+
+        List<User> userList = userService.listUser();
+        List<Contract> contractList = contractService.listContractSelective();
+
+        model.addAttribute("userList",userList);
+        model.addAttribute("contractList",contractList);
+        return "log";
+    }
+
 }

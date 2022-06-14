@@ -4,6 +4,7 @@ import bjtu.pt.easycontracts.mapper.LogMapper;
 import bjtu.pt.easycontracts.pojo.table.Log;
 import bjtu.pt.easycontracts.pojo.table.LogExample;
 import bjtu.pt.easycontracts.service.LogService;
+import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -42,10 +43,22 @@ public class LogServiceImpl implements LogService
     }
 
     @Override
-    public List<Log> listLog()
+    public List<Log> listLog(Integer contractId,Integer userId,Integer pn)
     {
         LogExample logExample = new LogExample();
-        return logMapper.selectByExample(logExample);
+        LogExample.Criteria criteria = logExample.createCriteria();
+        if (contractId !=null){
+            criteria.andContractidEqualTo(contractId);
+        }
+        if (userId !=null){
+            criteria.andUseridEqualTo(userId);
+        }
+        PageHelper.startPage(pn,5); //每页显示5个数据
+        List<Log> logList = logMapper.selectByExampleWithBLOBs(logExample);
+        for (Log log : logList) {
+            setLog(log);
+        }
+        return logList;
     }
 
     @Override
@@ -54,6 +67,11 @@ public class LogServiceImpl implements LogService
         LogExample logExample = new LogExample();
         logExample.createCriteria().andUseridEqualTo(userId);
         return logMapper.selectByExample(logExample);
+    }
+
+    @Override
+    public void setLog(Log log) {
+
     }
 
     /**

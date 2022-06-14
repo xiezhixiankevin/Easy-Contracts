@@ -84,6 +84,11 @@ public class ContractServiceImpl implements ContractService
     }
 
     @Override
+    public List<Contract> listContractSelective() {
+        return contractMapper.selectByExample(null);
+    }
+
+    @Override
     public Contract getContractById(int contractId) {
         Contract contract = contractMapper.selectByPrimaryKey(contractId);
         setContract(contract);

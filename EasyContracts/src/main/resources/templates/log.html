@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+	<meta name="robots" content="index, follow">
+    <link rel="shortcut icon" type="image/png" href="../../../../../../contracts/favicon.png">
+
+<!--	<link href="../../lib/bootstrap-3.4.1-dist/bootstrap-3.4.1-dist/css/bootstrap.min.css" th:href="@{/lib/bootstrap-3.4.1-dist/bootstrap-3.4.1-dist/css/bootstrap.min.css}" rel="stylesheet">-->
+<!--	<script src="../../lib/bootstrap-3.4.1-dist/bootstrap-3.4.1-dist/js/bootstrap.min.js" th:src="@{/lib/bootstrap-3.4.1-dist/bootstrap-3.4.1-dist/js/bootstrap.min.js}"  ></script>-->
+	<link rel="stylesheet" type="text/css" href="../../static/css/bootstrap.min.css?9188" th:href="@{/css/bootstrap.min.css?9188}">
+	<link rel="stylesheet" type="text/css" href="../../static/css/style.css?8116" th:href="@{/css/style.css?8116}">
+	<link rel="stylesheet" type="text/css" href="../../static/css/animate.min.css?7456" th:href="@{/css/animate.min.css?7456}">
+	<link href='https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900&display=swap&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+    <title>日志查询</title>
+
+
+    
+<!-- Analytics -->
+ 
+<!-- Analytics END -->
+    
+</head>
+<body>
+
+<!-- Preloader -->
+<div id="page-loading-blocs-notifaction" class="page-preloader"></div>
+<!-- Preloader END -->
+
+
+<!-- Main container -->
+<div class="page-container">
+    
+<!-- bloc-0 -->
+<div class="bloc bg-截屏2022-05-07-2019-53-22 l-bloc" id="bloc-0">
+	<div class="container bloc-sm">
+		<div class="row">
+			<div class="col">
+				<nav th:replace="_fragments :: nav" class="navbar navbar-light row navbar-expand-md nav-invert" role="navigation">
+					<button id="nav-toggle" type="button" class="ui-navbar-toggler navbar-toggler border-0 p-0" data-toggle="collapse" data-target=".navbar-27707" aria-expanded="false" aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon"></span>
+					</button>
+					<div class="collapse navbar-collapse navbar-27707">
+						<ul class="site-navigation nav navbar-nav">
+							<li class="nav-item">
+								<a href="loginup.html" th:href="@{/}" class="nav-link a-btn ltc-white">首页</a>
+							</li>
+							<li th:if="${session.nowUser.ifHasRight(1)}" class="nav-item">
+								<a href="contract/draft.html" th:href="@{/toDraft}" class="nav-link  ltc-white">起草合同</a>
+							</li>
+							<li th:if="${session.nowUser.ifHasRight(5)}" class="nav-item">
+								<a href="select.html" th:href="@{/toCounterSign}" class="nav-link  ltc-white">会签合同</a>
+							</li>
+							<li th:if="${session.nowUser.ifHasRight(2)}" class="nav-item">
+								<a href="finalization.html" th:href="@{/toFinalize}" class="nav-link a-btn ltc-white">定稿合同</a>
+							</li>
+							<li th:if="${session.nowUser.ifHasRight(6)}" class="nav-item">
+								<a href="approval.html" th:href="@{/toExamine}" class="nav-link a-btn ltc-white">审批合同</a>
+							</li>
+							<li th:if="${session.nowUser.ifHasRight(7)}" class="nav-item">
+								<a href="sign.html" th:href="@{/toSign}" class="nav-link a-btn ltc-white">签订合同</a>
+							</li>
+						</ul>
+					</div>
+					<a class="navbar-brand mr-0" href="/toMe"> xzx <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16"><path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg></a>
+
+				</nav>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- bloc-0 END -->
+<div id="contract_div" class="container-lg p-lg-5">
+	<div class="row ">
+		<div class="col-md-10">
+			<div class="input-group mb-3">
+				<div class="input-group-append">
+				<span class="input-group-text" id="basic-addon3">用户名:</span>
+				</div>
+				<select id="User_select"  class="form-control">
+					<option value=""></option>
+					<option value="" th:value="${user.getUserid()}" th:each="user : ${userList}" th:text="${user.getUsername()}"></option>
+				</select>
+				&nbsp;
+				<div class="input-group-append">
+					<span class="input-group-text" id="basic-addon4">合同id:</span>
+				</div>
+				<select id="Contract_select"  class="form-control">
+					<option value=""></option>
+					<option value="" th:value="${contract.getContractid()}" th:each="contract : ${contractList}" th:text="${contract.getContractid()}"></option>
+				</select>
+				&nbsp;
+			</div>
+		</div>
+		<div class="col-md-2">
+			<button v-on:click="listLogSelective(1)" type="button" class="btn btn-success">
+				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+					<path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+				</svg>
+				Search
+			</button>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-lg-12">
+			<table id="customer_table" class="table table-hover table-bordered">
+				<tr>
+					<th>操作用户</th>
+					<th>操作合同id</th>
+					<th>内容</th>
+					<th>操作类型</th>
+					<th>操作时间</th>
+				</tr>
+				<tr v-for="log in logs">
+					<td>{{log.username}}</td>
+					<td>{{log.contractid}}</td>
+					<td>{{log.content}}</td>
+					<td>{{log.operatetypeStr}}</td>
+					<td>{{log.timeStr}}</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-9 "></div>
+		<div class="col-md-3 ">
+			<nav aria-label="Page navigation example">
+				<ul class="pagination">
+					<li v-on:click="prePage(pageInfo.prePage)" class="page-item" v-bind:class="pageInfo.isFirstPage?'disabled' : '' ">
+						<a class="page-link" href="#" aria-label="Previous">
+							<span aria-hidden="true">&laquo;</span>
+						</a>
+					</li>
+					<li v-on:click="listLogSelective(num)" class="page-item" v-for="num in pageInfo.navigatepageNums">
+						<a class="page-link" href="#">{{num}}</a>
+					</li>
+					<li v-on:click="nextPage(pageInfo.nextPage)" class="page-item" v-bind:class="pageInfo.isLastPage?'disabled' : '' ">
+						<a class="page-link" href="#" aria-label="Next">
+							<span aria-hidden="true">&raquo;</span>
+						</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+
+</div>
+
+<!-- ScrollToTop Button -->
+<a class="bloc-button btn btn-d scrollToTop" onclick="scrollToTarget('1',this)"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 32 32"><path class="scroll-to-top-btn-icon" d="M30,22.656l-14-13-14,13"/></svg></a>
+<!-- ScrollToTop Button END-->
+
+
+<!-- bloc-2 -->
+<div class="bloc l-bloc" id="bloc-2">
+	<div class="container bloc-lg">
+		<div class="row">
+			<div class="col-12">
+				<h5 class="mg-md text-lg-center">
+					北京交通大学实训小组荣誉出品
+				</h5>
+				<p class="text-lg-center">
+					XZX HCB FBF ZCX WJ
+				</p>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- bloc-2 END -->
+<input type="hidden" id="userID_input" th:value="${session.nowUser.getUserid()}">
+</div>
+<!-- Main container END -->
+    
+
+
+<!-- Additional JS -->
+<script th:src="@{/js/jquery.min.js}" src="../../static/js/jquery.min.js?7482"></script>
+<script th:src="@{/js/bootstrap.bundle.min.js?6777}" src="../../static/js/bootstrap.bundle.min.js?6777"></script>
+<script th:src="@{/js/blocs.min.js?2512}" src="../../static/js/blocs.min.js?2512"></script>
+<script th:src="@{/js/lazysizes.min.js}" src="../../static/js/lazysizes.min.js" defer></script>
+<script th:src="@{/js/jquery.min.js}"  type="text/javascript" charset="utf-8"></script>
+<script th:src="@{/js/vue.js}"  type="text/javascript" charset="utf-8"></script>
+<script th:src="@{/js/axios.min.js}"  type="text/javascript" charset="utf-8"></script>
+
+<script>
+		var contractTableVue = new Vue({
+		el:"#contract_div",
+		data:{//定义数据
+			now_page:1,
+			logs:[],
+			//一些常量
+			OK :200,
+			pageInfo:[],
+			Ctype: 0
+		},
+		methods:{
+			prePage:function (pageNum) {
+				if(contractTableVue.pageInfo.isFirstPage){
+					return;
+				}
+				this.listLogSelective(pageNum);
+			},
+			nextPage:function (pageNum) {
+				if(contractTableVue.pageInfo.isLastPage){
+					return;
+				}
+				this.listLogSelective(pageNum);
+			},
+			listLogSelective:function (pageNum) {
+				var userId = $("#User_select option:selected").val();
+				var contractId = $("#Contract_select option:selected").val();
+				axios({
+					method: "get",
+					url : "log/listLog/"+pageNum.toString(),
+					params:{userId:userId,contractId:contractId}
+				}).then(function (value) {
+					if(value.data.code === contractTableVue.OK){
+						//成功获取到数据渲染表格
+						contractTableVue.logs = value.data.object.list;
+						contractTableVue.pageInfo = value.data.object;
+					}else{
+						alert("服务器错误,获取数据失败！");
+					}
+				}).catch();
+			}
+		},
+		mounted:function () {
+			this.listLogSelective(1);
+		}
+	});
+</script>
+
+</body>
+</html>

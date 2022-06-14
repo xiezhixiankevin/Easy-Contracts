@@ -101,6 +101,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public List<User> listUser() {
+        return userMapper.selectByExample(null);
+    }
+
+    @Override
     public List<User> listUserSelective(User user, int pn) {
         UserExample userExample = new UserExample();
         UserExample.Criteria criteria = userExample.createCriteria();

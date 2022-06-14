@@ -23,6 +23,8 @@ public interface ContractService {
     */
     List<Contract> listContractSelective(Contract contract,int pn);//wj
 
+    List<Contract> listContractSelective();
+
     Contract getContractById(int contractId);//xzx
 
     //添加合同，其实就是起草

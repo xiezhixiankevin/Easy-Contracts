@@ -13,6 +13,11 @@ public class Log {
 
     private String content;
 
+    //非数据库属性
+    private String username;
+    private String operatetypeStr;
+    private String timeStr;
+
     public Log() {
     }
 
@@ -61,5 +66,29 @@ public class Log {
 
     public void setContent(String content) {
         this.content = content == null ? null : content.trim();
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getOperatetypeStr() {
+        return operatetypeStr;
+    }
+
+    public void setOperatetypeStr(String operatetypeStr) {
+        this.operatetypeStr = operatetypeStr;
+    }
+
+    public String getTimeStr() {
+        return timeStr;
+    }
+
+    public void setTimeStr(String timeStr) {
+        this.timeStr = timeStr;
     }
 }

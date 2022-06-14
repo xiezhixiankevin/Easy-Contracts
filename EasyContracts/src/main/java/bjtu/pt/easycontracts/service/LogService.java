@@ -25,9 +25,12 @@ public interface LogService {
     //1.查询指定时间的日志
     List<Log> listLogByTime(Log startLog,Log endLog);
     //2.列出所有日志(最新的排在最前面)
-    List<Log> listLog();
+    List<Log> listLog(Integer contractId,Integer userId,Integer pn);
     //3.查询某个人的操作日志
     List<Log> listLogByUserId(int userId);
+
+    //初始化log的非数据库字段
+    void setLog(Log log);
 
     /**
      * 添加会签,定稿,审批,签订,起草日志,删除合同
