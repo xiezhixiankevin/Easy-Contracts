@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 	<meta name="robots" content="index, follow">
     <link rel="shortcut icon" type="image/png" href="../../../../../../contracts/favicon.png">
-
+	<script src="https://cdn.staticfile.org/echarts/4.3.0/echarts.min.js"></script>
 <!--	<link href="../../lib/bootstrap-3.4.1-dist/bootstrap-3.4.1-dist/css/bootstrap.min.css" th:href="@{/lib/bootstrap-3.4.1-dist/bootstrap-3.4.1-dist/css/bootstrap.min.css}" rel="stylesheet">-->
 <!--	<script src="../../lib/bootstrap-3.4.1-dist/bootstrap-3.4.1-dist/js/bootstrap.min.js" th:src="@{/lib/bootstrap-3.4.1-dist/bootstrap-3.4.1-dist/js/bootstrap.min.js}"  ></script>-->
 	<link rel="stylesheet" type="text/css" href="../../static/css/bootstrap.min.css?9188" th:href="@{/css/bootstrap.min.css?9188}">
@@ -202,6 +202,19 @@
 <!-- ScrollToTop Button END-->
 
 
+	<div class="parent" style="width:1500px;height:500px">
+		<div id="main" style="width: 400px;height:500px;"></div>
+	</div>
+	<style>
+		/* 1 flex布局 */
+		div.parent {
+			display: flex;
+			/*项目位于容器的中心*/
+			justify-content: center;
+			/*元素位于容器的中心。弹性盒子元素在该行的侧轴（纵轴）上居中放置。（如果该行的尺寸小于弹性盒子元素的尺寸，则会向两个方向溢出相同的长度）。*/
+			align-items: center;
+		}
+	</style>
 <!-- bloc-2 -->
 <div class="bloc l-bloc" id="bloc-2">
 	<div class="container bloc-lg">
@@ -221,7 +234,9 @@
 <input type="hidden" id="userID_input" th:value="${session.nowUser.getUserid()}">
 </div>
 <!-- Main container END -->
-    
+
+
+
 
 
 <!-- Additional JS -->
@@ -233,6 +248,47 @@
 <script th:src="@{/js/vue.js}"  type="text/javascript" charset="utf-8"></script>
 <script th:src="@{/js/axios.min.js}"  type="text/javascript" charset="utf-8"></script>
 
+<script type="text/javascript">
+    // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('main'));
+
+    // 指定图表的配置项和数据
+	var counter = [[${COUNTERSIGNING}]];
+	var fin = [[${FINALIZING}]];
+	var exa = [[${EXAMMING}]];
+	var sin = [[${SIGNING}]];
+    var option = {
+        title: {
+            text: '总合同分布'
+        },
+        tooltip: {},
+        legend: {
+            data:['待处理'],
+            top: 400,
+            bottom: 20,
+            right: 0
+        },
+        grid: {
+            bottom: 150,
+            top: 20,
+            right: 0,
+            left: 50,
+            height: 300
+        },
+        xAxis: {
+            data: ["会签","定稿","审批","签订"]
+        },
+        yAxis: {},
+        series: [{
+            name: '待处理',
+            type: 'bar',
+            data: [counter, fin, exa, sin]
+        }]
+    };
+
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+</script>
 <script>
 		var contractTableVue = new Vue({
 		el:"#contract_div",

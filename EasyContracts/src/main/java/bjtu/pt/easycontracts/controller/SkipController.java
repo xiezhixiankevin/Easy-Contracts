@@ -130,6 +130,20 @@ public class SkipController {
     //跳转到selectAllContract页面
     @GetMapping("/toSelectAllContract")
     public String toSelectAllContract(Model model){
+        int cs=0,f=0,e=0,s=0;
+        List<Contract> contractList = contractService.getAllContract();
+        for(int i=0;i<contractList.size();i++){
+            switch (contractList.get(i).getType()){
+                case 2:cs++;break;
+                case 3:f++;break;
+                case 4:e++;break;
+                case 5:s++;break;
+            }
+        }
+        model.addAttribute("COUNTERSIGNING",cs);
+        model.addAttribute("FINALIZING",f);
+        model.addAttribute("EXAMMING",e);
+        model.addAttribute("SIGNING",s);
         model.addAttribute("customers",customerService.listCustomerSelective(null));
         return "contract/selectAllContract";
     }

@@ -67,4 +67,6 @@ public interface ContractService {
 
     void setContract(Contract contract);
 
+    List<Contract> getAllContract();
+
 }

@@ -609,4 +609,11 @@ public class ContractServiceImpl implements ContractService
         Customer customer = customerMapper.selectByPrimaryKey(contract.getCustomerid());
         contract.setCustomerName(customer.getCustomername());
     }
+
+    @Override
+    public List<Contract> getAllContract() {
+        return contractMapper.selectByExample(null);
+    }
+
+
 }
