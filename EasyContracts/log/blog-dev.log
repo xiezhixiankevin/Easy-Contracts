@@ -1087,3 +1087,26 @@ com.mysql.cj.exceptions.UnableToConnectException: Public Key Retrieval is not al
 2022-06-16 16:58:23.984  WARN 11080 --- [http-nio-8080-exec-2] o.a.c.util.SessionIdGeneratorBase        : Creation of SecureRandom instance for session ID generation using [SHA1PRNG] took [1,176] milliseconds.
 2022-06-16 16:58:28.335  INFO 11080 --- [http-nio-8080-exec-3] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
 2022-06-16 16:58:28.473  INFO 11080 --- [http-nio-8080-exec-3] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2022-06-16 19:50:23.154  INFO 20660 --- [restartedMain] b.p.e.EasyContractsApplication           : Starting EasyContractsApplication using Java 11.0.11 on LAPTOP-U8055N0R with PID 20660 (C:\Users\FUBOFENG\Easy-Contracts\EasyContracts\target\classes started by FUBOFENG in C:\Users\FUBOFENG\Easy-Contracts\EasyContracts)
+2022-06-16 19:50:23.156 DEBUG 20660 --- [restartedMain] b.p.e.EasyContractsApplication           : Running with Spring Boot v2.6.7, Spring v5.3.19
+2022-06-16 19:50:23.156  INFO 20660 --- [restartedMain] b.p.e.EasyContractsApplication           : The following 1 profile is active: "dev"
+2022-06-16 19:50:23.214  INFO 20660 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2022-06-16 19:50:23.214  INFO 20660 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2022-06-16 19:50:24.219  INFO 20660 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2022-06-16 19:50:24.223  INFO 20660 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2022-06-16 19:50:24.283  INFO 20660 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 32 ms. Found 0 Redis repository interfaces.
+2022-06-16 19:50:25.267  INFO 20660 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2022-06-16 19:50:25.289  INFO 20660 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2022-06-16 19:50:25.290  INFO 20660 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.62]
+2022-06-16 19:50:25.414  INFO 20660 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2022-06-16 19:50:25.414  INFO 20660 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2199 ms
+2022-06-16 19:50:26.636  INFO 20660 --- [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2022-06-16 19:50:27.085  INFO 20660 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2022-06-16 19:50:27.132  INFO 20660 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2022-06-16 19:50:27.147  INFO 20660 --- [restartedMain] b.p.e.EasyContractsApplication           : Started EasyContractsApplication in 4.701 seconds (JVM running for 7.594)
+2022-06-16 19:50:47.025  INFO 20660 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-06-16 19:50:47.027  INFO 20660 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2022-06-16 19:50:47.029  INFO 20660 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2022-06-16 19:50:48.279  WARN 20660 --- [http-nio-8080-exec-1] o.a.c.util.SessionIdGeneratorBase        : Creation of SecureRandom instance for session ID generation using [SHA1PRNG] took [1,214] milliseconds.
+2022-06-16 19:50:56.059  INFO 20660 --- [http-nio-8080-exec-4] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2022-06-16 19:50:56.196  INFO 20660 --- [http-nio-8080-exec-4] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.

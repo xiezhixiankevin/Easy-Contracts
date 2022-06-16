@@ -257,6 +257,8 @@
 	var fin = [[${FINALIZING}]];
 	var exa = [[${EXAMMING}]];
 	var sin = [[${SIGNING}]];
+	var wa = [[${WAITING}]];
+	var fi = [[${FINISH}]];
     var option = {
         title: {
             text: '总合同分布'
@@ -276,13 +278,13 @@
             height: 300
         },
         xAxis: {
-            data: ["会签","定稿","审批","签订"]
+            data: ["待分配","会签","定稿","审批","签订","已完成"]
         },
         yAxis: {},
         series: [{
-            name: '待处理',
+            name: '数量',
             type: 'bar',
-            data: [counter, fin, exa, sin]
+            data: [wa,counter, fin, exa, sin,fi]
         }]
     };
 
