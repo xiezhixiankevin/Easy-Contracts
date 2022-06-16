@@ -4,10 +4,12 @@ import bjtu.pt.easycontracts.mapper.LogMapper;
 import bjtu.pt.easycontracts.pojo.table.Log;
 import bjtu.pt.easycontracts.pojo.table.LogExample;
 import bjtu.pt.easycontracts.service.LogService;
+import bjtu.pt.easycontracts.service.UserService;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -15,6 +17,9 @@ public class LogServiceImpl implements LogService
 {
     @Autowired
     private LogMapper logMapper;
+
+    @Autowired
+    private UserService userService;
 
     @Override
     public int addLog(Log log)
@@ -71,7 +76,60 @@ public class LogServiceImpl implements LogService
 
     @Override
     public void setLog(Log log) {
+        Integer operateType = log.getOperatetype();
+        String username = userService.getUserById(log.getUserid()).getUsername();
+        String time = log.getTime().toString();
+        String operateTypeStr;
 
+        switch (operateType)
+        {
+            case 1 :
+                operateTypeStr = "COUNTERSIGN_LOG";
+                break;
+            case 2 :
+                operateTypeStr = "FINALIZE_LOG";
+                break;
+            case 3 :
+                operateTypeStr = "EXAM_LOG";
+                break;
+            case 4 :
+                operateTypeStr = "SIGN_LOG";
+                break;
+            case 5 :
+                operateTypeStr = "DRAFT_LOG";
+                break;
+            case 6 :
+                operateTypeStr = "ASSIGN_PERMISSION_LOG";
+                break;
+            case 7 :
+                operateTypeStr = "ADD_CUSTOMER_LOG";
+                break;
+            case 8 :
+                operateTypeStr = "MODIFY_CUSTOMER_LOG";
+                break;
+            case 9 :
+                operateTypeStr = "DELETE_CUSTOMER_LOG";
+                break;
+            case 10 :
+                operateTypeStr = "MODIFY_USER_LOG";
+                break;
+            case 11 :
+                operateTypeStr = "DELETE_USER_LOG";
+                break;
+            case 12 :
+                operateTypeStr = "MODIFY_OWN_LOG";
+                break;
+            case 13 :
+                operateTypeStr = "DELETE_CONTRACT_LOG";
+                break;
+            default:
+                operateTypeStr = "Error";
+        }
+
+        /* 赋值 */
+        log.setUsername(username);
+        log.setOperatetypeStr(operateTypeStr);
+        log.setTimeStr(time);
     }
 
     /**
